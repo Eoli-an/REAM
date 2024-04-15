@@ -1,0 +1,60 @@
+{
+    "words": {
+      "你": {
+        "characters": ["你"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "你好": {
+        "characters": ["你", "好"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "家": {
+        "characters": ["家"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "住": {
+        "characters": ["住"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "的": {
+        "characters": ["的"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "家住": {
+        "characters": ["家", "住"],
+        "knowledge_level": 0,
+        "pictures": []
+      },
+      "他們": {
+        "characters": ["他", "們"],
+        "knowledge_level": 0,
+        "pictures": []
+      },
+      "是": {
+        "characters": ["是"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "非常": {
+        "characters": ["非", "常"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "人家": {
+        "characters": ["人", "家"],
+        "knowledge_level": 2,
+        "pictures": []
+      },
+      "不": {
+        "characters": ["不"],
+        "knowledge_level": 2,
+        "pictures": []
+      }
+
+    }
+  }
