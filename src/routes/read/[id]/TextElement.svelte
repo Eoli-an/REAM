@@ -14,4 +14,4 @@
 
 </script>
 
-<span on:click={() => handleClick(word)}>{word}</span>
+<button on:click={() => handleClick(word)}>{word}</button>
