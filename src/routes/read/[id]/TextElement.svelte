@@ -34,3 +34,14 @@
 <button on:click={circleThrough}>
     {displayText}
 </button>
+
+<style>
+    button {
+      background-color: transparent; /* Remove the gray background */
+      border: 1px solid #ccc; /* Add a light border */
+      border-radius: 0; /* Remove the rounded edges */
+      padding: 8px 16px; /* Adjust the padding as needed */
+      font-size: 16px; /* Adjust the font size as needed */
+      cursor: pointer; /* Add a pointer cursor on hover */
+    }
+  </style>

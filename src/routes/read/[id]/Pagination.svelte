@@ -6,7 +6,8 @@
     // export let pos;
     // export let knowledge_level: number;
 
-    async function loadTranslations() {
+
+    async function loadTranslations(words: string[]	) {
         const response = await fetch('/api/translate', {
             method: 'POST',
             headers: {
@@ -22,7 +23,7 @@
         }
     }
 
-    const translations = loadTranslations();
+    $: translations = loadTranslations(words);
 
     // <span>&nbsp;</span>
 </script>
