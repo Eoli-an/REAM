@@ -7,7 +7,7 @@
     export let pinyin_word: string;
     export let translation: string;
 
-    let displayType = 'word'; // Possible values: 'word', 'pinyin', 'translation'
+    let displayType = 'word'; // Possible values: 'word', 'pinyin', 'translation', 'image'
     let displayText: string;
 
     function circleThrough() {
