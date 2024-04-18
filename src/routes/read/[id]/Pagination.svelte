@@ -1,14 +1,39 @@
 <script lang="ts">
     import TextElement from './TextElement.svelte';
+    //import {cut} from '@node-rs/jieba';
 
     export let words: string[];
     export let pinyin_words: string[];
-    let simplifyToggle: boolean;
+    //export let simplifyToggle: boolean;
+
+    // if (simplifyToggle) {
+    //     console.log('simplifyToggle is true');
+    // }
     // export let pos;
     // export let knowledge_level: number;
 
+    async function simplifyText(text: string) {
+        const response = await fetch('/api/simplify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data.content;
+        } else {
+            throw new Error('Failed to simplify text');
+        }
+    }
 
     async function loadTranslations(words: string[]	) {
+        // let text = words.join('');
+        // if (simplifyToggle) {
+        //     text = await simplifyText(text);
+        // }
+        // words = cut(text);
         const response = await fetch('/api/translate', {
             method: 'POST',
             headers: {
