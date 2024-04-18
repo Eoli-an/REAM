@@ -3,6 +3,7 @@
 
     export let words: string[];
     export let pinyin_words: string[];
+    let simplifyToggle: boolean;
     // export let pos;
     // export let knowledge_level: number;
 

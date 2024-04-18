@@ -4,11 +4,16 @@ import Groq from 'groq-sdk';
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY
 });
+
+
 export const POST: RequestHandler = async ({ request }) => {
     const { text, words } = await request.json();
-    const chatInput = text + '\n\n-' + words.join('\n-');
+    const { filteredWords, positions } = filterWordsAndRecordPositions(words);
+
+
+    const chatInput = text + '\n\n-' + filteredWords.join('\n-');
     const systemPrompt = `You will be given a piece of chinese text and then a list of words from this chinese text. Generate word-by-word translations, that are context appropriate. Be brief with the translations.
-    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation.
+    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation. If words repeat, also repeat the translation.
   
   Like this:
   User:
@@ -51,16 +56,46 @@ export const POST: RequestHandler = async ({ request }) => {
     console.log("RESPONSE: ", content);
 
   
-    const outputList: string[] = [];
+    const outputList: (string)[] = [];
     const lines = content.split('\n');
     console.log("LINES: ", lines);
+    let outputIndex = 0;
+
+    // Reinsert special characters into their original positions
     for (const line of lines) {
-      if (!line.includes(': ')) {
-        continue;
-      }
-      const translation = line.split(': ')[1].split('/')[0].split('(')[0].replace("'", "").trim();
-      outputList.push(translation);
+        if (!line.includes(': ')) {
+            continue;
+        }
+        while (positions.length > 0 && positions[0].index === outputIndex) {
+            outputList.push(positions.shift()?.character ?? '');
+            outputIndex++;
+        }
+        const translation = line.split(': ')[1].split('/')[0].split('(')[0].replace("'", "").trim();
+        outputList.push(translation);
+        outputIndex++;
     }
 
+    // Append any remaining special characters
+    while (positions.length > 0) {
+        outputList.push(positions.shift()?.character ?? '');
+    }
+    console.log("OUTPUT: ", outputList);
     return json({ outputList }, { status: 201 });
 };
+
+
+function filterWordsAndRecordPositions(words: string[]) {
+    const specialCharacters = new Set([' ', '"', '\uFF0C', '"', '。', '？', '！', '\r\n', '\n', '\r', '：', '；', '、', '（', '）', '《', '》', '『', '』', '【', '】', '—', '…', '～', '·', '「', '」', '＂', '＇']);
+    const filteredWords: string[] = [];
+    const positions: { index: number; character: string }[] = [];
+
+    words.forEach((word, index) => {
+        if (specialCharacters.has(word)) {
+            positions.push({ index, character: word });
+        } else {
+            filteredWords.push(word);
+        }
+    });
+
+    return { filteredWords, positions };
+}

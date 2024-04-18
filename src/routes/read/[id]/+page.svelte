@@ -27,16 +27,22 @@
             offset += words_per_page;
         }
     }
+    let simplifyToggle : boolean = false;
+
+    function simplify() {
+        simplifyToggle = !simplifyToggle;
+    }
 </script>
 
 
 <div class="navigation">
     <button on:click={goBack}>Previous Page</button>
     <button on:click={goForward}>Next Page</button>
+    <button on:click={simplify}>Simplify</button>
 </div>
 
 <div class="content">
-    <Pagination words={page_words} pinyin_words={page_pinyin}/>
+    <Pagination words={page_words} pinyin_words={page_pinyin} simplifyToggle={simplifyToggle}/>
 </div>
 
 
