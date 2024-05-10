@@ -1,14 +1,20 @@
 <script lang="ts">
+    import { base } from '$app/paths';
 
-	// the name is updated whenever the prop value changes...
-	export let word: string;
-    // export let textSize: number;
-    // export let knowledge_level: number;
+    export let word: string;
     export let pinyin_word: string;
     export let translation: string;
 
-    let displayType = 'word'; // Possible values: 'word', 'pinyin', 'translation', 'image'
+    let displayType = 'word'; // Possible values: 'word', 'pinyin', 'translation', 'image_character', 'image_word'
     let displayText: string;
+
+    let imageCharacterPaths: string[] = [];
+    let imageWordPath: string;
+
+    // sourcepath of images for individual characters
+    imageCharacterPaths = word.split('').map(char => `/images/${char}.png`);
+    // sourcepath of image for the whole word
+    imageWordPath = `/images/${word}.png`;
 
     function circleThrough() {
         if (displayType === 'word') {
@@ -16,6 +22,10 @@
         } else if (displayType === 'pinyin') {
             displayType = 'translation';
         } else if (displayType === 'translation') {
+            displayType = 'image_character';
+        } else if (displayType === 'image_character') {
+            displayType = 'image_word';
+        } else if (displayType === 'image_word') {
             displayType = 'word';
         }
     }
@@ -29,19 +39,35 @@
             displayText = word;
         }
     }
+
 </script>
 
 <button on:click={circleThrough}>
-    {displayText}
+    {#if displayType === 'image_character'}
+        {#each imageCharacterPaths as src}
+            <img src={src} alt={word} on:error={(e) => e.target.src = word}>&nbsp;
+        {/each}
+    {:else if displayType === 'image_word'}
+        <img src={imageWordPath} alt={word} on:error={(e) => e.target.src = word}>
+    {:else}
+        {displayText}
+    {/if}
 </button>
 
 <style>
     button {
-      background-color: transparent; /* Remove the gray background */
-      border: 1px solid #ccc; /* Add a light border */
-      border-radius: 0; /* Remove the rounded edges */
-      padding: 8px 16px; /* Adjust the padding as needed */
-      font-size: 16px; /* Adjust the font size as needed */
-      cursor: pointer; /* Add a pointer cursor on hover */
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
     }
-  </style>
+
+    img {
+      width: 22px;
+      height: auto;
+      vertical-align: middle;
+      margin-bottom: 4px;
+    }
+</style>

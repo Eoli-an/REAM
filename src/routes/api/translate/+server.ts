@@ -29,7 +29,7 @@ export const POST: RequestHandler = async ({ request }) => {
   -前往: go`;
   
     const chatCompletion = await groq.chat.completions.create({
-      model: 'llama2-70b-4096',
+      model: 'llama3-70b-8192',
       messages: [
         {
           role: 'system',
