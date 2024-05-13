@@ -11,6 +11,8 @@
     const pinyin_cut = data.pinyin_cut;
     let offset = data.offset;
     let word_amount = 0;
+    let prev_word_amount = 0;
+
 
     $: {
         // Calculate the number of words per page, ensuring it's always one sentence
@@ -18,6 +20,7 @@
         while (currentOffset < text_cut.length && !['。', '！', '？'].includes(text_cut[currentOffset])) {
             currentOffset++;
         }
+        prev_word_amount = word_amount;
         word_amount = currentOffset - offset + 1;
     }
 
@@ -26,7 +29,7 @@
 
     function goBack() {
         if (offset > 0) {
-            offset -= word_amount;
+            offset -= prev_word_amount;
         }
     }
 
@@ -46,11 +49,10 @@
 <div class="navigation">
     <button on:click={goBack}>Previous Sentence</button>
     <button on:click={goForward}>Next Sentence</button>
-    <button on:click={simplify}>Simplify</button>
 </div>
 
 <div class="content">
-    <Pagination words={page_words} pinyin_words={page_pinyin} simplifyToggle={simplifyToggle} />
+    <Pagination words={page_words} pinyin_words={page_pinyin} />
 </div>
 
 <style>

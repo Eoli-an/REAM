@@ -10,7 +10,7 @@ import { pinyin } from "pinyin-pro";
 
 
 export const load = (async ({fetch}) => {
-    const text_less_complex = true;
+    const text_less_complex = false;
     let response;
     if (! text_less_complex) {
         response = await fetch('/harry_potter.txt');//SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.

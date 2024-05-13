@@ -49,7 +49,7 @@
         }
     }
 
-    let hideTranslation = false;
+    let hideTranslation = true;
 
 </script>
 

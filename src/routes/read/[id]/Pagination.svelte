@@ -1,14 +1,16 @@
 <script lang="ts">
     import TextElement from './TextElement.svelte';
+    import { onMount } from 'svelte';
+    import { browser } from "$app/environment";
 
     export let words: string[];
     export let pinyin_words: string[];
-    export let simplifyToggle: boolean;
+    //export let simplifyToggle: boolean;
     let showSentenceTranslation = false;
     const dummySentenceTranslation = "This is a dummy sentence translation.";
 
-    async function loadTranslations(words: string[]	) {
-        const response = await fetch('/api/translate', {
+    async function loadWordTranslations(words: string[]	) {
+        const response = await fetch('/api/translate_words', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -17,23 +19,59 @@
         });
         if (response.ok) {
             const data = await response.json();
-            return data.outputList;
+            translations = data.outputList;
+            //return data.outputList;
         } else {
             throw new Error('Failed to load translations');
         }
     }
+    async function loadSentenceTranslations(words: string[]	) {
+        const response = await fetch('/api/translate_sentence', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sentence: words.join('')})
+        });
+        if (response.ok) {
+            const data = await response.json();
+            sentenceTranslation = data.sentenceTranslation;
+            //return data.sentenceTranslation;
+        } else {
+            throw new Error('Failed to load sentence translation');
+        }
+    }
+    // see https://stackoverflow.com/questions/76335938/how-to-use-reactive-statements-to-fetch-data-from-a-server-js-handler-in-svelte
+    let translations : string[] = [];  
+    let sentenceTranslation : string= '';
 
-    $: translations = loadTranslations(words);
+    $: if (browser) {
+        loadWordTranslations(words);
+    }
+
+    $: if (browser) {
+        loadSentenceTranslations(words);
+    }
+
+    // $: translations = loadWordTranslations(words);
+    // $: sentenceTranslation = loadSentenceTranslations(words);
+
 </script>
 
-<div class="sentence-translation-container" on:click={() => showSentenceTranslation = !showSentenceTranslation}>
+<button class="sentence-translation-container" on:click={() => showSentenceTranslation = !showSentenceTranslation}>
     {#if showSentenceTranslation}
-        <div class="sentence-translation">
-            {dummySentenceTranslation}
-        </div>
-        <hr class="divider">
+        {#await sentenceTranslation}
+            loading...
+        {:then sentenceTranslation}
+            {sentenceTranslation}
+        {:catch error}
+            <p style="color: red">{error.message}</p>
+        {/await}
+    {:else}
+        ...
     {/if}
-</div>
+</button>
+<hr class="divider">
 
 {#await translations}
     {#each words as word, i (i)}
@@ -50,12 +88,12 @@
 <style>
     .sentence-translation-container {
         cursor: pointer;
-    }
-
-    .sentence-translation {
-        font-size: 1rem;
+        font-size: 0.7rem;
         font-weight: normal;
         margin-bottom: 0.5rem;
+        background-color: transparent;
+        border: none;
+        padding: 0;
     }
 
     .divider {

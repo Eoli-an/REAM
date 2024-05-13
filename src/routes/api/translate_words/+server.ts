@@ -20,12 +20,15 @@ export const POST: RequestHandler = async ({ request }) => {
   哈利波特站在火車站的月台上，心情既興奮又緊張。他即將乘坐霍格華茲特快列車，前往他夢寐以求的魔法學校。
   
   -月台
+  -,
   -即將
   -前往
   
    Assitant:
   -月台: platform
-  -即將: soon 
+  -,: ,
+  -即將: soon
+  -。:。
   -前往: go`;
   
     const chatCompletion = await groq.chat.completions.create({
@@ -40,7 +43,7 @@ export const POST: RequestHandler = async ({ request }) => {
           content: chatInput,
         },
       ],
-      temperature: 1,
+      temperature: 0,
       max_tokens: 10000,//chatInput.length * 5,
       top_p: 1,
       frequency_penalty: 0,

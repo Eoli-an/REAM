@@ -8,9 +8,10 @@
         isDarkMode = !isDarkMode;
         document.body.classList.toggle('dark-mode', isDarkMode);
     }
+    //<button on:click={toggleTheme}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</button> <!-- Toggle theme button -->
 </script>
 
-<button on:click={toggleTheme}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</button> <!-- Toggle theme button -->
+
 
 <style>
     /* Dark mode styles */
