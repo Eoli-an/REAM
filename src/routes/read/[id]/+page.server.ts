@@ -10,7 +10,7 @@ import { pinyin } from "pinyin-pro";
 
 
 export const load = (async ({fetch}) => {
-    const text_less_complex = false;
+    const text_less_complex = true;
     let response;
     if (! text_less_complex) {
         response = await fetch('/harry_potter.txt');//SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
@@ -22,6 +22,21 @@ export const load = (async ({fetch}) => {
     const text_simplified = t2s(text);
     const text_cut = cut(text_traditional);
     const pinyin_cut = text_cut.map(c_word => pinyin(c_word));
+
+    let sentenceOffsets: number[] = [];
+    let currentSentenceIndex = 0;
+
+    function calculateSentenceOffsets() {
+        let offset = 0;
+        while (offset < text_cut.length) {
+            sentenceOffsets.push(offset);
+            while (offset < text_cut.length && !['。', '！', '？'].includes(text_cut[offset])) {
+                offset++;
+            }
+            offset++; // Move past the punctuation mark
+        }
+    }
+    calculateSentenceOffsets();
 
 
     //const wordsToTranslate = text_cut.slice(0, 10); // Example: translate first 10 words
@@ -41,7 +56,9 @@ export const load = (async ({fetch}) => {
         //translations: translations,
         pinyin_cut: pinyin_cut,
         offset: offset,
-        words_per_page: words_per_page
+        words_per_page: words_per_page,
+        sentenceOffsets: sentenceOffsets,
+        currentSentenceIndex: currentSentenceIndex
 
     };
 }) satisfies PageServerLoad;

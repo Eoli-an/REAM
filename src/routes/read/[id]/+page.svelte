@@ -2,40 +2,27 @@
     import { pinyin } from 'pinyin-pro';
     import type { PageData } from './$types';
     import Pagination from './Pagination.svelte';
+    import { onMount } from 'svelte';
 
     export let data: PageData;
 
-    const text = data.text;
-    const known_words = data.knownWords;
     const text_cut = data.text_cut;
     const pinyin_cut = data.pinyin_cut;
-    let offset = data.offset;
-    let word_amount = 0;
-    let prev_word_amount = 0;
+    const sentenceOffsets = data.sentenceOffsets;
+    let currentSentenceIndex = data.currentSentenceIndex;
 
-
-    $: {
-        // Calculate the number of words per page, ensuring it's always one sentence
-        let currentOffset = offset;
-        while (currentOffset < text_cut.length && !['。', '！', '？'].includes(text_cut[currentOffset])) {
-            currentOffset++;
-        }
-        prev_word_amount = word_amount;
-        word_amount = currentOffset - offset + 1;
-    }
-
-    $: page_words = text_cut.slice(offset, offset + word_amount);
-    $: page_pinyin = pinyin_cut.slice(offset, offset + word_amount);
+    $: page_words = text_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);
+    $: page_pinyin = pinyin_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);
 
     function goBack() {
-        if (offset > 0) {
-            offset -= prev_word_amount;
+        if (currentSentenceIndex > 0) {
+            currentSentenceIndex--;
         }
     }
 
     function goForward() {
-        if (offset + word_amount < text_cut.length) {
-            offset += word_amount;
+        if (currentSentenceIndex < sentenceOffsets.length - 1) {
+            currentSentenceIndex++;
         }
     }
 

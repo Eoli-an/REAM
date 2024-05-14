@@ -45,6 +45,9 @@
     let translations : string[] = [];  
     let sentenceTranslation : string= '';
 
+    // reset imemdiately when we navigate to a new page
+    $: words, translations = [];  
+
     $: if (browser) {
         loadWordTranslations(words);
     }
