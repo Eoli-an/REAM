@@ -1,24 +1,28 @@
 <script lang="ts">
-    import type { LayoutData } from './$types';
-    
-    export let data: LayoutData;
-    let isDarkMode = false; // Theme state
+    import { onMount } from 'svelte';
 
-    function toggleTheme() {
-        isDarkMode = !isDarkMode;
-        document.body.classList.toggle('dark-mode', isDarkMode);
-    }
-    //<button on:click={toggleTheme}>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</button> <!-- Toggle theme button -->
+    onMount(() => {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    });
 </script>
 
-
+<slot></slot>
 
 <style>
-    /* Dark mode styles */
-    :global(body.dark-mode) {
-        background-color: #333;
-        color: #fff;
+    :global([data-theme='dark']) {
+        --background-color: black;
+        --text-color: #ffffff;
+        --button-background: #333333;
+        --button-text: #ffffff;
+    }
+
+    :global(body) {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    :global(button) {
+        background-color: var(--button-background);
+        color: var(--button-text);
     }
 </style>
-
-<slot />
