@@ -11,6 +11,7 @@
     const sentenceOffsets = data.sentenceOffsets;
     let currentSentenceIndex = data.currentSentenceIndex;
 
+
     $: page_words = text_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);
     $: page_pinyin = pinyin_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);
 

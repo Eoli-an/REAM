@@ -78,7 +78,7 @@
 
 {#await translations}
     {#each words as word, i (i)}
-        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={'...'}/>
+        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={'...'} />
     {/each}
 {:then translations}
     {#each words as word, i (i)}

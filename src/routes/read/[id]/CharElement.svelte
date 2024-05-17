@@ -1,28 +1,27 @@
 <script lang="ts">
-    import wordKnowledgeData from '$lib/static/word_knowledge.json';
-
+    // import wordKnowledgeData from '$lib/static/word_knowledge.json';
     export let char: string;
+    // interface WordKnowledge {
+    //     [key: string]: { knowledge_level: number };
+    // }
+    // // Cast the imported JSON to the correct type
+    // let wordKnowledge: WordKnowledge = wordKnowledgeData as WordKnowledge;
+    import {wordKnowledge} from '$lib'
 
-
-    interface WordKnowledge {
-        [key: string]: { knowledge_level: number };
-    }
-
-    // Cast the imported JSON to the correct type
-    let wordKnowledge: WordKnowledge = wordKnowledgeData as WordKnowledge;
+    //export let wordKnowledge: { [key: string]: { knowledge_level: number } };
 
     $: imagePath = `/images/${char}.png`;
 
     let displayType = '';
 
-    $: {
-        if (wordKnowledge[char]) {
+    wordKnowledge.subscribe(value => {
+        if (value[char]) {
             displayType = 'character';
         }
         else {
             displayType = 'image';
         }
-    }
+    });
 
     function circle() {
         if (displayType === 'character') {

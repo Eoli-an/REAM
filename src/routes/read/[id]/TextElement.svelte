@@ -1,36 +1,41 @@
 <script lang="ts">
     import { base } from '$app/paths';
-    import wordKnowledgeData from '$lib/static/word_knowledge.json';
     import CharElement from './CharElement.svelte';
+    import {wordKnowledge} from '$lib'
+
+
+
 
     export let word: string;
-    //export let pinyin_word: string;
+    export let pinyin_word: string;
     export let translation: string;
-
-    interface WordKnowledge {
-        [key: string]: { knowledge_level: number };
-    }
-
-    // Cast the imported JSON to the correct type
-    let wordKnowledge: WordKnowledge = wordKnowledgeData as WordKnowledge;
 
 
     let upperButtonDisplay = '';
 
-    $: {
-        if (wordKnowledge[word]) {
+    $: wordKnowledge.subscribe(value => {
+        if (value[word]) { //value[word] !== undefined
             upperButtonDisplay = 'none';
         }
         else {
             upperButtonDisplay = 'translation';
         }
-    }
+    });
+
 
     function circleUpperButton() {
         if (upperButtonDisplay === 'translation') {
             upperButtonDisplay = 'none';
+            wordKnowledge.update(knowledge => {
+                knowledge[word] = 1;
+                return knowledge;
+            });
         } else if (upperButtonDisplay === 'none') {
             upperButtonDisplay = 'translation';
+            wordKnowledge.update(knowledge => {
+                knowledge[word] = 0;
+                return knowledge;
+            });
         }
     }
 
@@ -48,7 +53,7 @@
     
     <button>
         {#each word.split('') as char}
-            <CharElement {char} />
+            <CharElement {char}/>
         {/each}
     </button>
 </div>

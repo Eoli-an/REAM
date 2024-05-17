@@ -7,6 +7,9 @@ import pkg from 'chinese-s2t';
 const {s2t, t2s} = pkg;
 
 import { pinyin } from "pinyin-pro";
+import { supabase } from "$lib/supabaseClient";
+
+import { wordKnowledge } from '$lib/stores';
 
 
 export const load = (async ({fetch}) => {
@@ -48,6 +51,13 @@ export const load = (async ({fetch}) => {
     const offset = 0;
     const words_per_page = 40;
 
+    const { data : wordKnowledgeData} = await supabase.from("MyKnownWords").select();
+    const wordKnowledgeDict: { [key: string]: number | null } = {};
+    wordKnowledgeData?.forEach(item => {
+        wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
+    });
+
+    wordKnowledge.set(wordKnowledgeDict);
 
     return {
         text: text,
@@ -58,7 +68,7 @@ export const load = (async ({fetch}) => {
         offset: offset,
         words_per_page: words_per_page,
         sentenceOffsets: sentenceOffsets,
-        currentSentenceIndex: currentSentenceIndex
+        currentSentenceIndex: currentSentenceIndex,
 
     };
 }) satisfies PageServerLoad;
