@@ -51,17 +51,42 @@ export const load = (async ({fetch}) => {
     const offset = 0;
     const words_per_page = 40;
 
-    const { data : wordKnowledgeData} = await supabase.from("MyKnownWords").select();
-    const wordKnowledgeDict: { [key: string]: number | null } = {};
-    wordKnowledgeData?.forEach(item => {
-        wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
-    });
+    // const { data: wordKnowledgeData, error } = await supabase.from("MyKnownWords").select();
+    // if (error) {
+    //     console.error("Error fetching data from Supabase:", error);
+    //     throw new Error("Failed to fetch data from Supabase");
+    // }
 
-    wordKnowledge.set(wordKnowledgeDict);
+    // console.log("Fetched data from Supabase:", wordKnowledgeData);
+
+    // const wordKnowledgeDict: { [key: string]: number | null } = {};
+    // wordKnowledgeData?.forEach(item => {
+    //     if (item.wordChinese && item.knowledgeLevel !== undefined) {
+    //         wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
+    //     } else {
+    //         console.warn("Invalid data item:", item);
+    //     }
+    // });
+
+    // wordKnowledge.set(wordKnowledgeDict);
+
+    const { data : wordKnowledgeData} = await supabase.from("MyKnownWords").select();
+    //console.log("wordKnowledgeData", wordKnowledgeData);
+    //const wordKnowledgeDict: { [key: string]: number | null } = {};
+    // wordKnowledgeData?.forEach(item => {
+    //     wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
+    //     wordKnowledge.update(knowledge => {
+    //         knowledge[item.wordChinese] = item.knowledgeLevel;
+    //         return knowledge;
+    //     });
+    // });
+
+    //wordKnowledge.set(wordKnowledgeDict);
+    console.log("wordKnowledge inside load", wordKnowledge);
 
     return {
         text: text,
-        knownWords: knownWords,
+        wordKnowledgeData: wordKnowledgeData,
         text_cut: text_cut,
         //translations: translations,
         pinyin_cut: pinyin_cut,

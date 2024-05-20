@@ -13,7 +13,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const chatInput = text + '\n\n-' + filteredWords.join('\n-');
     const systemPrompt = `You will be given a piece of chinese text and then a list of words from this chinese text. Generate word-by-word translations, that are context appropriate. Be brief with the translations.
-    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation. If words repeat, also repeat the translation.
+    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation. If words repeat, also repeat the translation. Make sure to give the translation for every word.
   
   Like this:
   User:

@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { base } from '$app/paths';
+    import { updateDatabase } from '$lib'; 
     import CharElement from './CharElement.svelte';
     import {wordKnowledge} from '$lib'
-
-
+    import { get } from 'svelte/store';
 
 
     export let word: string;
@@ -11,16 +10,21 @@
     export let translation: string;
 
 
-    let upperButtonDisplay = '';
+    let upperButtonDisplay = 'translation';
 
-    $: wordKnowledge.subscribe(value => {
-        if (value[word]) { //value[word] !== undefined
-            upperButtonDisplay = 'none';
-        }
-        else {
+    const store_value = $wordKnowledge;
+    $: {if (!(store_value.hasOwnProperty(word))) {
+        upperButtonDisplay = 'translation';
+    }
+    else {
+        if (store_value[word] === 0) {
             upperButtonDisplay = 'translation';
         }
-    });
+        else if (store_value[word] === 1) {
+            upperButtonDisplay = 'none';
+        }
+    }
+    }
 
 
     function circleUpperButton() {
@@ -30,15 +34,16 @@
                 knowledge[word] = 1;
                 return knowledge;
             });
+            updateDatabase(word, 1);
         } else if (upperButtonDisplay === 'none') {
             upperButtonDisplay = 'translation';
             wordKnowledge.update(knowledge => {
                 knowledge[word] = 0;
                 return knowledge;
             });
+            updateDatabase(word, 0);
         }
     }
-
 
 </script>
 
@@ -53,7 +58,7 @@
     
     <button>
         {#each word.split('') as char}
-            <CharElement {char}/>
+            <CharElement char = {char} />
         {/each}
     </button>
 </div>

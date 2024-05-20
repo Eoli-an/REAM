@@ -3,14 +3,22 @@
     import type { PageData } from './$types';
     import Pagination from './Pagination.svelte';
     import { onMount } from 'svelte';
+    import { wordKnowledge } from '$lib/stores';
 
     export let data: PageData;
 
     const text_cut = data.text_cut;
     const pinyin_cut = data.pinyin_cut;
     const sentenceOffsets = data.sentenceOffsets;
+    const wordKnowledgeData = data.wordKnowledgeData;
     let currentSentenceIndex = data.currentSentenceIndex;
 
+    wordKnowledgeData?.forEach(item => {
+        wordKnowledge.update(knowledge => {
+            knowledge[item.wordChinese] = item.knowledgeLevel;
+            return knowledge;
+        });
+    });
 
     $: page_words = text_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);
     $: page_pinyin = pinyin_cut.slice(sentenceOffsets[currentSentenceIndex], sentenceOffsets[currentSentenceIndex + 1] || text_cut.length);

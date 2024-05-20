@@ -2,3 +2,4 @@
 // TODO not sure why this is needed
 export { supabase } from './supabaseClient';
 export { wordKnowledge } from './stores';
+export { updateDatabase } from './functions';
