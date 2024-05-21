@@ -1,29 +1,32 @@
 <script lang="ts">
     import { updateDatabase } from '$lib'; 
     import { browser } from '$app/environment'; 
-    import {wordKnowledge} from '$lib'
+    import { wordKnowledge } from '$lib';
+    import Modal from './Modal.svelte';
 
     export let char: string;
 
     $: imagePath = `/images/${char}.png`;
 
     let displayType: string = '';
+    let showModal = false;
+    let imageError = false;
 
     const store_value = $wordKnowledge;
 
-    $: {if (!(store_value.hasOwnProperty(char))) {
-        displayType = 'image';
-    }
-    else {
-        if (store_value[char] === 0) {
+    $: {
+        if (!(store_value.hasOwnProperty(char))) {
             displayType = 'image';
         }
-        else if (store_value[char] === 1) {
+        else {
+            if (store_value[char] === 0) {
+                displayType = 'image';
+            }
+            else if (store_value[char] === 1) {
                 displayType = 'character';
+            }
         }
     }
-    }
-
 
     function circle() {
         if (displayType === 'character') {
@@ -41,13 +44,21 @@
             });
             updateDatabase(char, 1);
         }
+        close();
+    }
+
+    function close() {
+        showModal = false;
     }
 
     async function loadImage(src: string): Promise<string> {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => resolve(src);
-            img.onerror = () => reject(new Error('Image failed to load'));
+            img.onerror = () => {
+                imageError = true;
+                reject(new Error('Image failed to load'));
+            };
             img.src = src;
         });
     }
@@ -56,9 +67,7 @@
 
 </script>
 
-
-<button on:click={circle}>
-    
+<button on:click={() => showModal = true}>
     {#await imagePromise}
         ...
     {:then src}
@@ -70,9 +79,11 @@
     {:catch error}
         {char}
     {/await}
-
 </button>
 
+{#if showModal}
+    <Modal {close} {char} {imagePath} {circle} {imageError}/>
+{/if}
 
 <style>
     button {

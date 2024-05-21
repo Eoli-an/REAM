@@ -15,5 +15,11 @@ declare module 'chinese-conv' {
 	export function sify(input: string): string;
 }
 
+declare namespace svelte.JSX {
+	interface HTMLAttributes<T> {
+		'on:longpress'?: (event: CustomEvent) => void;
+	}
+}
+
 export {};
 
