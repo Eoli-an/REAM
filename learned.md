@@ -21,3 +21,10 @@ If I use await in html I have to wait for the promise in any case. Because if th
 
 # Auto subscriptions
 Instead of setting up a subscription to a store, can also be done with reactive statements. See https://dev.to/jdgamble555/the-unwritten-svelte-stores-guide-47la. Then, one also does not have to concern oneself with destroying the subscription, is done automatically.
+
+# Fetch
+Sveltekit has a special fetch with some additional stuff that can be used in the load function, https://kit.svelte.dev/docs/load#making-fetch-requests
+
+# Dealing with undefined
+If a undefined value occurs, i.e. from database this can be used: value || []
+The || [] part is the default value. It means that if imagePathsWord is falsy (e.g., null, undefined, 0, '', false, or NaN), then the default value of an empty array [] will be used instead.
