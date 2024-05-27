@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { updateDatabase } from '$lib'; 
     import { wordKnowledge } from '$lib';
     import { goto } from '$app/navigation';
 
@@ -7,6 +6,8 @@
 
     export let char: string;
     export let imagePaths;
+
+    console.log(`Character: ${char}, Image Paths: ${imagePaths[char]}`);
     
     let chosen_image = 0; //TODO pass down later from parent
     let imagePath: string;
@@ -21,7 +22,6 @@
 
 
     let displayType: string = 'image';
-
     const store_value = $wordKnowledge;
 
     // determine the display type of the character
@@ -40,24 +40,24 @@
         }
     }
 
-    function circle() {
-        if (displayType === 'character') {
-            displayType = 'image';
-            wordKnowledge.update(knowledge => {
-                knowledge[char] = 0;
-                return knowledge;
-            });
-            updateDatabase(char, 0);
-        } else if (displayType === 'image') {
-            displayType = 'character';
-            wordKnowledge.update(knowledge => {
-                knowledge[char] = 1;
-                return knowledge;
-            });
-            updateDatabase(char, 1);
-        }
-        close();
-    }
+    // function circle() {
+    //     if (displayType === 'character') {
+    //         displayType = 'image';
+    //         wordKnowledge.update(knowledge => {
+    //             knowledge[char] = 0;
+    //             return knowledge;
+    //         });
+    //         updateDatabase(char, 0);
+    //     } else if (displayType === 'image') {
+    //         displayType = 'character';
+    //         wordKnowledge.update(knowledge => {
+    //             knowledge[char] = 1;
+    //             return knowledge;
+    //         });
+    //         updateDatabase(char, 1);
+    //     }
+    //     close();
+    // }
 
 
 </script>

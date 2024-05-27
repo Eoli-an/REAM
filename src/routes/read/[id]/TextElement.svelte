@@ -46,11 +46,18 @@
             updateDatabase(word, 0);
         }
     }
+    // let charContainerWidth = 0;
+    // function measureCharContainerWidth(node: HTMLDivElement) {
+    //     charContainerWidth = node.offsetWidth;
+    // }
+
+    let charContainer: HTMLDivElement;
+    $: charContainerWidth = charContainer ? charContainer.offsetWidth : 0;
 
 </script>
 
 <div class="button-group">
-    <button on:click={(e) => { circleUpperButton() }} class="upper-button">
+    <button on:click={(e) => { circleUpperButton() }} class="upper-button" style="width: {charContainerWidth}px; height:30px">
         {#if upperButtonDisplay === 'translation'}
             {translation}
         {:else}
@@ -58,7 +65,7 @@
         {/if}
     </button>
     
-    <div class="chars">
+    <div bind:this={charContainer} class="chars">
         {#each word.split('') as char}
             <CharElement char = {char} imagePaths={imagePaths}/>
         {/each}
@@ -94,7 +101,7 @@
       background-color: transparent;
       border: none;
       border-radius: 0;
-      padding: 4px 8px;
+      /* padding: 4px 8px; */
       font-size: 16px;
       cursor: pointer;
       margin-right: 0px;
