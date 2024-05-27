@@ -24,5 +24,7 @@ declare namespace svelte.JSX {
 	}
 }
 
+declare module 'hanzi';
+
 export {};
 
