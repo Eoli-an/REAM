@@ -38,7 +38,6 @@
             updateDatabaseSentenceIndex(currentSentenceIndex);
         }
     }
-    $: console.log(currentSentenceIndex);
 
     let simplifyToggle: boolean = false;
 
@@ -81,7 +80,7 @@
         border: none;
         border-radius: 4px;
         padding: 4px 8px;
-        font-size: 4px;
+        font-size: 30px;
         cursor: pointer;
         margin-right: 8px;
     }

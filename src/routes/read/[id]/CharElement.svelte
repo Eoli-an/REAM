@@ -1,27 +1,7 @@
 <script lang="ts">
     import { updateDatabase } from '$lib'; 
-    import { browser } from '$app/environment'; 
     import { wordKnowledge } from '$lib';
-    import Modal from './Modal.svelte';
-    import Modal2 from './Modal2.svelte';
-    import { Button } from 'flowbite-svelte';
-    import { preloadData, pushState, goto } from '$app/navigation';
-    import { page } from '$app/stores';
-    
-    // import { getModalStore } from '@skeletonlabs/skeleton';
-    // import type { ModalSettings } from '@skeletonlabs/skeleton';
-    // import { Modal as ModalFlowbite, Button as ButtonFlowbite} from 'flowbite-svelte';
-			
-    // const modalStore = getModalStore();
-    
-    // const modal: ModalSettings = {
-    //     type: 'alert',
-    //     // Data
-    //     title: 'Example Alert',
-    //     body: 'This is an example modal.',
-    //     image: 'https://i.imgur.com/WOgTG96.gif',
-    // };
-    
+    import { goto } from '$app/navigation';
 
                         
 
@@ -41,9 +21,6 @@
 
 
     let displayType: string = 'image';
-    let showModal = false;
-    let imageError = false;
-
 
     const store_value = $wordKnowledge;
 
@@ -82,53 +59,10 @@
         close();
     }
 
-    function close() {
-        showModal = false;
-    }
-
-    async function handleClick(event: MouseEvent) {
-        event.preventDefault();
-        const href = `/dictionary/${char}`;
-
-        // Preload data for the new route
-        const result = await preloadData(href);
-
-        if (result.type === 'loaded' && result.status === 200) {
-            pushState(href, { selected: result.data });
-        } else {
-            // Fallback to full navigation if something went wrong
-            window.location.href = href;
-        }
-    }
-
 
 </script>
 
-
-<a
-href="/dictionary/${char}"
-on:click={async (e) => {
-
-    // prevent navigation
-    e.preventDefault();
-
-    const { href } = e.currentTarget;
-
-    // run `load` functions (or rather, get the result of the `load` functions
-    // that are already running because of `data-sveltekit-preload-data`)
-    const result = await preloadData(href);
-
-    if (result.type === 'loaded' && result.status === 200) {
-        goto(href);
-        pushState(href, { selected: result.data });
-        
-    } else {
-        // something bad happened! try navigating
-        goto(href);
-    }
-}}
->
-<button >
+<button on:click={() => goto(`/dictionary/${char}`)}>
     {#if displayType === 'character'}
         {char}
     {:else if image_available}
@@ -137,23 +71,7 @@ on:click={async (e) => {
         {char}
     {/if}
 </button>
-</a>
 
-
-
-
-<!-- <ModalFlowbite title="Terms of Service" bind:open={defaultModal} autoclose>
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.</p>
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.</p>
-    <svelte:fragment slot="footer">
-      <ButtonFlowbite on:click={() => alert('Handle "success"')}>I accept</ButtonFlowbite>
-      <ButtonFlowbite color="alternative">Decline</ButtonFlowbite>
-    </svelte:fragment>
-  </ModalFlowbite> -->
-
-<!-- {#if showModal}
-    <Modal {close} {char} {imagePaths} {chosen_image} {circle} {imageError}/>
-{/if} -->
 
 
 <style>
