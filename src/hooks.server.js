@@ -9,7 +9,14 @@ const staticPath = path.join(process.cwd(), staticDir);
 // This will only run once when the app starts, exactly what I want I think because jieba can only be loaded once
 // https://stackoverflow.com/a/76505892
 // (Problem was previously also that jieba.cut also calls init)
-loadDict(fs.readFileSync(staticPath))
+//TODO this stilll doesn't work sometimes
+
+let jieba_loaded = false;
+if (!jieba_loaded) {
+	loadDict(fs.readFileSync(staticPath));
+	jieba_loaded = true;
+}
+
 
 // try {
 //     loadDict(fs.readFileSync(staticPath))

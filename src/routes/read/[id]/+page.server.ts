@@ -12,8 +12,9 @@ import { supabase } from "$lib/supabaseClient";
 import { wordKnowledge } from '$lib/stores';
 
 
+
 export const load = (async ({fetch}) => {
-    const text_less_complex = true;
+    const text_less_complex = false;
     let response;
     if (! text_less_complex) {
         response = await fetch('/harry_potter.txt');//SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
@@ -47,6 +48,9 @@ export const load = (async ({fetch}) => {
 
     const response2 = await fetch('/my_known_words.json');
     const knownWords = await response2.json();
+
+    const response3 = await fetch('/images.json');
+    const imagePaths = await response3.json();
 
     const offset = 0;
     const words_per_page = 40;
@@ -94,6 +98,7 @@ export const load = (async ({fetch}) => {
         words_per_page: words_per_page,
         sentenceOffsets: sentenceOffsets,
         currentSentenceIndex: currentSentenceIndex,
+        imagePaths: imagePaths,
 
     };
 }) satisfies PageServerLoad;

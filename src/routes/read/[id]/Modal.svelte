@@ -5,9 +5,13 @@
     export let circle; // this is a function that will be passed from the parent component
     export let imageError;
     console.log(imageError);
+    // TODO does not relly work see https://www.shaunchander.me/effective-modals-in-sveltekit
+    const portal = (/** @type {any} */ node) => {
+	document.querySelector('main')?.appendChild(node).focus();
+    };
   </script>
   
-  <div class="modal-backdrop" on:click={close}>
+  <div use:portal class="modal-backdrop" on:click={close}>
     <div class="modal-content" on:click|stopPropagation>
       <div class="modal-header">
         <div class="modal-char">{char}</div>
@@ -48,7 +52,13 @@
       padding: 1rem;
       border-radius: 8px;
       width: 300px;
+      height: 200px;
+      /* max-width: 500px; /* Set a maximum width to prevent the modal from becoming too large */
+      /* max-height: 400px; Set a maximum height to prevent the modal from becoming too tall */ 
+      /* width: 40vw;
+      height: 40vh; */
       text-align: center;
+      overflow-y: auto;
     }
     .modal-header {
       display: flex;

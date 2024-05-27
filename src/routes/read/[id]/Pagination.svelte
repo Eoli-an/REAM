@@ -5,6 +5,7 @@
 
     export let words: string[];
     export let pinyin_words: string[];
+    export let imagePaths;
     //export let simplifyToggle: boolean;
     let showSentenceTranslation = false;
     const dummySentenceTranslation = "This is a dummy sentence translation.";
@@ -78,11 +79,11 @@
 
 {#await translations}
     {#each words as word, i (i)}
-        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={'...'} />
+        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={'...'} imagePaths={imagePaths}  />
     {/each}
 {:then translations}
     {#each words as word, i (i)}
-        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={translations[i]}/>
+        <TextElement word = {word} pinyin_word={pinyin_words[i]} translation={translations[i]} imagePaths={imagePaths}/>
     {/each}
 {:catch error}
     <p style="color: red">{error.message}</p>

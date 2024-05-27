@@ -8,6 +8,7 @@
     export let word: string;
     export let pinyin_word: string;
     export let translation: string;
+    export let imagePaths;
 
 
     let upperButtonDisplay = 'translation';
@@ -58,7 +59,7 @@
     
     <button>
         {#each word.split('') as char}
-            <CharElement char = {char} />
+            <CharElement char = {char} imagePaths={imagePaths}/>
         {/each}
     </button>
 </div>

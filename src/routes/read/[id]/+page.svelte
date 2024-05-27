@@ -11,6 +11,7 @@
     const pinyin_cut = data.pinyin_cut;
     const sentenceOffsets = data.sentenceOffsets;
     const wordKnowledgeData = data.wordKnowledgeData;
+    const imagePaths = data.imagePaths;
     let currentSentenceIndex = data.currentSentenceIndex;
 
     wordKnowledgeData?.forEach(item => {
@@ -40,12 +41,17 @@
     function simplify() {
         simplifyToggle = !simplifyToggle;
     }
+    // import { initializeStores, Modal, AppShell} from '@skeletonlabs/skeleton';
+
+    // initializeStores();
+    // import { Modal as ModalFlowbite, Button as ButtonFlowbite} from 'flowbite-svelte';
+    // let defaultModal = true;
 </script>
 
 
 
 <div class="content">
-    <Pagination words={page_words} pinyin_words={page_pinyin} />
+    <Pagination words={page_words} pinyin_words={page_pinyin} imagePaths={imagePaths}/>
 </div>
 
 <div class="navigation">
