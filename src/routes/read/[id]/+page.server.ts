@@ -9,7 +9,6 @@ const {s2t, t2s} = pkg;
 import { pinyin } from "pinyin-pro";
 import { supabase } from "$lib/supabaseClient";
 
-import { wordKnowledge } from '$lib/stores';
 
 
 
@@ -28,7 +27,7 @@ export const load = (async ({fetch}) => {
     const pinyin_cut = text_cut.map(c_word => pinyin(c_word));
 
     let sentenceOffsets: number[] = [];
-    let currentSentenceIndex = 0;
+
 
     function calculateSentenceOffsets() {
         let offset = 0;
@@ -43,9 +42,6 @@ export const load = (async ({fetch}) => {
     calculateSentenceOffsets();
 
 
-    //const wordsToTranslate = text_cut.slice(0, 10); // Example: translate first 10 words
-    //const translations = await translateWord(text_traditional, wordsToTranslate);
-
     const response2 = await fetch('/my_known_words.json');
     const knownWords = await response2.json();
 
@@ -55,38 +51,9 @@ export const load = (async ({fetch}) => {
     const offset = 0;
     const words_per_page = 40;
 
-    // const { data: wordKnowledgeData, error } = await supabase.from("MyKnownWords").select();
-    // if (error) {
-    //     console.error("Error fetching data from Supabase:", error);
-    //     throw new Error("Failed to fetch data from Supabase");
-    // }
-
-    // console.log("Fetched data from Supabase:", wordKnowledgeData);
-
-    // const wordKnowledgeDict: { [key: string]: number | null } = {};
-    // wordKnowledgeData?.forEach(item => {
-    //     if (item.wordChinese && item.knowledgeLevel !== undefined) {
-    //         wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
-    //     } else {
-    //         console.warn("Invalid data item:", item);
-    //     }
-    // });
-
-    // wordKnowledge.set(wordKnowledgeDict);
 
     const { data : wordKnowledgeData} = await supabase.from("MyKnownWords").select();
-    //console.log("wordKnowledgeData", wordKnowledgeData);
-    //const wordKnowledgeDict: { [key: string]: number | null } = {};
-    // wordKnowledgeData?.forEach(item => {
-    //     wordKnowledgeDict[item.wordChinese] = item.knowledgeLevel;
-    //     wordKnowledge.update(knowledge => {
-    //         knowledge[item.wordChinese] = item.knowledgeLevel;
-    //         return knowledge;
-    //     });
-    // });
-
-    //wordKnowledge.set(wordKnowledgeDict);
-    console.log("wordKnowledge inside load", wordKnowledge);
+    const { data : sentenceIndexData} = await supabase.from("SentenceIndex").select().eq('id', 12345);
 
     return {
         text: text,
@@ -97,7 +64,7 @@ export const load = (async ({fetch}) => {
         offset: offset,
         words_per_page: words_per_page,
         sentenceOffsets: sentenceOffsets,
-        currentSentenceIndex: currentSentenceIndex,
+        currentSentenceIndex: sentenceIndexData?.[0]["sentenceIndex"] || 0,
         imagePaths: imagePaths,
 
     };

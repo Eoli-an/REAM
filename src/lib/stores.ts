@@ -7,3 +7,11 @@ interface WordKnowledgeDict {
   }
 
 export const wordKnowledge = writable<WordKnowledgeDict>({});
+
+// interface CurrentSentence {
+//     sentenceIndex: number;
+// }
+
+// export const currentSentence = writable<CurrentSentence>({sentenceIndex: 0});
+
+export const currentSentence = writable(0);

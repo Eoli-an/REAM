@@ -9,3 +9,14 @@ export async function updateDatabase(wordChinese: string, knowledgeLevel: number
         console.error('Error updating database:', error);
     }
 }
+
+export async function updateDatabaseSentenceIndex(sentenceIndex: number) {
+    const { error } = await supabase
+        .from('SentenceIndex')
+        .update({ sentenceIndex: sentenceIndex })
+        .eq('id', 12345);
+
+    if (error) {
+        console.error('Error updating sentence database:', error);
+    }
+}

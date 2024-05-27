@@ -3,6 +3,7 @@
     import CharElement from './CharElement.svelte';
     import {wordKnowledge} from '$lib'
     import { get } from 'svelte/store';
+    import { Button } from 'flowbite-svelte';
 
 
     export let word: string;
@@ -57,11 +58,11 @@
         {/if}
     </button>
     
-    <button>
+    <div class="chars">
         {#each word.split('') as char}
             <CharElement char = {char} imagePaths={imagePaths}/>
         {/each}
-    </button>
+    </div>
 </div>
 
 <style>
@@ -69,13 +70,24 @@
       display: inline-flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 0px;
+      margin-bottom: 30px;
+      margin-right: 30px;
       
     }
 
+    .chars {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-right: 0px;
+    }
+
+
     .upper-button {
-      font-size: 6px;
+      font-size: 20px;
       align-items: bottom;
-      margin-bottom: 0px; /* Adjust the font size as needed */
+      margin-bottom: -4px; /* Adjust the font size as needed */
     }
 
     button {

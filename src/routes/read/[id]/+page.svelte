@@ -1,9 +1,8 @@
 <script lang="ts">
-    import { pinyin } from 'pinyin-pro';
     import type { PageData } from './$types';
     import Pagination from './Pagination.svelte';
-    import { onMount } from 'svelte';
     import { wordKnowledge } from '$lib/stores';
+    import {updateDatabaseSentenceIndex} from '$lib';
 
     export let data: PageData;
 
@@ -13,6 +12,7 @@
     const wordKnowledgeData = data.wordKnowledgeData;
     const imagePaths = data.imagePaths;
     let currentSentenceIndex = data.currentSentenceIndex;
+
 
     wordKnowledgeData?.forEach(item => {
         wordKnowledge.update(knowledge => {
@@ -27,25 +27,24 @@
     function goBack() {
         if (currentSentenceIndex > 0) {
             currentSentenceIndex--;
+            updateDatabaseSentenceIndex(currentSentenceIndex);
+
         }
     }
 
     function goForward() {
         if (currentSentenceIndex < sentenceOffsets.length - 1) {
             currentSentenceIndex++;
+            updateDatabaseSentenceIndex(currentSentenceIndex);
         }
     }
+    $: console.log(currentSentenceIndex);
 
     let simplifyToggle: boolean = false;
 
     function simplify() {
         simplifyToggle = !simplifyToggle;
     }
-    // import { initializeStores, Modal, AppShell} from '@skeletonlabs/skeleton';
-
-    // initializeStores();
-    // import { Modal as ModalFlowbite, Button as ButtonFlowbite} from 'flowbite-svelte';
-    // let defaultModal = true;
 </script>
 
 

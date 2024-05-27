@@ -3,6 +3,10 @@
     import { browser } from '$app/environment'; 
     import { wordKnowledge } from '$lib';
     import Modal from './Modal.svelte';
+    import Modal2 from './Modal2.svelte';
+    import { Button } from 'flowbite-svelte';
+    import { preloadData, pushState, goto } from '$app/navigation';
+    import { page } from '$app/stores';
     
     // import { getModalStore } from '@skeletonlabs/skeleton';
     // import type { ModalSettings } from '@skeletonlabs/skeleton';
@@ -82,10 +86,49 @@
         showModal = false;
     }
 
+    async function handleClick(event: MouseEvent) {
+        event.preventDefault();
+        const href = `/dictionary/${char}`;
+
+        // Preload data for the new route
+        const result = await preloadData(href);
+
+        if (result.type === 'loaded' && result.status === 200) {
+            pushState(href, { selected: result.data });
+        } else {
+            // Fallback to full navigation if something went wrong
+            window.location.href = href;
+        }
+    }
+
 
 </script>
 
-<button on:click={() => showModal = true}>
+
+<a
+href="/dictionary/${char}"
+on:click={async (e) => {
+
+    // prevent navigation
+    e.preventDefault();
+
+    const { href } = e.currentTarget;
+
+    // run `load` functions (or rather, get the result of the `load` functions
+    // that are already running because of `data-sveltekit-preload-data`)
+    const result = await preloadData(href);
+
+    if (result.type === 'loaded' && result.status === 200) {
+        goto(href);
+        pushState(href, { selected: result.data });
+        
+    } else {
+        // something bad happened! try navigating
+        goto(href);
+    }
+}}
+>
+<button >
     {#if displayType === 'character'}
         {char}
     {:else if image_available}
@@ -94,6 +137,10 @@
         {char}
     {/if}
 </button>
+</a>
+
+
+
 
 <!-- <ModalFlowbite title="Terms of Service" bind:open={defaultModal} autoclose>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.</p>
@@ -104,30 +151,34 @@
     </svelte:fragment>
   </ModalFlowbite> -->
 
-{#if showModal}
-    <Modal {close} {char} {imagePath} {circle} {imageError}/>
-{/if}
+<!-- {#if showModal}
+    <Modal {close} {char} {imagePaths} {chosen_image} {circle} {imageError}/>
+{/if} -->
 
 
 <style>
     button {
-      width: 22px; /* Set the desired fixed width */
-      height: 22px; /* Set the desired fixed height */
+      width: 80px; /* Set the desired fixed width */
+      height: 80px; /* Set the desired fixed height */
       background-color: transparent;
       border: none;
-      border-radius: 0;
-      padding: 4px 8px;
-      font-size: 16px;
+      /* border-radius: 0; */
+      /* padding: 4px 8px; */
+      font-size: 60px;
       cursor: pointer;
       margin-right: 0px;
       margin-bottom: 0px;
-      margin-top: -6px;
+      margin-top: 0px;
+      margin-left: 0px;
+      padding: 0px;
     }
 
     img {
-      width: 17px;
+      width: 70px;
       height: auto;
       vertical-align: middle;
-      margin-bottom: 4px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-top: -6px;
     }
 </style>

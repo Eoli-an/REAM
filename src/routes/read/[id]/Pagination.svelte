@@ -89,10 +89,12 @@
     <p style="color: red">{error.message}</p>
 {/await}
 
+
+
 <style>
     .sentence-translation-container {
         cursor: pointer;
-        font-size: 0.7rem;
+        font-size: 3rem;
         font-weight: normal;
         margin-bottom: 0.5rem;
         background-color: transparent;
@@ -102,6 +104,6 @@
 
     .divider {
         border-top: 1px solid black;
-        margin: 0.5rem 0;
+        margin: 5rem 0;
     }
 </style>

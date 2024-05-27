@@ -1,17 +1,36 @@
-<script>
+<script lang="ts">
+    import { Carousel } from 'flowbite-svelte';
+
+
     export let close;
     export let char;
-    export let imagePath;
+    export let imagePaths;
+    export let chosen_image;
     export let circle; // this is a function that will be passed from the parent component
     export let imageError;
     console.log(imageError);
     // TODO does not relly work see https://www.shaunchander.me/effective-modals-in-sveltekit
-    const portal = (/** @type {any} */ node) => {
-	document.querySelector('main')?.appendChild(node).focus();
-    };
+  //   const portal = (/** @type {any} */ node) => {
+	// document.querySelector('main')?.appendChild(node).focus();
+  //   };
+
+    console.log(imagePaths[char]);
+
+    function convertSrcList(srcList: string[]) {
+      return srcList.map(src => ({
+        src: src, // Convert backslashes to forward slashes
+        alt: 'Random Alt Text', // Replace with your logic for generating random alt text
+        title: 'Random Title' // Replace with your logic for generating random title
+      }));
+    }
+    const images = convertSrcList(imagePaths[char]);
+
+
   </script>
+
+
   
-  <div use:portal class="modal-backdrop" on:click={close}>
+  <div class="modal-backdrop" on:click={close}>
     <div class="modal-content" on:click|stopPropagation>
       <div class="modal-header">
         <div class="modal-char">{char}</div>
@@ -19,7 +38,12 @@
             {#if imageError}
                 <p>No image available yet</p>
             {:else}
-                <img src={imagePath} alt={char} />
+            <div class="modal-image">
+                <Carousel style="height: 200px"{images} let:Controls>
+                  <Controls />
+                </Carousel>
+                <!-- <img src={imagePaths[char][chosen_image]} alt={char} /> -->
+              </div>
             {/if}
         </div>
       </div>
@@ -51,8 +75,8 @@
       background: gainsboro;
       padding: 1rem;
       border-radius: 8px;
-      width: 300px;
-      height: 200px;
+      width: 1000px;
+      height: 600px;
       /* max-width: 500px; /* Set a maximum width to prevent the modal from becoming too large */
       /* max-height: 400px; Set a maximum height to prevent the modal from becoming too tall */ 
       /* width: 40vw;
@@ -69,13 +93,15 @@
       font-size: 3.5rem;
       color: black;
     }
-    .modal-image {
+    /* .modal-image {
       flex: 1;
       color: black;
       font-size: 0.7rem;
-    }
-    .modal-image img {
-      width: 70px;
+      height: 150px;
+      width: 150px;
+    } */
+    .modal-image {
+      width: 30px;
       height: auto;
     }
     .modal-body {

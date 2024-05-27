@@ -11,16 +11,34 @@ export type Database = {
     Tables: {
       MyKnownWords: {
         Row: {
+          image_paths: string[] | null
           knowledgeLevel: number | null
           wordChinese: string
         }
         Insert: {
+          image_paths?: string[] | null
           knowledgeLevel?: number | null
           wordChinese: string
         }
         Update: {
+          image_paths?: string[] | null
           knowledgeLevel?: number | null
           wordChinese?: string
+        }
+        Relationships: []
+      }
+      SentenceIndex: {
+        Row: {
+          id: number
+          sentenceIndex: number | null
+        }
+        Insert: {
+          id?: number
+          sentenceIndex?: number | null
+        }
+        Update: {
+          id?: number
+          sentenceIndex?: number | null
         }
         Relationships: []
       }
