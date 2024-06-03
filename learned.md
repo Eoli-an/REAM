@@ -28,3 +28,6 @@ Sveltekit has a special fetch with some additional stuff that can be used in the
 # Dealing with undefined
 If a undefined value occurs, i.e. from database this can be used: value || []
 The || [] part is the default value. It means that if imagePathsWord is falsy (e.g., null, undefined, 0, '', false, or NaN), then the default value of an empty array [] will be used instead.
+
+# Variable definition in page
+Previously I did  i.e. const words = data.words;. This is not reeactive, so even if data.words changes, words stays the same. Rather just use data.words everywhere...(was also problem why images did not update)

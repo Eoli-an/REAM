@@ -11,11 +11,13 @@ const staticPath = path.join(process.cwd(), staticDir);
 // (Problem was previously also that jieba.cut also calls init)
 //TODO this stilll doesn't work sometimes
 
-let jieba_loaded = false;
-if (!jieba_loaded) {
-	loadDict(fs.readFileSync(staticPath));
-	jieba_loaded = true;
+
+try {
+    loadDict(fs.readFileSync(staticPath));
+} catch (err) {
+    console.error('Error loading dictionary:', err);
 }
+
 
 
 // try {

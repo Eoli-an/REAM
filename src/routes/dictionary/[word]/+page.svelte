@@ -56,6 +56,9 @@
             <p style="font-size: 1.5rem;">{item.pinyin}</p>
         </div>
     {/each}
+    <div class="grid-item">
+        <p style="font-size: 1.5rem;">Frequency {data.frequency}</p>
+    </div>
 </div>
 
 <style>

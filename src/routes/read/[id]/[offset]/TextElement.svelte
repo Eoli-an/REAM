@@ -2,8 +2,6 @@
     import { updateDatabase } from '$lib'; 
     import CharElement from './CharElement.svelte';
     import {wordKnowledge} from '$lib'
-    import { get } from 'svelte/store';
-    import { Button } from 'flowbite-svelte';
 
 
     export let word: string;

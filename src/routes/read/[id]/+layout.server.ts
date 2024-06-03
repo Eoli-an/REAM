@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import {cut} from '@node-rs/jieba';
 // Jieba only works on server, maybe later better to do everything on clientside for android app
 import { translateWord } from './translate';
@@ -9,14 +9,11 @@ const {s2t, t2s} = pkg;
 import { pinyin } from "pinyin-pro";
 import { supabase } from "$lib/supabaseClient";
 
-
-
-
-export const load = (async ({fetch}) => {
+export const load = (async ({fetch, params}) => {
     const text_less_complex = false;
     let response;
     if (! text_less_complex) {
-        response = await fetch('/harry_potter.txt');//SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
+        response = await fetch('/short_story.txt');//SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
     } else {
         response = await fetch('/harry_potter_less_complex.txt');
     }
@@ -42,8 +39,8 @@ export const load = (async ({fetch}) => {
     calculateSentenceOffsets();
 
 
-    const response2 = await fetch('/my_known_words.json');
-    const knownWords = await response2.json();
+    // const response2 = await fetch('/my_known_words.json');
+    // const knownWords = await response2.json();
 
     const response3 = await fetch('/images.json');
     const imagePaths = await response3.json();
@@ -54,6 +51,8 @@ export const load = (async ({fetch}) => {
 
     const { data : wordKnowledgeData} = await supabase.from("MyKnownWords").select();
     const { data : sentenceIndexData} = await supabase.from("SentenceIndex").select().eq('id', 12345);
+
+    const currentId = params.id;
 
     return {
         text: text,
@@ -66,7 +65,9 @@ export const load = (async ({fetch}) => {
         sentenceOffsets: sentenceOffsets,
         currentSentenceIndex: sentenceIndexData?.[0]["sentenceIndex"] || 0,
         imagePaths: imagePaths,
+        currentId: currentId,
 
     };
-}) satisfies PageServerLoad;
+}) satisfies LayoutServerLoad;
+
 

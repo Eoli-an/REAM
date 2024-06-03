@@ -7,7 +7,7 @@
     export let char: string;
     export let imagePaths;
 
-    console.log(`Character: ${char}, Image Paths: ${imagePaths[char]}`);
+    // console.log(`Character: ${char}, Image Paths: ${imagePaths[char]}`);
     
     let chosen_image = 0; //TODO pass down later from parent
     let imagePath: string;
