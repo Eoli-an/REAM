@@ -20,3 +20,24 @@ export async function updateDatabaseSentenceIndex(sentenceIndex: number) {
         console.error('Error updating sentence database:', error);
     }
 }
+
+export async function uploadDatabaseBook(dicts: { word_position: number; word: string; translation: string; sentence: number; }[]) {
+
+    const data = dicts.map(dict => ({
+        text_id: 1234,
+        word_position: dict.word_position,
+        word: dict.word,
+        translation: dict.translation,
+        sentence: dict.sentence
+    }));
+
+    const { error } = await supabase
+        .from('Texts') 
+        .upsert(data, { onConflict: 'text_id, word_position, sentence' });
+
+    if (error) {
+        console.error('Error uploading to database:', error);
+    } else {
+        console.log('Database upload successful');
+    }
+}

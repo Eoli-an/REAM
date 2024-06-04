@@ -42,6 +42,33 @@ export type Database = {
         }
         Relationships: []
       }
+      Texts: {
+        Row: {
+          id: number
+          sentence: number | null
+          text_id: number | null
+          translation: string | null
+          word: string | null
+          word_position: number | null
+        }
+        Insert: {
+          id?: number
+          sentence?: number | null
+          text_id?: number | null
+          translation?: string | null
+          word?: string | null
+          word_position?: number | null
+        }
+        Update: {
+          id?: number
+          sentence?: number | null
+          text_id?: number | null
+          translation?: string | null
+          word?: string | null
+          word_position?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
