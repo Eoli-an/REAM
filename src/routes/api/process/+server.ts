@@ -19,26 +19,19 @@ function splitIntoSentences(text: string): string[] {
     return sentences;
 }
 
-// // Function to process a batch of sentences
-// function processBatch(sentences: string[]): string {
-//     // Split each sentence into words
-//     const text = sentences.join('');
-// }
 
 export const POST: RequestHandler = async ({ request }) => {
     const { text } = await request.json();
 
-    // Split text into sentences
     const sentences = splitIntoSentences(text);
 
-    // Process sentences in batches of 5
-    for (let i = 0; i < sentences.length; i += 1) {
-        const batch = sentences.slice(i, i + 1);
-        const outputDict = await splitAndTranslate(sentences.join(''), i);
+    //TODO not sure why -1 here
+    for (let i = 0; i < sentences.length - 1; i += 1) {
+        // const batch = sentences.slice(i, i + 1);
+        const outputDict = await splitAndTranslate(sentences[i], i);
         uploadDatabaseBook(outputDict);
     }
 
-    // Return a success response
     return new Response('Processing completed', { status: 200 });
 };
 
