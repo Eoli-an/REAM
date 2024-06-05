@@ -21,7 +21,8 @@ function splitIntoSentences(text: string): string[] {
 
 
 export const POST: RequestHandler = async ({ request }) => {
-    const { text } = await request.json();
+    console.log("inside process api");
+    const { text, text_id } = await request.json();
 
     const sentences = splitIntoSentences(text);
 
@@ -29,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
     for (let i = 0; i < sentences.length - 1; i += 1) {
         // const batch = sentences.slice(i, i + 1);
         const outputDict = await splitAndTranslate(sentences[i], i);
-        uploadDatabaseBook(outputDict);
+        uploadDatabaseBook(outputDict, text_id);
     }
 
     return new Response('Processing completed', { status: 200 });
@@ -38,7 +39,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 async function splitAndTranslate(text: string, sentence_id: number): Promise<{ word_position: number; word: string; translation: string; sentence:number;}[]> {
 
-
+    console.log(text);
     const chatInput = text;
     const systemPrompt = `You will be given a chinese text. Split this text into words and generate word-by-word translations, that are context appropriate.
     Be brief with the translations. If you encouter punctations, just copy them. It is important to follow my instructions, because I will parse the output programmatically afterwards.
@@ -71,6 +72,48 @@ ASSISTANT:
 夢寐以求 - dreamt of
 的 - 's
 魔法學校 - magic school
+。- .
+
+USER:
+小明：老板，买单。
+
+经理：好的，您一共消费了300元。
+
+ASSISTANT:
+小明 - Xiao Ming
+：- :
+老板 - boss
+，- ,
+买单 - give bill
+。- .
+经理 - manager
+：- :
+好的 - ok
+，- ,
+您 - you
+一共 - total
+消费了 - spend
+300 - 300
+元 - yuan
+。- .
+
+USER:
+我媽媽做的水果沙拉酸酸甜甜的,口感真不錯。
+
+ASSISTANT:
+我 - I
+媽媽 - mom
+做 - make
+的 - 's
+水果 - fruit
+沙拉 - salad
+酸酸 - sour
+甜甜 - sweet
+的 - 's
+, - ,
+口感 - taste
+真 - really
+不錯 - not bad
 。- .`;
   
     const chatCompletion = await groq.chat.completions.create({

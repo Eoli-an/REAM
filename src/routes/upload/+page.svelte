@@ -1,9 +1,24 @@
+<!-- +page.svelte -->
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 	import { Gallery } from 'flowbite-svelte';
+	import { enhance } from '$app/forms';
 
 	export let data: PageData;
+	export let form: ActionData;
 </script>
+
+<form method="POST" action="?/uploadText" use:enhance enctype="multipart/form-data">
+	<label>
+		Upload a .txt file:
+		<input type="file" name="file" accept=".txt" required />
+	</label>
+	<button type="submit">Upload</button>
+</form>
+
+{#if form?.success}
+	<p>{form.message}</p>
+{/if}
 
 <Gallery class="grid-cols-2 gap-4">
 	{#each data.texts as text}

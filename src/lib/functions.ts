@@ -21,10 +21,12 @@ export async function updateDatabaseSentenceIndex(sentenceIndex: number) {
     }
 }
 
-export async function uploadDatabaseBook(dicts: { word_position: number; word: string; translation: string; sentence: number; }[]) {
-
+export async function uploadDatabaseBook(dicts: { word_position: number; word: string; translation: string; sentence: number; }[]
+    , text_id: number
+) {
+    console.log(text_id)
     const data = dicts.map(dict => ({
-        text_id: 1234,
+        text_id: text_id,
         word_position: dict.word_position,
         word: dict.word,
         translation: dict.translation,

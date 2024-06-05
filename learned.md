@@ -33,4 +33,7 @@ The || [] part is the default value. It means that if imagePathsWord is falsy (e
 Previously I did  i.e. const words = data.words;. This is not reeactive, so even if data.words changes, words stays the same. Rather just use data.words everywhere...(was also problem why images did not update)
 
 # SQL upsert constraint
-If I want to have a constraint over multiple cols in supabase, I first have to create a combined unique index
+If I want to have a constraint over multiple cols in supabase, I first have to create a combined unique index https://stackoverflow.com/questions/75247517/supabase-upsert-multiple-onconflict-constraints
+
+# File upload
+File upload with enctype="multipart/form-data", https://www.okupter.com/blog/sveltekit-file-upload
