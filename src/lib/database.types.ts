@@ -44,7 +44,7 @@ export type Database = {
       }
       Texts: {
         Row: {
-          id: number
+          id: string
           sentence: number | null
           text_id: number | null
           translation: string | null
@@ -52,7 +52,7 @@ export type Database = {
           word_position: number | null
         }
         Insert: {
-          id?: number
+          id?: string
           sentence?: number | null
           text_id?: number | null
           translation?: string | null
@@ -60,7 +60,7 @@ export type Database = {
           word_position?: number | null
         }
         Update: {
-          id?: number
+          id?: string
           sentence?: number | null
           text_id?: number | null
           translation?: string | null
@@ -71,7 +71,12 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      distinct_text_id: {
+        Row: {
+          text_id: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

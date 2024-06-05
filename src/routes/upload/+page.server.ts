@@ -15,8 +15,8 @@ export const load = (async ({fetch}) => {
 //     })
 
     const { data, error } = await supabase
-        .from('Texts')
-        .select('book_id');
+        .from('distinct_text_id')
+        .select();
 
     if (error) {
         console.error('Error fetching book IDs:', error);
