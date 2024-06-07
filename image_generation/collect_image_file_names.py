@@ -25,7 +25,7 @@ def main():
                 images_dict[char] = []
             images_dict[char].extend(paths)
 
-    output_path = os.path.join(os.path.dirname(__file__), 'images.json')
+    output_path = os.path.join(base_path, 'images.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(images_dict, f, ensure_ascii=False, indent=4)
 

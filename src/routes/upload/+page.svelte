@@ -1,4 +1,3 @@
-<!-- +page.svelte -->
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 	import { Gallery } from 'flowbite-svelte';
@@ -8,9 +7,23 @@
 	export let form: ActionData;
 </script>
 
-<form method="POST" action="?/uploadText" use:enhance enctype="multipart/form-data">
+<form method="POST" action="?/uploadTextChinese" use:enhance enctype="multipart/form-data">
 	<label>
-		Upload a .txt file:
+		Upload a Chinese .txt file:
+		<input type="file" name="file" accept=".txt" required />
+	</label>
+	<button type="submit">Upload</button>
+</form>
+
+<form
+	method="POST"
+	action="?/uploadTextEnglish"
+	use:enhance
+	enctype="multipart/form-data"
+	class="mt-4"
+>
+	<label>
+		Upload an English .txt file:
 		<input type="file" name="file" accept=".txt" required />
 	</label>
 	<button type="submit">Upload</button>

@@ -5,7 +5,7 @@
 		document.documentElement.setAttribute('data-theme', 'dark');
 	});
 
-	import { wordKnowledge } from '$lib/stores';
+	import { wordKnowledge, CharacterKnowledge } from '$lib/stores';
 	import { updateDatabaseSentenceIndex } from '$lib';
 	import type { LayoutData } from './$types';
 	import { goto } from '$app/navigation';
@@ -19,6 +19,7 @@
 	const pinyin_cut = data.pinyin_cut;
 	const sentenceOffsets = data.sentenceOffsets;
 	const wordKnowledgeData = data.wordKnowledgeData;
+	const charKnowledgeData = data.characterKnowledgeData;
 	const imagePaths = data.imagePaths;
 	const currentId = data.currentId;
 	let currentSentenceIndex = data.currentSentenceIndex;
@@ -26,6 +27,13 @@
 	wordKnowledgeData?.forEach((item) => {
 		wordKnowledge.update((knowledge) => {
 			knowledge[item.wordChinese] = item.knowledgeLevel;
+			return knowledge;
+		});
+	});
+
+	charKnowledgeData?.forEach((item) => {
+		CharacterKnowledge.update((knowledge) => {
+			knowledge[item.character] = item.knowledgeLevel;
 			return knowledge;
 		});
 	});

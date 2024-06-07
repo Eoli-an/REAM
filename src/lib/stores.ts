@@ -2,11 +2,12 @@ import { writable } from 'svelte/store';
 //import type { Database } from './database.types';
 
 //type MyKnownWordsRow = Database['public']['Tables']['MyKnownWords']['Row'];
-interface WordKnowledgeDict {
-    [key: string]: number | null;
-  }
+interface KnowledgeDict {
+	[key: string]: number | null;
+}
 
-export const wordKnowledge = writable<WordKnowledgeDict>({});
+export const wordKnowledge = writable<KnowledgeDict>({});
+export const CharacterKnowledge = writable<KnowledgeDict>({});
 
 // interface CurrentSentence {
 //     sentenceIndex: number;
