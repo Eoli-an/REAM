@@ -53,7 +53,7 @@
 	// }
 </script>
 
-<button on:click={() => goto(`/dictionary/${char}`)}>
+<button on:click={() => goto(`/dictionaryChar/${char}`)}>
 	{#if displayType === 'character'}
 		{char}
 	{:else if image_available}

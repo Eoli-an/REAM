@@ -2,9 +2,12 @@
 	import type { ActionData, PageData } from './$types';
 	import { Gallery } from 'flowbite-svelte';
 	import { enhance } from '$app/forms';
+	import { Spinner, Button } from 'flowbite-svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
+
+	let formLoading = false;
 </script>
 
 <form method="POST" action="?/uploadTextChinese" use:enhance enctype="multipart/form-data">
@@ -12,13 +15,19 @@
 		Upload a Chinese .txt file:
 		<input type="file" name="file" accept=".txt" required />
 	</label>
-	<button type="submit">Upload</button>
+	<Button type="submit">Upload</Button>
 </form>
 
 <form
 	method="POST"
 	action="?/uploadTextEnglish"
-	use:enhance
+	use:enhance={() => {
+		formLoading = true;
+		return async ({ update }) => {
+			formLoading = false;
+			update();
+		};
+	}}
 	enctype="multipart/form-data"
 	class="mt-4"
 >
@@ -26,8 +35,12 @@
 		Upload an English .txt file:
 		<input type="file" name="file" accept=".txt" required />
 	</label>
-	<button type="submit">Upload</button>
+	<Button type="submit">Upload</Button>
 </form>
+
+{#if formLoading}
+	<Spinner />
+{/if}
 
 {#if form?.success}
 	<p>{form.message}</p>

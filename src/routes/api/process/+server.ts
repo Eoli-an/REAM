@@ -48,7 +48,8 @@ Example:
 USER:
 哈利波特站在火車站的月台上，心情既興奮又緊張。他即將乘坐霍格華茲特快列車，前往他夢寐以求的魔法學校。
 ASSISTANT:
-哈利波特 - Harry Potter
+哈利 - Harry
+波特 - Potter
 站 - stands
 在 - at
 火車站 - train station
@@ -65,13 +66,16 @@ ASSISTANT:
 他 - He
 即將 - about to
 乘坐 - board
-霍格華茲特快列車 - Hogwarts Express
+霍格華茲 - Hogwarts
+特快 - express
+列車 - train
 ，- ,
 前往 - go to
 他 - his
 夢寐以求 - dreamt of
 的 - 's
-魔法學校 - magic school
+魔法 - magic
+學校 - school
 。- .
 
 USER:
@@ -114,7 +118,36 @@ ASSISTANT:
 口感 - taste
 真 - really
 不錯 - not bad
-。- .`;
+。- .
+
+USER:
+但是當他回頭看時,只有一隻虎斑貓站在普里維特街的街角,沒有地圖在望。
+
+ASSISTANT:
+但是 - but
+當 - when
+他 - he
+回頭 - turn around
+看 - look
+時 - time
+, - ,
+只有 - only
+一 - one
+隻 - measure word for animals
+虎斑 - tabby
+貓 - cat
+站 - stand
+在 - at
+普里維特 - Privet
+街 - street
+的 - 's
+街角 - corner
+, - ,
+沒有 - no
+地圖 - map
+在 - at
+望 - sight
+`;
   
     const chatCompletion = await groq.chat.completions.create({
       model: 'llama3-70b-8192',
