@@ -16,3 +16,5 @@ export const CharacterKnowledge = writable<KnowledgeDict>({});
 // export const currentSentence = writable<CurrentSentence>({sentenceIndex: 0});
 
 export const currentSentence = writable(0);
+
+export const currentSentenceWords = writable<string>('');

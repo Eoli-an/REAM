@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
+	import { currentSentenceWords } from '$lib';
 	async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
 		const { error } = await supabase
 			.from('MyKnownWords') // Adjust the table name as needed
@@ -11,7 +12,8 @@
 	}
 	import type { PageData } from './$types';
 	import { wordKnowledge } from '$lib';
-	import { Button } from 'flowbite-svelte';
+	import { Button, Spinner } from 'flowbite-svelte';
+	import CharElement from '../../read/[id]/[offset]/CharElement.svelte';
 
 	export let data: PageData;
 	const word = data.word;
@@ -26,6 +28,8 @@
 		updateDatabase(word, knowledgeLevel);
 		window.history.back();
 	}
+
+	console.log(currentSentenceWords);
 </script>
 
 <div class="word-grid">
@@ -50,6 +54,16 @@
 	</div>
 </div>
 
+<div class="definition">
+	{#await data.explanation}
+		<Spinner /> loading explanation...
+	{:then explanation}
+		<p>{explanation}</p>
+	{:catch error}
+		<p style="color: red">{error.message}</p>
+	{/await}
+</div>
+
 <style>
 	.word-grid {
 		display: grid;
@@ -71,5 +85,14 @@
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		grid-gap: 1rem;
 		margin-top: 20rem;
+	}
+
+	.definition {
+		margin-top: 5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 1rem; /* Adjust the height as needed */
+		font-size: 1.6rem;
 	}
 </style>

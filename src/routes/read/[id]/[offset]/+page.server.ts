@@ -16,6 +16,7 @@ export const load = (async ({ parent, params, fetch }) => {
 
 		wordTranslations = loadWordTranslations(page_words, fetch);
 	} else {
+		// If on-the-fly translation is not wished, fetch all the words and translations from the database
 		const { data: sentenceData, error } = await supabase
 			.from('Texts')
 			.select('word_position, word, translation')
@@ -35,6 +36,8 @@ export const load = (async ({ parent, params, fetch }) => {
 	}
 	//TODO adjust
 	const sentenceTranslation = loadSentenceTranslations(page_words, fetch);
+
+	updateCurrentSentence(page_words);
 
 	return {
 		words: page_words,
@@ -64,4 +67,19 @@ async function loadSentenceTranslations(words: string[], fetch: any) {
 	})
 		.then((response: Response) => response.json())
 		.then((data: { sentenceTranslation: string }) => data.sentenceTranslation);
+}
+
+async function updateCurrentSentence(page_words: string[]) {
+  const currentSentence = page_words.join(' ');
+  const { error } = await supabase
+    .from('currentSentence')
+    .update({ sentence: currentSentence})
+    .eq('id', 0);
+
+  if (error) {
+    console.error('Error updating current sentence:', error);
+  } 
+//   else {
+//     console.log('Current sentence updated successfully.');
+//   }
 }

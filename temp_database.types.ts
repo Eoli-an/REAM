@@ -9,6 +9,21 @@
 export type Database = {
   public: {
     Tables: {
+      currentSentence: {
+        Row: {
+          id: number
+          sentence: string | null
+        }
+        Insert: {
+          id?: number
+          sentence?: string | null
+        }
+        Update: {
+          id?: number
+          sentence?: string | null
+        }
+        Relationships: []
+      }
       MyKnownCharacters: {
         Row: {
           character: string

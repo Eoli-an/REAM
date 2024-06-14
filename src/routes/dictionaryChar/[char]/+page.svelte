@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
+	import { Button, Spinner } from 'flowbite-svelte';
 	async function updateDatabase(character: string, knowledgeLevel: number) {
 		const { error } = await supabase
 			.from('MyKnownCharacters') // Adjust the table name as needed
@@ -70,6 +71,16 @@
 	</div>
 </div>
 
+<div class="definition">
+	{#await data.explanation}
+		<Spinner /> loading explanation...
+	{:then explanation}
+		<p>{explanation}</p>
+	{:catch error}
+		<p style="color: red">{error.message}</p>
+	{/await}
+</div>
+
 <style>
 	.image-grid {
 		display: grid;
@@ -97,5 +108,14 @@
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		grid-gap: 1rem;
 		margin-top: 20rem;
+	}
+
+	.definition {
+		margin-top: 10rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 1rem; /* Adjust the height as needed */
+		font-size: 1.6rem;
 	}
 </style>
