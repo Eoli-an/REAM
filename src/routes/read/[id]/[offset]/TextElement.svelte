@@ -8,13 +8,14 @@
 	export let pinyin_word: string;
 	export let translation: string;
 	export let imagePaths;
+	export let imageChosen;
 
-	let upperButtonDisplay = 'translation';
+	let upperButtonDisplay = 'none';
 
 	const store_value = $wordKnowledge;
 	$: {
 		if (!store_value.hasOwnProperty(word)) {
-			upperButtonDisplay = 'translation';
+			upperButtonDisplay = 'none';
 		} else {
 			if (store_value[word] === 0) {
 				upperButtonDisplay = 'translation';
@@ -67,7 +68,7 @@
 
 	<div bind:this={charContainer} class="chars">
 		{#each word.split('') as char}
-			<CharElement {char} {imagePaths} />
+			<CharElement {char} {imagePaths} {imageChosen} />
 		{/each}
 	</div>
 </div>

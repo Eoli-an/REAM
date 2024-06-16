@@ -4,12 +4,19 @@
 
 	export let char: string;
 	export let imagePaths;
+	export let imageChosen;
 
 	// console.log(`Character: ${char}, Image Paths: ${imagePaths[char]}`);
 
-	let chosen_image = 0; //TODO pass down later from parent
+	let chosen_image = 0;
 	let imagePath: string;
 	let image_available = false;
+
+	$: {
+		if (imageChosen.hasOwnProperty(char)) {
+			chosen_image = imageChosen[char];
+		}
+	}
 
 	// check if there is a image available and choose the image if yes
 	$: if (imagePaths.hasOwnProperty(char)) {
@@ -78,6 +85,7 @@
 		margin-top: 0px;
 		margin-left: 0px;
 		padding: 0px;
+		font-size: 70px;
 	}
 
 	img {
@@ -86,6 +94,6 @@
 		vertical-align: middle;
 		margin-right: 0px;
 		margin-bottom: 0px;
-		margin-top: -6px;
+		margin-top: 20px;
 	}
 </style>

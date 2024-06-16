@@ -45,18 +45,19 @@
 	function goBack() {
 		if (currentSentenceIndex > 0) {
 			currentSentenceIndex--;
-			updateDatabaseSentenceIndex(currentSentenceIndex);
+			updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
 			goto(`/read/${currentId}/${currentSentenceIndex}`);
 		}
 	}
 
 	function goForward() {
-		if (currentSentenceIndex < sentenceOffsets.length - 1) {
-			currentSentenceIndex++;
-			updateDatabaseSentenceIndex(currentSentenceIndex);
-			goto(`/read/${currentId}/${currentSentenceIndex}`);
-		}
+		// if (currentSentenceIndex) {
+		currentSentenceIndex++;
+		updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
+		goto(`/read/${currentId}/${currentSentenceIndex}`);
+		// }
 	}
+
 	if (browser) {
 		goto(`/read/${currentId}/${currentSentenceIndex}`);
 	}

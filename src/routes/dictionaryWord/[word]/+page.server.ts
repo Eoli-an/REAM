@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import { supabase } from '$lib/supabaseClient';
 // @ts-ignore
 import * as hanzi from 'hanzi';
-hanzi.start();
+// hanzi.start();
 
 
 export const load = (async ({params, fetch}) => {

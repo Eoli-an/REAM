@@ -5,14 +5,20 @@ import fs from 'fs';
 import path from 'path';
 
 export const load = (async () => {
-	const { data, error } = await supabase.from('distinct_text_id').select();
+	// const { data, error } = await supabase.from('distinct_text_id').select();
 
-	if (error) {
-		console.error('Error fetching book IDs:', error);
-		return { texts: [] };
-	}
+	// if (error) {
+	// 	console.error('Error fetching book IDs:', error);
+	// 	return { texts: [] };
+	// }
+	const { data, error } = await supabase.from('TextsMetadata').select();
 
-	return { texts: data };
+    if (error) {
+        console.error('Error fetching text metadata:', error);
+        return { texts: [] };
+    }
+
+    return { texts: data };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
@@ -29,6 +35,8 @@ export const actions: Actions = {
 		}
 
 		const text = await file.text();
+		const title: string = formData.get('title') as string; 
+
 
 		const response = await fetch('/api/process', {
 			method: 'POST',
@@ -39,6 +47,13 @@ export const actions: Actions = {
 		});
 
 		if (response.ok) {
+			const {error } = await supabase
+			.from('TextsMetadata')
+			.upsert({ text_id: text_id, title: title}, { onConflict: 'text_id' });
+			// TODO proper error handling
+			if (error) {
+				console.error('Error updating database:', error);
+			}
 			return {
 				success: true,
 				message: 'Text processed successfully.'
@@ -64,6 +79,7 @@ export const actions: Actions = {
 		}
 
 		const text = await file.text();
+		const title: string = formData.get('title') as string; 
 
 		// Call the simplifyEnglish API first
 		const simplifyResponse = await fetch('/api/simplifyEnglish', {
@@ -115,6 +131,13 @@ export const actions: Actions = {
 		});
 
 		if (processResponse.ok) {
+			const {error } = await supabase
+			.from('TextsMetadata')
+			.upsert({ text_id: text_id, title: title}, { onConflict: 'text_id' });
+			// TODO proper error handling
+			if (error) {
+				console.error('Error updating database:', error);
+			}
 			return {
 				success: true,
 				message: 'Text processed successfully.'

@@ -37,12 +37,31 @@ export const load = (async ({ parent, params, fetch }) => {
 	//TODO adjust
 	const sentenceTranslation = loadSentenceTranslations(page_words, fetch);
 
+	const characterSet = new Set(page_words.join(''));
+
+	const { data: imageChosenData, error } = await supabase
+		.from('MyKnownCharacters')
+		.select('character, chosen_image')
+		.in('character', [...characterSet]);
+		
+	if (error) {
+		console.error('Error fetching image data:', error);
+	}
+	
+	const imageChosen:  { [key: string]: number }= {};
+	imageChosenData?.forEach((row) => {
+		imageChosen[row.character] = row.chosen_image;
+	});
+
+
+
 	updateCurrentSentence(page_words);
 
 	return {
 		words: page_words,
 		wordTranslations: wordTranslations,
-		sentenceTranslation: sentenceTranslation
+		sentenceTranslation: sentenceTranslation,
+		imageChosen: imageChosen,
 	};
 }) satisfies PageServerLoad;
 

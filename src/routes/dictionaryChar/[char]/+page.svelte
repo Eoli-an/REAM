@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
 	import { Button, Spinner } from 'flowbite-svelte';
-	async function updateDatabase(character: string, knowledgeLevel: number) {
+	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
 		const { error } = await supabase
 			.from('MyKnownCharacters') // Adjust the table name as needed
-			.upsert({ character, knowledgeLevel }, { onConflict: 'character' });
+			.upsert({ character, knowledgeLevel, chosen_image }, { onConflict: 'character' });
 
 		if (error) {
 			console.error('Error updating database:', error);
@@ -21,20 +21,20 @@
 
 	let selectedItem: 'word' | 'image' = 'image';
 
-	function selectItem(type: 'word' | 'image') {
+	function selectItem(type: 'word' | 'image', index: number) {
 		selectedItem = type;
 		if (type === 'word') {
 			CharacterKnowledge.update((knowledge) => {
 				knowledge[char] = 1;
 				return knowledge;
 			});
-			updateDatabase(char, 1);
+			updateDatabase(char, 1, index);
 		} else if (type === 'image') {
 			CharacterKnowledge.update((knowledge) => {
 				knowledge[char] = 0;
 				return knowledge;
 			});
-			updateDatabase(char, 0);
+			updateDatabase(char, 0, index);
 		}
 		window.history.back();
 	}
@@ -43,13 +43,13 @@
 <div class="image-grid">
 	<div class="grid-item">
 		<h1 style="font-size: 20rem; margin-bottom: 0rem; margin-top: 10rem">{char}</h1>
-		<button on:click={() => selectItem('word')}>Choose this</button>
+		<button on:click={() => selectItem('word', 0)}>Choose this</button>
 	</div>
 	{#if imagePaths.length > 0}
-		{#each imagePaths as imagePath}
+		{#each imagePaths as imagePath, index}
 			<div class="grid-item">
 				<img style="margin-top: 17rem;" src={imagePath} alt={char} />
-				<button on:click={() => selectItem('image')}>Choose this</button>
+				<button on:click={() => selectItem('image', index)}>Choose this</button>
 			</div>
 		{/each}
 	{:else}

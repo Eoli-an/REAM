@@ -51,12 +51,17 @@
         "\\images\\像.png",
         "\\images2\\像.png"
     ],
+    "先": [
+        "\\images\\先.png",
+        "\\images2\\先.png"
+    ],
     "利": [
         "\\images\\利.png",
         "\\images2\\利.png"
     ],
     "到": [
-        "\\images\\到.png"
+        "\\images\\到.png",
+        "\\images2\\到.png"
     ],
     "前": [
         "\\images\\前.png"
@@ -65,11 +70,25 @@
         "\\images\\又.png",
         "\\images2\\又.png"
     ],
+    "向": [
+        "\\images\\向.png",
+        "\\images\\向_3.png",
+        "\\images2\\向_2.png",
+        "\\images2\\向_4.png",
+        "\\images2\\向_5.png"
+    ],
     "回": [
         "\\images\\回.png"
     ],
+    "圖": [
+        "\\images\\圖.png",
+        "\\images2\\圖.png"
+    ],
     "夫": [
         "\\images\\夫.png"
+    ],
+    "奇": [
+        "\\images\\奇.png"
     ],
     "妻": [
         "\\images\\妻.png"
@@ -91,6 +110,10 @@
     "就": [
         "\\images\\就.png"
     ],
+    "常": [
+        "\\images\\常.png",
+        "\\images2\\常.png"
+    ],
     "弗": [
         "\\images\\弗.png"
     ],
@@ -103,6 +126,9 @@
     ],
     "從": [
         "\\images\\從.png"
+    ],
+    "怪": [
+        "\\images\\怪.png"
     ],
     "总": [
         "\\images\\总.png"
@@ -122,18 +148,41 @@
     "時": [
         "\\images\\時.png"
     ],
+    "普": [
+        "\\images\\普.png"
+    ],
     "最": [
         "\\images\\最.png",
         "\\images2\\最.png"
     ],
+    "杜": [
+        "\\images\\杜.png"
+    ],
     "樣": [
         "\\images\\樣.png"
+    ],
+    "正": [
+        "\\images\\正.png",
+        "\\images2\\正.png"
+    ],
+    "波": [
+        "\\images\\波.png"
     ],
     "然": [
         "\\images\\然.png"
     ],
+    "特": [
+        "\\images\\特.png",
+        "\\images2\\特.png"
+    ],
+    "現": [
+        "\\images\\現.png"
+    ],
     "用": [
         "\\images\\用.png"
+    ],
+    "當": [
+        "\\images\\當.png"
     ],
     "發": [
         "\\images\\發.png"
@@ -150,16 +199,32 @@
     "着": [
         "\\images\\着.png"
     ],
+    "祕": [
+        "\\images\\祕.png"
+    ],
     "神": [
         "\\images\\神.png",
         "\\images2\\神.png"
     ],
+    "禮": [
+        "\\images\\禮.png"
+    ],
     "秘": [
-        "\\images\\秘.png"
+        "\\images\\秘.png",
+        "\\images2\\秘.png"
+    ],
+    "種": [
+        "\\images\\種.png"
+    ],
+    "穿": [
+        "\\images\\穿.png"
     ],
     "給": [
         "\\images\\給.png",
         "\\images2\\給.png"
+    ],
+    "維": [
+        "\\images\\維.png"
     ],
     "總": [
         "\\images\\總.png",
@@ -178,8 +243,14 @@
     "自": [
         "\\images\\自.png"
     ],
+    "著": [
+        "\\images\\著.png"
+    ],
     "號": [
         "\\images\\號.png"
+    ],
+    "街": [
+        "\\images\\街.png"
     ],
     "要": [
         "\\images\\要.png"
@@ -188,12 +259,19 @@
         "\\images\\規.png",
         "\\images\\規2.png"
     ],
+    "試": [
+        "\\images\\試.png",
+        "\\images2\\試.png"
+    ],
     "豕": [
         "\\images\\豕.png",
         "\\images\\豕2.png"
     ],
     "豪": [
         "\\images\\豪.png"
+    ],
+    "貓": [
+        "\\images\\貓.png"
     ],
     "起": [
         "\\images\\起.png"
@@ -206,7 +284,8 @@
         "\\images\\過.png"
     ],
     "道": [
-        "\\images\\道.png"
+        "\\images\\道.png",
+        "\\images2\\道.png"
     ],
     "還": [
         "\\images\\還.png"
@@ -214,9 +293,17 @@
     "邊": [
         "\\images\\邊.png"
     ],
+    "鑽": [
+        "\\images\\鑽.png",
+        "\\images\\鑽_2.png"
+    ],
     "長": [
         "\\images\\長.png",
         "\\images2\\長.png"
+    ],
+    "隻": [
+        "\\images\\隻.png",
+        "\\images2\\隻.png"
     ],
     "頭": [
         "\\images\\頭.png",
@@ -272,9 +359,6 @@
     ],
     "做": [
         "\\images2\\做.png"
-    ],
-    "先": [
-        "\\images2\\先.png"
     ],
     "光": [
         "\\images2\\光.png"
@@ -417,9 +501,6 @@
     "市": [
         "\\images2\\市.png"
     ],
-    "常": [
-        "\\images2\\常.png"
-    ],
     "平": [
         "\\images2\\平.png"
     ],
@@ -546,9 +627,6 @@
     "次": [
         "\\images2\\次.png"
     ],
-    "正": [
-        "\\images2\\正.png"
-    ],
     "此": [
         "\\images2\\此.png"
     ],
@@ -584,9 +662,6 @@
     ],
     "物": [
         "\\images2\\物.png"
-    ],
-    "特": [
-        "\\images2\\特.png"
     ],
     "王": [
         "\\images2\\王.png"

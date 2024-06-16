@@ -41,7 +41,13 @@
 
 {#await wordTranslations}
 	{#each data.words as word, i (i)}
-		<TextElement {word} pinyin_word={'pinyin'} translation={'...'} imagePaths={data.imagePaths} />
+		<TextElement
+			{word}
+			pinyin_word={'pinyin'}
+			translation={'...'}
+			imagePaths={data.imagePaths}
+			imageChosen={data.imageChosen}
+		/>
 	{/each}
 {:then translations}
 	{#each data.words as word, i (i)}
@@ -50,6 +56,7 @@
 			pinyin_word={'pinyin'}
 			translation={translations[i]}
 			imagePaths={data.imagePaths}
+			imageChosen={data.imageChosen}
 		/>
 	{/each}
 {:catch error}

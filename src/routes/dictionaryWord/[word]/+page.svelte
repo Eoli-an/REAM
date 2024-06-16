@@ -32,14 +32,19 @@
 	console.log(currentSentenceWords);
 </script>
 
-<div class="word-grid">
-	<div class="grid-item">
-		<h1 style="font-size: 20rem; margin-bottom: 0rem; margin-top: 10rem">{word}</h1>
-		<Button on:click={() => update(0)} color="alternative" size="md" class="mb-2"
-			>Show translation</Button
-		>
-		<Button on:click={() => update(1)} color="alternative" size="md">Hide translation</Button>
+<div class="flex flex-col items-center">
+	<div class="flex flex-row space-x-4">
+		{#each word.split('') as char}
+			<a href="/dictionaryChar/{char}">
+				<h1 class="text-[14rem]">{char}</h1>
+			</a>
+		{/each}
 	</div>
+
+	<Button on:click={() => update(0)} color="alternative" size="lg" class="mb-2">
+		Show translation
+	</Button>
+	<Button on:click={() => update(1)} color="alternative" size="lg">Hide translation</Button>
 </div>
 
 <div class="definition-grid">
@@ -65,26 +70,11 @@
 </div>
 
 <style>
-	.word-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		grid-gap: 1rem;
-		margin-top: -13rem;
-		margin-bottom: -10rem;
-	}
-
-	.grid-item {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
 	.definition-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		grid-gap: 1rem;
-		margin-top: 20rem;
+		margin-top: 5rem;
 	}
 
 	.definition {

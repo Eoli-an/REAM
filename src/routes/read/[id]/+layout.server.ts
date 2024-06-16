@@ -43,11 +43,15 @@ export const load = (async ({ fetch, params }) => {
 	const response3 = await fetch('/images.json');
 	const imagePaths = await response3.json();
 
+	
+
+
 	const offset = 0;
 	const words_per_page = 40;
 
 	const { data: wordKnowledgeData } = await supabase.from('MyKnownWords').select();
-	const { data: sentenceIndexData } = await supabase.from('SentenceIndex').select().eq('id', 12345);
+	const { data: sentenceIndexData } = await supabase.from('TextsMetadata').select("currentSentence").eq('text_id', params.id).single();
+	// const { data: sentenceIndexData } = await supabase.from('SentenceIndex').select().eq('id', 12345);
 	const { data: characterKnowledgeData } = await supabase.from('MyKnownCharacters').select();
 
 	const currentId = params.id;
@@ -62,8 +66,8 @@ export const load = (async ({ fetch, params }) => {
 		offset: offset,
 		words_per_page: words_per_page,
 		sentenceOffsets: sentenceOffsets,
-		currentSentenceIndex: sentenceIndexData?.[0]['sentenceIndex'] || 0,
+		currentSentenceIndex: sentenceIndexData?.currentSentence || 0,
 		imagePaths: imagePaths,
-		currentId: currentId
+		currentId: currentId,
 	};
 }) satisfies LayoutServerLoad;

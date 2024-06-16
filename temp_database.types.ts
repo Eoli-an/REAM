@@ -27,18 +27,21 @@ export type Database = {
       MyKnownCharacters: {
         Row: {
           character: string
+          chosen_image: number
           created_at: string
           id: string
           knowledgeLevel: number | null
         }
         Insert: {
           character: string
+          chosen_image?: number
           created_at?: string
           id?: string
           knowledgeLevel?: number | null
         }
         Update: {
           character?: string
+          chosen_image?: number
           created_at?: string
           id?: string
           knowledgeLevel?: number | null
@@ -103,6 +106,32 @@ export type Database = {
           word?: string | null
           word_position?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "Texts_text_id_fkey"
+            columns: ["text_id"]
+            isOneToOne: false
+            referencedRelation: "TextsMetadata"
+            referencedColumns: ["text_id"]
+          },
+        ]
+      }
+      TextsMetadata: {
+        Row: {
+          currentSentence: number
+          text_id: string
+          title: string | null
+        }
+        Insert: {
+          currentSentence?: number
+          text_id?: string
+          title?: string | null
+        }
+        Update: {
+          currentSentence?: number
+          text_id?: string
+          title?: string | null
+        }
         Relationships: []
       }
     }
@@ -111,7 +140,15 @@ export type Database = {
         Row: {
           text_id: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "Texts_text_id_fkey"
+            columns: ["text_id"]
+            isOneToOne: false
+            referencedRelation: "TextsMetadata"
+            referencedColumns: ["text_id"]
+          },
+        ]
       }
     }
     Functions: {

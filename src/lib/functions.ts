@@ -10,11 +10,11 @@ export async function updateDatabase(wordChinese: string, knowledgeLevel: number
     }
 }
 
-export async function updateDatabaseSentenceIndex(sentenceIndex: number) {
+export async function updateDatabaseSentenceIndex(sentenceIndex: number, text_id: string) {
     const { error } = await supabase
-        .from('SentenceIndex')
-        .update({ sentenceIndex: sentenceIndex })
-        .eq('id', 12345);
+        .from('TextsMetadata')
+        .update({ currentSentence: sentenceIndex })
+        .eq('text_id', text_id);
 
     if (error) {
         console.error('Error updating sentence database:', error);
