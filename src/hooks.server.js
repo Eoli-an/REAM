@@ -1,9 +1,5 @@
 import { loadDict } from '@node-rs/jieba';
 import fs from 'fs';
-import path from 'path';
-
-const staticDir = 'static/dict.txt.big'; // Change this to your static directory name
-const staticPath = path.join(process.cwd(), staticDir);
 
 // This will only run once when the app starts, exactly what I want I think because jieba can only be loaded once
 // https://stackoverflow.com/a/76505892
@@ -11,7 +7,7 @@ const staticPath = path.join(process.cwd(), staticDir);
 //TODO this stilll doesn't work sometimes
 
 try {
-	loadDict(fs.readFileSync(staticPath));
+	loadDict(fs.readFileSync('/dict.txt.big'));
 } catch (err) {
 	console.error('Error loading dictionary:', err);
 }
