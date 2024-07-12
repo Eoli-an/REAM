@@ -1,9 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import Groq from 'groq-sdk';
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
-});
+import { callLLM } from '../llmService';
+
 
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -13,45 +11,25 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const chatInput = text + '\n\n-' + filteredWords.join('\n-');
     const systemPrompt = `You will be given a piece of chinese text and then a list of words from this chinese text. Generate word-by-word translations, that are context appropriate. Be brief with the translations.
-    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation. If words repeat, also repeat the translation.
+    Do NOT output anything else. Adhere strcitly to the format of the example output. Start directly with the first word, no introduction or explanation. If words repeat, also repeat the translation. Make sure to give the translation for every word.
   
   Like this:
   User:
   哈利波特站在火車站的月台上，心情既興奮又緊張。他即將乘坐霍格華茲特快列車，前往他夢寐以求的魔法學校。
   
   -月台
+  -,
   -即將
   -前往
   
    Assitant:
   -月台: platform
-  -即將: soon 
+  -,: ,
+  -即將: soon
+  -。:。
   -前往: go`;
+    const content = await callLLM(systemPrompt, chatInput, false);
   
-    const chatCompletion = await groq.chat.completions.create({
-      model: 'llama3-70b-8192',
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: chatInput,
-        },
-      ],
-      temperature: 1,
-      max_tokens: 10000,//chatInput.length * 5,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      //stream: true,
-    });
-  
-    const content = chatCompletion.choices[0].message.content;
-    if (!content) {
-      throw new Error('No content in chatCompletion');
-    }
     console.log("CONTENT: ", chatInput);
     console.log("RESPONSE: ", content);
 
