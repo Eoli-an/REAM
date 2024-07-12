@@ -1,2 +1,6 @@
-<h1>Welcome</h1>
+<script>
+</script>
 
+<main>
+	<h1>Page</h1>
+</main>

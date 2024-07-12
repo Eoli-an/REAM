@@ -1,0 +1,732 @@
+{
+    "事": [
+        "\\images\\事.png",
+        "\\images\\事2.png"
+    ],
+    "住": [
+        "\\images\\住.png"
+    ],
+    "信": [
+        "\\images\\信.png",
+        "\\images\\信2.png",
+        "\\images2\\信.png"
+    ],
+    "像": [
+        "\\images\\像.png",
+        "\\images2\\像.png"
+    ],
+    "利": [
+        "\\images\\利.png",
+        "\\images2\\利.png"
+    ],
+    "到": [
+        "\\images\\到.png"
+    ],
+    "前": [
+        "\\images\\前.png"
+    ],
+    "又": [
+        "\\images\\又.png",
+        "\\images2\\又.png"
+    ],
+    "妻": [
+        "\\images\\妻.png"
+    ],
+    "家": [
+        "\\images\\家.png",
+        "\\images\\家2 (2).png",
+        "\\images\\家2.png"
+    ],
+    "對": [
+        "\\images\\對.png"
+    ],
+    "就": [
+        "\\images\\就.png"
+    ],
+    "弗": [
+        "\\images\\弗.png"
+    ],
+    "後": [
+        "\\images\\後.png"
+    ],
+    "得": [
+        "\\images\\得.png",
+        "\\images\\得2.png"
+    ],
+    "從": [
+        "\\images\\從.png"
+    ],
+    "总": [
+        "\\images\\总.png"
+    ],
+    "意": [
+        "\\images\\意.png",
+        "\\images2\\意.png"
+    ],
+    "把": [
+        "\\images\\把.png",
+        "\\images2\\把.png"
+    ],
+    "拜": [
+        "\\images\\拜.png",
+        "\\images\\拜2.png"
+    ],
+    "時": [
+        "\\images\\時.png"
+    ],
+    "最": [
+        "\\images\\最.png",
+        "\\images2\\最.png"
+    ],
+    "樣": [
+        "\\images\\樣.png"
+    ],
+    "然": [
+        "\\images\\然.png"
+    ],
+    "用": [
+        "\\images\\用.png"
+    ],
+    "發": [
+        "\\images\\發.png"
+    ],
+    "相": [
+        "\\images\\相.png",
+        "\\images\\相3.png",
+        "\\images2\\相.png"
+    ],
+    "眼": [
+        "\\images\\眼.png",
+        "\\images2\\眼.png"
+    ],
+    "着": [
+        "\\images\\着.png"
+    ],
+    "神": [
+        "\\images\\神.png",
+        "\\images2\\神.png"
+    ],
+    "秘": [
+        "\\images\\秘.png"
+    ],
+    "給": [
+        "\\images\\給.png",
+        "\\images2\\給.png"
+    ],
+    "總": [
+        "\\images\\總.png",
+        "\\images2\\總.png"
+    ],
+    "而": [
+        "\\images\\而.png"
+    ],
+    "聲": [
+        "\\images\\聲.png",
+        "\\images2\\聲.png"
+    ],
+    "胖": [
+        "\\images\\胖.png"
+    ],
+    "自": [
+        "\\images\\自.png"
+    ],
+    "號": [
+        "\\images\\號.png"
+    ],
+    "要": [
+        "\\images\\要.png"
+    ],
+    "規": [
+        "\\images\\規.png",
+        "\\images\\規2.png"
+    ],
+    "豕": [
+        "\\images\\豕.png",
+        "\\images\\豕2.png"
+    ],
+    "豪": [
+        "\\images\\豪.png"
+    ],
+    "起": [
+        "\\images\\起.png"
+    ],
+    "路": [
+        "\\images\\路.png",
+        "\\images\\路2.png"
+    ],
+    "過": [
+        "\\images\\過.png"
+    ],
+    "道": [
+        "\\images\\道.png"
+    ],
+    "還": [
+        "\\images\\還.png"
+    ],
+    "邊": [
+        "\\images\\邊.png"
+    ],
+    "長": [
+        "\\images\\長.png",
+        "\\images2\\長.png"
+    ],
+    "頭": [
+        "\\images\\頭.png",
+        "\\images2\\頭.png"
+    ],
+    "三": [
+        "\\images2\\三.png"
+    ],
+    "且": [
+        "\\images2\\且.png"
+    ],
+    "世": [
+        "\\images2\\世.png"
+    ],
+    "並": [
+        "\\images2\\並.png"
+    ],
+    "二": [
+        "\\images2\\二.png"
+    ],
+    "五": [
+        "\\images2\\五.png"
+    ],
+    "什": [
+        "\\images2\\什.png"
+    ],
+    "代": [
+        "\\images2\\代.png"
+    ],
+    "件": [
+        "\\images2\\件.png"
+    ],
+    "任": [
+        "\\images2\\任.png"
+    ],
+    "位": [
+        "\\images2\\位.png"
+    ],
+    "何": [
+        "\\images2\\何.png"
+    ],
+    "使": [
+        "\\images2\\使.png"
+    ],
+    "便": [
+        "\\images2\\便.png"
+    ],
+    "係": [
+        "\\images2\\係.png"
+    ],
+    "保": [
+        "\\images2\\保.png"
+    ],
+    "做": [
+        "\\images2\\做.png"
+    ],
+    "先": [
+        "\\images2\\先.png"
+    ],
+    "光": [
+        "\\images2\\光.png"
+    ],
+    "兒": [
+        "\\images2\\兒.png"
+    ],
+    "入": [
+        "\\images2\\入.png"
+    ],
+    "內": [
+        "\\images2\\內.png"
+    ],
+    "全": [
+        "\\images2\\全.png"
+    ],
+    "兩": [
+        "\\images2\\兩.png"
+    ],
+    "公": [
+        "\\images2\\公.png"
+    ],
+    "再": [
+        "\\images2\\再.png"
+    ],
+    "則": [
+        "\\images2\\則.png"
+    ],
+    "剋": [
+        "\\images2\\剋.png"
+    ],
+    "力": [
+        "\\images2\\力.png"
+    ],
+    "加": [
+        "\\images2\\加.png"
+    ],
+    "務": [
+        "\\images2\\務.png"
+    ],
+    "化": [
+        "\\images2\\化.png"
+    ],
+    "區": [
+        "\\images2\\區.png"
+    ],
+    "十": [
+        "\\images2\\十.png"
+    ],
+    "即": [
+        "\\images2\\即.png"
+    ],
+    "卻": [
+        "\\images2\\卻.png"
+    ],
+    "原": [
+        "\\images2\\原.png"
+    ],
+    "及": [
+        "\\images2\\及.png"
+    ],
+    "反": [
+        "\\images2\\反.png"
+    ],
+    "受": [
+        "\\images2\\受.png"
+    ],
+    "口": [
+        "\\images2\\口.png"
+    ],
+    "司": [
+        "\\images2\\司.png"
+    ],
+    "各": [
+        "\\images2\\各.png"
+    ],
+    "名": [
+        "\\images2\\名.png"
+    ],
+    "命": [
+        "\\images2\\命.png"
+    ],
+    "員": [
+        "\\images2\\員.png"
+    ],
+    "問": [
+        "\\images2\\問.png"
+    ],
+    "嚮": [
+        "\\images2\\嚮.png"
+    ],
+    "四": [
+        "\\images2\\四.png"
+    ],
+    "基": [
+        "\\images2\\基.png"
+    ],
+    "報": [
+        "\\images2\\報.png"
+    ],
+    "場": [
+        "\\images2\\場.png"
+    ],
+    "外": [
+        "\\images2\\外.png"
+    ],
+    "太": [
+        "\\images2\\太.png"
+    ],
+    "女": [
+        "\\images2\\女.png"
+    ],
+    "它": [
+        "\\images2\\它.png"
+    ],
+    "安": [
+        "\\images2\\安.png"
+    ],
+    "將": [
+        "\\images2\\將.png"
+    ],
+    "少": [
+        "\\images2\\少.png"
+    ],
+    "展": [
+        "\\images2\\展.png"
+    ],
+    "山": [
+        "\\images2\\山.png"
+    ],
+    "工": [
+        "\\images2\\工.png"
+    ],
+    "己": [
+        "\\images2\\己.png"
+    ],
+    "已": [
+        "\\images2\\已.png"
+    ],
+    "市": [
+        "\\images2\\市.png"
+    ],
+    "常": [
+        "\\images2\\常.png"
+    ],
+    "平": [
+        "\\images2\\平.png"
+    ],
+    "幾": [
+        "\\images2\\幾.png"
+    ],
+    "度": [
+        "\\images2\\度.png"
+    ],
+    "建": [
+        "\\images2\\建.png"
+    ],
+    "強": [
+        "\\images2\\強.png"
+    ],
+    "彆": [
+        "\\images2\\彆.png"
+    ],
+    "形": [
+        "\\images2\\形.png"
+    ],
+    "很": [
+        "\\images2\\很.png"
+    ],
+    "德": [
+        "\\images2\\德.png"
+    ],
+    "必": [
+        "\\images2\\必.png"
+    ],
+    "思": [
+        "\\images2\\思.png"
+    ],
+    "性": [
+        "\\images2\\性.png"
+    ],
+    "情": [
+        "\\images2\\情.png"
+    ],
+    "感": [
+        "\\images2\\感.png"
+    ],
+    "應": [
+        "\\images2\\應.png"
+    ],
+    "或": [
+        "\\images2\\或.png"
+    ],
+    "戰": [
+        "\\images2\\戰.png"
+    ],
+    "手": [
+        "\\images2\\手.png"
+    ],
+    "打": [
+        "\\images2\\打.png"
+    ],
+    "指": [
+        "\\images2\\指.png"
+    ],
+    "接": [
+        "\\images2\\接.png"
+    ],
+    "提": [
+        "\\images2\\提.png"
+    ],
+    "放": [
+        "\\images2\\放.png"
+    ],
+    "政": [
+        "\\images2\\政.png"
+    ],
+    "教": [
+        "\\images2\\教.png"
+    ],
+    "數": [
+        "\\images2\\數.png"
+    ],
+    "文": [
+        "\\images2\\文.png"
+    ],
+    "斯": [
+        "\\images2\\斯.png"
+    ],
+    "新": [
+        "\\images2\\新.png"
+    ],
+    "日": [
+        "\\images2\\日.png"
+    ],
+    "明": [
+        "\\images2\\明.png"
+    ],
+    "更": [
+        "\\images2\\更.png"
+    ],
+    "書": [
+        "\\images2\\書.png"
+    ],
+    "月": [
+        "\\images2\\月.png"
+    ],
+    "期": [
+        "\\images2\\期.png"
+    ],
+    "東": [
+        "\\images2\\東.png"
+    ],
+    "果": [
+        "\\images2\\果.png"
+    ],
+    "條": [
+        "\\images2\\條.png"
+    ],
+    "業": [
+        "\\images2\\業.png"
+    ],
+    "機": [
+        "\\images2\\機.png"
+    ],
+    "權": [
+        "\\images2\\權.png"
+    ],
+    "次": [
+        "\\images2\\次.png"
+    ],
+    "正": [
+        "\\images2\\正.png"
+    ],
+    "此": [
+        "\\images2\\此.png"
+    ],
+    "比": [
+        "\\images2\\比.png"
+    ],
+    "民": [
+        "\\images2\\民.png"
+    ],
+    "氣": [
+        "\\images2\\氣.png"
+    ],
+    "水": [
+        "\\images2\\水.png"
+    ],
+    "決": [
+        "\\images2\\決.png"
+    ],
+    "治": [
+        "\\images2\\治.png"
+    ],
+    "活": [
+        "\\images2\\活.png"
+    ],
+    "海": [
+        "\\images2\\海.png"
+    ],
+    "無": [
+        "\\images2\\無.png"
+    ],
+    "爾": [
+        "\\images2\\爾.png"
+    ],
+    "物": [
+        "\\images2\\物.png"
+    ],
+    "特": [
+        "\\images2\\特.png"
+    ],
+    "王": [
+        "\\images2\\王.png"
+    ],
+    "産": [
+        "\\images2\\産.png"
+    ],
+    "由": [
+        "\\images2\\由.png"
+    ],
+    "界": [
+        "\\images2\\界.png"
+    ],
+    "白": [
+        "\\images2\\白.png"
+    ],
+    "目": [
+        "\\images2\\目.png"
+    ],
+    "直": [
+        "\\images2\\直.png"
+    ],
+    "真": [
+        "\\images2\\真.png"
+    ],
+    "知": [
+        "\\images2\\知.png"
+    ],
+    "社": [
+        "\\images2\\社.png"
+    ],
+    "科": [
+        "\\images2\\科.png"
+    ],
+    "空": [
+        "\\images2\\空.png"
+    ],
+    "立": [
+        "\\images2\\立.png"
+    ],
+    "第": [
+        "\\images2\\第.png"
+    ],
+    "等": [
+        "\\images2\\等.png"
+    ],
+    "管": [
+        "\\images2\\管.png"
+    ],
+    "結": [
+        "\\images2\\結.png"
+    ],
+    "統": [
+        "\\images2\\統.png"
+    ],
+    "纔": [
+        "\\images2\\纔.png"
+    ],
+    "美": [
+        "\\images2\\美.png"
+    ],
+    "義": [
+        "\\images2\\義.png"
+    ],
+    "老": [
+        "\\images2\\老.png"
+    ],
+    "者": [
+        "\\images2\\者.png"
+    ],
+    "聽": [
+        "\\images2\\聽.png"
+    ],
+    "至": [
+        "\\images2\\至.png"
+    ],
+    "與": [
+        "\\images2\\與.png"
+    ],
+    "處": [
+        "\\images2\\處.png"
+    ],
+    "被": [
+        "\\images2\\被.png"
+    ],
+    "製": [
+        "\\images2\\製.png"
+    ],
+    "西": [
+        "\\images2\\西.png"
+    ],
+    "見": [
+        "\\images2\\見.png"
+    ],
+    "解": [
+        "\\images2\\解.png"
+    ],
+    "計": [
+        "\\images2\\計.png"
+    ],
+    "許": [
+        "\\images2\\許.png"
+    ],
+    "話": [
+        "\\images2\\話.png"
+    ],
+    "認": [
+        "\\images2\\認.png"
+    ],
+    "論": [
+        "\\images2\\論.png"
+    ],
+    "變": [
+        "\\images2\\變.png"
+    ],
+    "象": [
+        "\\images2\\象.png"
+    ],
+    "資": [
+        "\\images2\\資.png"
+    ],
+    "走": [
+        "\\images2\\走.png"
+    ],
+    "身": [
+        "\\images2\\身.png"
+    ],
+    "軍": [
+        "\\images2\\軍.png"
+    ],
+    "迴": [
+        "\\images2\\迴.png"
+    ],
+    "通": [
+        "\\images2\\通.png"
+    ],
+    "達": [
+        "\\images2\\達.png"
+    ],
+    "重": [
+        "\\images2\\重.png"
+    ],
+    "量": [
+        "\\images2\\量.png"
+    ],
+    "金": [
+        "\\images2\\金.png"
+    ],
+    "錶": [
+        "\\images2\\錶.png"
+    ],
+    "門": [
+        "\\images2\\門.png"
+    ],
+    "間": [
+        "\\images2\\間.png"
+    ],
+    "閤": [
+        "\\images2\\閤.png"
+    ],
+    "關": [
+        "\\images2\\關.png"
+    ],
+    "隊": [
+        "\\images2\\隊.png"
+    ],
+    "難": [
+        "\\images2\\難.png"
+    ],
+    "電": [
+        "\\images2\\電.png"
+    ],
+    "非": [
+        "\\images2\\非.png"
+    ],
+    "題": [
+        "\\images2\\題.png"
+    ],
+    "馬": [
+        "\\images2\\馬.png"
+    ],
+    "體": [
+        "\\images2\\體.png"
+    ],
+    "高": [
+        "\\images2\\高.png"
+    ],
+    "點": [
+        "\\images2\\點.png"
+    ]
+}
