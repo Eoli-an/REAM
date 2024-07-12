@@ -1,9 +1,6 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import Groq from 'groq-sdk';
-const groq = new Groq({
-	apiKey: process.env.GROQ_API_KEY
-});
+import { callLLM } from '../llmService';
 
 function splitIntoSentences(text: string): string[] {
 	const sentences = [];
@@ -34,7 +31,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 async function translate(sentences: string[]): Promise<{ content: string }> {
 	const systemPrompt = `Translate the following English text to Chinese. Use traditional characters. Only output the translated text, nothing else. Keep the translation grammatically simple.
-	It should be suitable for a beginner/intermediate chinese learner. Make it feel like proper chinese, not just a translation.
+	It should be suitable for a beginner/intermediate chinese learner. Make it feel like proper chinese, not just a translation. Make the translation natural.
 
 	Examples:
 	USER:
@@ -68,29 +65,6 @@ The very idea of a novel miracle weight-loss drug might provoke eye rolls becaus
 
 ASSISTANT:
 一種神奇的減肥藥，你可能聽了就想翻白眼，因為這種東西我們以前見多了。通常，這種藥就像麻黃，在 90 年代和 2000 年代非常流行。麻黃確實可以幫助人們減肥，但最終因為與心臟病、中風和癲癇發作有關而被下架。`;
-
-	const chatCompletion = await groq.chat.completions.create({
-		model: 'llama3-70b-8192',
-		messages: [
-			{
-				role: 'system',
-				content: systemPrompt
-			},
-			{
-				role: 'user',
-				content: sentences.join('\n')
-			}
-		],
-		temperature: 0.0,
-		max_tokens: 10000,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0
-	});
-
-	const content = chatCompletion.choices[0].message.content;
-	if (!content) {
-		throw new Error('No content in chatCompletion');
-	}
+	const content = await callLLM(systemPrompt, sentences.join('\n'), false);
 	return { content };
 }

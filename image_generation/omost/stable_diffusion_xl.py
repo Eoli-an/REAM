@@ -39,28 +39,44 @@ from modal import (
 # triggers a rebuild.
 
 
-sdxl_image = (
+omost_image = (
     Image.debian_slim(python_version="3.10")
     .apt_install(
         "libglib2.0-0", "libsm6", "libxrender1", "libxext6", "ffmpeg", "libgl1"
     )
     .pip_install(
-        "diffusers==0.26.3",
-        "invisible_watermark==0.2.0",
-        "transformers~=4.38.2",
-        "accelerate==0.27.2",
-        "safetensors==0.4.2",
+        "diffusers==0.28.0",
+        "transformers==4.41.1",
+        "gradio==4.31.5",
+        "bitsandbytes==0.43.1",
+        "accelerate==0.30.1",
+        "protobuf==3.20",
+        "opencv-python",
+        "tensorboardX",
+        "safetensors",
+        "pillow",
+        "einops",
+        "torch",
+        "peft",
     )
 )
 
 app = App(
-    "stable-diffusion-xl"
+    "omost"
 )  # Note: prior to April 2024, "app" was called "stub"
 
 with sdxl_image.imports():
     import torch
     from diffusers import DiffusionPipeline
     from fastapi import Response
+    import uuid
+    import time
+    import torch
+    import numpy as np
+    import gradio as gr
+    import tempfile
+    from threading import Thread
+    from PIL import Image
 
 # ## Load model and run inference
 #
@@ -83,10 +99,10 @@ class Model:
             "*/diffusion_pytorch_model.safetensors",
         ]
         snapshot_download(
-            "stabilityai/stable-diffusion-xl-base-1.0", ignore_patterns=ignore
+            "SG161222/RealVisXL_V4.0", ignore_patterns=ignore
         )
         snapshot_download(
-            "stabilityai/stable-diffusion-xl-refiner-1.0",
+            "lllyasviel/omost-llama-3-8b",
             ignore_patterns=ignore,
         )
 
@@ -99,23 +115,76 @@ class Model:
             device_map="auto",
         )
 
-        # Load base model
-        self.base = DiffusionPipeline.from_pretrained(
-            "stabilityai/stable-diffusion-xl-base-1.0", **load_options
+        tokenizer = CLIPTokenizer.from_pretrained(
+            sdxl_name, subfolder="tokenizer")
+        tokenizer_2 = CLIPTokenizer.from_pretrained(
+            sdxl_name, subfolder="tokenizer_2")
+        text_encoder = CLIPTextModel.from_pretrained(
+            sdxl_name, subfolder="text_encoder", torch_dtype=torch.float16, variant="fp16")
+        text_encoder_2 = CLIPTextModel.from_pretrained(
+            sdxl_name, subfolder="text_encoder_2", torch_dtype=torch.float16, variant="fp16")
+        vae = AutoencoderKL.from_pretrained(
+            sdxl_name, subfolder="vae", torch_dtype=torch.bfloat16, variant="fp16")  # bfloat16 vae
+        unet = UNet2DConditionModel.from_pretrained(
+            sdxl_name, subfolder="unet", torch_dtype=torch.float16, variant="fp16")
+
+        unet.set_attn_processor(AttnProcessor2_0())
+        vae.set_attn_processor(AttnProcessor2_0())
+
+        pipeline = StableDiffusionXLOmostPipeline(
+            vae=vae,
+            text_encoder=text_encoder,
+            tokenizer=tokenizer,
+            text_encoder_2=text_encoder_2,
+            tokenizer_2=tokenizer_2,
+            unet=unet,
+            scheduler=None,  # We completely give up diffusers sampling system and use A1111's method
         )
 
-        # Load refiner model
-        self.refiner = DiffusionPipeline.from_pretrained(
-            "stabilityai/stable-diffusion-xl-refiner-1.0",
-            text_encoder_2=self.base.text_encoder_2,
-            vae=self.base.vae,
-            **load_options,
+        memory_management.unload_all_models([text_encoder, text_encoder_2, vae, unet])
+
+        # LLM
+
+        # llm_name = 'lllyasviel/omost-phi-3-mini-128k-8bits'
+        llm_name = 'lllyasviel/omost-llama-3-8b-4bits'
+        # llm_name = 'lllyasviel/omost-dolphin-2.9-llama3-8b-4bits'
+
+        llm_model = AutoModelForCausalLM.from_pretrained(
+            llm_name,
+            torch_dtype=torch.bfloat16,  # This is computation type, not load/memory type. The loading quant type is baked in config.
+            token=HF_TOKEN,
+            device_map="auto"  # This will load model to gpu with an offload system
         )
 
-        # Compiling the model graph is JIT so this will increase inference time for the first run
-        # but speed up subsequent runs. Uncomment to enable.
-        # self.base.unet = torch.compile(self.base.unet, mode="reduce-overhead", fullgraph=True)
-        # self.refiner.unet = torch.compile(self.refiner.unet, mode="reduce-overhead", fullgraph=True)
+        llm_tokenizer = AutoTokenizer.from_pretrained(
+            llm_name,
+            token=HF_TOKEN
+        )
+
+        memory_management.unload_all_models(llm_model)
+    
+    @torch.inference_mode()
+    def pytorch2numpy(imgs):
+        results = []
+        for x in imgs:
+            y = x.movedim(0, -1)
+            y = y * 127.5 + 127.5
+            y = y.detach().float().cpu().numpy().clip(0, 255).astype(np.uint8)
+            results.append(y)
+        return results
+
+
+    @torch.inference_mode()
+    def numpy2pytorch(imgs):
+        h = torch.from_numpy(np.stack(imgs, axis=0)).float() / 127.5 - 1.0
+        h = h.movedim(-1, 1)
+        return h
+
+
+    def resize_without_crop(image, target_width, target_height):
+        pil_image = Image.fromarray(image)
+        resized_image = pil_image.resize((target_width, target_height), Image.LANCZOS)
+        return np.array(resized_image)
 
     def _inference(self, prompt, n_steps=24, high_noise_frac=0.8):
         negative_prompt = "ugly, deformed, noisy, blurry, distorted, grainy, disfigured"

@@ -15,7 +15,7 @@ def collect_images(directory):
 
 def main():
     base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static'))
-    directories = [os.path.join(base_path, 'images'), os.path.join(base_path, 'images2')]
+    directories = [os.path.join(base_path, 'images'), os.path.join(base_path, 'images2'), os.path.join(base_path, 'images3')]
 
     images_dict = {}
     for directory in directories:

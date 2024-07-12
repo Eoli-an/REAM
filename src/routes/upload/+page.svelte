@@ -10,7 +10,19 @@
 	let formLoading = false;
 </script>
 
-<form method="POST" action="?/uploadTextChinese" use:enhance enctype="multipart/form-data">
+<form
+	method="POST"
+	action="?/uploadTextChinese"
+	use:enhance={() => {
+		formLoading = true;
+		return async ({ update }) => {
+			formLoading = false;
+			update();
+		};
+	}}
+	enctype="multipart/form-data"
+	class="mt-4"
+>
 	<label>
 		Upload a Chinese .txt file:
 		<input type="file" name="file" accept=".txt" required />

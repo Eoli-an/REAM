@@ -1,9 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import Groq from 'groq-sdk';
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
-});
+import { callLLM } from '../llmService';
+
 
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -30,31 +28,8 @@ export const POST: RequestHandler = async ({ request }) => {
   -即將: soon
   -。:。
   -前往: go`;
+    const content = await callLLM(systemPrompt, chatInput, false);
   
-    const chatCompletion = await groq.chat.completions.create({
-      model: 'llama3-70b-8192',
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: chatInput,
-        },
-      ],
-      temperature: 0,
-      max_tokens: 10000,//chatInput.length * 5,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      //stream: true,
-    });
-  
-    const content = chatCompletion.choices[0].message.content;
-    if (!content) {
-      throw new Error('No content in chatCompletion');
-    }
     console.log("CONTENT: ", chatInput);
     console.log("RESPONSE: ", content);
 

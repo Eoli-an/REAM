@@ -6,8 +6,6 @@
 	export let imagePaths;
 	export let imageChosen;
 
-	// console.log(`Character: ${char}, Image Paths: ${imagePaths[char]}`);
-
 	let chosen_image = 0;
 	let imagePath: string;
 	let image_available = false;
@@ -18,7 +16,6 @@
 		}
 	}
 
-	// check if there is a image available and choose the image if yes
 	$: if (imagePaths.hasOwnProperty(char)) {
 		image_available = true;
 		imagePath = imagePaths[char][chosen_image];
@@ -27,7 +24,6 @@
 	let displayType: string = 'image';
 	const store_value = $CharacterKnowledge;
 
-	// determine the display type of the character
 	$: {
 		if (!store_value.hasOwnProperty(char)) {
 			displayType = 'image';
@@ -40,27 +36,37 @@
 		}
 	}
 
-	// function circle() {
-	//     if (displayType === 'character') {
-	//         displayType = 'image';
-	//         wordKnowledge.update(knowledge => {
-	//             knowledge[char] = 0;
-	//             return knowledge;
-	//         });
-	//         updateDatabase(char, 0);
-	//     } else if (displayType === 'image') {
-	//         displayType = 'character';
-	//         wordKnowledge.update(knowledge => {
-	//             knowledge[char] = 1;
-	//             return knowledge;
-	//         });
-	//         updateDatabase(char, 1);
-	//     }
-	//     close();
-	// }
+	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
+		const { supabase } = await import('$lib/supabaseClient');
+		const { error } = await supabase
+			.from('MyKnownCharacters') // Adjust the table name as needed
+			.upsert({ character, knowledgeLevel, chosen_image }, { onConflict: 'character' });
+
+		if (error) {
+			console.error('Error updating database:', error);
+		}
+	}
+
+	function circle() {
+		if (displayType === 'character') {
+			displayType = 'image';
+			CharacterKnowledge.update((knowledge) => {
+				knowledge[char] = 0;
+				return knowledge;
+			});
+			updateDatabase(char, 0, chosen_image);
+		} else if (displayType === 'image') {
+			displayType = 'character';
+			CharacterKnowledge.update((knowledge) => {
+				knowledge[char] = 1;
+				return knowledge;
+			});
+			updateDatabase(char, 1, chosen_image);
+		}
+	}
 </script>
 
-<button on:click={() => goto(`/dictionaryChar/${char}`)}>
+<button on:click={circle}>
 	{#if displayType === 'character'}
 		{char}
 	{:else if image_available}
@@ -69,6 +75,8 @@
 		{char}
 	{/if}
 </button>
+
+<!-- <button on:click={() => goto(`/dictionaryChar/${char}`)}> -->
 
 <style>
 	button {

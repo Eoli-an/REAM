@@ -1,10 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import { uploadDatabaseBook } from '$lib';
-import Groq from 'groq-sdk';
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
-});
+import { callLLM } from '../llmService';
 
 // Function to split text into sentences
 function splitIntoSentences(text: string): string[] {
@@ -41,7 +38,7 @@ async function splitAndTranslate(text: string, sentence_id: number): Promise<{ w
 
     console.log(text);
     const chatInput = text;
-    const systemPrompt = `You will be given a chinese text. Split this text into words and generate word-by-word translations, that are context appropriate.
+    const systemPrompt = `You will be given a chinese text. Split this text into words and generate word-by-word translations, that are context appropriate. Make sure each word is in the dictionary. Do not combine multiple words into one translation. Use traditional characters.
     Be brief with the translations. If you encouter punctations, just copy them. It is important to follow my instructions, because I will parse the output programmatically afterwards.
     Adhere strictly to the format of the example output. Generate a short translation for every word, even if it is a grammer part. Start directly with the first word, no introduction or explanation.
 Example:
@@ -52,7 +49,8 @@ ASSISTANT:
 波特 - Potter
 站 - stands
 在 - at
-火車站 - train station
+火車 - train
+站 - station
 的 - 's
 月台 - platform
 上 - on
@@ -96,7 +94,8 @@ ASSISTANT:
 ，- ,
 您 - you
 一共 - total
-消费了 - spend
+消费 - spend
+了 - past action
 300 - 300
 元 - yuan
 。- .
@@ -148,33 +147,8 @@ ASSISTANT:
 在 - at
 望 - sight
 `;
-  
-    const chatCompletion = await groq.chat.completions.create({
-      model: 'llama3-70b-8192',
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: chatInput,
-        },
-      ],
-      temperature: 0,
-      max_tokens: 10000,//chatInput.length * 5,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      //stream: true,
-    });
-  
-    const content = chatCompletion.choices[0].message.content;
-    if (!content) {
-      throw new Error('No content in chatCompletion');
-    }
+    const content = await callLLM(systemPrompt, chatInput, false);
 
-  
     const outputDict: { word_position: number, word: string, translation: string, sentence:number}[] = [];
     const lines = content.split('\n');
     console.log("LINES: ", lines);
@@ -182,10 +156,16 @@ ASSISTANT:
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const line_split = line.split('-');
+        try {
         const word = line_split[0].trim();
         const translation = line_split[1].trim();
-
         outputDict.push({ word_position: i, word: word, translation: translation, sentence: sentence_id });
+
+        } catch (e) {
+            console.log("Error: ", e);
+            continue;
+        }
+
     }
     console.log("OUTPUT: ", outputDict);
     return outputDict;

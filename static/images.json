@@ -35,25 +35,54 @@
     "V": [
         "\\images\\VQ0H7BomSoKC8H161qkU5w.png"
     ],
+    "丈": [
+        "\\images\\丈.png"
+    ],
+    "世": [
+        "\\images\\世.png",
+        "\\images2\\世.png"
+    ],
+    "主": [
+        "\\images\\主.png"
+    ],
     "事": [
         "\\images\\事.png",
         "\\images\\事2.png"
     ],
     "住": [
-        "\\images\\住.png"
+        "\\images\\住.png",
+        "\\images3\\住.png",
+        "\\images3\\住_n406hqu.png",
+        "\\images3\\住_o5ztq6t.png"
+    ],
+    "作": [
+        "\\images\\作.png",
+        "\\images3\\作_rehf8er.png"
     ],
     "信": [
         "\\images\\信.png",
         "\\images\\信2.png",
-        "\\images2\\信.png"
+        "\\images2\\信.png",
+        "\\images3\\信_9l2esxf.png"
+    ],
+    "假": [
+        "\\images\\假.png",
+        "\\images3\\假_x42v6i9.png",
+        "\\images3\\假_zkyxegx.png"
     ],
     "像": [
         "\\images\\像.png",
-        "\\images2\\像.png"
+        "\\images2\\像.png",
+        "\\images3\\像_tpb2r9c.png"
     ],
     "先": [
         "\\images\\先.png",
         "\\images2\\先.png"
+    ],
+    "切": [
+        "\\images\\切_2.png",
+        "\\images3\\切.png",
+        "\\images3\\切_gz4hmk6.png"
     ],
     "利": [
         "\\images\\利.png",
@@ -66,9 +95,23 @@
     "前": [
         "\\images\\前.png"
     ],
+    "半": [
+        "\\images\\半.png",
+        "\\images3\\半_jdx9jlm.png"
+    ],
     "又": [
         "\\images\\又.png",
         "\\images2\\又.png"
+    ],
+    "反": [
+        "\\images\\反.png",
+        "\\images\\反_2.png",
+        "\\images2\\反.png"
+    ],
+    "另": [
+        "\\images\\另.png",
+        "\\images3\\另_a7lhe1v.png",
+        "\\images3\\另_hr2cjpb.png"
     ],
     "向": [
         "\\images\\向.png",
@@ -77,27 +120,59 @@
         "\\images2\\向_4.png",
         "\\images2\\向_5.png"
     ],
+    "哼": [
+        "\\images\\哼.png",
+        "\\images3\\哼_2qaqere.png"
+    ],
     "回": [
         "\\images\\回.png"
     ],
+    "困": [
+        "\\images\\困.png"
+    ],
+    "圍": [
+        "\\images\\圍_2.png",
+        "\\images3\\圍_0zgvkhy.png",
+        "\\images3\\圍_tk1kaac.png"
+    ],
     "圖": [
         "\\images\\圖.png",
-        "\\images2\\圖.png"
+        "\\images2\\圖.png",
+        "\\images3\\圖_q312wce.png"
+    ],
+    "外": [
+        "\\images\\外.png",
+        "\\images2\\外.png",
+        "\\images3\\外_q4h0n3r.png"
     ],
     "夫": [
-        "\\images\\夫.png"
+        "\\images\\夫.png",
+        "\\images3\\夫.png"
     ],
     "奇": [
-        "\\images\\奇.png"
+        "\\images\\奇.png",
+        "\\images3\\奇_9kmtzil.png"
+    ],
+    "如": [
+        "\\images\\如.png",
+        "\\images3\\如_5twm3lo.png"
     ],
     "妻": [
         "\\images\\妻.png"
     ],
+    "始": [
+        "\\images\\始.png",
+        "\\images\\始_2.png",
+        "\\images3\\始.png",
+        "\\images3\\始_12b06uv.png"
+    ],
     "婦": [
-        "\\images\\婦.png"
+        "\\images\\婦.png",
+        "\\images3\\婦_k92hn42.png"
     ],
     "定": [
-        "\\images\\定.png"
+        "\\images\\定.png",
+        "\\images3\\定_0mofvir.png"
     ],
     "家": [
         "\\images\\家.png",
@@ -105,14 +180,29 @@
         "\\images\\家2.png"
     ],
     "對": [
-        "\\images\\對.png"
+        "\\images\\對.png",
+        "\\images3\\對_8q2zvzt.png"
     ],
     "就": [
-        "\\images\\就.png"
+        "\\images\\就.png",
+        "\\images3\\就_42ptuq1.png"
+    ],
+    "已": [
+        "\\images\\已.png",
+        "\\images2\\已.png"
+    ],
+    "帶": [
+        "\\images\\帶.png",
+        "\\images3\\帶.png",
+        "\\images3\\帶_df009nb.png"
     ],
     "常": [
         "\\images\\常.png",
         "\\images2\\常.png"
+    ],
+    "幸": [
+        "\\images\\幸.png",
+        "\\images3\\幸_57ipht7.png"
     ],
     "弗": [
         "\\images\\弗.png"
@@ -125,61 +215,213 @@
         "\\images\\得2.png"
     ],
     "從": [
-        "\\images\\從.png"
+        "\\images\\從.png",
+        "\\images3\\從_zq71sdu.png"
+    ],
+    "德": [
+        "\\images\\德.png",
+        "\\images2\\德.png"
+    ],
+    "思": [
+        "\\images\\思.png",
+        "\\images2\\思.png"
     ],
     "怪": [
-        "\\images\\怪.png"
+        "\\images\\怪.png",
+        "\\images3\\怪_7p0dkhj.png"
     ],
     "总": [
         "\\images\\总.png"
     ],
     "意": [
         "\\images\\意.png",
-        "\\images2\\意.png"
+        "\\images\\意_2.png",
+        "\\images\\意_3.png",
+        "\\images\\意_4.png",
+        "\\images2\\意.png",
+        "\\images3\\意_1f9gjmf.png"
+    ],
+    "懼": [
+        "\\images\\懼.png",
+        "\\images\\懼_2.png",
+        "\\images\\懼_3.png",
+        "\\images3\\懼_hwy8zm3.png"
+    ],
+    "戴": [
+        "\\images\\戴.png",
+        "\\images3\\戴.png"
+    ],
+    "扔": [
+        "\\images\\扔.png"
     ],
     "把": [
         "\\images\\把.png",
+        "\\images\\把_2.png",
         "\\images2\\把.png"
     ],
     "拜": [
         "\\images\\拜.png",
-        "\\images\\拜2.png"
+        "\\images\\拜2.png",
+        "\\images\\拜_2.png"
+    ],
+    "拿": [
+        "\\images\\拿.png",
+        "\\images3\\拿_k8zqvfd.png",
+        "\\images3\\拿_wje4a0q.png"
+    ],
+    "擔": [
+        "\\images\\擔.png",
+        "\\images3\\擔_08ooqnj.png",
+        "\\images3\\擔_d38ybcp.png"
+    ],
+    "擾": [
+        "\\images\\擾.png"
+    ],
+    "放": [
+        "\\images\\放.png",
+        "\\images2\\放.png"
+    ],
+    "故": [
+        "\\images\\故.png",
+        "\\images3\\故_0cjo248.png",
+        "\\images3\\故_7wc842w.png"
+    ],
+    "斑": [
+        "\\images\\斑.png"
+    ],
+    "於": [
+        "\\images\\於.png"
     ],
     "時": [
         "\\images\\時.png"
     ],
+    "晨": [
+        "\\images\\晨.png",
+        "\\images2\\晨.png",
+        "\\images3\\晨_0mu5ggi.png"
+    ],
     "普": [
-        "\\images\\普.png"
+        "\\images\\普.png",
+        "\\images3\\普_t4la3hi.png"
+    ],
+    "更": [
+        "\\images\\更.png",
+        "\\images2\\更.png",
+        "\\images3\\更_uwzaiv4.png"
     ],
     "最": [
         "\\images\\最.png",
-        "\\images2\\最.png"
+        "\\images2\\最.png",
+        "\\images3\\最_ujztzwt.png"
+    ],
+    "本": [
+        "\\images\\本.png",
+        "\\images\\本_2.png",
+        "\\images3\\本_rck3xwz.png"
     ],
     "杜": [
         "\\images\\杜.png"
     ],
+    "果": [
+        "\\images\\果.png",
+        "\\images2\\果.png",
+        "\\images3\\果_94ryjef.png"
+    ],
+    "椅": [
+        "\\images\\椅.png",
+        "\\images3\\椅_l1zmhaa.png"
+    ],
+    "楚": [
+        "\\images\\楚.png",
+        "\\images3\\楚_jemf2uj.png"
+    ],
     "樣": [
-        "\\images\\樣.png"
+        "\\images\\樣.png",
+        "\\images3\\樣_sa35lem.png"
+    ],
+    "歌": [
+        "\\images\\歌.png",
+        "\\images3\\歌_d64h6wt.png"
     ],
     "正": [
         "\\images\\正.png",
-        "\\images2\\正.png"
+        "\\images2\\正.png",
+        "\\images3\\正_u2sbibg.png"
+    ],
+    "歪": [
+        "\\images\\歪.png"
+    ],
+    "比": [
+        "\\images\\比_2.png",
+        "\\images2\\比.png",
+        "\\images3\\比_6ylwsnp.png"
+    ],
+    "氣": [
+        "\\images\\氣.png",
+        "\\images2\\氣.png",
+        "\\images3\\氣_qxkjjkx.png"
+    ],
+    "沉": [
+        "\\images\\沉.png",
+        "\\images3\\沉_u030sqc.png"
+    ],
+    "沾": [
+        "\\images\\沾.png"
+    ],
+    "法": [
+        "\\images\\法.png"
     ],
     "波": [
-        "\\images\\波.png"
+        "\\images\\波.png",
+        "\\images3\\波_cqy0sri.png"
+    ],
+    "注": [
+        "\\images\\注.png",
+        "\\images\\注_2.png",
+        "\\images3\\注_d3gjci8.png",
+        "\\images3\\注_iyxms7h.png"
+    ],
+    "清": [
+        "\\images\\清.png",
+        "\\images3\\清.png"
     ],
     "然": [
-        "\\images\\然.png"
+        "\\images\\然.png",
+        "\\images3\\然_g91bxss.png"
+    ],
+    "牆": [
+        "\\images\\牆_2.png",
+        "\\images3\\牆_qjp9qnd.png"
+    ],
+    "片": [
+        "\\images\\片.png",
+        "\\images3\\片_jz3ytaa.png",
+        "\\images3\\片_terosox.png"
     ],
     "特": [
         "\\images\\特.png",
         "\\images2\\特.png"
     ],
+    "玩": [
+        "\\images\\玩.png"
+    ],
+    "班": [
+        "\\images\\班.png",
+        "\\images3\\班_7ow8ctf.png",
+        "\\images3\\班_yx5ejgl.png"
+    ],
     "現": [
         "\\images\\現.png"
     ],
+    "產": [
+        "\\images\\產.png"
+    ],
     "用": [
         "\\images\\用.png"
+    ],
+    "留": [
+        "\\images\\留.png",
+        "\\images3\\留_axd9g2e.png"
     ],
     "當": [
         "\\images\\當.png"
@@ -190,48 +432,104 @@
     "相": [
         "\\images\\相.png",
         "\\images\\相3.png",
-        "\\images2\\相.png"
+        "\\images2\\相.png",
+        "\\images3\\相_rhnjmz6.png"
+    ],
+    "眨": [
+        "\\images\\眨.png"
     ],
     "眼": [
         "\\images\\眼.png",
-        "\\images2\\眼.png"
+        "\\images2\\眼.png",
+        "\\images3\\眼_yenyjm2.png"
     ],
     "着": [
         "\\images\\着.png"
+    ],
+    "瞪": [
+        "\\images\\瞪.png"
+    ],
+    "矩": [
+        "\\images\\矩.png"
     ],
     "祕": [
         "\\images\\祕.png"
     ],
     "神": [
         "\\images\\神.png",
-        "\\images2\\神.png"
+        "\\images2\\神.png",
+        "\\images3\\神_ti9o9ac.png"
+    ],
+    "福": [
+        "\\images\\福.png",
+        "\\images3\\福_vgsr0tv.png"
     ],
     "禮": [
-        "\\images\\禮.png"
+        "\\images\\禮.png",
+        "\\images3\\禮_vbyo7w2.png"
     ],
     "秘": [
         "\\images\\秘.png",
-        "\\images2\\秘.png"
+        "\\images2\\秘.png",
+        "\\images3\\秘_9wzlybe.png"
     ],
     "種": [
         "\\images\\種.png"
     ],
+    "空": [
+        "\\images\\空.png",
+        "\\images2\\空.png",
+        "\\images3\\空_m976lkm.png"
+    ],
     "穿": [
-        "\\images\\穿.png"
+        "\\images\\穿.png",
+        "\\images3\\穿_rind3gs.png"
+    ],
+    "童": [
+        "\\images\\童.png"
     ],
     "給": [
         "\\images\\給.png",
-        "\\images2\\給.png"
+        "\\images2\\給.png",
+        "\\images3\\給_wxkufuj.png"
+    ],
+    "經": [
+        "\\images\\經.png"
     ],
     "維": [
-        "\\images\\維.png"
+        "\\images\\維.png",
+        "\\images3\\維_aooyon6.png",
+        "\\images3\\維_o02eeie.png"
+    ],
+    "線": [
+        "\\images\\線.png"
     ],
     "總": [
         "\\images\\總.png",
-        "\\images2\\總.png"
+        "\\images\\總_4.png",
+        "\\images2\\總.png",
+        "\\images3\\總.png",
+        "\\images3\\總_2.png"
+    ],
+    "繫": [
+        "\\images\\繫.png",
+        "\\images\\繫_2.png"
+    ],
+    "繼": [
+        "\\images\\繼.png",
+        "\\images3\\繼_hjfbymy.png"
+    ],
+    "續": [
+        "\\images\\續.png",
+        "\\images3\\續_p6zvyy0.png"
     ],
     "而": [
         "\\images\\而.png"
+    ],
+    "聯": [
+        "\\images\\聯.png",
+        "\\images3\\聯.png",
+        "\\images3\\聯_czbhczl.png"
     ],
     "聲": [
         "\\images\\聲.png",
@@ -240,58 +538,148 @@
     "胖": [
         "\\images\\胖.png"
     ],
+    "胡": [
+        "\\images\\胡.png"
+    ],
+    "脖": [
+        "\\images\\脖.png"
+    ],
     "自": [
         "\\images\\自.png"
     ],
+    "臭": [
+        "\\images\\臭.png"
+    ],
+    "與": [
+        "\\images\\與.png",
+        "\\images2\\與.png",
+        "\\images3\\與_wdrrrqw.png"
+    ],
+    "色": [
+        "\\images\\色.png",
+        "\\images3\\色.png",
+        "\\images3\\色_h3d00dp.png",
+        "\\images3\\色_qt49xvi.png"
+    ],
+    "花": [
+        "\\images\\花_2.png",
+        "\\images3\\花_p83qtaq.png",
+        "\\images3\\花_u5glb4d.png"
+    ],
     "著": [
-        "\\images\\著.png"
+        "\\images\\著.png",
+        "\\images\\著_2.png"
     ],
     "號": [
-        "\\images\\號.png"
+        "\\images\\號.png",
+        "\\images3\\號_uu5c95n.png",
+        "\\images3\\號_wtej41u.png"
     ],
     "街": [
         "\\images\\街.png"
     ],
+    "被": [
+        "\\images\\被.png",
+        "\\images2\\被.png",
+        "\\images3\\被.png"
+    ],
+    "裝": [
+        "\\images\\裝.png",
+        "\\images3\\裝_0gjlolh.png",
+        "\\images3\\裝_e3k38u6.png"
+    ],
     "要": [
-        "\\images\\要.png"
+        "\\images\\要.png",
+        "\\images3\\要_a011qrg.png"
     ],
     "規": [
         "\\images\\規.png",
-        "\\images\\規2.png"
+        "\\images\\規2.png",
+        "\\images3\\規.png"
+    ],
+    "角": [
+        "\\images\\角.png",
+        "\\images\\角_2.png",
+        "\\images3\\角_kl0wu4q.png",
+        "\\images3\\角_o5e22ts.png"
     ],
     "試": [
         "\\images\\試.png",
-        "\\images2\\試.png"
+        "\\images2\\試.png",
+        "\\images3\\試_9866gwh.png"
+    ],
+    "讓": [
+        "\\images\\讓.png",
+        "\\images3\\讓.png",
+        "\\images3\\讓_uny1f44.png"
     ],
     "豕": [
         "\\images\\豕.png",
         "\\images\\豕2.png"
     ],
     "豪": [
-        "\\images\\豪.png"
+        "\\images\\豪.png",
+        "\\images3\\豪_ds77i3a.png"
     ],
     "貓": [
         "\\images\\貓.png"
     ],
+    "貞": [
+        "\\images\\貞.png"
+    ],
     "起": [
-        "\\images\\起.png"
+        "\\images\\起.png",
+        "\\images3\\起_juv9eme.png"
+    ],
+    "跟": [
+        "\\images\\跟.png",
+        "\\images\\跟_2.png",
+        "\\images3\\跟_3j9kpzy.png",
+        "\\images3\\跟_udhfvdr.png"
     ],
     "路": [
         "\\images\\路.png",
-        "\\images\\路2.png"
+        "\\images\\路2.png",
+        "\\images3\\路.png",
+        "\\images3\\路_ffawbyy.png",
+        "\\images3\\路_gsur26u.png"
+    ],
+    "進": [
+        "\\images\\進.png"
     ],
     "過": [
-        "\\images\\過.png"
+        "\\images\\過.png",
+        "\\images3\\過_4j35b2j.png"
     ],
     "道": [
         "\\images\\道.png",
         "\\images2\\道.png"
     ],
     "還": [
-        "\\images\\還.png"
+        "\\images\\還.png",
+        "\\images3\\還_alwksft.png"
     ],
     "邊": [
-        "\\images\\邊.png"
+        "\\images\\邊.png",
+        "\\images3\\邊.png",
+        "\\images3\\邊_6vztmyd.png",
+        "\\images3\\邊_aq2mvel.png"
+    ],
+    "邪": [
+        "\\images\\邪.png",
+        "\\images\\邪_2.png"
+    ],
+    "醒": [
+        "\\images\\醒.png",
+        "\\images3\\醒_bzpzvdb.png"
+    ],
+    "鉆": [
+        "\\images\\鉆.png"
+    ],
+    "錯": [
+        "\\images\\錯.png",
+        "\\images3\\錯_nz2ho0e.png",
+        "\\images3\\錯_tbnrw99.png"
     ],
     "鑽": [
         "\\images\\鑽.png",
@@ -299,51 +687,92 @@
     ],
     "長": [
         "\\images\\長.png",
-        "\\images2\\長.png"
+        "\\images2\\長.png",
+        "\\images3\\長_sg3oqmt.png"
+    ],
+    "開": [
+        "\\images\\開.png",
+        "\\images3\\開_njf1hm0.png"
+    ],
+    "陰": [
+        "\\images\\陰.png",
+        "\\images3\\陰_djktynw.png"
     ],
     "隻": [
         "\\images\\隻.png",
         "\\images2\\隻.png"
     ],
+    "離": [
+        "\\images\\離.png",
+        "\\images3\\離_9tamp54.png",
+        "\\images3\\離_rr69bhe.png"
+    ],
+    "面": [
+        "\\images\\面.png"
+    ],
     "頭": [
         "\\images\\頭.png",
         "\\images2\\頭.png"
     ],
+    "養": [
+        "\\images\\養.png",
+        "\\images3\\養_q1uhotm.png",
+        "\\images3\\養_zvwfbgm.png"
+    ],
+    "餵": [
+        "\\images\\餵.png"
+    ],
+    "髮": [
+        "\\images\\髮.png"
+    ],
+    "麥": [
+        "\\images\\麥.png",
+        "\\images3\\麥_r23rsf3.png"
+    ],
+    "點": [
+        "\\images\\點.png",
+        "\\images2\\點.png",
+        "\\images3\\點_jsrm4m5.png"
+    ],
     "三": [
-        "\\images2\\三.png"
+        "\\images2\\三.png",
+        "\\images3\\三_jn6syon.png"
     ],
     "且": [
         "\\images2\\且.png"
     ],
-    "世": [
-        "\\images2\\世.png"
-    ],
     "並": [
-        "\\images2\\並.png"
+        "\\images2\\並.png",
+        "\\images3\\並_4kov6hm.png"
     ],
     "二": [
-        "\\images2\\二.png"
+        "\\images2\\二.png",
+        "\\images3\\二_3d6q83w.png"
     ],
     "五": [
         "\\images2\\五.png"
     ],
     "什": [
-        "\\images2\\什.png"
+        "\\images2\\什.png",
+        "\\images3\\什_jipwr85.png"
     ],
     "代": [
         "\\images2\\代.png"
     ],
     "件": [
-        "\\images2\\件.png"
+        "\\images2\\件.png",
+        "\\images3\\件_5vrnhac.png"
     ],
     "任": [
-        "\\images2\\任.png"
+        "\\images2\\任.png",
+        "\\images3\\任_no1mrr5.png"
     ],
     "位": [
         "\\images2\\位.png"
     ],
     "何": [
-        "\\images2\\何.png"
+        "\\images2\\何.png",
+        "\\images3\\何_hkedyrx.png"
     ],
     "使": [
         "\\images2\\使.png"
@@ -361,28 +790,35 @@
         "\\images2\\做.png"
     ],
     "光": [
-        "\\images2\\光.png"
+        "\\images2\\光.png",
+        "\\images3\\光_jbpxpbr.png"
     ],
     "兒": [
-        "\\images2\\兒.png"
+        "\\images2\\兒.png",
+        "\\images3\\兒_4d523v0.png"
     ],
     "入": [
-        "\\images2\\入.png"
+        "\\images2\\入.png",
+        "\\images3\\入_bjyweue.png"
     ],
     "內": [
         "\\images2\\內.png"
     ],
     "全": [
-        "\\images2\\全.png"
+        "\\images2\\全.png",
+        "\\images3\\全_crelbvb.png"
     ],
     "兩": [
-        "\\images2\\兩.png"
+        "\\images2\\兩.png",
+        "\\images3\\兩_4heokk3.png"
     ],
     "公": [
-        "\\images2\\公.png"
+        "\\images2\\公.png",
+        "\\images3\\公_w71opdz.png"
     ],
     "再": [
-        "\\images2\\再.png"
+        "\\images2\\再.png",
+        "\\images3\\再_sikkwr9.png"
     ],
     "則": [
         "\\images2\\則.png"
@@ -406,22 +842,23 @@
         "\\images2\\區.png"
     ],
     "十": [
-        "\\images2\\十.png"
+        "\\images2\\十.png",
+        "\\images3\\十_kck7led.png"
     ],
     "即": [
         "\\images2\\即.png"
     ],
     "卻": [
-        "\\images2\\卻.png"
+        "\\images2\\卻.png",
+        "\\images3\\卻_gj3qmxp.png"
     ],
     "原": [
-        "\\images2\\原.png"
+        "\\images2\\原.png",
+        "\\images3\\原_xu00hx4.png"
     ],
     "及": [
-        "\\images2\\及.png"
-    ],
-    "反": [
-        "\\images2\\反.png"
+        "\\images2\\及.png",
+        "\\images3\\及_22e84z1.png"
     ],
     "受": [
         "\\images2\\受.png"
@@ -430,7 +867,8 @@
         "\\images2\\口.png"
     ],
     "司": [
-        "\\images2\\司.png"
+        "\\images2\\司.png",
+        "\\images3\\司_vqrd2hk.png"
     ],
     "各": [
         "\\images2\\各.png"
@@ -451,7 +889,8 @@
         "\\images2\\嚮.png"
     ],
     "四": [
-        "\\images2\\四.png"
+        "\\images2\\四.png",
+        "\\images3\\四_fm71qui.png"
     ],
     "基": [
         "\\images2\\基.png"
@@ -460,16 +899,15 @@
         "\\images2\\報.png"
     ],
     "場": [
-        "\\images2\\場.png"
-    ],
-    "外": [
-        "\\images2\\外.png"
+        "\\images2\\場.png",
+        "\\images3\\場_rgo7atz.png"
     ],
     "太": [
         "\\images2\\太.png"
     ],
     "女": [
-        "\\images2\\女.png"
+        "\\images2\\女.png",
+        "\\images3\\女_vokfbde.png"
     ],
     "它": [
         "\\images2\\它.png"
@@ -478,7 +916,8 @@
         "\\images2\\安.png"
     ],
     "將": [
-        "\\images2\\將.png"
+        "\\images2\\將.png",
+        "\\images3\\將_7rpewwk.png"
     ],
     "少": [
         "\\images2\\少.png"
@@ -493,19 +932,19 @@
         "\\images2\\工.png"
     ],
     "己": [
-        "\\images2\\己.png"
-    ],
-    "已": [
-        "\\images2\\已.png"
+        "\\images2\\己.png",
+        "\\images3\\己_8hl82nv.png"
     ],
     "市": [
         "\\images2\\市.png"
     ],
     "平": [
-        "\\images2\\平.png"
+        "\\images2\\平.png",
+        "\\images3\\平_l0ggf86.png"
     ],
     "幾": [
-        "\\images2\\幾.png"
+        "\\images2\\幾.png",
+        "\\images3\\幾_zptj1wz.png"
     ],
     "度": [
         "\\images2\\度.png"
@@ -514,7 +953,8 @@
         "\\images2\\建.png"
     ],
     "強": [
-        "\\images2\\強.png"
+        "\\images2\\強.png",
+        "\\images3\\強_5toxldq.png"
     ],
     "彆": [
         "\\images2\\彆.png"
@@ -525,20 +965,15 @@
     "很": [
         "\\images2\\很.png"
     ],
-    "德": [
-        "\\images2\\德.png"
-    ],
     "必": [
         "\\images2\\必.png"
-    ],
-    "思": [
-        "\\images2\\思.png"
     ],
     "性": [
         "\\images2\\性.png"
     ],
     "情": [
-        "\\images2\\情.png"
+        "\\images2\\情.png",
+        "\\images3\\情_e308sxu.png"
     ],
     "感": [
         "\\images2\\感.png"
@@ -547,28 +982,29 @@
         "\\images2\\應.png"
     ],
     "或": [
-        "\\images2\\或.png"
+        "\\images2\\或.png",
+        "\\images3\\或_6nsdgyu.png"
     ],
     "戰": [
         "\\images2\\戰.png"
     ],
     "手": [
-        "\\images2\\手.png"
+        "\\images2\\手.png",
+        "\\images3\\手_vcdpfft.png"
     ],
     "打": [
         "\\images2\\打.png"
     ],
     "指": [
-        "\\images2\\指.png"
+        "\\images2\\指.png",
+        "\\images3\\指_colp34y.png"
     ],
     "接": [
-        "\\images2\\接.png"
+        "\\images2\\接.png",
+        "\\images3\\接_j5brvq9.png"
     ],
     "提": [
         "\\images2\\提.png"
-    ],
-    "放": [
-        "\\images2\\放.png"
     ],
     "政": [
         "\\images2\\政.png"
@@ -583,19 +1019,19 @@
         "\\images2\\文.png"
     ],
     "斯": [
-        "\\images2\\斯.png"
+        "\\images2\\斯.png",
+        "\\images3\\斯_3a0bgef.png"
     ],
     "新": [
-        "\\images2\\新.png"
+        "\\images2\\新.png",
+        "\\images3\\新_agivssc.png"
     ],
     "日": [
         "\\images2\\日.png"
     ],
     "明": [
-        "\\images2\\明.png"
-    ],
-    "更": [
-        "\\images2\\更.png"
+        "\\images2\\明.png",
+        "\\images3\\明_zxs6sny.png"
     ],
     "書": [
         "\\images2\\書.png"
@@ -604,13 +1040,11 @@
         "\\images2\\月.png"
     ],
     "期": [
-        "\\images2\\期.png"
+        "\\images2\\期.png",
+        "\\images3\\期_wdhg6va.png"
     ],
     "東": [
         "\\images2\\東.png"
-    ],
-    "果": [
-        "\\images2\\果.png"
     ],
     "條": [
         "\\images2\\條.png"
@@ -625,19 +1059,15 @@
         "\\images2\\權.png"
     ],
     "次": [
-        "\\images2\\次.png"
+        "\\images2\\次.png",
+        "\\images3\\次_yji1ck3.png"
     ],
     "此": [
-        "\\images2\\此.png"
-    ],
-    "比": [
-        "\\images2\\比.png"
+        "\\images2\\此.png",
+        "\\images3\\此_r7b1e0q.png"
     ],
     "民": [
         "\\images2\\民.png"
-    ],
-    "氣": [
-        "\\images2\\氣.png"
     ],
     "水": [
         "\\images2\\水.png"
@@ -652,10 +1082,12 @@
         "\\images2\\活.png"
     ],
     "海": [
-        "\\images2\\海.png"
+        "\\images2\\海.png",
+        "\\images3\\海_3f33b0t.png"
     ],
     "無": [
-        "\\images2\\無.png"
+        "\\images2\\無.png",
+        "\\images3\\無_wwv1i60.png"
     ],
     "爾": [
         "\\images2\\爾.png"
@@ -676,7 +1108,8 @@
         "\\images2\\界.png"
     ],
     "白": [
-        "\\images2\\白.png"
+        "\\images2\\白.png",
+        "\\images3\\白_rzaao7o.png"
     ],
     "目": [
         "\\images2\\目.png"
@@ -688,7 +1121,8 @@
         "\\images2\\真.png"
     ],
     "知": [
-        "\\images2\\知.png"
+        "\\images2\\知.png",
+        "\\images3\\知_pgsnxsn.png"
     ],
     "社": [
         "\\images2\\社.png"
@@ -696,11 +1130,9 @@
     "科": [
         "\\images2\\科.png"
     ],
-    "空": [
-        "\\images2\\空.png"
-    ],
     "立": [
-        "\\images2\\立.png"
+        "\\images2\\立.png",
+        "\\images3\\立_y7drjoa.png"
     ],
     "第": [
         "\\images2\\第.png"
@@ -718,7 +1150,8 @@
         "\\images2\\統.png"
     ],
     "纔": [
-        "\\images2\\纔.png"
+        "\\images2\\纔.png",
+        "\\images3\\纔_fc4hb80.png"
     ],
     "美": [
         "\\images2\\美.png"
@@ -727,7 +1160,8 @@
         "\\images2\\義.png"
     ],
     "老": [
-        "\\images2\\老.png"
+        "\\images2\\老.png",
+        "\\images3\\老_65rk48e.png"
     ],
     "者": [
         "\\images2\\者.png"
@@ -738,14 +1172,8 @@
     "至": [
         "\\images2\\至.png"
     ],
-    "與": [
-        "\\images2\\與.png"
-    ],
     "處": [
         "\\images2\\處.png"
-    ],
-    "被": [
-        "\\images2\\被.png"
     ],
     "製": [
         "\\images2\\製.png"
@@ -763,7 +1191,8 @@
         "\\images2\\計.png"
     ],
     "許": [
-        "\\images2\\許.png"
+        "\\images2\\許.png",
+        "\\images3\\許_50s23z5.png"
     ],
     "話": [
         "\\images2\\話.png"
@@ -787,7 +1216,8 @@
         "\\images2\\走.png"
     ],
     "身": [
-        "\\images2\\身.png"
+        "\\images2\\身.png",
+        "\\images3\\身_dzkr0eh.png"
     ],
     "軍": [
         "\\images2\\軍.png"
@@ -796,7 +1226,8 @@
         "\\images2\\迴.png"
     ],
     "通": [
-        "\\images2\\通.png"
+        "\\images2\\通.png",
+        "\\images3\\通_12jbagh.png"
     ],
     "達": [
         "\\images2\\達.png"
@@ -808,22 +1239,26 @@
         "\\images2\\量.png"
     ],
     "金": [
-        "\\images2\\金.png"
+        "\\images2\\金.png",
+        "\\images3\\金_jqtde9n.png"
     ],
     "錶": [
         "\\images2\\錶.png"
     ],
     "門": [
-        "\\images2\\門.png"
+        "\\images2\\門.png",
+        "\\images3\\門_vylb4si.png"
     ],
     "間": [
-        "\\images2\\間.png"
+        "\\images2\\間.png",
+        "\\images3\\間_ckv3eup.png"
     ],
     "閤": [
         "\\images2\\閤.png"
     ],
     "關": [
-        "\\images2\\關.png"
+        "\\images2\\關.png",
+        "\\images3\\關_t2yo28t.png"
     ],
     "隊": [
         "\\images2\\隊.png"
@@ -835,7 +1270,8 @@
         "\\images2\\電.png"
     ],
     "非": [
-        "\\images2\\非.png"
+        "\\images2\\非.png",
+        "\\images3\\非_dd70syk.png"
     ],
     "題": [
         "\\images2\\題.png"
@@ -847,9 +1283,2259 @@
         "\\images2\\體.png"
     ],
     "高": [
-        "\\images2\\高.png"
+        "\\images2\\高.png",
+        "\\images3\\高_uay3za8.png"
     ],
-    "點": [
-        "\\images2\\點.png"
+    "七": [
+        "\\images3\\七_1oc3zq9.png"
+    ],
+    "久": [
+        "\\images3\\久.png",
+        "\\images3\\久_rnru4tf.png"
+    ],
+    "乎": [
+        "\\images3\\乎_0kvc9d4.png",
+        "\\images3\\乎_34ip9mz.png"
+    ],
+    "九": [
+        "\\images3\\九_ywlrzep.png"
+    ],
+    "乾": [
+        "\\images3\\乾.png"
+    ],
+    "亂": [
+        "\\images3\\亂_8w1j334.png"
+    ],
+    "予": [
+        "\\images3\\予_xezr96e.png"
+    ],
+    "互": [
+        "\\images3\\互_zg91lab.png"
+    ],
+    "些": [
+        "\\images3\\些_sb10ph4.png"
+    ],
+    "亞": [
+        "\\images3\\亞_2z4i2tq.png"
+    ],
+    "亡": [
+        "\\images3\\亡_kqcqdjf.png"
+    ],
+    "交": [
+        "\\images3\\交.png",
+        "\\images3\\交_jykyos1.png",
+        "\\images3\\交_pbo96d4.png"
+    ],
+    "亦": [
+        "\\images3\\亦_6oi8xy9.png"
+    ],
+    "京": [
+        "\\images3\\京_5ab4nwi.png"
+    ],
+    "亮": [
+        "\\images3\\亮_mg35ikw.png"
+    ],
+    "今": [
+        "\\images3\\今.png"
+    ],
+    "介": [
+        "\\images3\\介_4j99xtz.png"
+    ],
+    "仍": [
+        "\\images3\\仍_hvp84wh.png"
+    ],
+    "付": [
+        "\\images3\\付_ki2yix3.png"
+    ],
+    "令": [
+        "\\images3\\令.png"
+    ],
+    "以": [
+        "\\images3\\以_3ssm5c2.png"
+    ],
+    "份": [
+        "\\images3\\份_ywrruib.png"
+    ],
+    "企": [
+        "\\images3\\企_3bsdh71.png"
+    ],
+    "伊": [
+        "\\images3\\伊_6xj3sfu.png"
+    ],
+    "伯": [
+        "\\images3\\伯_y69dl63.png"
+    ],
+    "似": [
+        "\\images3\\似_bzg87ts.png",
+        "\\images3\\似_f49552t.png"
+    ],
+    "低": [
+        "\\images3\\低_vdtss1u.png"
+    ],
+    "佛": [
+        "\\images3\\佛_xc5n0gk.png"
+    ],
+    "你": [
+        "\\images3\\你_62adlay.png"
+    ],
+    "例": [
+        "\\images3\\例_91y53ju.png"
+    ],
+    "供": [
+        "\\images3\\供_k1qpdil.png"
+    ],
+    "依": [
+        "\\images3\\依_cjs6ioy.png"
+    ],
+    "俄": [
+        "\\images3\\俄_r9xjogc.png"
+    ],
+    "修": [
+        "\\images3\\修_edam6xa.png"
+    ],
+    "倒": [
+        "\\images3\\倒_37as7pa.png",
+        "\\images3\\倒_kiy6hhs.png"
+    ],
+    "候": [
+        "\\images3\\候.png"
+    ],
+    "倫": [
+        "\\images3\\倫_gjv6br6.png",
+        "\\images3\\倫_ismi8r7.png"
+    ],
+    "值": [
+        "\\images3\\值_kn4mcl9.png"
+    ],
+    "停": [
+        "\\images3\\停_8kilkb3.png",
+        "\\images3\\停_thx4ytn.png"
+    ],
+    "健": [
+        "\\images3\\健_w5wa4rq.png"
+    ],
+    "備": [
+        "\\images3\\備.png"
+    ],
+    "傢": [
+        "\\images3\\傢_md6hlks.png"
+    ],
+    "傳": [
+        "\\images3\\傳.png"
+    ],
+    "傷": [
+        "\\images3\\傷_9w76e9o.png"
+    ],
+    "僅": [
+        "\\images3\\僅_01qnvzv.png"
+    ],
+    "價": [
+        "\\images3\\價_bv6c727.png"
+    ],
+    "優": [
+        "\\images3\\優_tvrm090.png"
+    ],
+    "元": [
+        "\\images3\\元.png"
+    ],
+    "充": [
+        "\\images3\\充_em5ofv7.png"
+    ],
+    "免": [
+        "\\images3\\免_vnpk0ae.png"
+    ],
+    "八": [
+        "\\images3\\八_5bncx8v.png",
+        "\\images3\\八_octwvt8.png"
+    ],
+    "六": [
+        "\\images3\\六_banr0jf.png"
+    ],
+    "共": [
+        "\\images3\\共.png"
+    ],
+    "兵": [
+        "\\images3\\兵.png"
+    ],
+    "其": [
+        "\\images3\\其_4nmw9ie.png"
+    ],
+    "具": [
+        "\\images3\\具.png"
+    ],
+    "冷": [
+        "\\images3\\冷_ppyhc60.png"
+    ],
+    "分": [
+        "\\images3\\分_jobvyn3.png"
+    ],
+    "列": [
+        "\\images3\\列_1rjwcby.png"
+    ],
+    "初": [
+        "\\images3\\初_y5bkzpl.png"
+    ],
+    "判": [
+        "\\images3\\判_ubcb303.png"
+    ],
+    "刻": [
+        "\\images3\\刻_ijhsxgj.png"
+    ],
+    "削": [
+        "\\images3\\削_d471849.png"
+    ],
+    "剛": [
+        "\\images3\\剛_67q5u1g.png",
+        "\\images3\\剛_cv8y6op.png"
+    ],
+    "副": [
+        "\\images3\\副_iuh9kq1.png"
+    ],
+    "創": [
+        "\\images3\\創_w7dg89c.png"
+    ],
+    "劃": [
+        "\\images3\\劃_3vzv4aa.png"
+    ],
+    "劇": [
+        "\\images3\\劇_69m5iqz.png",
+        "\\images3\\劇_c95x5mh.png"
+    ],
+    "劉": [
+        "\\images3\\劉_7bzgvsm.png"
+    ],
+    "劍": [
+        "\\images3\\劍_vmchx42.png"
+    ],
+    "功": [
+        "\\images3\\功_0i1los9.png"
+    ],
+    "助": [
+        "\\images3\\助_eargrbd.png",
+        "\\images3\\助_l2p6eti.png"
+    ],
+    "勒": [
+        "\\images3\\勒_pdgsaiy.png"
+    ],
+    "動": [
+        "\\images3\\動_o4xi42o.png"
+    ],
+    "勝": [
+        "\\images3\\勝_hyheuin.png"
+    ],
+    "勞": [
+        "\\images3\\勞_ril55hv.png"
+    ],
+    "勢": [
+        "\\images3\\勢_bu4hbk5.png"
+    ],
+    "包": [
+        "\\images3\\包_0evaoh1.png",
+        "\\images3\\包_2pjncee.png"
+    ],
+    "北": [
+        "\\images3\\北.png",
+        "\\images3\\北_i3wi98z.png"
+    ],
+    "升": [
+        "\\images3\\升_nczh3xt.png"
+    ],
+    "協": [
+        "\\images3\\協_tma9vee.png"
+    ],
+    "南": [
+        "\\images3\\南.png",
+        "\\images3\\南_h7iw65b.png"
+    ],
+    "博": [
+        "\\images3\\博_z4wdzyl.png"
+    ],
+    "占": [
+        "\\images3\\占_3qdk5os.png"
+    ],
+    "卡": [
+        "\\images3\\卡_6ce7rpu.png"
+    ],
+    "印": [
+        "\\images3\\印_raplch5.png"
+    ],
+    "危": [
+        "\\images3\\危_1kojk9o.png"
+    ],
+    "厭": [
+        "\\images3\\厭_v9f6b15.png"
+    ],
+    "去": [
+        "\\images3\\去_4zdakz0.png"
+    ],
+    "參": [
+        "\\images3\\參_4r792hr.png"
+    ],
+    "友": [
+        "\\images3\\友_45i032j.png",
+        "\\images3\\友_hejt5sw.png"
+    ],
+    "取": [
+        "\\images3\\取.png"
+    ],
+    "古": [
+        "\\images3\\古_753addz.png"
+    ],
+    "句": [
+        "\\images3\\句_5ks06s2.png"
+    ],
+    "叫": [
+        "\\images3\\叫.png",
+        "\\images3\\叫_82hvq9b.png"
+    ],
+    "可": [
+        "\\images3\\可_pm7udca.png"
+    ],
+    "史": [
+        "\\images3\\史_bvel7xu.png"
+    ],
+    "右": [
+        "\\images3\\右_kwh4c40.png"
+    ],
+    "吃": [
+        "\\images3\\吃_zvf7cfx.png"
+    ],
+    "吉": [
+        "\\images3\\吉_rvkvf6z.png"
+    ],
+    "君": [
+        "\\images3\\君_lxtvkj0.png"
+    ],
+    "否": [
+        "\\images3\\否_hdsqhvl.png"
+    ],
+    "吧": [
+        "\\images3\\吧_of57n9r.png"
+    ],
+    "含": [
+        "\\images3\\含_db953ec.png"
+    ],
+    "吸": [
+        "\\images3\\吸_y6lryu1.png"
+    ],
+    "吻": [
+        "\\images3\\吻_lh3waas.png"
+    ],
+    "呀": [
+        "\\images3\\呀_dgh903f.png"
+    ],
+    "告": [
+        "\\images3\\告.png",
+        "\\images3\\告_i99tatt.png"
+    ],
+    "呢": [
+        "\\images3\\呢.png"
+    ],
+    "周": [
+        "\\images3\\周_8uw8qww.png",
+        "\\images3\\周_xrmdykj.png"
+    ],
+    "味": [
+        "\\images3\\味_740lmae.png"
+    ],
+    "呼": [
+        "\\images3\\呼_wz1i67c.png"
+    ],
+    "品": [
+        "\\images3\\品.png",
+        "\\images3\\品_6p0w27z.png"
+    ],
+    "哈": [
+        "\\images3\\哈_u8cgs97.png"
+    ],
+    "哥": [
+        "\\images3\\哥_g4jjj1h.png"
+    ],
+    "哪": [
+        "\\images3\\哪_7q7ch0a.png"
+    ],
+    "唐": [
+        "\\images3\\唐_d4wjags.png"
+    ],
+    "商": [
+        "\\images3\\商_0353czg.png"
+    ],
+    "啊": [
+        "\\images3\\啊_jcd01o5.png"
+    ],
+    "善": [
+        "\\images3\\善_rb7lwqe.png"
+    ],
+    "喜": [
+        "\\images3\\喜_oi03ocl.png"
+    ],
+    "喝": [
+        "\\images3\\喝_rvcl4pu.png"
+    ],
+    "單": [
+        "\\images3\\單.png",
+        "\\images3\\單_xxklij2.png"
+    ],
+    "嗎": [
+        "\\images3\\嗎_lztujuk.png"
+    ],
+    "嘗": [
+        "\\images3\\嘗_0xmo495.png"
+    ],
+    "嘴": [
+        "\\images3\\嘴_vowvt7u.png"
+    ],
+    "器": [
+        "\\images3\\器_acyzhta.png"
+    ],
+    "嚴": [
+        "\\images3\\嚴_f9son9t.png"
+    ],
+    "固": [
+        "\\images3\\固_4gh5orb.png"
+    ],
+    "國": [
+        "\\images3\\國_5da0fs1.png"
+    ],
+    "園": [
+        "\\images3\\園_o3625rk.png"
+    ],
+    "團": [
+        "\\images3\\團_ghym66q.png"
+    ],
+    "土": [
+        "\\images3\\土_1z2sqw4.png"
+    ],
+    "均": [
+        "\\images3\\均_gswxgal.png"
+    ],
+    "坐": [
+        "\\images3\\坐_61klejz.png",
+        "\\images3\\坐_v99bebz.png"
+    ],
+    "型": [
+        "\\images3\\型_0mlfv1k.png",
+        "\\images3\\型_a2qajwk.png"
+    ],
+    "城": [
+        "\\images3\\城_lo3gr5g.png",
+        "\\images3\\城_y822ufb.png"
+    ],
+    "域": [
+        "\\images3\\域_5ecnlqk.png"
+    ],
+    "執": [
+        "\\images3\\執_y5vhdpi.png"
+    ],
+    "堂": [
+        "\\images3\\堂_82k5gao.png"
+    ],
+    "堅": [
+        "\\images3\\堅_03xcf37.png"
+    ],
+    "塊": [
+        "\\images3\\塊_4qcj56v.png"
+    ],
+    "塞": [
+        "\\images3\\塞_ddac9rn.png"
+    ],
+    "境": [
+        "\\images3\\境_yx5mhha.png"
+    ],
+    "增": [
+        "\\images3\\增_itokias.png"
+    ],
+    "壁": [
+        "\\images3\\壁_w5xrac9.png"
+    ],
+    "壓": [
+        "\\images3\\壓_1ilm1xn.png"
+    ],
+    "壞": [
+        "\\images3\\壞_fhlnge3.png"
+    ],
+    "士": [
+        "\\images3\\士.png"
+    ],
+    "壯": [
+        "\\images3\\壯_40l5be6.png"
+    ],
+    "夜": [
+        "\\images3\\夜_a57xyrl.png"
+    ],
+    "夠": [
+        "\\images3\\夠_2am0w5e.png",
+        "\\images3\\夠_kqish5e.png"
+    ],
+    "夢": [
+        "\\images3\\夢_dv9kr8i.png"
+    ],
+    "天": [
+        "\\images3\\天_n86bjil.png"
+    ],
+    "央": [
+        "\\images3\\央_co5hiug.png"
+    ],
+    "失": [
+        "\\images3\\失.png"
+    ],
+    "奧": [
+        "\\images3\\奧_nmu81rs.png"
+    ],
+    "奮": [
+        "\\images3\\奮_hqijrna.png"
+    ],
+    "她": [
+        "\\images3\\她_omy7ip6.png"
+    ],
+    "好": [
+        "\\images3\\好_073phsu.png"
+    ],
+    "姐": [
+        "\\images3\\姐_3ee3gxh.png"
+    ],
+    "姑": [
+        "\\images3\\姑_mbqpggw.png"
+    ],
+    "委": [
+        "\\images3\\委_a2dsxas.png"
+    ],
+    "威": [
+        "\\images3\\威_tpn6lvq.png"
+    ],
+    "娘": [
+        "\\images3\\娘_bfz2wix.png"
+    ],
+    "婚": [
+        "\\images3\\婚_9yjbmzz.png"
+    ],
+    "媽": [
+        "\\images3\\媽_828044i.png"
+    ],
+    "字": [
+        "\\images3\\字.png"
+    ],
+    "存": [
+        "\\images3\\存.png"
+    ],
+    "孩": [
+        "\\images3\\孩_9kgc7fx.png",
+        "\\images3\\孩_jqqniob.png"
+    ],
+    "孫": [
+        "\\images3\\孫_lp79v61.png"
+    ],
+    "守": [
+        "\\images3\\守_shed2i4.png"
+    ],
+    "宋": [
+        "\\images3\\宋_lnmdasj.png"
+    ],
+    "完": [
+        "\\images3\\完.png",
+        "\\images3\\完_19p9bdw.png",
+        "\\images3\\完_jfgm4ix.png"
+    ],
+    "宗": [
+        "\\images3\\宗_c0pc2tk.png"
+    ],
+    "官": [
+        "\\images3\\官_xwxlkqr.png"
+    ],
+    "客": [
+        "\\images3\\客_b2mfn14.png"
+    ],
+    "宣": [
+        "\\images3\\宣_adrhv05.png"
+    ],
+    "室": [
+        "\\images3\\室_gtukpye.png"
+    ],
+    "宮": [
+        "\\images3\\宮_aji093p.png"
+    ],
+    "害": [
+        "\\images3\\害_sil6xzl.png"
+    ],
+    "容": [
+        "\\images3\\容_59yyr5f.png"
+    ],
+    "密": [
+        "\\images3\\密_2yid0wb.png",
+        "\\images3\\密_4tlle0y.png"
+    ],
+    "富": [
+        "\\images3\\富_lhb1mv7.png"
+    ],
+    "察": [
+        "\\images3\\察_xynw252.png"
+    ],
+    "實": [
+        "\\images3\\實_9jdcmwl.png"
+    ],
+    "審": [
+        "\\images3\\審_9kwlp19.png"
+    ],
+    "寫": [
+        "\\images3\\寫_d6s4bz9.png"
+    ],
+    "寶": [
+        "\\images3\\寶_i6wv7ae.png"
+    ],
+    "封": [
+        "\\images3\\封_uqw680a.png"
+    ],
+    "射": [
+        "\\images3\\射_zre8gkd.png"
+    ],
+    "專": [
+        "\\images3\\專_fviuqn5.png"
+    ],
+    "尋": [
+        "\\images3\\尋_vhugqb0.png"
+    ],
+    "導": [
+        "\\images3\\導.png"
+    ],
+    "尖": [
+        "\\images3\\尖_4of1190.png"
+    ],
+    "尚": [
+        "\\images3\\尚_1sy76os.png",
+        "\\images3\\尚_84rid3c.png"
+    ],
+    "尤": [
+        "\\images3\\尤_rdw5can.png"
+    ],
+    "尼": [
+        "\\images3\\尼_j0sm69u.png"
+    ],
+    "局": [
+        "\\images3\\局_s0pcbbp.png"
+    ],
+    "居": [
+        "\\images3\\居_1gtt6zl.png",
+        "\\images3\\居_hlgzy7i.png"
+    ],
+    "屋": [
+        "\\images3\\屋_gspvao5.png"
+    ],
+    "層": [
+        "\\images3\\層_f3ccakl.png"
+    ],
+    "屬": [
+        "\\images3\\屬_yn4cpro.png"
+    ],
+    "岸": [
+        "\\images3\\岸_qqie6o6.png"
+    ],
+    "島": [
+        "\\images3\\島_jmg7wgx.png"
+    ],
+    "州": [
+        "\\images3\\州_839d1wo.png"
+    ],
+    "左": [
+        "\\images3\\左_hpfh2q0.png"
+    ],
+    "巨": [
+        "\\images3\\巨_pjgwu7a.png"
+    ],
+    "差": [
+        "\\images3\\差_i7mc86s.png"
+    ],
+    "巴": [
+        "\\images3\\巴_9n2uabk.png"
+    ],
+    "布": [
+        "\\images3\\布.png"
+    ],
+    "希": [
+        "\\images3\\希_4o0mp9y.png",
+        "\\images3\\希_6qbhfpx.png"
+    ],
+    "帝": [
+        "\\images3\\帝_cw7c8m6.png"
+    ],
+    "師": [
+        "\\images3\\師.png"
+    ],
+    "席": [
+        "\\images3\\席_zchami8.png"
+    ],
+    "幫": [
+        "\\images3\\幫_578t4vc.png",
+        "\\images3\\幫_wgthoi2.png"
+    ],
+    "年": [
+        "\\images3\\年_kl6dpxw.png"
+    ],
+    "序": [
+        "\\images3\\序_cptg1nr.png"
+    ],
+    "底": [
+        "\\images3\\底_y8zgm61.png"
+    ],
+    "府": [
+        "\\images3\\府_rbhhedi.png"
+    ],
+    "座": [
+        "\\images3\\座_yjz98x0.png"
+    ],
+    "庭": [
+        "\\images3\\庭_6bg62y4.png"
+    ],
+    "康": [
+        "\\images3\\康_jr9e2da.png"
+    ],
+    "廠": [
+        "\\images3\\廠_b7nsah0.png"
+    ],
+    "廣": [
+        "\\images3\\廣_jl4qsgf.png"
+    ],
+    "式": [
+        "\\images3\\式.png",
+        "\\images3\\式_qtu1gt1.png"
+    ],
+    "引": [
+        "\\images3\\引_emwrvbv.png"
+    ],
+    "弟": [
+        "\\images3\\弟_4rcdbsl.png"
+    ],
+    "張": [
+        "\\images3\\張.png",
+        "\\images3\\張_98bpwt4.png"
+    ],
+    "彈": [
+        "\\images3\\彈_3rlkcb4.png"
+    ],
+    "彎": [
+        "\\images3\\彎_x9b4wa2.png"
+    ],
+    "影": [
+        "\\images3\\影.png"
+    ],
+    "彼": [
+        "\\images3\\彼_g98mdzi.png"
+    ],
+    "往": [
+        "\\images3\\往.png"
+    ],
+    "待": [
+        "\\images3\\待_in2c0rv.png"
+    ],
+    "律": [
+        "\\images3\\律_zy94b29.png"
+    ],
+    "復": [
+        "\\images3\\復_ryycqz2.png"
+    ],
+    "微": [
+        "\\images3\\微_2g5mcax.png"
+    ],
+    "徵": [
+        "\\images3\\徵_kq18txm.png"
+    ],
+    "心": [
+        "\\images3\\心_jmaunk0.png"
+    ],
+    "忘": [
+        "\\images3\\忘_bipb0hv.png"
+    ],
+    "忙": [
+        "\\images3\\忙_1d58zrb.png"
+    ],
+    "快": [
+        "\\images3\\快.png",
+        "\\images3\\快_acg4w25.png"
+    ],
+    "念": [
+        "\\images3\\念_99sdm5u.png"
+    ],
+    "忽": [
+        "\\images3\\忽_jqs5ddy.png"
+    ],
+    "怎": [
+        "\\images3\\怎.png",
+        "\\images3\\怎_0sexh84.png"
+    ],
+    "怕": [
+        "\\images3\\怕_hpl3qtz.png"
+    ],
+    "急": [
+        "\\images3\\急_fp1vnvj.png"
+    ],
+    "恐": [
+        "\\images3\\恐_6f28u45.png",
+        "\\images3\\恐_bspndvg.png"
+    ],
+    "恩": [
+        "\\images3\\恩_h4hsfac.png"
+    ],
+    "息": [
+        "\\images3\\息_ilwv4wh.png"
+    ],
+    "您": [
+        "\\images3\\您_iuj62p3.png"
+    ],
+    "惡": [
+        "\\images3\\惡_9pfruxt.png",
+        "\\images3\\惡_nvbj81i.png"
+    ],
+    "愚": [
+        "\\images3\\愚_mxr52cv.png"
+    ],
+    "愛": [
+        "\\images3\\愛.png"
+    ],
+    "態": [
+        "\\images3\\態_kajy9b6.png"
+    ],
+    "慢": [
+        "\\images3\\慢_bxf8rhy.png"
+    ],
+    "慮": [
+        "\\images3\\慮_p8qmmpm.png"
+    ],
+    "懷": [
+        "\\images3\\懷_3z5oys9.png"
+    ],
+    "成": [
+        "\\images3\\成_z4d1w1n.png"
+    ],
+    "我": [
+        "\\images3\\我_x1ztjzr.png"
+    ],
+    "戶": [
+        "\\images3\\戶_r0pernr.png"
+    ],
+    "房": [
+        "\\images3\\房_246orl4.png"
+    ],
+    "所": [
+        "\\images3\\所_lgz325r.png"
+    ],
+    "托": [
+        "\\images3\\托.png",
+        "\\images3\\托_4zcz3dn.png"
+    ],
+    "批": [
+        "\\images3\\批_5ocywk2.png",
+        "\\images3\\批_rvw61f9.png"
+    ],
+    "找": [
+        "\\images3\\找_pfzo7oq.png"
+    ],
+    "承": [
+        "\\images3\\承_83k1gxx.png"
+    ],
+    "技": [
+        "\\images3\\技_nr3tbv9.png"
+    ],
+    "抓": [
+        "\\images3\\抓_5orvkov.png"
+    ],
+    "投": [
+        "\\images3\\投_i5atwnq.png"
+    ],
+    "抗": [
+        "\\images3\\抗_cqv96te.png"
+    ],
+    "拉": [
+        "\\images3\\拉.png"
+    ],
+    "拋": [
+        "\\images3\\拋_tbb0f13.png"
+    ],
+    "招": [
+        "\\images3\\招_15qcqk2.png"
+    ],
+    "括": [
+        "\\images3\\括_pyl1ok6.png"
+    ],
+    "持": [
+        "\\images3\\持.png"
+    ],
+    "按": [
+        "\\images3\\按_sbe2rwm.png"
+    ],
+    "授": [
+        "\\images3\\授_t6sm972.png"
+    ],
+    "掉": [
+        "\\images3\\掉_dldtdi0.png"
+    ],
+    "掌": [
+        "\\images3\\掌_3fre9ys.png"
+    ],
+    "排": [
+        "\\images3\\排_ixa2hem.png"
+    ],
+    "探": [
+        "\\images3\\探_yn6hf98.png"
+    ],
+    "控": [
+        "\\images3\\控_qih53h6.png"
+    ],
+    "推": [
+        "\\images3\\推_uk0ypfo.png"
+    ],
+    "換": [
+        "\\images3\\換_47n09a6.png"
+    ],
+    "揮": [
+        "\\images3\\揮_j25bgak.png"
+    ],
+    "損": [
+        "\\images3\\損_ohw6rem.png"
+    ],
+    "搖": [
+        "\\images3\\搖_duix12f.png",
+        "\\images3\\搖_hm2ugip.png"
+    ],
+    "擁": [
+        "\\images3\\擁_5puksjg.png"
+    ],
+    "擇": [
+        "\\images3\\擇_9zmt8na.png",
+        "\\images3\\擇_cf3a58f.png"
+    ],
+    "擊": [
+        "\\images3\\擊.png",
+        "\\images3\\擊_dytmuai.png"
+    ],
+    "據": [
+        "\\images3\\據.png",
+        "\\images3\\據_utu6yx0.png"
+    ],
+    "支": [
+        "\\images3\\支_bnaj4l8.png"
+    ],
+    "收": [
+        "\\images3\\收.png"
+    ],
+    "改": [
+        "\\images3\\改.png"
+    ],
+    "攻": [
+        "\\images3\\攻_vma7gik.png"
+    ],
+    "效": [
+        "\\images3\\效_1mqtqb5.png"
+    ],
+    "救": [
+        "\\images3\\救_c6qr2az.png"
+    ],
+    "敗": [
+        "\\images3\\敗_g2nj5o9.png"
+    ],
+    "敢": [
+        "\\images3\\敢_acjjitt.png",
+        "\\images3\\敢_vys2sda.png"
+    ],
+    "散": [
+        "\\images3\\散_9zu947b.png"
+    ],
+    "敲": [
+        "\\images3\\敲_ev9dhk7.png"
+    ],
+    "整": [
+        "\\images3\\整_6tv0zxl.png",
+        "\\images3\\整_bp3gz9r.png"
+    ],
+    "敵": [
+        "\\images3\\敵_gz1w767.png"
+    ],
+    "料": [
+        "\\images3\\料_96o2s8l.png",
+        "\\images3\\料_jbxfkpl.png"
+    ],
+    "斷": [
+        "\\images3\\斷_72sbx35.png"
+    ],
+    "方": [
+        "\\images3\\方_px6g8b0.png"
+    ],
+    "施": [
+        "\\images3\\施_md84htm.png"
+    ],
+    "旁": [
+        "\\images3\\旁_zb4qxfb.png"
+    ],
+    "旅": [
+        "\\images3\\旅_p05s8s0.png"
+    ],
+    "族": [
+        "\\images3\\族_84yw16n.png"
+    ],
+    "既": [
+        "\\images3\\既_oegos9i.png"
+    ],
+    "早": [
+        "\\images3\\早_k5qj63q.png",
+        "\\images3\\早_wxh8dqh.png"
+    ],
+    "易": [
+        "\\images3\\易_bhcn3xo.png"
+    ],
+    "星": [
+        "\\images3\\星_gyt6vqs.png",
+        "\\images3\\星_i3h60os.png"
+    ],
+    "春": [
+        "\\images3\\春_hg0irhi.png"
+    ],
+    "晚": [
+        "\\images3\\晚_fecwn2r.png"
+    ],
+    "景": [
+        "\\images3\\景_7wsjib7.png"
+    ],
+    "智": [
+        "\\images3\\智_dg2lhz7.png"
+    ],
+    "暗": [
+        "\\images3\\暗_9n6rvzl.png",
+        "\\images3\\暗_qszfx45.png"
+    ],
+    "曆": [
+        "\\images3\\曆_g2fry10.png"
+    ],
+    "曾": [
+        "\\images3\\曾_8yv5snh.png"
+    ],
+    "朋": [
+        "\\images3\\朋_gx9uj8a.png",
+        "\\images3\\朋_yfpidfu.png"
+    ],
+    "服": [
+        "\\images3\\服.png",
+        "\\images3\\服_l6smsxe.png"
+    ],
+    "望": [
+        "\\images3\\望.png"
+    ],
+    "朝": [
+        "\\images3\\朝_yykxkpo.png"
+    ],
+    "木": [
+        "\\images3\\木_upg66ok.png"
+    ],
+    "未": [
+        "\\images3\\未.png"
+    ],
+    "李": [
+        "\\images3\\李_vct50in.png"
+    ],
+    "材": [
+        "\\images3\\材_bpx1l2x.png"
+    ],
+    "村": [
+        "\\images3\\村_v5lyvsd.png"
+    ],
+    "束": [
+        "\\images3\\束_qq5lbjj.png"
+    ],
+    "林": [
+        "\\images3\\林.png"
+    ],
+    "架": [
+        "\\images3\\架_hqvy6td.png"
+    ],
+    "某": [
+        "\\images3\\某_3qenvu3.png",
+        "\\images3\\某_xoobzge.png"
+    ],
+    "查": [
+        "\\images3\\查_ron0gk1.png"
+    ],
+    "校": [
+        "\\images3\\校_vnmefvj.png"
+    ],
+    "核": [
+        "\\images3\\核_2gaiy3f.png"
+    ],
+    "根": [
+        "\\images3\\根.png",
+        "\\images3\\根_an732ej.png"
+    ],
+    "格": [
+        "\\images3\\格.png",
+        "\\images3\\格_k6irht2.png"
+    ],
+    "案": [
+        "\\images3\\案_xbqti5f.png"
+    ],
+    "極": [
+        "\\images3\\極.png"
+    ],
+    "概": [
+        "\\images3\\概_a3bmmx0.png"
+    ],
+    "榮": [
+        "\\images3\\榮_sk03xpp.png"
+    ],
+    "構": [
+        "\\images3\\構_nvxbzkc.png"
+    ],
+    "槍": [
+        "\\images3\\槍_gkg3ulv.png"
+    ],
+    "樂": [
+        "\\images3\\樂_llz0vox.png"
+    ],
+    "樓": [
+        "\\images3\\樓_h99ee42.png"
+    ],
+    "標": [
+        "\\images3\\標_6ne9ip8.png",
+        "\\images3\\標_rqe8u1g.png"
+    ],
+    "模": [
+        "\\images3\\模_2gtsmqv.png"
+    ],
+    "樹": [
+        "\\images3\\樹_utohulw.png"
+    ],
+    "檢": [
+        "\\images3\\檢_8lwvjyd.png"
+    ],
+    "款": [
+        "\\images3\\款_ds43myh.png",
+        "\\images3\\款_jpb7dmp.png"
+    ],
+    "歐": [
+        "\\images3\\歐_paqcm8f.png"
+    ],
+    "歡": [
+        "\\images3\\歡_67l8anf.png"
+    ],
+    "止": [
+        "\\images3\\止_vn5mwck.png",
+        "\\images3\\止_zn14uf6.png"
+    ],
+    "步": [
+        "\\images3\\步.png"
+    ],
+    "武": [
+        "\\images3\\武_5pf79q9.png"
+    ],
+    "歲": [
+        "\\images3\\歲_yxk5bsd.png"
+    ],
+    "歸": [
+        "\\images3\\歸_3vvu42t.png"
+    ],
+    "死": [
+        "\\images3\\死.png",
+        "\\images3\\死_om1fn1n.png"
+    ],
+    "段": [
+        "\\images3\\段_fvc5qqc.png"
+    ],
+    "殺": [
+        "\\images3\\殺_g7byuts.png"
+    ],
+    "母": [
+        "\\images3\\母_uv90u3z.png"
+    ],
+    "每": [
+        "\\images3\\每.png"
+    ],
+    "毒": [
+        "\\images3\\毒_fnkx4t2.png"
+    ],
+    "毛": [
+        "\\images3\\毛_6v21683.png"
+    ],
+    "毫": [
+        "\\images3\\毫_mj08too.png"
+    ],
+    "永": [
+        "\\images3\\永_g9zwbl8.png"
+    ],
+    "求": [
+        "\\images3\\求.png",
+        "\\images3\\求_cd2r4jp.png"
+    ],
+    "江": [
+        "\\images3\\江_9a0tjui.png"
+    ],
+    "沙": [
+        "\\images3\\沙_gfmizel.png"
+    ],
+    "河": [
+        "\\images3\\河_lonjrw9.png"
+    ],
+    "油": [
+        "\\images3\\油_zpiww2x.png"
+    ],
+    "況": [
+        "\\images3\\況_uiztzpo.png"
+    ],
+    "洋": [
+        "\\images3\\洋_m4ujmwt.png"
+    ],
+    "洛": [
+        "\\images3\\洛_jihuy2s.png"
+    ],
+    "洲": [
+        "\\images3\\洲_a5yma3i.png"
+    ],
+    "派": [
+        "\\images3\\派_qhplzq4.png"
+    ],
+    "流": [
+        "\\images3\\流.png",
+        "\\images3\\流_7f964wf.png"
+    ],
+    "消": [
+        "\\images3\\消_60dvidm.png"
+    ],
+    "涉": [
+        "\\images3\\涉.png",
+        "\\images3\\涉_d3bmks0.png"
+    ],
+    "深": [
+        "\\images3\\深_qym8pks.png"
+    ],
+    "減": [
+        "\\images3\\減_h77ecrl.png"
+    ],
+    "測": [
+        "\\images3\\測_syc8m8c.png"
+    ],
+    "港": [
+        "\\images3\\港_infc48j.png"
+    ],
+    "湖": [
+        "\\images3\\湖_8t1yws5.png"
+    ],
+    "源": [
+        "\\images3\\源_nbotqfo.png"
+    ],
+    "準": [
+        "\\images3\\準.png"
+    ],
+    "溫": [
+        "\\images3\\溫_uiq390e.png"
+    ],
+    "滅": [
+        "\\images3\\滅_skk76cc.png"
+    ],
+    "滿": [
+        "\\images3\\滿_68q8hnp.png"
+    ],
+    "演": [
+        "\\images3\\演_oq5259a.png"
+    ],
+    "漢": [
+        "\\images3\\漢_4kfeb6c.png"
+    ],
+    "漸": [
+        "\\images3\\漸_uszyeke.png"
+    ],
+    "潮": [
+        "\\images3\\潮_w7qhfku.png"
+    ],
+    "澤": [
+        "\\images3\\澤_94x3p5s.png"
+    ],
+    "激": [
+        "\\images3\\激_amp6hqn.png"
+    ],
+    "濟": [
+        "\\images3\\濟.png"
+    ],
+    "灣": [
+        "\\images3\\灣_gvx4a1k.png"
+    ],
+    "火": [
+        "\\images3\\火_degi09i.png"
+    ],
+    "灰": [
+        "\\images3\\灰_j8zm6kj.png"
+    ],
+    "炮": [
+        "\\images3\\炮_to7aglu.png"
+    ],
+    "炸": [
+        "\\images3\\炸_d6dzc0o.png"
+    ],
+    "烈": [
+        "\\images3\\烈_x579epf.png"
+    ],
+    "煙": [
+        "\\images3\\煙_6k90lee.png"
+    ],
+    "照": [
+        "\\images3\\照_traqgmo.png"
+    ],
+    "熱": [
+        "\\images3\\熱_ybj6ih7.png"
+    ],
+    "營": [
+        "\\images3\\營_bda6fw9.png"
+    ],
+    "爭": [
+        "\\images3\\爭.png"
+    ],
+    "父": [
+        "\\images3\\父_agtsw2u.png"
+    ],
+    "版": [
+        "\\images3\\版_tg3om9u.png"
+    ],
+    "牙": [
+        "\\images3\\牙_elq3iby.png"
+    ],
+    "犯": [
+        "\\images3\\犯_3vk4nyj.png"
+    ],
+    "狀": [
+        "\\images3\\狀_7sys3ur.png"
+    ],
+    "獨": [
+        "\\images3\\獨_5gdbpj6.png"
+    ],
+    "獲": [
+        "\\images3\\獲_gfy40fx.png"
+    ],
+    "率": [
+        "\\images3\\率_j2uq7fo.png"
+    ],
+    "玉": [
+        "\\images3\\玉_mybr2vw.png"
+    ],
+    "球": [
+        "\\images3\\球_oul5rgj.png"
+    ],
+    "理": [
+        "\\images3\\理_obx13h6.png"
+    ],
+    "環": [
+        "\\images3\\環_oy008e8.png"
+    ],
+    "田": [
+        "\\images3\\田_mtcviiq.png"
+    ],
+    "男": [
+        "\\images3\\男_sf8rbm9.png",
+        "\\images3\\男_xzr4m9o.png"
+    ],
+    "略": [
+        "\\images3\\略_3x3vpgf.png"
+    ],
+    "畫": [
+        "\\images3\\畫_xf93i76.png"
+    ],
+    "異": [
+        "\\images3\\異_mjz43fb.png",
+        "\\images3\\異_wek9khz.png"
+    ],
+    "疑": [
+        "\\images3\\疑_nej33au.png"
+    ],
+    "病": [
+        "\\images3\\病_3ptjb3e.png"
+    ],
+    "痛": [
+        "\\images3\\痛_hatgosp.png"
+    ],
+    "瘦": [
+        "\\images3\\瘦_axpe83a.png"
+    ],
+    "療": [
+        "\\images3\\療_l6vyc6n.png"
+    ],
+    "登": [
+        "\\images3\\登_pg6hgnu.png"
+    ],
+    "百": [
+        "\\images3\\百_uurccm4.png"
+    ],
+    "皇": [
+        "\\images3\\皇_wurkn2j.png"
+    ],
+    "皮": [
+        "\\images3\\皮_ydv4woq.png"
+    ],
+    "益": [
+        "\\images3\\益_mdydpjq.png"
+    ],
+    "盡": [
+        "\\images3\\盡_sto4o26.png"
+    ],
+    "監": [
+        "\\images3\\監_c4uy183.png",
+        "\\images3\\監_iaxf0jd.png"
+    ],
+    "盤": [
+        "\\images3\\盤_bq9342f.png"
+    ],
+    "盯": [
+        "\\images3\\盯_1cl1yw4.png"
+    ],
+    "省": [
+        "\\images3\\省_bwbqw8r.png"
+    ],
+    "眾": [
+        "\\images3\\眾_ewqrqnp.png"
+    ],
+    "睏": [
+        "\\images3\\睏_6copyhl.png"
+    ],
+    "睛": [
+        "\\images3\\睛_ejxfqry.png"
+    ],
+    "睡": [
+        "\\images3\\睡_677ecmg.png"
+    ],
+    "督": [
+        "\\images3\\督_uum2902.png"
+    ],
+    "短": [
+        "\\images3\\短_g4aokd4.png"
+    ],
+    "石": [
+        "\\images3\\石_k75wolt.png"
+    ],
+    "研": [
+        "\\images3\\研_c9k1gjt.png"
+    ],
+    "破": [
+        "\\images3\\破_dbwi0yu.png"
+    ],
+    "確": [
+        "\\images3\\確.png"
+    ],
+    "示": [
+        "\\images3\\示_q642otv.png",
+        "\\images3\\示_vuryrb4.png"
+    ],
+    "票": [
+        "\\images3\\票_f7azms1.png"
+    ],
+    "禁": [
+        "\\images3\\禁_heo2vhh.png",
+        "\\images3\\禁_oleyqk9.png"
+    ],
+    "移": [
+        "\\images3\\移_ddevoiq.png"
+    ],
+    "稅": [
+        "\\images3\\稅_nyigar4.png"
+    ],
+    "程": [
+        "\\images3\\程.png",
+        "\\images3\\程_xsfrszy.png"
+    ],
+    "稱": [
+        "\\images3\\稱_4huf5ny.png"
+    ],
+    "積": [
+        "\\images3\\積_j38u6da.png"
+    ],
+    "究": [
+        "\\images3\\究_wci1ihc.png"
+    ],
+    "突": [
+        "\\images3\\突_in3hlze.png"
+    ],
+    "窗": [
+        "\\images3\\窗_ta4ohee.png"
+    ],
+    "站": [
+        "\\images3\\站_cmpl1om.png",
+        "\\images3\\站_jwmrw64.png"
+    ],
+    "竟": [
+        "\\images3\\竟_wwkd31o.png"
+    ],
+    "章": [
+        "\\images3\\章_zfrwdgb.png"
+    ],
+    "端": [
+        "\\images3\\端_67tpo1g.png"
+    ],
+    "笑": [
+        "\\images3\\笑.png",
+        "\\images3\\笑_t75zm1q.png"
+    ],
+    "筆": [
+        "\\images3\\筆_ndlaiib.png"
+    ],
+    "答": [
+        "\\images3\\答_4lgb5ad.png"
+    ],
+    "策": [
+        "\\images3\\策_a6stk32.png"
+    ],
+    "算": [
+        "\\images3\\算_w1b52r6.png"
+    ],
+    "節": [
+        "\\images3\\節_behm2hx.png"
+    ],
+    "範": [
+        "\\images3\\範_2m937tw.png"
+    ],
+    "簡": [
+        "\\images3\\簡_7a2n66h.png"
+    ],
+    "米": [
+        "\\images3\\米_h8mvw42.png"
+    ],
+    "精": [
+        "\\images3\\精_2fiyp5b.png"
+    ],
+    "紀": [
+        "\\images3\\紀_z3fuw8e.png"
+    ],
+    "約": [
+        "\\images3\\約_ob4rrja.png"
+    ],
+    "紅": [
+        "\\images3\\紅_kb1k3me.png"
+    ],
+    "納": [
+        "\\images3\\納_6pc2rpc.png"
+    ],
+    "級": [
+        "\\images3\\級_ymrwyhw.png"
+    ],
+    "素": [
+        "\\images3\\素_8r703iz.png"
+    ],
+    "索": [
+        "\\images3\\索_y9ythg2.png"
+    ],
+    "細": [
+        "\\images3\\細_s1joczq.png"
+    ],
+    "終": [
+        "\\images3\\終_1paicth.png"
+    ],
+    "組": [
+        "\\images3\\組.png"
+    ],
+    "絕": [
+        "\\images3\\絕_hrfh8wt.png"
+    ],
+    "綠": [
+        "\\images3\\綠_zax04y3.png"
+    ],
+    "綫": [
+        "\\images3\\綫_1z2hnhe.png"
+    ],
+    "網": [
+        "\\images3\\網_csfot5e.png"
+    ],
+    "緊": [
+        "\\images3\\緊_pzvvn94.png"
+    ],
+    "緒": [
+        "\\images3\\緒_v6c8qrq.png"
+    ],
+    "緣": [
+        "\\images3\\緣_i7x2x18.png"
+    ],
+    "編": [
+        "\\images3\\編_9doqgij.png"
+    ],
+    "緻": [
+        "\\images3\\緻_myon68i.png"
+    ],
+    "縣": [
+        "\\images3\\縣_odxee9q.png"
+    ],
+    "織": [
+        "\\images3\\織_04qjwzb.png"
+    ],
+    "缺": [
+        "\\images3\\缺_2jrmghx.png"
+    ],
+    "罪": [
+        "\\images3\\罪_mfwfspe.png"
+    ],
+    "置": [
+        "\\images3\\置_rd3nmqs.png"
+    ],
+    "羅": [
+        "\\images3\\羅.png"
+    ],
+    "群": [
+        "\\images3\\群_6aajt7u.png"
+    ],
+    "習": [
+        "\\images3\\習_cp490sg.png"
+    ],
+    "考": [
+        "\\images3\\考_2dlsbal.png",
+        "\\images3\\考_hfzrg5l.png"
+    ],
+    "耳": [
+        "\\images3\\耳_50khmbk.png",
+        "\\images3\\耳_z3p20vz.png"
+    ],
+    "聊": [
+        "\\images3\\聊_zuaznfp.png"
+    ],
+    "聖": [
+        "\\images3\\聖_1k50ahe.png"
+    ],
+    "聞": [
+        "\\images3\\聞_cndzxre.png"
+    ],
+    "職": [
+        "\\images3\\職_c0tusgx.png"
+    ],
+    "股": [
+        "\\images3\\股_rf7w5cl.png"
+    ],
+    "肯": [
+        "\\images3\\肯_d9jie06.png"
+    ],
+    "育": [
+        "\\images3\\育_vs3okcl.png"
+    ],
+    "背": [
+        "\\images3\\背_utwzhrz.png"
+    ],
+    "能": [
+        "\\images3\\能_zpfe6pm.png"
+    ],
+    "脫": [
+        "\\images3\\脫_tbrxj9t.png"
+    ],
+    "腦": [
+        "\\images3\\腦_865tjxd.png",
+        "\\images3\\腦_9l5qgqo.png"
+    ],
+    "腳": [
+        "\\images3\\腳_f5rt5v7.png"
+    ],
+    "臉": [
+        "\\images3\\臉_azemqau.png",
+        "\\images3\\臉_gpoj0ym.png"
+    ],
+    "臨": [
+        "\\images3\\臨_h2uptgb.png"
+    ],
+    "興": [
+        "\\images3\\興_en13nz9.png",
+        "\\images3\\興_ftvotgj.png"
+    ],
+    "舉": [
+        "\\images3\\舉_6myxpqc.png"
+    ],
+    "舊": [
+        "\\images3\\舊_xmz6wqa.png"
+    ],
+    "航": [
+        "\\images3\\航_74mjhja.png"
+    ],
+    "般": [
+        "\\images3\\般_9n8087d.png"
+    ],
+    "船": [
+        "\\images3\\船_vxd12ux.png"
+    ],
+    "艦": [
+        "\\images3\\艦_nt4zabj.png"
+    ],
+    "良": [
+        "\\images3\\良_iam70ia.png"
+    ],
+    "若": [
+        "\\images3\\若_nguucvl.png"
+    ],
+    "苦": [
+        "\\images3\\苦_m11aax4.png"
+    ],
+    "英": [
+        "\\images3\\英.png"
+    ],
+    "草": [
+        "\\images3\\草_3t78yhu.png"
+    ],
+    "莫": [
+        "\\images3\\莫_xbb560f.png"
+    ],
+    "華": [
+        "\\images3\\華_541tz9t.png"
+    ],
+    "萬": [
+        "\\images3\\萬.png"
+    ],
+    "落": [
+        "\\images3\\落_mp2p29t.png"
+    ],
+    "葉": [
+        "\\images3\\葉_z0no0f6.png"
+    ],
+    "藉": [
+        "\\images3\\藉_u4ql4ea.png"
+    ],
+    "藏": [
+        "\\images3\\藏_kx9dz4f.png",
+        "\\images3\\藏_pt8ehwv.png"
+    ],
+    "藝": [
+        "\\images3\\藝_3ytdifu.png"
+    ],
+    "藥": [
+        "\\images3\\藥_y8hj59o.png"
+    ],
+    "蘇": [
+        "\\images3\\蘇_rg4eo2x.png"
+    ],
+    "蘭": [
+        "\\images3\\蘭_59z4atz.png"
+    ],
+    "虎": [
+        "\\images3\\虎_dyuj56r.png"
+    ],
+    "血": [
+        "\\images3\\血_zcyagly.png"
+    ],
+    "術": [
+        "\\images3\\術.png"
+    ],
+    "衛": [
+        "\\images3\\衛_3sfqylb.png"
+    ],
+    "衝": [
+        "\\images3\\衝_iqrh35m.png"
+    ],
+    "衣": [
+        "\\images3\\衣_3knechm.png",
+        "\\images3\\衣_hl83grm.png"
+    ],
+    "補": [
+        "\\images3\\補_vswvn6a.png"
+    ],
+    "視": [
+        "\\images3\\視_8z5rqyv.png",
+        "\\images3\\視_rjibecn.png"
+    ],
+    "親": [
+        "\\images3\\親.png"
+    ],
+    "覺": [
+        "\\images3\\覺.png",
+        "\\images3\\覺_a2q0rgf.png"
+    ],
+    "觀": [
+        "\\images3\\觀.png"
+    ],
+    "言": [
+        "\\images3\\言.png"
+    ],
+    "訂": [
+        "\\images3\\訂_5p9gyc5.png"
+    ],
+    "討": [
+        "\\images3\\討_6njk6av.png",
+        "\\images3\\討_llmhoqq.png"
+    ],
+    "記": [
+        "\\images3\\記.png",
+        "\\images3\\記_so9wgr7.png",
+        "\\images3\\記_ukrcxxl.png"
+    ],
+    "設": [
+        "\\images3\\設.png",
+        "\\images3\\設_e652gv9.png"
+    ],
+    "訴": [
+        "\\images3\\訴_nea2o26.png"
+    ],
+    "評": [
+        "\\images3\\評_iaglb1q.png"
+    ],
+    "詞": [
+        "\\images3\\詞_t6acwsj.png"
+    ],
+    "詩": [
+        "\\images3\\詩_kckgw0l.png"
+    ],
+    "該": [
+        "\\images3\\該.png",
+        "\\images3\\該_kvig58w.png"
+    ],
+    "誌": [
+        "\\images3\\誌_0tw8or1.png",
+        "\\images3\\誌_1gurbek.png"
+    ],
+    "語": [
+        "\\images3\\語_1n1217k.png",
+        "\\images3\\語_roxon6m.png"
+    ],
+    "誤": [
+        "\\images3\\誤_m1jd06m.png"
+    ],
+    "說": [
+        "\\images3\\說_cfvt0v7.png"
+    ],
+    "誰": [
+        "\\images3\\誰_389xzd7.png",
+        "\\images3\\誰_p064gdd.png"
+    ],
+    "調": [
+        "\\images3\\調.png"
+    ],
+    "談": [
+        "\\images3\\談_cxg3kda.png"
+    ],
+    "請": [
+        "\\images3\\請_ma9urfs.png"
+    ],
+    "諾": [
+        "\\images3\\諾_8mxxl0r.png"
+    ],
+    "謀": [
+        "\\images3\\謀_pn3f6g3.png"
+    ],
+    "謂": [
+        "\\images3\\謂_ct01i20.png"
+    ],
+    "講": [
+        "\\images3\\講_56cws7v.png"
+    ],
+    "謝": [
+        "\\images3\\謝_h5yazql.png",
+        "\\images3\\謝_zwwpzvx.png"
+    ],
+    "證": [
+        "\\images3\\證.png"
+    ],
+    "識": [
+        "\\images3\\識.png"
+    ],
+    "警": [
+        "\\images3\\警_uodqtzl.png"
+    ],
+    "議": [
+        "\\images3\\議.png"
+    ],
+    "護": [
+        "\\images3\\護_obm3ewr.png"
+    ],
+    "讀": [
+        "\\images3\\讀_06vmeon.png",
+        "\\images3\\讀_7tfcbe4.png"
+    ],
+    "負": [
+        "\\images3\\負_heeu9xa.png"
+    ],
+    "財": [
+        "\\images3\\財_k2m9a1g.png"
+    ],
+    "貨": [
+        "\\images3\\貨_vpjeo7t.png"
+    ],
+    "責": [
+        "\\images3\\責_9xbx7d6.png"
+    ],
+    "貴": [
+        "\\images3\\貴_8bpfk8i.png"
+    ],
+    "買": [
+        "\\images3\\買_ptt0bvq.png"
+    ],
+    "費": [
+        "\\images3\\費_t7df4kg.png"
+    ],
+    "賣": [
+        "\\images3\\賣_qj8066z.png"
+    ],
+    "質": [
+        "\\images3\\質_3i7di54.png"
+    ],
+    "超": [
+        "\\images3\\超_zl1ddpl.png"
+    ],
+    "越": [
+        "\\images3\\越_1ckx3s6.png"
+    ],
+    "趕": [
+        "\\images3\\趕_4hw2n1z.png"
+    ],
+    "趣": [
+        "\\images3\\趣_ve9u21l.png"
+    ],
+    "足": [
+        "\\images3\\足_62596bd.png"
+    ],
+    "跑": [
+        "\\images3\\跑_wf0jipg.png"
+    ],
+    "跡": [
+        "\\images3\\跡_wp64aqi.png"
+    ],
+    "跳": [
+        "\\images3\\跳_ecj5a5y.png"
+    ],
+    "蹤": [
+        "\\images3\\蹤_fw18h6n.png"
+    ],
+    "車": [
+        "\\images3\\車.png"
+    ],
+    "較": [
+        "\\images3\\較_881oijf.png"
+    ],
+    "載": [
+        "\\images3\\載_fcarwu6.png"
+    ],
+    "輕": [
+        "\\images3\\輕_qddjgdx.png",
+        "\\images3\\輕_vd8uwo3.png"
+    ],
+    "輸": [
+        "\\images3\\輸_xyxanx8.png"
+    ],
+    "轉": [
+        "\\images3\\轉.png",
+        "\\images3\\轉_yt6qbno.png"
+    ],
+    "辦": [
+        "\\images3\\辦.png"
+    ],
+    "農": [
+        "\\images3\\農_3rcaq91.png"
+    ],
+    "近": [
+        "\\images3\\近.png",
+        "\\images3\\近_fpcrepe.png"
+    ],
+    "述": [
+        "\\images3\\述_05sj50q.png"
+    ],
+    "追": [
+        "\\images3\\追_nzzbkha.png"
+    ],
+    "退": [
+        "\\images3\\退_5djcxd9.png"
+    ],
+    "送": [
+        "\\images3\\送_e6owfyd.png"
+    ],
+    "逃": [
+        "\\images3\\逃_fhrxly8.png"
+    ],
+    "逐": [
+        "\\images3\\逐_883r4fx.png"
+    ],
+    "速": [
+        "\\images3\\速_qesccxh.png",
+        "\\images3\\速_u1j5jm6.png"
+    ],
+    "造": [
+        "\\images3\\造.png"
+    ],
+    "連": [
+        "\\images3\\連.png"
+    ],
+    "遇": [
+        "\\images3\\遇_d5edtj2.png"
+    ],
+    "遊": [
+        "\\images3\\遊_kzyetg6.png"
+    ],
+    "運": [
+        "\\images3\\運.png"
+    ],
+    "遠": [
+        "\\images3\\遠.png",
+        "\\images3\\遠_oe9t2ci.png"
+    ],
+    "適": [
+        "\\images3\\適_po8fxvz.png"
+    ],
+    "選": [
+        "\\images3\\選_5rqlggw.png",
+        "\\images3\\選_7qojxhe.png"
+    ],
+    "遺": [
+        "\\images3\\遺_cla4epo.png"
+    ],
+    "避": [
+        "\\images3\\避_q4f7nbh.png"
+    ],
+    "郎": [
+        "\\images3\\郎_e8kykco.png"
+    ],
+    "鄉": [
+        "\\images3\\鄉_my459j5.png"
+    ],
+    "鄰": [
+        "\\images3\\鄰_5211fje.png"
+    ],
+    "配": [
+        "\\images3\\配_3nvq26x.png"
+    ],
+    "酒": [
+        "\\images3\\酒_zs030h9.png"
+    ],
+    "醫": [
+        "\\images3\\醫_1brrz6h.png"
+    ],
+    "采": [
+        "\\images3\\采_1z44xzn.png"
+    ],
+    "釋": [
+        "\\images3\\釋_3v750cx.png"
+    ],
+    "野": [
+        "\\images3\\野_g80cbx7.png"
+    ],
+    "銀": [
+        "\\images3\\銀_o6fx6tj.png"
+    ],
+    "銷": [
+        "\\images3\\銷_8soa11a.png"
+    ],
+    "錄": [
+        "\\images3\\錄_gdmk0ov.png"
+    ],
+    "錢": [
+        "\\images3\\錢_xpaoht8.png"
+    ],
+    "鍾": [
+        "\\images3\\鍾_wbaeuf2.png"
+    ],
+    "鎮": [
+        "\\images3\\鎮_labm94s.png",
+        "\\images3\\鎮_vvvucws.png"
+    ],
+    "鏡": [
+        "\\images3\\鏡_mkwj4u3.png"
+    ],
+    "鐵": [
+        "\\images3\\鐵_ka9t21q.png"
+    ],
+    "闆": [
+        "\\images3\\闆.png",
+        "\\images3\\闆_j15u11v.png",
+        "\\images3\\闆_m48glar.png"
+    ],
+    "防": [
+        "\\images3\\防_10s3wbc.png"
+    ],
+    "阿": [
+        "\\images3\\阿_0akj88p.png"
+    ],
+    "附": [
+        "\\images3\\附_s53kaqg.png",
+        "\\images3\\附_tsdioup.png"
+    ],
+    "降": [
+        "\\images3\\降_lmxpgok.png"
+    ],
+    "限": [
+        "\\images3\\限_hjpw6un.png"
+    ],
+    "院": [
+        "\\images3\\院.png"
+    ],
+    "陣": [
+        "\\images3\\陣_syncg3b.png"
+    ],
+    "除": [
+        "\\images3\\除_f1qoz70.png"
+    ],
+    "陳": [
+        "\\images3\\陳_wk7qp65.png"
+    ],
+    "陸": [
+        "\\images3\\陸_9qe838x.png"
+    ],
+    "陽": [
+        "\\images3\\陽_q7ggag4.png"
+    ],
+    "階": [
+        "\\images3\\階_ljq4fuy.png"
+    ],
+    "際": [
+        "\\images3\\際_4xrgdz8.png"
+    ],
+    "隨": [
+        "\\images3\\隨_y3vckvo.png"
+    ],
+    "險": [
+        "\\images3\\險_fofswtk.png"
+    ],
+    "集": [
+        "\\images3\\集_874o12k.png",
+        "\\images3\\集_uqz6jbn.png"
+    ],
+    "雖": [
+        "\\images3\\雖_ymr856u.png"
+    ],
+    "雙": [
+        "\\images3\\雙_31lrpp2.png"
+    ],
+    "雜": [
+        "\\images3\\雜_792b8jx.png"
+    ],
+    "雨": [
+        "\\images3\\雨_xi50ogd.png"
+    ],
+    "雲": [
+        "\\images3\\雲_ncp5yq9.png"
+    ],
+    "雷": [
+        "\\images3\\雷_tszu5qo.png"
+    ],
+    "需": [
+        "\\images3\\需_qilp1wn.png"
+    ],
+    "露": [
+        "\\images3\\露_60vkaxx.png"
+    ],
+    "靈": [
+        "\\images3\\靈_ud7lrrv.png"
+    ],
+    "青": [
+        "\\images3\\青_yczhm3b.png"
+    ],
+    "靜": [
+        "\\images3\\靜_exv6fj3.png"
+    ],
+    "靠": [
+        "\\images3\\靠_qx1k8ff.png"
+    ],
+    "革": [
+        "\\images3\\革_cqojytp.png"
+    ],
+    "韆": [
+        "\\images3\\韆_81b9n4h.png"
+    ],
+    "音": [
+        "\\images3\\音_3ane1io.png"
+    ],
+    "響": [
+        "\\images3\\響_gtww8u5.png"
+    ],
+    "頂": [
+        "\\images3\\頂_xn0ucl6.png"
+    ],
+    "項": [
+        "\\images3\\項_lr86zjj.png"
+    ],
+    "順": [
+        "\\images3\\順_57jklcl.png"
+    ],
+    "須": [
+        "\\images3\\須_jvcr9pc.png"
+    ],
+    "預": [
+        "\\images3\\預_tzlm7qg.png"
+    ],
+    "頓": [
+        "\\images3\\頓_nhr9glt.png"
+    ],
+    "領": [
+        "\\images3\\領.png",
+        "\\images3\\領_1hpjump.png"
+    ],
+    "額": [
+        "\\images3\\額_epszm18.png"
+    ],
+    "願": [
+        "\\images3\\願_bgz5dvl.png"
+    ],
+    "類": [
+        "\\images3\\類.png",
+        "\\images3\\類_41yuhz2.png"
+    ],
+    "顧": [
+        "\\images3\\顧_vnskb6z.png"
+    ],
+    "顯": [
+        "\\images3\\顯_fwsbf2n.png"
+    ],
+    "風": [
+        "\\images3\\風.png"
+    ],
+    "颱": [
+        "\\images3\\颱.png"
+    ],
+    "飛": [
+        "\\images3\\飛.png",
+        "\\images3\\飛_9p5hh2h.png"
+    ],
+    "食": [
+        "\\images3\\食_nz0zwsd.png"
+    ],
+    "飯": [
+        "\\images3\\飯_8jr4zue.png"
+    ],
+    "餘": [
+        "\\images3\\餘_c5usndd.png"
+    ],
+    "首": [
+        "\\images3\\首_r3bx5zx.png"
+    ],
+    "香": [
+        "\\images3\\香_jqkolpz.png"
+    ],
+    "駕": [
+        "\\images3\\駕_p7q41mw.png"
+    ],
+    "駛": [
+        "\\images3\\駛_uij84ho.png"
+    ],
+    "驗": [
+        "\\images3\\驗_b3dge3t.png"
+    ],
+    "驚": [
+        "\\images3\\驚_pztiyup.png"
+    ],
+    "鬆": [
+        "\\images3\\鬆_ni4h0ri.png"
+    ],
+    "鬍": [
+        "\\images3\\鬍_63ug97z.png",
+        "\\images3\\鬍_fpckjjk.png"
+    ],
+    "鬥": [
+        "\\images3\\鬥_mdc8mg7.png"
+    ],
+    "魚": [
+        "\\images3\\魚_6s1hl43.png"
+    ],
+    "魯": [
+        "\\images3\\魯_awabs9j.png"
+    ],
+    "鮮": [
+        "\\images3\\鮮_wrdykc7.png",
+        "\\images3\\鮮_x2cmdp6.png"
+    ],
+    "鷹": [
+        "\\images3\\鷹_xs78sv6.png"
+    ],
+    "麗": [
+        "\\images3\\麗_2lm5ami.png"
+    ],
+    "麼": [
+        "\\images3\\麼_xxkpjcg.png"
+    ],
+    "黃": [
+        "\\images3\\黃_q0wb6as.png",
+        "\\images3\\黃_ygm1iu1.png"
+    ],
+    "黑": [
+        "\\images3\\黑_cyxxqhh.png"
+    ],
+    "黨": [
+        "\\images3\\黨_94pawak.png"
+    ],
+    "龍": [
+        "\\images3\\龍_7nzk35o.png"
     ]
 }

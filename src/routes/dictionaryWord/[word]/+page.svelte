@@ -63,7 +63,7 @@
 	{#await data.explanation}
 		<Spinner /> loading explanation...
 	{:then explanation}
-		<p>{explanation}</p>
+		<p style="white-space: pre-wrap;">{explanation}</p>
 	{:catch error}
 		<p style="color: red">{error.message}</p>
 	{/await}
@@ -78,7 +78,7 @@
 	}
 
 	.definition {
-		margin-top: 5rem;
+		margin-top: 10rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;

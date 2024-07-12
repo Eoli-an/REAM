@@ -1,9 +1,7 @@
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import Groq from 'groq-sdk';
-const groq = new Groq({
-	apiKey: process.env.GROQ_API_KEY
-});
+import { callLLM } from '../llmService';
+
 
 function splitIntoSentences(text: string): string[] {
 	const sentences = [];
@@ -67,28 +65,6 @@ Naturally, he had thought that the long campaign and the strain of the election 
 ASSISTANT:
 He thought the long election and all the stress had made him crazy. First, a talking portrait scared him silly. But that was nothing compared to the fright he got when a man claiming to be a wizard jumped out of the fireplace and shook his hand. This man, Fudge, explained in a kind voice that there were still witches and wizards living secretly among us. He assured the man that he didn't need to worry about them at all. The Ministry of Magic was in charge of all magical folk and made sure regular people never found out about them. It was a tough job, Fudge explained, involving everything from making sure broomsticks were used safely to keeping the dragon population under control. (The man remembered grabbing his desk for support when he heard about the dragons). Then, Fudge patted the shocked man on the shoulder, like a father comforting his son.`;
 
-	const chatCompletion = await groq.chat.completions.create({
-		model: 'llama3-70b-8192',
-		messages: [
-			{
-				role: 'system',
-				content: systemPrompt
-			},
-			{
-				role: 'user',
-				content: sentences.join('\n')
-			}
-		],
-		temperature: 0.1,
-		max_tokens: 10000,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0
-	});
-
-	const content = chatCompletion.choices[0].message.content;
-	if (!content) {
-		throw new Error('No content in chatCompletion');
-	}
+	const content = await callLLM(systemPrompt, sentences.join('\n'), true);
 	return { content };
 }
