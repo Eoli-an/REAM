@@ -7,7 +7,7 @@ import fs from 'fs';
 //TODO this stilll doesn't work sometimes
 
 try {
-	loadDict(fs.readFileSync('/dict.txt.big'));
+	loadDict(fs.readFileSync('static/dict.txt.big'));
 } catch (err) {
 	console.error('Error loading dictionary:', err);
 }
