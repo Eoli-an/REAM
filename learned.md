@@ -51,3 +51,11 @@ File upload with enctype="multipart/form-data", https://www.okupter.com/blog/sve
 npx supabase gen types typescript --project-id "kxkuuxexzztnyzzmptgg" --schema public | Out-File -FilePath temp_database.types.ts -Encoding utf8
 
 > > Copy-Item -Path temp_database.types.ts -Destination src/lib/database.types.ts
+
+# Static dir served automatically in sveltekit
+
+response = await fetch('/short_story.txt'); //SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
+
+# Reading from filesystem
+
+Reading from the filesystem is not encouraged as the build output won't match the desired path as you do in dev. It works in dev because files are left as-is (unbundled) through the dev server. Ideally you should import them, or save it in a database, etc. Marking as duplicate of (https://github.com/sveltejs/kit/issues/5163)

@@ -20,22 +20,22 @@ export const load = (async ({ fetch, params }) => {
 	const text = await response.text();
 	const text_traditional = s2t(text);
 	const text_simplified = t2s(text);
-	const text_cut = cut(text_traditional);
-	const pinyin_cut = text_cut.map((c_word) => pinyin(c_word));
+	// const text_cut = cut(text_traditional);
+	// const pinyin_cut = text_cut.map((c_word) => pinyin(c_word));
 
 	let sentenceOffsets: number[] = [];
 
-	function calculateSentenceOffsets() {
-		let offset = 0;
-		while (offset < text_cut.length) {
-			sentenceOffsets.push(offset);
-			while (offset < text_cut.length && !['。', '！', '？'].includes(text_cut[offset])) {
-				offset++;
-			}
-			offset++; // Move past the punctuation mark
-		}
-	}
-	calculateSentenceOffsets();
+	// function calculateSentenceOffsets() {
+	// 	let offset = 0;
+	// 	while (offset < text_cut.length) {
+	// 		sentenceOffsets.push(offset);
+	// 		while (offset < text_cut.length && !['。', '！', '？'].includes(text_cut[offset])) {
+	// 			offset++;
+	// 		}
+	// 		offset++; // Move past the punctuation mark
+	// 	}
+	// }
+	// calculateSentenceOffsets();
 
 	// const response2 = await fetch('/my_known_words.json');
 	// const knownWords = await response2.json();
@@ -60,9 +60,9 @@ export const load = (async ({ fetch, params }) => {
 		text: text,
 		wordKnowledgeData: wordKnowledgeData,
 		characterKnowledgeData: characterKnowledgeData,
-		text_cut: text_cut,
+		// text_cut: text_cut,
 		//translations: translations,
-		pinyin_cut: pinyin_cut,
+		// pinyin_cut: pinyin_cut,
 		offset: offset,
 		words_per_page: words_per_page,
 		sentenceOffsets: sentenceOffsets,
