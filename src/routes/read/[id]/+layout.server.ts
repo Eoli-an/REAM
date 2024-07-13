@@ -40,8 +40,8 @@ export const load = (async ({ fetch, params }) => {
 	// const response2 = await fetch('/my_known_words.json');
 	// const knownWords = await response2.json();
 
-	const response3 = await fetch('/images.json');
-	const imagePaths = await response3.json();
+	// const response3 = await fetch('/images.json');
+	// const imagePaths = await response3.json();
 
 	
 
@@ -67,7 +67,7 @@ export const load = (async ({ fetch, params }) => {
 		words_per_page: words_per_page,
 		sentenceOffsets: sentenceOffsets,
 		currentSentenceIndex: sentenceIndexData?.currentSentence || 0,
-		imagePaths: imagePaths,
+		// imagePaths: imagePaths,
 		currentId: currentId,
 	};
 }) satisfies LayoutServerLoad;
