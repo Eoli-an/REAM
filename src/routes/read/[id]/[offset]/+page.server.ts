@@ -1,5 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { supabase } from '$lib/supabaseClient';
+import { url } from 'inspector';
 
 export const load = (async ({ parent, params, fetch }) => {
 	const dynamic = false;
@@ -53,6 +54,58 @@ export const load = (async ({ parent, params, fetch }) => {
 		imageChosen[row.character] = row.chosen_image;
 	});
 
+	async function getImageIds(sentence: string, supabase: any) {
+		const { data: imageData, error: imageError } = await supabase
+			.from('images')
+			.select('id, char, index')
+			.in('char', [...new Set(sentence.split(''))]);
+
+		if (imageError) {
+			console.error('Error fetching image data:', imageError);
+			return {};
+		}
+
+		const idDict: { [char: string]: { [index: number]: string } } = {};
+		imageData.forEach((row: { char: string; index: number; id: string; }) => {
+			if (!idDict[row.char]) {
+				idDict[row.char] = {};
+			}
+			idDict[row.char][row.index] = row.id;
+		});
+
+		return idDict;
+	}
+
+	async function getImageUrlsFromIds(idDict: { [char: string]: { [index: number]: string } }, supabase: any) {
+		const urlDict: { [char: string]: { [index: number]: string } } = {};
+		for (const char in idDict) {
+			urlDict[char] = {}; 
+			for (const index in idDict[char]) {
+				const { data, error } = await supabase
+					.storage
+					.from('Images')
+					.getPublicUrl(`images/${idDict[char][index]}`);
+
+				if (error) {
+					console.error('Error fetching public URL:', error);
+				} else {
+					urlDict[char][index] = data.publicUrl;
+				}
+			}
+		}
+
+		return urlDict;
+	}
+
+	async function getImageUrls(sentence: string, supabase: any) {
+		const idDict = await getImageIds(sentence, supabase);
+		const urlDict = await getImageUrlsFromIds(idDict, supabase);
+		console.log(urlDict);
+		return urlDict;
+	}
+	const urlDict = await getImageUrls(page_words.join(''), supabase);
+
+
 
 
 	updateCurrentSentence(page_words);
@@ -62,6 +115,7 @@ export const load = (async ({ parent, params, fetch }) => {
 		wordTranslations: wordTranslations,
 		sentenceTranslation: sentenceTranslation,
 		imageChosen: imageChosen,
+		imagePaths: urlDict,
 	};
 }) satisfies PageServerLoad;
 

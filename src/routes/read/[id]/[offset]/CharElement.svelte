@@ -16,9 +16,12 @@
 		}
 	}
 
+	console.log(imagePaths);
+
 	$: if (imagePaths.hasOwnProperty(char)) {
 		image_available = true;
 		imagePath = imagePaths[char][chosen_image];
+		console.log(imagePath);
 	}
 
 	let displayType: string = 'image';
