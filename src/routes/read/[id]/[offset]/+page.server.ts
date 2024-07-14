@@ -100,7 +100,6 @@ export const load = (async ({ parent, params, fetch }) => {
 	async function getImageUrls(sentence: string, supabase: any) {
 		const idDict = await getImageIds(sentence, supabase);
 		const urlDict = await getImageUrlsFromIds(idDict, supabase);
-		console.log(urlDict);
 		return urlDict;
 	}
 	const urlDict = await getImageUrls(page_words.join(''), supabase);
