@@ -43,3 +43,53 @@ export async function uploadDatabaseBook(dicts: { word_position: number; word: s
         console.log('Database upload successful');
     }
 }
+
+async function getImageIds(sentence: string, supabase: any) {
+		const { data: imageData, error: imageError } = await supabase
+			.from('images')
+			.select('id, char, index')
+			.in('char', [...new Set(sentence.split(''))]);
+
+		if (imageError) {
+			console.error('Error fetching image data:', imageError);
+			return {};
+		}
+
+		const idDict: { [char: string]: { [index: number]: string } } = {};
+		imageData.forEach((row: { char: string; index: number; id: string; }) => {
+			if (!idDict[row.char]) {
+				idDict[row.char] = {};
+			}
+			idDict[row.char][row.index] = row.id;
+		});
+
+		return idDict;
+	}
+
+async function getImageUrlsFromIds(idDict: { [char: string]: { [index: number]: string } }, supabase: any) {
+		const urlDict: { [char: string]: { [index: number]: string } } = {};
+		for (const char in idDict) {
+			urlDict[char] = {}; 
+			for (const index in idDict[char]) {
+				const { data, error } = await supabase
+					.storage
+					.from('Images')
+					.getPublicUrl(`images/${idDict[char][index]}`);
+
+				if (error) {
+					console.error('Error fetching public URL:', error);
+				} else {
+					urlDict[char][index] = data.publicUrl;
+				}
+			}
+		}
+
+		return urlDict;
+	}
+
+export async function getImageUrls(sentence: string, supabase: any) {
+        // sentence can also be only one word
+		const idDict = await getImageIds(sentence, supabase);
+		const urlDict = await getImageUrlsFromIds(idDict, supabase);
+		return urlDict;
+	} 
