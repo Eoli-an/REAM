@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	onMount(() => {
-		document.documentElement.setAttribute('data-theme', 'dark');
-	});
+	// onMount(() => {
+	// 	document.documentElement.setAttribute('data-theme', 'dark');
+	// });
 
 	import { wordKnowledge, CharacterKnowledge } from '$lib/stores';
 	import { updateDatabaseSentenceIndex } from '$lib';
@@ -96,22 +96,5 @@
 		font-size: 30px;
 		cursor: pointer;
 		margin-right: 8px;
-	}
-
-	:global([data-theme='dark']) {
-		--background-color: black;
-		--text-color: #ffffff;
-		--button-background: #333333;
-		--button-text: #ffffff;
-	}
-
-	:global(body) {
-		background-color: var(--background-color);
-		color: var(--text-color);
-	}
-
-	:global(button) {
-		background-color: var(--button-background);
-		color: var(--button-text);
 	}
 </style>
