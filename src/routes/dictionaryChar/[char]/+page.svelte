@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { supabase } from '$lib/supabaseClient';
-	import { Button, Spinner } from 'flowbite-svelte';
+	import { Button, Spinner, AccordionItem, Accordion } from 'flowbite-svelte';
+	import { CharacterKnowledge } from '$lib';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+	const { char, imagePaths, definition, frequency } = data;
+
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
 		const { error } = await supabase
-			.from('MyKnownCharacters') // Adjust the table name as needed
+			.from('MyKnownCharacters')
 			.upsert({ character, knowledgeLevel, chosen_image }, { onConflict: 'character' });
 
 		if (error) {
@@ -11,111 +17,75 @@
 		}
 	}
 
-	import type { PageData } from './$types';
-	import { CharacterKnowledge } from '$lib';
-	export let data: PageData;
-	const char = data.char;
-	const imagePaths = data.imagePaths;
-	const definition = data.definition;
-	console.log(definition);
-
-	let selectedItem: 'word' | 'image' = 'image';
-
 	function selectItem(type: 'word' | 'image', index: number) {
-		selectedItem = type;
-		if (type === 'word') {
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[char] = 1;
-				return knowledge;
-			});
-			updateDatabase(char, 1, index);
-		} else if (type === 'image') {
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[char] = 0;
-				return knowledge;
-			});
-			updateDatabase(char, 0, index);
-		}
+		CharacterKnowledge.update((knowledge) => {
+			knowledge[char] = type === 'word' ? 1 : 0;
+			return knowledge;
+		});
+		updateDatabase(char, type === 'word' ? 1 : 0, index);
 		window.history.back();
 	}
 </script>
 
-<div class="image-grid">
-	<div class="grid-item">
-		<h1 style="font-size: 20rem; margin-bottom: 0rem; margin-top: 10rem">{char}</h1>
-		<button on:click={() => selectItem('word', 0)}>Choose this</button>
-	</div>
-	{#if imagePaths.length > 0}
-		{#each imagePaths as imagePath, index}
-			<div class="grid-item">
-				<img style="margin-top: 17rem;" src={imagePath} alt={char} />
-				<button on:click={() => selectItem('image', index)}>Choose this</button>
+<div class="container mx-auto px-4 py-8">
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+		<div
+			class="flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+		>
+			<h1 class="mb-4 text-9xl">{char}</h1>
+			<Button color="blue" on:click={() => selectItem('word', 0)}>Choose this</Button>
+		</div>
+
+		{#if imagePaths.length > 0}
+			{#each imagePaths as imagePath, index}
+				<div
+					class="flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+				>
+					<img src={imagePath} alt={char} class="mb-4 h-48 w-full object-contain" />
+					<Button color="blue" on:click={() => selectItem('image', index)}>Choose this</Button>
+				</div>
+			{/each}
+		{:else}
+			<div
+				class="flex items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+			>
+				<p class="text-gray-500 dark:text-gray-400">No images available for this word.</p>
 			</div>
-		{/each}
-	{:else}
-		<div class="grid-item">
-			<p>No images available for this word.</p>
-		</div>
-	{/if}
-</div>
+		{/if}
+	</div>
 
-<div class="definition-grid">
-	{#each definition as item}
-		<div class="grid-item">
-			<p style="font-size: 1.5rem;">Definition: {item.definition}</p>
-			<p style="font-size: 1.5rem;">{item.pinyin}</p>
-		</div>
-	{/each}
-	<div class="grid-item">
-		<p style="font-size: 1.5rem;">Frequency {data.frequency}</p>
+	<div class="mt-12">
+		<Accordion flush>
+			<AccordionItem>
+				<span slot="header" class="text-xl font-semibold">Definitions</span>
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+					{#each definition as item}
+						<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+							<p class="mb-2 text-lg"><strong>Definition:</strong> {item.definition}</p>
+							<p class="text-lg"><strong>Pinyin:</strong> {item.pinyin}</p>
+						</div>
+					{/each}
+				</div>
+			</AccordionItem>
+
+			<AccordionItem>
+				<span slot="header" class="text-xl font-semibold">Frequency</span>
+				<p class="text-lg">Frequency: {frequency}</p>
+			</AccordionItem>
+
+			<AccordionItem>
+				<span slot="header" class="text-xl font-semibold">Explanation</span>
+				{#await data.explanation}
+					<div class="flex items-center justify-center">
+						<Spinner size="xl" />
+						<span class="ml-2">Loading explanation...</span>
+					</div>
+				{:then explanation}
+					<p class="whitespace-pre-wrap text-gray-700 dark:text-gray-300">{explanation}</p>
+				{:catch error}
+					<p class="text-red-500">{error.message}</p>
+				{/await}
+			</AccordionItem>
+		</Accordion>
 	</div>
 </div>
-
-<div class="definition">
-	{#await data.explanation}
-		<Spinner /> loading explanation...
-	{:then explanation}
-		<p style="white-space: pre-wrap;">{explanation}</p>
-	{:catch error}
-		<p style="color: red">{error.message}</p>
-	{/await}
-</div>
-
-<style>
-	.image-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		grid-gap: 1rem;
-		margin-top: -13rem;
-		margin-bottom: -10rem;
-	}
-
-	.grid-item {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.image-grid img {
-		width: 50%;
-		height: auto;
-		object-fit: cover;
-	}
-
-	.definition-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		grid-gap: 1rem;
-		margin-top: 20rem;
-	}
-
-	.definition {
-		margin-top: 10rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 1rem; /* Adjust the height as needed */
-		font-size: 1.6rem;
-	}
-</style>
