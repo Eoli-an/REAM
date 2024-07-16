@@ -39,29 +39,31 @@
 </button>
 <hr class="divider" />
 
-{#await wordTranslations}
-	{#each data.words as word, i (i)}
-		<TextElement
-			{word}
-			pinyin_word={'pinyin'}
-			translation={'...'}
-			imagePaths={data.imagePaths}
-			imageChosen={data.imageChosen}
-		/>
-	{/each}
-{:then translations}
-	{#each data.words as word, i (i)}
-		<TextElement
-			{word}
-			pinyin_word={'pinyin'}
-			translation={translations[i]}
-			imagePaths={data.imagePaths}
-			imageChosen={data.imageChosen}
-		/>
-	{/each}
-{:catch error}
-	<p style="color: red">{error.message}</p>
-{/await}
+<div>
+	{#await wordTranslations}
+		{#each data.words as word, i (i)}
+			<TextElement
+				{word}
+				pinyin_word={'pinyin'}
+				translation={'...'}
+				imagePaths={data.imagePaths}
+				imageChosen={data.imageChosen}
+			/>
+		{/each}
+	{:then translations}
+		{#each data.words as word, i (i)}
+			<TextElement
+				{word}
+				pinyin_word={'pinyin'}
+				translation={translations[i]}
+				imagePaths={data.imagePaths}
+				imageChosen={data.imageChosen}
+			/>
+		{/each}
+	{:catch error}
+		<p class="text-red-500">{error.message}</p>
+	{/await}
+</div>
 
 <style>
 	.sentence-translation-container {

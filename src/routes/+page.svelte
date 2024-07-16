@@ -30,7 +30,7 @@
 		>
 			<NavLi href="/" active={true}>Home</NavLi>
 			<NavLi href="/">About</NavLi>
-			<NavLi href="/">Pricing</NavLi>
+			<NavLi href="/">Blog</NavLi>
 		</NavUl>
 	</Navbar>
 </header>
@@ -43,13 +43,13 @@
 				<h1
 					class="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white"
 				>
-					Learn Chinese characters with ease
+					Reading Chinese Streamlined
 				</h1>
 				<p
 					class="mb-6 max-w-2xl font-light text-gray-500 md:text-lg lg:mb-8 lg:text-xl dark:text-gray-400"
 				>
-					REAM is a web app for learning traditional and simplified Chinese characters and
-					vocabulary using AI-powered techniques.
+					REAM helps you read your favorite texts in Chinese, even if they are above your current
+					level. We use modern AI to make your texts more comprehensible and enjoyable.
 				</p>
 				<!-- <Button size="xl" color="red">Try For Free <ArrowRight class="ml-2 h-5 w-5" /></Button> -->
 				<Button class="bg-blue-900 text-white" size="xl" href="/upload">Try it</Button>
@@ -68,30 +68,30 @@
 		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
 			<div class="mb-8 max-w-screen-md lg:mb-16">
 				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-					AI-Powered Learning
+					AI-Powered Simplification
 				</h2>
 				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
-					Our advanced AI algorithms adapt to your learning style, making character recognition and
-					memorization more efficient than ever.
+					REAM uses large language models to simplify complex Chinese texts into a more digestible
+					form
 				</p>
 			</div>
 			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Personalized Learning Path</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Less Complex Grammar</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						Our AI creates a custom learning path based on your progress and goals.
+						Adapt the text to your personal HSK level grammar.
 					</p>
 				</div>
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Adaptive Difficulty</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">More Common Characters And Words</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						Lessons adjust in real-time to match your skill level for optimal learning.
+						Replace rare characters with more common ones to improve readability.
 					</p>
 				</div>
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Smart Review System</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Additional Explanations</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						AI-powered spaced repetition ensures you review characters at the perfect intervals.
+						Provide explanations for difficult words and phrases to aid comprehension.
 					</p>
 				</div>
 			</div>
@@ -103,31 +103,64 @@
 		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
 			<div class="mb-8 max-w-screen-md lg:mb-16">
 				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-					Comprehensive Learning Experience
+					Adaptive Translation
 				</h2>
 				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
-					Master Chinese characters from the ground up with our holistic approach to language
-					learning.
+					REAM provides you with translations, right where you need them
 				</p>
 			</div>
 			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Character Breakdown</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Sentence Translation</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						Learn the components and radicals that make up each character for better understanding
-						and retention.
+						Don't quite get the meaning of a sentence? REAM is here to help.
 					</p>
 				</div>
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Contextual Learning</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Word Translation</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						See characters used in real sentences and dialogues to grasp their practical usage.
+						Adaptively translate words that you don't want to learn right now
 					</p>
 				</div>
 				<div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Writing Practice</h3>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">AI-powered</h3>
 					<p class="text-gray-500 dark:text-gray-400">
-						Perfect your handwriting with our interactive stroke order guides and practice tools.
+						Chinese words can have many meanings. REAM gives you the right one for the context.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Feature Section 1 -->
+	<section class="bg-gray-50 dark:bg-gray-800">
+		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
+			<div class="mb-8 max-w-screen-md lg:mb-16">
+				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+					Mnemonics make your life easier
+				</h2>
+				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
+					In REAM we have create powerful Mnemonics for each character. This makes learning new
+					characters a breeze.
+				</p>
+			</div>
+			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
+				<div>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">AI-generated Images</h3>
+					<p class="text-gray-500 dark:text-gray-400">
+						AI helps to visualize even the most absurd Mnemonics.
+					</p>
+				</div>
+				<div>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Adaptive Scaffolding</h3>
+					<p class="text-gray-500 dark:text-gray-400">
+						REAM provides a multiple Mnemonics per image, so you can learn step by step.
+					</p>
+				</div>
+				<div>
+					<h3 class="mb-2 text-xl font-bold dark:text-white">Choose Your Style</h3>
+					<p class="text-gray-500 dark:text-gray-400">
+						Choose between different types of Mnemonics to find the one that suits you best.
 					</p>
 				</div>
 			</div>
@@ -135,14 +168,14 @@
 	</section>
 
 	<!-- CTA Section -->
-	<section class="bg-gray-50 dark:bg-gray-800">
+	<section class="bg-white dark:bg-gray-900">
 		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
 			<div class="mx-auto max-w-screen-sm text-center">
 				<h2 class="mb-4 text-4xl font-extrabold leading-tight text-gray-900 dark:text-white">
 					Start your Chinese learning journey today
 				</h2>
 				<p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-					Try REAM for free and experience the power of AI-assisted language learning.
+					Try REAM and experience the power of AI-assisted language learning.
 				</p>
 				<Button class="bg-blue-900 text-white" size="xl" href="/upload">Get started</Button>
 			</div>
@@ -150,7 +183,7 @@
 	</section>
 </main>
 
-<footer class="bg-white p-4 sm:p-6 dark:bg-gray-800">
+<footer class="bg-gray-50 dark:bg-gray-800">
 	<div class="mx-auto max-w-screen-xl">
 		<div class="md:flex md:justify-between">
 			<div class="mb-6 md:mb-0">

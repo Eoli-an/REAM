@@ -11,6 +11,8 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { preloadCode, preloadData } from '$app/navigation';
+	import { BottomNav, BottomNavItem, Tooltip } from 'flowbite-svelte';
+	import { AngleLeftOutline, AngleRightOutline, HomeOutline } from 'flowbite-svelte-icons';
 
 	export let data: LayoutData;
 
@@ -65,10 +67,26 @@
 
 <slot></slot>
 
-<div class="navigation">
-	<button class="nav-button" on:click={goBack}>Previous Sentence</button>
-	<button class="nav-button" on:click={goForward}>Next Sentence</button>
-</div>
+<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
+	<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
+		<AngleLeftOutline
+			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+		/>
+		<Tooltip arrow={false}>Previous Sentence</Tooltip>
+	</BottomNavItem>
+	<BottomNavItem btnName="Home" href="/upload">
+		<HomeOutline
+			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+		/>
+		<Tooltip arrow={false}>Home</Tooltip>
+	</BottomNavItem>
+	<BottomNavItem btnName="Next Sentence" on:click={goForward}>
+		<AngleRightOutline
+			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+		/>
+		<Tooltip arrow={false}>Next Sentence</Tooltip>
+	</BottomNavItem>
+</BottomNav>
 
 <style>
 	.navigation {

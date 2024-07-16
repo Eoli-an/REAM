@@ -66,11 +66,18 @@
 	}
 </script>
 
-<button on:click={circle}>
+<button
+	on:click={circle}
+	class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
+>
 	{#if displayType === 'character'}
 		{char}
 	{:else if image_available}
-		<img src={imagePath} alt={char} />
+		<img
+			src={imagePath}
+			alt={char}
+			class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
+		/>
 	{:else}
 		{char}
 	{/if}
@@ -78,7 +85,7 @@
 
 <!-- <button on:click={() => goto(`/dictionaryChar/${char}`)}> -->
 
-<style>
+<!-- <style>
 	button {
 		width: 80px; /* Set the desired fixed width */
 		height: 80px; /* Set the desired fixed height */
@@ -104,4 +111,4 @@
 		margin-bottom: 0px;
 		margin-top: 20px;
 	}
-</style>
+</style> -->
