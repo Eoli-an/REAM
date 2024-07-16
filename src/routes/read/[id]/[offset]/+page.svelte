@@ -22,7 +22,7 @@
 </script>
 
 <button
-	class="sentence-translation-container"
+	class="mb-2 h-16 w-full cursor-pointer border-none bg-transparent p-0 text-2xl font-normal sm:text-3xl"
 	on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
 >
 	{#if showSentenceTranslation}
@@ -31,15 +31,15 @@
 		{:then sentenceTranslation}
 			{sentenceTranslation}
 		{:catch error}
-			<p style="color: red">{error.message}</p>
+			<p class="text-red-500">{error.message}</p>
 		{/await}
 	{:else}
 		...
 	{/if}
 </button>
-<hr class="divider" />
+<hr class="divider my-10 border-t border-black sm:my-20" />
 
-<div>
+<div class="text-center">
 	{#await wordTranslations}
 		{#each data.words as word, i (i)}
 			<TextElement
@@ -65,7 +65,7 @@
 	{/await}
 </div>
 
-<style>
+<!-- <style>
 	.sentence-translation-container {
 		cursor: pointer;
 		font-size: 3rem;
@@ -80,4 +80,4 @@
 		border-top: 1px solid black;
 		margin: 5rem 0;
 	}
-</style>
+</style> -->

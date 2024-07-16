@@ -72,19 +72,19 @@
 		<AngleLeftOutline
 			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
 		/>
-		<Tooltip arrow={false}>Previous Sentence</Tooltip>
+		<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
 	</BottomNavItem>
 	<BottomNavItem btnName="Home" href="/upload">
 		<HomeOutline
 			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
 		/>
-		<Tooltip arrow={false}>Home</Tooltip>
+		<!-- <Tooltip arrow={false}>Home</Tooltip> -->
 	</BottomNavItem>
 	<BottomNavItem btnName="Next Sentence" on:click={goForward}>
 		<AngleRightOutline
 			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
 		/>
-		<Tooltip arrow={false}>Next Sentence</Tooltip>
+		<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
 	</BottomNavItem>
 </BottomNav>
 
