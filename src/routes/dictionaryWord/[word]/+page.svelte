@@ -12,7 +12,8 @@
 	}
 	import type { PageData } from './$types';
 	import { wordKnowledge } from '$lib';
-	import { Button, Spinner } from 'flowbite-svelte';
+	import { Button, Spinner, Accordion, AccordionItem } from 'flowbite-svelte';
+	import { ArrowLeftIcon } from 'flowbite-svelte-icons';
 	import CharElement from '../../read/[id]/[offset]/CharElement.svelte';
 
 	export let data: PageData;
@@ -32,44 +33,63 @@
 	console.log(currentSentenceWords);
 </script>
 
+<!-- <div class="">
+	<Button on:click={() => window.history.back()} color="alternative" size="lg">
+		<ArrowLeftIcon class="h-5 w-5" />
+	</Button>
+</div> -->
+
 <div class="flex flex-col items-center">
 	<div class="flex flex-row space-x-4">
 		{#each word.split('') as char}
-			<a href="/dictionaryChar/{char}">
-				<h1 class="text-[14rem]">{char}</h1>
+			<a href="/dictionaryChar/{char}" class="mb-2 rounded bg-gray-100 shadow dark:bg-gray-800">
+				<h1 class="text-[6rem] sm:text-[14rem]">{char}</h1>
 			</a>
 		{/each}
 	</div>
 
-	<Button on:click={() => update(0)} color="alternative" size="lg" class="mb-2">
-		Show translation
-	</Button>
-	<Button on:click={() => update(1)} color="alternative" size="lg">Hide translation</Button>
-</div>
-
-<div class="definition-grid">
-	{#each definition as item}
-		<div class="grid-item">
-			<p style="font-size: 1.5rem;">Definition: {item.definition}</p>
-			<p style="font-size: 1.5rem;">{item.pinyin}</p>
-		</div>
-	{/each}
-	<div class="grid-item">
-		<p style="font-size: 1.5rem;">Frequency {frequency}</p>
+	<div class="flex flex-row space-x-4">
+		<Button on:click={() => update(0)} color="alternative" size="lg">Show translation</Button>
+		<Button on:click={() => update(1)} color="alternative" size="lg">Hide translation</Button>
 	</div>
 </div>
 
-<div class="definition">
-	{#await data.explanation}
-		<Spinner /> loading explanation...
-	{:then explanation}
-		<p style="white-space: pre-wrap;">{explanation}</p>
-	{:catch error}
-		<p style="color: red">{error.message}</p>
-	{/await}
+<div class="mt-12">
+	<Accordion flush>
+		<AccordionItem>
+			<span slot="header" class="text-xl font-semibold">Definitions</span>
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+				{#each definition as item}
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<p class="mb-2 text-lg"><strong>Definition:</strong> {item.definition}</p>
+						<p class="text-lg"><strong>Pinyin:</strong> {item.pinyin}</p>
+					</div>
+				{/each}
+			</div>
+		</AccordionItem>
+
+		<AccordionItem>
+			<span slot="header" class="text-xl font-semibold">Frequency</span>
+			<p class="text-lg">Frequency: {frequency}</p>
+		</AccordionItem>
+
+		<AccordionItem>
+			<span slot="header" class="text-xl font-semibold">Explanation</span>
+			{#await data.explanation}
+				<div class="flex items-center justify-center">
+					<Spinner size="xl" />
+					<span class="ml-2">Loading explanation...</span>
+				</div>
+			{:then explanation}
+				<p class="whitespace-pre-wrap text-gray-700 dark:text-gray-300">{explanation}</p>
+			{:catch error}
+				<p class="text-red-500">{error.message}</p>
+			{/await}
+		</AccordionItem>
+	</Accordion>
 </div>
 
-<style>
+<!-- <style>
 	.definition-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -85,4 +105,4 @@
 		height: 1rem; /* Adjust the height as needed */
 		font-size: 1.6rem;
 	}
-</style>
+</style> -->

@@ -22,7 +22,7 @@
 </script>
 
 <button
-	class="sentence-translation-container"
+	class="mb-2 h-16 w-full cursor-pointer border-none bg-transparent p-0 text-2xl font-normal sm:text-3xl"
 	on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
 >
 	{#if showSentenceTranslation}
@@ -31,39 +31,41 @@
 		{:then sentenceTranslation}
 			{sentenceTranslation}
 		{:catch error}
-			<p style="color: red">{error.message}</p>
+			<p class="text-red-500">{error.message}</p>
 		{/await}
 	{:else}
 		...
 	{/if}
 </button>
-<hr class="divider" />
+<hr class="divider my-10 border-t border-black sm:my-20" />
 
-{#await wordTranslations}
-	{#each data.words as word, i (i)}
-		<TextElement
-			{word}
-			pinyin_word={'pinyin'}
-			translation={'...'}
-			imagePaths={data.imagePaths}
-			imageChosen={data.imageChosen}
-		/>
-	{/each}
-{:then translations}
-	{#each data.words as word, i (i)}
-		<TextElement
-			{word}
-			pinyin_word={'pinyin'}
-			translation={translations[i]}
-			imagePaths={data.imagePaths}
-			imageChosen={data.imageChosen}
-		/>
-	{/each}
-{:catch error}
-	<p style="color: red">{error.message}</p>
-{/await}
+<div class="text-center">
+	{#await wordTranslations}
+		{#each data.words as word, i (i)}
+			<TextElement
+				{word}
+				pinyin_word={'pinyin'}
+				translation={'...'}
+				imagePaths={data.imagePaths}
+				imageChosen={data.imageChosen}
+			/>
+		{/each}
+	{:then translations}
+		{#each data.words as word, i (i)}
+			<TextElement
+				{word}
+				pinyin_word={'pinyin'}
+				translation={translations[i]}
+				imagePaths={data.imagePaths}
+				imageChosen={data.imageChosen}
+			/>
+		{/each}
+	{:catch error}
+		<p class="text-red-500">{error.message}</p>
+	{/await}
+</div>
 
-<style>
+<!-- <style>
 	.sentence-translation-container {
 		cursor: pointer;
 		font-size: 3rem;
@@ -78,4 +80,4 @@
 		border-top: 1px solid black;
 		margin: 5rem 0;
 	}
-</style>
+</style> -->
