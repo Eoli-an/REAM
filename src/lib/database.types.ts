@@ -24,6 +24,27 @@ export type Database = {
         }
         Relationships: []
       }
+      images: {
+        Row: {
+          char: string | null
+          created_at: string
+          id: string
+          index: number
+        }
+        Insert: {
+          char?: string | null
+          created_at?: string
+          id?: string
+          index?: number
+        }
+        Update: {
+          char?: string | null
+          created_at?: string
+          id?: string
+          index?: number
+        }
+        Relationships: []
+      }
       MyKnownCharacters: {
         Row: {
           character: string
@@ -66,21 +87,6 @@ export type Database = {
         }
         Relationships: []
       }
-      SentenceIndex: {
-        Row: {
-          id: number
-          sentenceIndex: number | null
-        }
-        Insert: {
-          id?: number
-          sentenceIndex?: number | null
-        }
-        Update: {
-          id?: number
-          sentenceIndex?: number | null
-        }
-        Relationships: []
-      }
       Texts: {
         Row: {
           id: string
@@ -109,6 +115,47 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "Texts_text_id_fkey"
+            columns: ["text_id"]
+            isOneToOne: false
+            referencedRelation: "TextsMetadata"
+            referencedColumns: ["text_id"]
+          },
+        ]
+      }
+      Texts2: {
+        Row: {
+          id: string
+          sentence: string[] | null
+          sentence_id: number | null
+          sentence_simplified_word_translations: string[] | null
+          sentence_translation: string | null
+          sentence_word_translations: string[] | null
+          simplified_sentence: string[] | null
+          text_id: string
+        }
+        Insert: {
+          id?: string
+          sentence?: string[] | null
+          sentence_id?: number | null
+          sentence_simplified_word_translations?: string[] | null
+          sentence_translation?: string | null
+          sentence_word_translations?: string[] | null
+          simplified_sentence?: string[] | null
+          text_id: string
+        }
+        Update: {
+          id?: string
+          sentence?: string[] | null
+          sentence_id?: number | null
+          sentence_simplified_word_translations?: string[] | null
+          sentence_translation?: string | null
+          sentence_word_translations?: string[] | null
+          simplified_sentence?: string[] | null
+          text_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Texts2_text_id_fkey"
             columns: ["text_id"]
             isOneToOne: false
             referencedRelation: "TextsMetadata"

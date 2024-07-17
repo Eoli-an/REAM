@@ -6,18 +6,14 @@
 	export let data: PageData;
 	export let form: ActionData;
 
-	let chineseFormLoading = false;
-	let englishFormLoading = false;
+	let formLoading = false;
 
-	const handleSubmit = (formType: 'chinese' | 'english') => {
+	const handleSubmit = () => {
 		return () => {
-			if (formType === 'chinese') chineseFormLoading = true;
-			else englishFormLoading = true;
-
+			formLoading = true;
 			return async ({ update }: { update: () => void }) => {
-				if (formType === 'chinese') chineseFormLoading = false;
-				else englishFormLoading = false;
-				await update();
+				formLoading = false;
+				update();
 			};
 		};
 	};
@@ -31,7 +27,7 @@
 			<form
 				method="POST"
 				action="?/uploadTextChinese"
-				use:enhance={handleSubmit('chinese')}
+				use:enhance={handleSubmit()}
 				enctype="multipart/form-data"
 				class="space-y-4"
 			>
@@ -73,7 +69,7 @@
 					</label>
 				</div>
 				<Button type="submit" class="w-full">
-					{#if chineseFormLoading}
+					{#if formLoading}
 						<Spinner class="mr-3" size="4" />
 					{/if}
 					Upload Chinese Text
@@ -85,7 +81,7 @@
 			<form
 				method="POST"
 				action="?/uploadTextEnglish"
-				use:enhance={handleSubmit('english')}
+				use:enhance={handleSubmit()}
 				enctype="multipart/form-data"
 				class="space-y-4"
 			>
@@ -127,7 +123,7 @@
 					</label>
 				</div>
 				<Button type="submit" class="w-full">
-					{#if englishFormLoading}
+					{#if formLoading}
 						<Spinner class="mr-3" size="4" />
 					{/if}
 					Upload English Text
