@@ -45,7 +45,7 @@ uploadTextChinese: async ({ request, fetch}) => {
 		const sentences = splitIntoSentences(text);
 
 		// Upload first sentence and wait for it
-		await processAndUploadOneSentence(sentences[0], text_id, fetch);
+		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch);
 
 		// Upload the rest of the sentences asynchronously
 		processAndUpload(sentences, text_id, fetch);
@@ -185,11 +185,11 @@ async function callApi(apiRoute: string, input: any, fetch:any) {
 async function processAndUpload(sentences: string[], text_id: string, fetch: any) {
 			for (let i = 1; i < sentences.length - 1; i += 1) {
 			const sentence = sentences[i];
-			processAndUploadOneSentence(sentence, text_id, fetch);
+			processAndUploadOneSentence(sentence, text_id, i, fetch);
 		}
 }
 
-async function processAndUploadOneSentence(sentence: string, text_id: string, fetch: any) {
+async function processAndUploadOneSentence(sentence: string, text_id: string, sentence_id: number, fetch: any) {
 	const { simplifiedSentence } = await callApi('/api/newDataScheme/simplifySentence', { sentence }, fetch);
 
 	const [
@@ -204,18 +204,18 @@ async function processAndUploadOneSentence(sentence: string, text_id: string, fe
         callApi('/api/newDataScheme/splitWordsAndTranslate', { sentence : simplifiedSentence }, fetch)
     ]);
 
-
-
-
 	// TODO make this not await in case of async upload?
 	const { error } = await supabase.from('Texts2').insert({
 		text_id: text_id,
-		sentence: [sentence],
-		sentence_id: 0,
-		sentence_simplified_word_translations: simplifiedTranslations,
+		sentence_id: sentence_id,
+
+		sentence: words,
 		sentence_translation: translatedSentence,
 		sentence_word_translations: translations,
-		simplified_sentence: [simplifiedSentence]
+
+		simplified_sentence: simplifiedWords,
+		sentence_simplified_translation: translatedSimplifiedSentence,
+		sentence_simplified_word_translations: simplifiedTranslations,
 	});
 
 	if (error) {

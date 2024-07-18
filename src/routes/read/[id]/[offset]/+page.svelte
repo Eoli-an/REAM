@@ -2,23 +2,20 @@
 	import type { PageData } from './$types';
 	import TextElement from './TextElement.svelte';
 	import { currentSentenceWords } from '$lib';
+	import { getContext } from 'svelte';
+
+	const simplified: SvelteStore<any> = getContext('simplified');
 
 	export let data: PageData;
 
 	let showSentenceTranslation = false;
 
-	$: sentenceTranslation = data.sentenceTranslation;
-	$: wordTranslations = data.wordTranslations;
-	// TODO make the snapshot work, I think the await needs to depend on if there already was a translation
-	// export const snapshot = {
-	// 	capture: () => [sentenceTranslation, wordTranslations],
-	// 	restore: (value) => [sentenceTranslation, wordTranslations] = value
-	// };
-
 	// set the store to the current sentence
-	$: currentSentenceWords.set(data.words.join(''));
+	$: currentSentenceWords.set(data.sentence);
 
-	console.log(data.words.join(''));
+	// console.log(data.sentence);
+
+	console.log($simplified);
 </script>
 
 <button
@@ -26,13 +23,7 @@
 	on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
 >
 	{#if showSentenceTranslation}
-		{#await sentenceTranslation}
-			loading...
-		{:then sentenceTranslation}
-			{sentenceTranslation}
-		{:catch error}
-			<p class="text-red-500">{error.message}</p>
-		{/await}
+		{data.sentenceTranslation}
 	{:else}
 		...
 	{/if}
@@ -40,29 +31,27 @@
 <hr class="divider my-10 border-t border-black sm:my-20" />
 
 <div class="text-center">
-	{#await wordTranslations}
+	{#if $simplified}
 		{#each data.words as word, i (i)}
 			<TextElement
 				{word}
 				pinyin_word={'pinyin'}
-				translation={'...'}
+				translation={data.sentenceWordTranslations[i]}
 				imagePaths={data.imagePaths}
-				imageChosen={data.imageChosen}
+				imageChosen={data.chosenImages}
 			/>
 		{/each}
-	{:then translations}
-		{#each data.words as word, i (i)}
+	{:else}
+		{#each data.wordsSimplified as word, i (i)}
 			<TextElement
 				{word}
 				pinyin_word={'pinyin'}
-				translation={translations[i]}
+				translation={data.sentenceSimplifiedWordTranslations[i]}
 				imagePaths={data.imagePaths}
-				imageChosen={data.imageChosen}
+				imageChosen={data.chosenImages}
 			/>
 		{/each}
-	{:catch error}
-		<p class="text-red-500">{error.message}</p>
-	{/await}
+	{/if}
 </div>
 
 <!-- <style>

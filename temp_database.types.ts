@@ -127,6 +127,7 @@ export type Database = {
           id: string
           sentence: string[] | null
           sentence_id: number | null
+          sentence_simplified_translation: string | null
           sentence_simplified_word_translations: string[] | null
           sentence_translation: string | null
           sentence_word_translations: string[] | null
@@ -137,6 +138,7 @@ export type Database = {
           id?: string
           sentence?: string[] | null
           sentence_id?: number | null
+          sentence_simplified_translation?: string | null
           sentence_simplified_word_translations?: string[] | null
           sentence_translation?: string | null
           sentence_word_translations?: string[] | null
@@ -147,6 +149,7 @@ export type Database = {
           id?: string
           sentence?: string[] | null
           sentence_id?: number | null
+          sentence_simplified_translation?: string | null
           sentence_simplified_word_translations?: string[] | null
           sentence_translation?: string | null
           sentence_word_translations?: string[] | null
