@@ -23,7 +23,11 @@
 	on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
 >
 	{#if showSentenceTranslation}
-		{data.sentenceTranslation}
+		{#if !$simplified}
+			{data.sentenceTranslation}
+		{:else}
+			{data.sentenceSimplifiedTranslation}
+		{/if}
 	{:else}
 		...
 	{/if}
@@ -31,7 +35,7 @@
 <hr class="divider my-10 border-t border-black sm:my-20" />
 
 <div class="text-center">
-	{#if $simplified}
+	{#if !$simplified}
 		{#each data.words as word, i (i)}
 			<TextElement
 				{word}

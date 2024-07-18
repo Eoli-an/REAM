@@ -9,7 +9,7 @@ export const load = (async ({ parent, params, fetch }) => {
 
 	const { data, error } = await supabase
 			.from('Texts2')
-			.select('sentence, sentence_translation, simplified_sentence, sentence_word_translations, sentence_simplified_word_translations')
+			.select('sentence, sentence_translation, simplified_sentence, sentence_word_translations, sentence_simplified_word_translations, sentence_simplified_translation')
 			.eq('sentence_id', params.offset)
 			.eq('text_id', params.id);
 	if (error) {
@@ -40,6 +40,7 @@ export const load = (async ({ parent, params, fetch }) => {
 		sentenceTranslation: data[0]?.sentence_translation ?? '',
 		sentenceWordTranslations: data[0]?.sentence_word_translations ?? [],
 		sentenceSimplifiedWordTranslations: data[0]?.sentence_simplified_word_translations ?? [],
+		sentenceSimplifiedTranslation: data[0]?.sentence_simplified_translation ?? '',
 		chosenImages: chosenImages,
 		imagePaths: urlDict,
 	};

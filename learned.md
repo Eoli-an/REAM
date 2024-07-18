@@ -59,3 +59,7 @@ response = await fetch('/short_story.txt'); //SvelteKit automatically serves fil
 # Reading from filesystem
 
 Reading from the filesystem is not encouraged as the build output won't match the desired path as you do in dev. It works in dev because files are left as-is (unbundled) through the dev server. Ideally you should import them, or save it in a database, etc. Marking as duplicate of (https://github.com/sveltejs/kit/issues/5163)
+
+# Passing data between layout and page
+
+Can not be done via probs, instead use context API, which is akin to messsage passing (https://github.com/sveltejs/kit/discussions/10640)
