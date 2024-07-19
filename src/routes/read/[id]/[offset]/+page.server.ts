@@ -22,12 +22,12 @@ export const load = (async ({ parent, params, fetch }) => {
 
 	// get chosen images for all potential characters, saved as traditional
 	const chosenImages = await getImageChosenDict(
-		s2t(sentence + simplifiedSentence)
+		sentence + simplifiedSentence
 	);
 
 	// get imageURLs for all potential characters, saved as traditional
 	const urlDict = await getImageUrls(
-		s2t(sentence + simplifiedSentence), supabase
+		sentence + simplifiedSentence, supabase
 	);
 
 	updateCurrentSentence(sentence);
@@ -64,11 +64,12 @@ async function updateCurrentSentence(currentSentence: string) {
 // Convert the block to a function that gets a string and returns the imagesChosen Dict
 async function getImageChosenDict(inputString: string) {
 	const characterSet = new Set(inputString.split(''));
+	const characterSetTraditional = s2t(characterSet);
 
 	const { data: imageChosenData, error } = await supabase
 		.from('MyKnownCharacters')
 		.select('character, chosen_image')
-		.in('character', [...characterSet]);
+		.in('character', [...characterSetTraditional]);
 		
 	if (error) {
 		console.error('Error fetching image data:', error);
