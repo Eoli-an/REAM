@@ -51,7 +51,7 @@
 	$: charContainerWidth = charContainer ? charContainer.offsetWidth : 0;
 </script>
 
-<div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-8 sm:mr-8">
+<div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
 	<button
 		on:click={(e) => {
 			goto(`/dictionaryWord/${word}`);

@@ -5,7 +5,7 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const { char, imagePaths, definition, frequency } = data;
+	const { char, imagePaths, definition, frequency, decompositions } = data;
 
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
 		const { error } = await supabase
@@ -85,6 +85,27 @@
 				{:catch error}
 					<p class="text-red-500">{error.message}</p>
 				{/await}
+			</AccordionItem>
+
+			<AccordionItem>
+				<span slot="header" class="text-xl font-semibold">Decomposition</span>
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+						<p class="mb-2 text-lg"><strong>Character:</strong> {decompositions.character}</p>
+						<p class="text-lg">
+							<strong>Components 1:</strong>
+							{decompositions.components1.join(', ')}
+						</p>
+						<p class="text-lg">
+							<strong>Components 2:</strong>
+							{decompositions.components2.join(', ')}
+						</p>
+						<p class="text-lg">
+							<strong>Components 3:</strong>
+							{decompositions.components3.join(', ')}
+						</p>
+					</div>
+				</div>
 			</AccordionItem>
 		</Accordion>
 	</div>
