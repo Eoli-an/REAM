@@ -87,32 +87,3 @@
 		<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
 	</BottomNavItem>
 </BottomNav>
-
-<style>
-	.navigation {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-color: var(--background-color);
-		padding: 10px;
-		display: flex;
-		justify-content: space-between;
-		z-index: 100;
-	}
-
-	.content {
-		margin-top: 20px;
-	}
-
-	.nav-button {
-		background-color: var(--button-background);
-		color: var(--button-text);
-		border: none;
-		border-radius: 4px;
-		padding: 4px 8px;
-		font-size: 30px;
-		cursor: pointer;
-		margin-right: 8px;
-	}
-</style>
