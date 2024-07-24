@@ -1,4 +1,7 @@
 import { supabase } from '$lib/supabaseClient';
+// @ts-ignore
+import pkg from 'chinese-s2t';
+const { s2t, t2s } = pkg;
 
 export async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
     const { error } = await supabase
@@ -89,7 +92,8 @@ async function getImageUrlsFromIds(idDict: { [char: string]: { [index: number]: 
 
 export async function getImageUrls(sentence: string, supabase: any) {
         // sentence can also be only one word
-		const idDict = await getImageIds(sentence, supabase);
+
+		const idDict = await getImageIds(s2t(sentence), supabase);
 		const urlDict = await getImageUrlsFromIds(idDict, supabase);
 		return urlDict;
 	} 

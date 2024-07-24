@@ -1,42 +1,16 @@
 import type { RequestHandler } from './$types';
+import { callLLM } from '../../llmService';
 import { json } from '@sveltejs/kit';
-import { uploadDatabaseBook } from '$lib';
-import { callLLM } from '../llmService';
-
-// Function to split text into sentences
-function splitIntoSentences(text: string): string[] {
-    const sentences = [];
-    const parts = text.split(/(。|！|？)/g);
-    
-    for (let i = 0; i < parts.length; i += 2) {
-        const sentence = parts[i] + (parts[i + 1] || '');
-        sentences.push(sentence);
-    }
-    
-    return sentences;
-}
-
 
 export const POST: RequestHandler = async ({ request }) => {
-    console.log("inside process api");
-    const { text, text_id } = await request.json();
+    const { sentence } = await request.json();
 
-    const sentences = splitIntoSentences(text);
+    const { words, translations } = await splitAndTranslate(sentence);
 
-    //TODO not sure why -1 here
-    for (let i = 0; i < sentences.length - 1; i += 1) {
-        // const batch = sentences.slice(i, i + 1);
-        const outputDict = await splitAndTranslate(sentences[i], i);
-        uploadDatabaseBook(outputDict, text_id);
-    }
-
-    return new Response('Processing completed', { status: 200 });
+    return json({ words, translations }, { status: 200 });
 };
 
-
-async function splitAndTranslate(text: string, sentence_id: number): Promise<{ word_position: number; word: string; translation: string; sentence:number;}[]> {
-
-    console.log(text);
+async function splitAndTranslate(text: string): Promise<{ words: string[]; translations: string[] }> {
     const chatInput = text;
     const systemPrompt = `You will be given a chinese text. Split this text into words and generate word-by-word translations, that are context appropriate. Make sure each word is in the dictionary. Do not combine multiple words into one translation. Use traditional characters.
     Be brief with the translations. If you encouter punctations, just copy them. It is important to follow my instructions, because I will parse the output programmatically afterwards.
@@ -150,7 +124,8 @@ ASSISTANT:
 `;
     const content = await callLLM(systemPrompt, chatInput, false);
 
-    const outputDict: { word_position: number, word: string, translation: string, sentence:number}[] = [];
+    const words: string[] = [];
+    const translations: string[] = [];
     const lines = content.split('\n');
     console.log("LINES: ", lines);
 
@@ -158,16 +133,15 @@ ASSISTANT:
         const line = lines[i];
         const line_split = line.split('-');
         try {
-        const word = line_split[0].trim();
-        const translation = line_split[1].trim();
-        outputDict.push({ word_position: i, word: word, translation: translation, sentence: sentence_id });
-
+            const word = line_split[0].trim();
+            const translation = line_split[1].trim();
+            words.push(word);
+            translations.push(translation);
         } catch (e) {
             console.log("Error: ", e);
             continue;
         }
-
     }
-    console.log("OUTPUT: ", outputDict);
-    return outputDict;
+    console.log("OUTPUT: ", { words, translations });
+    return { words, translations };
 };

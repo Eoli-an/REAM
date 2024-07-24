@@ -1,148 +1,53 @@
 import type { PageServerLoad } from './$types';
 import { supabase } from '$lib/supabaseClient';
-import { url } from 'inspector';
+import { getImageUrls } from '$lib/functions';
+// @ts-ignore
+import pkg from 'chinese-s2t';
+const { s2t, t2s } = pkg;
 
 export const load = (async ({ parent, params, fetch }) => {
-	const dynamic = false;
-	let page_words: string[] = [];
-	let wordTranslations: Promise<string[]> = Promise.resolve([]);
-	if (dynamic) {
-		const { text_cut, sentenceOffsets } = await parent();
 
-		const currentSentenceIndex = Number(params.offset);
-		page_words = text_cut.slice(
-			sentenceOffsets[currentSentenceIndex],
-			sentenceOffsets[currentSentenceIndex + 1] || text_cut.length
-		);
-
-		wordTranslations = loadWordTranslations(page_words, fetch);
-	} else {
-		// If on-the-fly translation is not wished, fetch all the words and translations from the database
-		const { data: sentenceData, error } = await supabase
-			.from('Texts')
-			.select('word_position, word, translation')
-			.eq('sentence', params.offset)
+	const { data, error } = await supabase
+			.from('Texts2')
+			.select('sentence, sentence_translation, simplified_sentence, sentence_word_translations, sentence_simplified_word_translations, sentence_simplified_translation')
+			.eq('sentence_id', params.offset)
 			.eq('text_id', params.id);
-		if (error) {
-			console.error('Error fetching sentence data:', error);
-		} else {
-			let translations: string[] = [];
-			for (const row of sentenceData) {
-				page_words.push(row.word ?? '');
-				translations.push(row.translation ?? '');
-			}
-			// artifical promise to match the type
-			wordTranslations = Promise.resolve(translations);
-		}
-	}
-	//TODO adjust
-	const sentenceTranslation = loadSentenceTranslations(page_words, fetch);
-
-	const characterSet = new Set(page_words.join(''));
-
-	const { data: imageChosenData, error } = await supabase
-		.from('MyKnownCharacters')
-		.select('character, chosen_image')
-		.in('character', [...characterSet]);
-		
 	if (error) {
-		console.error('Error fetching image data:', error);
-	}
-	
-	const imageChosen:  { [key: string]: number }= {};
-	imageChosenData?.forEach((row) => {
-		imageChosen[row.character] = row.chosen_image;
-	});
+			throw new Error('Error fetching sentence data: ' + error.message);	
+		} 
+	console.log(data);
 
-	async function getImageIds(sentence: string, supabase: any) {
-		const { data: imageData, error: imageError } = await supabase
-			.from('images')
-			.select('id, char, index')
-			.in('char', [...new Set(sentence.split(''))]);
+	const sentence = data[0]?.sentence?.join('') ?? '';
+	const simplifiedSentence = data[0]?.simplified_sentence?.join('') ?? '';
 
-		if (imageError) {
-			console.error('Error fetching image data:', imageError);
-			return {};
-		}
+	// get chosen images for all potential characters, saved as traditional
+	const chosenImages = await getImageChosenDict(
+		sentence + simplifiedSentence
+	);
 
-		const idDict: { [char: string]: { [index: number]: string } } = {};
-		imageData.forEach((row: { char: string; index: number; id: string; }) => {
-			if (!idDict[row.char]) {
-				idDict[row.char] = {};
-			}
-			idDict[row.char][row.index] = row.id;
-		});
+	// get imageURLs for all potential characters, saved as traditional
+	const urlDict = await getImageUrls(
+		sentence + simplifiedSentence, supabase
+	);
 
-		return idDict;
-	}
-
-	async function getImageUrlsFromIds(idDict: { [char: string]: { [index: number]: string } }, supabase: any) {
-		const urlDict: { [char: string]: { [index: number]: string } } = {};
-		for (const char in idDict) {
-			urlDict[char] = {}; 
-			for (const index in idDict[char]) {
-				const { data, error } = await supabase
-					.storage
-					.from('Images')
-					.getPublicUrl(`images/${idDict[char][index]}`);
-
-				if (error) {
-					console.error('Error fetching public URL:', error);
-				} else {
-					urlDict[char][index] = data.publicUrl;
-				}
-			}
-		}
-
-		return urlDict;
-	}
-
-	async function getImageUrls(sentence: string, supabase: any) {
-		const idDict = await getImageIds(sentence, supabase);
-		const urlDict = await getImageUrlsFromIds(idDict, supabase);
-		return urlDict;
-	}
-	const urlDict = await getImageUrls(page_words.join(''), supabase);
-
-
-
-
-	updateCurrentSentence(page_words);
+	updateCurrentSentence(sentence);
 
 	return {
-		words: page_words,
-		wordTranslations: wordTranslations,
-		sentenceTranslation: sentenceTranslation,
-		imageChosen: imageChosen,
+		sentence: sentence,
+		simplifiedSentence: simplifiedSentence,
+		words: data[0]?.sentence ?? [],
+		wordsSimplified: data[0]?.simplified_sentence ?? [],
+		sentenceTranslation: data[0]?.sentence_translation ?? '',
+		sentenceWordTranslations: data[0]?.sentence_word_translations ?? [],
+		sentenceSimplifiedWordTranslations: data[0]?.sentence_simplified_word_translations ?? [],
+		sentenceSimplifiedTranslation: data[0]?.sentence_simplified_translation ?? '',
+		chosenImages: chosenImages,
 		imagePaths: urlDict,
 	};
 }) satisfies PageServerLoad;
 
-async function loadWordTranslations(words: string[], fetch: any) {
-	return fetch('/api/translate_words', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ text: words.join(''), words })
-	})
-		.then((response: Response) => response.json())
-		.then((data: { outputList: any[] }) => data.outputList);
-}
-async function loadSentenceTranslations(words: string[], fetch: any) {
-	return fetch('/api/translate_sentence', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ sentence: words.join('') })
-	})
-		.then((response: Response) => response.json())
-		.then((data: { sentenceTranslation: string }) => data.sentenceTranslation);
-}
 
-async function updateCurrentSentence(page_words: string[]) {
-  const currentSentence = page_words.join(' ');
+async function updateCurrentSentence(currentSentence: string) {
   const { error } = await supabase
     .from('currentSentence')
     .update({ sentence: currentSentence})
@@ -154,4 +59,26 @@ async function updateCurrentSentence(page_words: string[]) {
 //   else {
 //     console.log('Current sentence updated successfully.');
 //   }
+}
+
+// Convert the block to a function that gets a string and returns the imagesChosen Dict
+async function getImageChosenDict(inputString: string) {
+	const characterSet = new Set(inputString.split(''));
+	const characterSetTraditional = s2t(characterSet);
+
+	const { data: imageChosenData, error } = await supabase
+		.from('MyKnownCharacters')
+		.select('character, chosen_image')
+		.in('character', [...characterSetTraditional]);
+		
+	if (error) {
+		console.error('Error fetching image data:', error);
+	}
+	
+	const imageChosen: { [key: string]: number } = {};
+	imageChosenData?.forEach((row) => {
+		imageChosen[row.character] = row.chosen_image;
+	});
+
+	return imageChosen;
 }

@@ -13,7 +13,7 @@
 	import type { PageData } from './$types';
 	import { wordKnowledge } from '$lib';
 	import { Button, Spinner, Accordion, AccordionItem } from 'flowbite-svelte';
-	import { ArrowLeftIcon } from 'flowbite-svelte-icons';
+	// import { ArrowLeftIcon } from 'flowbite-svelte-icons';
 	import CharElement from '../../read/[id]/[offset]/CharElement.svelte';
 
 	export let data: PageData;
@@ -32,12 +32,6 @@
 
 	console.log(currentSentenceWords);
 </script>
-
-<!-- <div class="">
-	<Button on:click={() => window.history.back()} color="alternative" size="lg">
-		<ArrowLeftIcon class="h-5 w-5" />
-	</Button>
-</div> -->
 
 <div class="flex flex-col items-center">
 	<div class="flex flex-row space-x-4">

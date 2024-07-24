@@ -9,9 +9,8 @@ export const load = (async ({params, fetch}) => {
     const char = params.char;
 
     const imagePathsDict = await getImageUrls(char, supabase);
-    const imagePaths = Object.values(imagePathsDict[char])
+    const imagePaths = imagePathsDict && imagePathsDict[char] ? Object.values(imagePathsDict[char]) : [];
 
-    console.log(imagePaths);
 
     const definition: any[] = hanzi.definitionLookup(char);
     // For some reason definitions come back multiple times
@@ -40,6 +39,8 @@ export const load = (async ({params, fetch}) => {
         explanation = Promise.resolve('No current sentence available');
     }
 
+    const decompositions = hanzi.decompose(char);
+
     return {
         char: char,
         imagePaths: imagePaths || [], // Update to use imagePaths directly
@@ -47,6 +48,7 @@ export const load = (async ({params, fetch}) => {
         frequency: frequency,
         currentSentence: currentSentence,
         explanation: explanation,
+        decompositions: decompositions
     };
 }) satisfies PageServerLoad;
 

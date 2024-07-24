@@ -16,7 +16,7 @@ export async function callLLM(system_prompt: string, user_prompt: string, useGro
     let chatCompletion;
     if (useGroq) {
         chatCompletion = await groq.chat.completions.create({
-          model: 'llama3-70b-8192',
+          model: 'gemma2-9b-it', //llama3-70b-8192
           messages: [
             {
               role: 'system',

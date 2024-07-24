@@ -17,12 +17,12 @@
 	export let data: LayoutData;
 
 	//TODO get that right here with the reactivity
-	const text_cut = data.text_cut;
-	const pinyin_cut = data.pinyin_cut;
+	// const text_cut = data.text_cut;
+	// const pinyin_cut = data.pinyin_cut;
 	const sentenceOffsets = data.sentenceOffsets;
 	const wordKnowledgeData = data.wordKnowledgeData;
 	const charKnowledgeData = data.characterKnowledgeData;
-	const imagePaths = data.imagePaths;
+	// const imagePaths = data.imagePaths;
 	const currentId = data.currentId;
 	let currentSentenceIndex = data.currentSentenceIndex;
 
