@@ -65,25 +65,29 @@
 	}
 </script>
 
-<slot></slot>
+<div class="flex min-h-screen flex-col">
+	<main class="flex-grow pb-16">
+		<slot></slot>
+	</main>
 
-<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
-	<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
-		<AngleLeftOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
-	</BottomNavItem>
-	<BottomNavItem btnName="Home" href="/upload">
-		<HomeOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Home</Tooltip> -->
-	</BottomNavItem>
-	<BottomNavItem btnName="Next Sentence" on:click={goForward}>
-		<AngleRightOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
-	</BottomNavItem>
-</BottomNav>
+	<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
+		<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
+			<AngleLeftOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
+		</BottomNavItem>
+		<BottomNavItem btnName="Home" href="/upload">
+			<HomeOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Home</Tooltip> -->
+		</BottomNavItem>
+		<BottomNavItem btnName="Next Sentence" on:click={goForward}>
+			<AngleRightOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
+		</BottomNavItem>
+	</BottomNav>
+</div>
