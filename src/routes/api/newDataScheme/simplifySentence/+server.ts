@@ -18,7 +18,7 @@ async function simplify(sentence: string): Promise<{ simplifiedSentence: string 
 
 Make sure to really follow those instructions. The text will be given to beginning Chinese learners, so it can not be too complex.
 
-Also, use traditional characters.
+If the original text used traditional characters, also use traditional characters in the output. If the original text used simplified characters, use simplified characters in the output.
 
 Carefully examine the following examples and make sure to follow the same style. The output should be very simplified, but still interesting and engaging.
 
