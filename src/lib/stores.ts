@@ -18,3 +18,5 @@ export const CharacterKnowledge = writable<KnowledgeDict>({});
 export const currentSentence = writable(0);
 
 export const currentSentenceWords = writable<string>('');
+
+export const simplified = writable(false);

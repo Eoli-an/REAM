@@ -65,54 +65,29 @@
 	}
 </script>
 
-<slot></slot>
+<div class="flex min-h-screen flex-col">
+	<main class="flex-grow pb-16">
+		<slot></slot>
+	</main>
 
-<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
-	<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
-		<AngleLeftOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
-	</BottomNavItem>
-	<BottomNavItem btnName="Home" href="/upload">
-		<HomeOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Home</Tooltip> -->
-	</BottomNavItem>
-	<BottomNavItem btnName="Next Sentence" on:click={goForward}>
-		<AngleRightOutline
-			class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-		/>
-		<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
-	</BottomNavItem>
-</BottomNav>
-
-<style>
-	.navigation {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-color: var(--background-color);
-		padding: 10px;
-		display: flex;
-		justify-content: space-between;
-		z-index: 100;
-	}
-
-	.content {
-		margin-top: 20px;
-	}
-
-	.nav-button {
-		background-color: var(--button-background);
-		color: var(--button-text);
-		border: none;
-		border-radius: 4px;
-		padding: 4px 8px;
-		font-size: 30px;
-		cursor: pointer;
-		margin-right: 8px;
-	}
-</style>
+	<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
+		<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
+			<AngleLeftOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
+		</BottomNavItem>
+		<BottomNavItem btnName="Home" href="/upload">
+			<HomeOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Home</Tooltip> -->
+		</BottomNavItem>
+		<BottomNavItem btnName="Next Sentence" on:click={goForward}>
+			<AngleRightOutline
+				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+			/>
+			<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
+		</BottomNavItem>
+	</BottomNav>
+</div>

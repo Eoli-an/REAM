@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 	import { Drawer, Button, CloseButton, Toggle } from 'flowbite-svelte';
-	import { InfoCircleSolid, ArrowRightOutline } from 'flowbite-svelte-icons';
+	import { simplified } from '$lib';
 	import { sineIn } from 'svelte/easing';
 	import { AdjustmentsHorizontalOutline } from 'flowbite-svelte-icons';
 
@@ -17,8 +17,8 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	const simplified = writable(false);
-	setContext('simplified', simplified);
+	// const simplified = writable(false);
+	// setContext('simplified', simplified);
 
 	function toggleSimplified() {
 		simplified.set(!$simplified);

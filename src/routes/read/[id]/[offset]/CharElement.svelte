@@ -11,14 +11,18 @@
 	let image_available = false;
 
 	$: {
+		chosen_image = 0;
 		if (imageChosen.hasOwnProperty(char)) {
 			chosen_image = imageChosen[char];
 		}
 	}
 
-	$: if (imagePaths.hasOwnProperty(char)) {
-		image_available = true;
-		imagePath = imagePaths[char][chosen_image];
+	$: {
+		image_available = false;
+		if (imagePaths.hasOwnProperty(char)) {
+			image_available = true;
+			imagePath = imagePaths[char][chosen_image];
+		}
 	}
 
 	let displayType: string = 'image';

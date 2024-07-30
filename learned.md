@@ -63,3 +63,7 @@ Reading from the filesystem is not encouraged as the build output won't match th
 # Passing data between layout and page
 
 Can not be done via probs, instead use context API, which is akin to messsage passing (https://github.com/sveltejs/kit/discussions/10640)
+
+# Reactive declaration in Component
+
+In my CharElement, I had the mental model that for each instance, the variables get set back to the default and a completly new component is created. Now, this is only the case if I wrap everything in a reactive component. The declarations (chosen_image, image_available) however were not reactive. Thus, if before the was an image availbe but afterwards not, the reactive if statements were not triggered and the image paths and chosen images were still those of the last page.

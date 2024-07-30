@@ -3,8 +3,8 @@
 	import TextElement from './TextElement.svelte';
 	import { currentSentenceWords } from '$lib';
 	import { getContext } from 'svelte';
-
-	const simplified: SvelteStore<any> = getContext('simplified');
+	import { simplified } from '$lib';
+	// const simplified: SvelteStore<any> = getContext('simplified');
 
 	export let data: PageData;
 
@@ -12,10 +12,6 @@
 
 	// set the store to the current sentence
 	$: currentSentenceWords.set(data.sentence);
-
-	// console.log(data.sentence);
-
-	console.log($simplified);
 </script>
 
 <button

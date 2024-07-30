@@ -62,16 +62,16 @@
 			</div>
 		</AccordionItem>
 
-		<AccordionItem>
+		<!-- <AccordionItem>
 			<span slot="header" class="text-xl font-semibold">Frequency</span>
 			<p class="text-lg">Frequency: {frequency}</p>
-		</AccordionItem>
+		</AccordionItem> -->
 
 		<AccordionItem>
 			<span slot="header" class="text-xl font-semibold">Explanation</span>
 			{#await data.explanation}
 				<div class="flex items-center justify-center">
-					<Spinner size="xl" />
+					<Spinner size="m" />
 					<span class="ml-2">Loading explanation...</span>
 				</div>
 			{:then explanation}
