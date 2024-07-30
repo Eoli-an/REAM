@@ -41,6 +41,24 @@ export const load = (async ({params, fetch}) => {
 
     const decompositions = hanzi.decompose(char);
 
+    if (decompositions && decompositions.components2) {
+        decompositions.components2 = decompositions.components2.map((component: string) => {
+            const meaning = hanzi.getRadicalMeaning(component);
+            return meaning ? `${component} (${meaning})` : component;
+        });
+
+        // decompositions.components1 = decompositions.components1.map((component: string) => {
+        //     const meaning = hanzi.getRadicalMeaning(component);
+        //     return meaning ? `${component} (${meaning})` : component;
+        // });
+
+        // decompositions.components3 = decompositions.components3.map((component: string) => {
+        //     const meaning = hanzi.getRadicalMeaning(component);
+        //     return meaning ? `${component} (${meaning})` : component;
+        // });
+        
+    }
+
     return {
         char: char,
         imagePaths: imagePaths || [], // Update to use imagePaths directly
