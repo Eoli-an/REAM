@@ -30,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
 };
 
 async function translate(sentences: string[]): Promise<{ content: string }> {
-	const systemPrompt = `Translate the following English text to Chinese. Use traditional characters. Only output the translated text, nothing else. Keep the translation grammatically simple.
+	const systemPrompt = `Translate the following English text to Chinese. Only output the translated text, nothing else. Keep the translation grammatically simple.
 	It should be suitable for a beginner/intermediate chinese learner. Make it feel like proper chinese, not just a translation. Make the translation natural.
 
 	Examples:
