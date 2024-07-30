@@ -62,10 +62,10 @@
 			</div>
 		</AccordionItem>
 
-		<AccordionItem>
+		<!-- <AccordionItem>
 			<span slot="header" class="text-xl font-semibold">Frequency</span>
 			<p class="text-lg">Frequency: {frequency}</p>
-		</AccordionItem>
+		</AccordionItem> -->
 
 		<AccordionItem>
 			<span slot="header" class="text-xl font-semibold">Explanation</span>
