@@ -3,8 +3,8 @@
 	import TextElement from './TextElement.svelte';
 	import { currentSentenceWords } from '$lib';
 	import { getContext } from 'svelte';
-
-	const simplified: SvelteStore<any> = getContext('simplified');
+	import { simplified } from '$lib';
+	// const simplified: SvelteStore<any> = getContext('simplified');
 
 	export let data: PageData;
 
