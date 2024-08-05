@@ -144,7 +144,7 @@
 		<Gallery class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
 			{#each data.texts as text}
 				<a
-					href="/read/{text.text_id}"
+					href="/app/read/{text.text_id}"
 					class="flex h-32 items-center justify-center rounded-lg bg-blue-100 p-4 text-center transition-colors duration-200 hover:bg-blue-200"
 				>
 					<span class="text-lg font-semibold text-blue-800">{text.title}</span>

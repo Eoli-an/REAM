@@ -54,7 +54,7 @@
 <div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
 	<button
 		on:click={(e) => {
-			goto(`/dictionaryWord/${word}`);
+			goto(`/app/dictionaryWord/${word}`);
 		}}
 		class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
 	>

@@ -36,7 +36,7 @@
 <div class="flex flex-col items-center">
 	<div class="flex flex-row space-x-4">
 		{#each word.split('') as char}
-			<a href="/dictionaryChar/{char}" class="mb-2 rounded bg-gray-100 shadow dark:bg-gray-800">
+			<a href="/app/dictionaryChar/{char}" class="mb-2 rounded bg-gray-100 shadow dark:bg-gray-800">
 				<h1 class="text-[6rem] sm:text-[14rem]">{char}</h1>
 			</a>
 		{/each}

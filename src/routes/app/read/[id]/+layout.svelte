@@ -48,7 +48,7 @@
 		if (currentSentenceIndex > 0) {
 			currentSentenceIndex--;
 			updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
-			goto(`/read/${currentId}/${currentSentenceIndex}`);
+			goto(`/app/read/${currentId}/${currentSentenceIndex}`);
 		}
 	}
 
@@ -56,12 +56,12 @@
 		// if (currentSentenceIndex) {
 		currentSentenceIndex++;
 		updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
-		goto(`/read/${currentId}/${currentSentenceIndex}`);
+		goto(`/app/read/${currentId}/${currentSentenceIndex}`);
 		// }
 	}
 
 	if (browser) {
-		goto(`/read/${currentId}/${currentSentenceIndex}`);
+		goto(`/app/read/${currentId}/${currentSentenceIndex}`);
 	}
 </script>
 
@@ -77,7 +77,7 @@
 			/>
 			<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
 		</BottomNavItem>
-		<BottomNavItem btnName="Home" href="/upload">
+		<BottomNavItem btnName="Home" href="/app/upload">
 			<HomeOutline
 				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
 			/>
