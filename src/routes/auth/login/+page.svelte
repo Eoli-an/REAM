@@ -18,16 +18,16 @@
 				<span>Your password</span>
 				<Input type="password" name="password" placeholder="•••••" required />
 			</Label>
-			<div class="flex items-start">
-				<Checkbox>Remember me</Checkbox>
-				<a href="/" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-					>Forgot password?</a
-				>
-			</div>
+
+			<Checkbox>Remember me</Checkbox>
+			<a href="/" class=" text-sm text-blue-700 hover:underline dark:text-blue-500"
+				>Forgot password?</a
+			>
+
 			<Button type="submit" class="w-full">Login</Button>
 			<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 				Don’t have an account yet? <a
-					href="?/signup"
+					href="/auth/signup"
 					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a
 				>
 			</p>

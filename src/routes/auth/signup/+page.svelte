@@ -24,7 +24,7 @@
 			</Label>
 			<div class="flex items-start">
 				<Checkbox
-					>I accept the <a
+					>I accept the&nbsp;<a
 						class="font-medium text-primary-600 hover:underline dark:text-primary-500"
 						href="/"
 					>
@@ -35,7 +35,7 @@
 			<Button type="submit" class="w-full">Create an account</Button>
 			<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
 				Already have an account? <a
-					href="?/login"
+					href="/auth/login"
 					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a
 				>
 			</div>
