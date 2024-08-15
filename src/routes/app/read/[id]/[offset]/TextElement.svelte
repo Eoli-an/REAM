@@ -9,6 +9,7 @@
 	export let translation: string;
 	export let imagePaths;
 	export let imageChosen;
+	export let supabase: any;
 
 	let upperButtonDisplay = 'none';
 
@@ -67,7 +68,7 @@
 
 	<div bind:this={charContainer} class="chars mr-0 flex flex-wrap justify-center">
 		{#each word.split('') as char}
-			<CharElement {char} {imagePaths} {imageChosen} />
+			<CharElement {char} {imagePaths} {imageChosen} {supabase} />
 		{/each}
 	</div>
 </div>

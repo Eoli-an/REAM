@@ -1,11 +1,10 @@
 import type { PageServerLoad } from './$types';
-import { supabase } from '$lib/supabaseClient';
 import { getImageUrls } from '$lib/functions'; // Import getImageUrls
 // @ts-ignore
 import * as hanzi from 'hanzi';
 // hanzi.start();
 
-export const load = (async ({params, fetch}) => {
+export const load = (async ({params, fetch, locals: { supabase }}) => {
     const char = params.char;
 
     const imagePathsDict = await getImageUrls(char, supabase);
@@ -29,7 +28,7 @@ export const load = (async ({params, fetch}) => {
     }
     const frequency = hanzi.getCharacterFrequency(char)['number'];
 
-    const currentSentence = await getCurrentSentence();
+    const currentSentence = await getCurrentSentence(supabase);
 
     let explanation: Promise<string> = Promise.resolve('');
     if (currentSentence) {
@@ -70,7 +69,7 @@ export const load = (async ({params, fetch}) => {
     };
 }) satisfies PageServerLoad;
 
-async function getCurrentSentence() {
+async function getCurrentSentence(supabase: any) {
   const { data: currentSentenceData, error } = await supabase
     .from('currentSentence')
     .select('sentence')
@@ -86,7 +85,7 @@ async function getCurrentSentence() {
 }
 
 async function getWordExplanation(sentence: string, word: string, fetch: any) {
-    return fetch('/api/explain', {
+    return fetch('/app/api/explain', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

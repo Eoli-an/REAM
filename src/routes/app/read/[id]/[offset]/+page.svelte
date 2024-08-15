@@ -7,6 +7,7 @@
 	// const simplified: SvelteStore<any> = getContext('simplified');
 
 	export let data: PageData;
+	$: ({ supabase } = data);
 
 	let showSentenceTranslation = false;
 
@@ -39,6 +40,7 @@
 				translation={data.sentenceWordTranslations[i]}
 				imagePaths={data.imagePaths}
 				imageChosen={data.chosenImages}
+				{supabase}
 			/>
 		{/each}
 	{:else}
@@ -49,6 +51,7 @@
 				translation={data.sentenceSimplifiedWordTranslations[i]}
 				imagePaths={data.imagePaths}
 				imageChosen={data.chosenImages}
+				{supabase}
 			/>
 		{/each}
 	{/if}

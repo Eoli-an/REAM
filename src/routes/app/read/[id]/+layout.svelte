@@ -16,6 +16,8 @@
 
 	export let data: LayoutData;
 
+	$: ({ supabase } = data);
+
 	//TODO get that right here with the reactivity
 	// const text_cut = data.text_cut;
 	// const pinyin_cut = data.pinyin_cut;
@@ -47,7 +49,7 @@
 	function goBack() {
 		if (currentSentenceIndex > 0) {
 			currentSentenceIndex--;
-			updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
+			updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
 			goto(`/app/read/${currentId}/${currentSentenceIndex}`);
 		}
 	}
@@ -55,7 +57,7 @@
 	function goForward() {
 		// if (currentSentenceIndex) {
 		currentSentenceIndex++;
-		updateDatabaseSentenceIndex(currentSentenceIndex, currentId);
+		updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
 		goto(`/app/read/${currentId}/${currentSentenceIndex}`);
 		// }
 	}

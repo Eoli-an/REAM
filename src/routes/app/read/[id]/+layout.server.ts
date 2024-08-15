@@ -23,27 +23,7 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 	// const pinyin_cut = text_cut.map((c_word) => pinyin(c_word));
 
 	let sentenceOffsets: number[] = [];
-
-	// function calculateSentenceOffsets() {
-	// 	let offset = 0;
-	// 	while (offset < text_cut.length) {
-	// 		sentenceOffsets.push(offset);
-	// 		while (offset < text_cut.length && !['。', '！', '？'].includes(text_cut[offset])) {
-	// 			offset++;
-	// 		}
-	// 		offset++; // Move past the punctuation mark
-	// 	}
-	// }
-	// calculateSentenceOffsets();
-
-	// const response2 = await fetch('/my_known_words.json');
-	// const knownWords = await response2.json();
-
-	// const response3 = await fetch('/images.json');
-	// const imagePaths = await response3.json();
-
 	
-
 
 	const offset = 0;
 	const words_per_page = 40;
