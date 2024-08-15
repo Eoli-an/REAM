@@ -67,3 +67,15 @@ Can not be done via probs, instead use context API, which is akin to messsage pa
 # Reactive declaration in Component
 
 In my CharElement, I had the mental model that for each instance, the variables get set back to the default and a completly new component is created. Now, this is only the case if I wrap everything in a reactive component. The declarations (chosen_image, image_available) however were not reactive. Thus, if before the was an image availbe but afterwards not, the reactive if statements were not triggered and the image paths and chosen images were still those of the last page.
+
+# Depends and invalidate
+
+In sveltekit, a load function can depend on a key (or url). When invalidate(key) is called, the load function that depends on that is rerun
+
+# Case-sensitivity in SQL
+
+SQL is case-sensitive with identifiers, including table names, when they are quoted. However, if you don't quote the table name, PostgreSQL (which Supabase uses) converts it to lowercase by default.
+
+# JWT and Session
+
+A token used to communicate between server and client. When the client logs in, a jwt is created (a session). This JWT is returned to the user. The user can then use the JWT to make further requests to the server. The server can then, using the JWT, verfiy the identity and give information to the User. See https://www.vaadata.com/blog/jwt-tokens-and-security-working-principles-and-use-cases/ and https://supabase.com/docs/guides/auth/sessions. (Traditionally user sessions were implemented by using a unique string stored in cookies that identified the authorization that the user had on a specific browser. Applications would use this unique string to constantly fetch the attached user information on every API call.)

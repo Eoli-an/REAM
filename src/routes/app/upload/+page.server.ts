@@ -1,5 +1,4 @@
 import type { Actions, PageServerLoad } from './$types';
-import { supabase } from '$lib/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
@@ -7,7 +6,7 @@ import path from 'path';
 import pkg from 'chinese-s2t';
 const { s2t, t2s } = pkg;
 
-export const load = (async () => {
+export const load = (async ({ locals: { supabase } }) => {
 	const { data, error } = await supabase.from('TextsMetadata').select();
 
     if (error) {
@@ -19,7 +18,7 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-uploadTextChinese: async ({ request, fetch}) => {
+uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		const formData = await request.formData();
 		const file = formData.get('file') as File;
 		const text_id: string = uuidv4(); // Generate a new UUID
@@ -34,9 +33,19 @@ uploadTextChinese: async ({ request, fetch}) => {
 		let text = await file.text();
 		const title: string = file.name.split('.')[0];
 
+		const { data: userData, error: userError } = await supabase.auth.getUser();
+
+		if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+		}
+
 		const { error } = await supabase
 			.from('TextsMetadata')
-			.upsert({ text_id: text_id, title: title }, { onConflict: 'text_id' });
+			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id}, { onConflict: 'text_id' });
 		// TODO proper error handling
 		if (error) {
 			console.error('Error updating database:', error);
@@ -45,10 +54,10 @@ uploadTextChinese: async ({ request, fetch}) => {
 		const sentences = splitIntoSentences(text);
 
 		// Upload first sentence and wait for it
-		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch);
+		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
 
 		// Upload the rest of the sentences asynchronously
-		processAndUpload(sentences, text_id, fetch);
+		processAndUpload(sentences, text_id, fetch, supabase);
 
 
 		return {
@@ -59,7 +68,7 @@ uploadTextChinese: async ({ request, fetch}) => {
 
 	},
 
-	uploadTextEnglish: async ({ request, fetch }) => {
+	uploadTextEnglish: async ({ request, fetch, locals: { supabase } }) => {
 
 		const formData = await request.formData();
 		const file = formData.get('file') as File;
@@ -83,7 +92,7 @@ uploadTextChinese: async ({ request, fetch}) => {
 			console.error('Error updating database:', error);
 		}
 
-		const translateResponse = await fetch('/api/translateEnglishChinese', {
+		const translateResponse = await fetch('/app/api/translateEnglishChinese', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -103,10 +112,10 @@ uploadTextChinese: async ({ request, fetch}) => {
 		const sentences = splitIntoSentences(translatedText);
 
 		// Upload first sentence and wait for it
-		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch);
+		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
 
 		// Upload the rest of the sentences asynchronously
-		processAndUpload(sentences, text_id, fetch);
+		processAndUpload(sentences, text_id, fetch, supabase);
 
 
 		return {
@@ -148,15 +157,16 @@ async function callApi(apiRoute: string, input: any, fetch:any) {
 	return await response.json();
 }
 
-async function processAndUpload(sentences: string[], text_id: string, fetch: any) {
+async function processAndUpload(sentences: string[], text_id: string, fetch: any, supabase: any) {
 			for (let i = 1; i < sentences.length - 1; i += 1) {
 			const sentence = sentences[i];
-			processAndUploadOneSentence(sentence, text_id, i, fetch);
+			processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
 		}
 }
 
-async function processAndUploadOneSentence(sentence: string, text_id: string, sentence_id: number, fetch: any) {
-	const { simplifiedSentence } = await callApi('/api/newDataScheme/simplifySentence', { sentence }, fetch);
+async function processAndUploadOneSentence(sentence: string, text_id: string, sentence_id: number, fetch: any, supabase: any) {
+	console.log('Processing sentence:', sentence);
+	const { simplifiedSentence } = await callApi('/app/api/newDataScheme/simplifySentence', { sentence }, fetch);
 
 	const [
 		{ sentenceTranslation : translatedSentence },
@@ -164,10 +174,10 @@ async function processAndUploadOneSentence(sentence: string, text_id: string, se
 		{ words, translations },
 		{ words : simplifiedWords, translations : simplifiedTranslations }
     ] = await Promise.all([
-        callApi('/api/translate_sentence', { sentence : sentence}, fetch),
-        callApi('/api/translate_sentence', { sentence : simplifiedSentence }, fetch),
-        callApi('/api/newDataScheme/splitWordsAndTranslate', { sentence : sentence}, fetch),
-        callApi('/api/newDataScheme/splitWordsAndTranslate', { sentence : simplifiedSentence }, fetch)
+        callApi('/app/api/translate_sentence', { sentence : sentence}, fetch),
+        callApi('/app/api/translate_sentence', { sentence : simplifiedSentence }, fetch),
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : sentence}, fetch),
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : simplifiedSentence }, fetch)
     ]);
 
 	// TODO make this not await in case of async upload?

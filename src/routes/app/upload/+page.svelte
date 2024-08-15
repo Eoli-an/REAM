@@ -2,9 +2,12 @@
 	import type { ActionData, PageData } from './$types';
 	import { Gallery, Button, Spinner, Card } from 'flowbite-svelte';
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 	export let form: ActionData;
+
+	console.log(data);
 
 	let formLoading = false;
 
@@ -17,7 +20,22 @@
 			};
 		};
 	};
+
+	$: logout = async () => {
+		const { error } = await data.supabase.auth.signOut();
+		if (error) {
+			console.error(error);
+		}
+		goto('/');
+	};
 </script>
+
+<header>
+	<nav>
+		<a href="/">Home</a>
+	</nav>
+	<button on:click={logout}>Logout</button>
+</header>
 
 <div class="mx-auto max-w-4xl space-y-8 p-6">
 	<h1 class="mb-6 text-3xl font-bold text-gray-800">Text Upload</h1>

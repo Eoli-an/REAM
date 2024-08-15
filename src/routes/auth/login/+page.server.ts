@@ -16,7 +16,7 @@ export const actions: Actions = {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       console.error(error)
-      redirect(303, '/auth/error')
+      redirect(303, '/auth/signup')
     } else {
       redirect(303, '/app/upload')
     }

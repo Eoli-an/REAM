@@ -7,9 +7,8 @@ import pkg from 'chinese-s2t';
 const { s2t, t2s } = pkg;
 
 import { pinyin } from 'pinyin-pro';
-import { supabase } from '$lib/supabaseClient';
 
-export const load = (async ({ fetch, params }) => {
+export const load = (async ({ fetch, params, locals: { supabase } }) => {
 	const text_less_complex = false;
 	let response;
 	if (!text_less_complex) {

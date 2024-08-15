@@ -1,11 +1,10 @@
 import type { PageServerLoad } from './$types';
-import { supabase } from '$lib/supabaseClient';
 import { getImageUrls } from '$lib/functions';
 // @ts-ignore
 import pkg from 'chinese-s2t';
 const { s2t, t2s } = pkg;
 
-export const load = (async ({ parent, params, fetch }) => {
+export const load = (async ({ parent, params, fetch, locals: { supabase }  }) => {
 
 	const { data, error } = await supabase
 			.from('Texts2')
@@ -22,7 +21,7 @@ export const load = (async ({ parent, params, fetch }) => {
 
 	// get chosen images for all potential characters, saved as traditional
 	const chosenImages = await getImageChosenDict(
-		sentence + simplifiedSentence
+		sentence + simplifiedSentence, supabase
 	);
 
 	// get imageURLs for all potential characters, saved as traditional
@@ -30,7 +29,7 @@ export const load = (async ({ parent, params, fetch }) => {
 		sentence + simplifiedSentence, supabase
 	);
 
-	updateCurrentSentence(sentence);
+	updateCurrentSentence(sentence, supabase);
 
 	return {
 		sentence: sentence,
@@ -47,7 +46,7 @@ export const load = (async ({ parent, params, fetch }) => {
 }) satisfies PageServerLoad;
 
 
-async function updateCurrentSentence(currentSentence: string) {
+async function updateCurrentSentence(currentSentence: string, supabase: any) {
   const { error } = await supabase
     .from('currentSentence')
     .update({ sentence: currentSentence})
@@ -62,7 +61,7 @@ async function updateCurrentSentence(currentSentence: string) {
 }
 
 // Convert the block to a function that gets a string and returns the imagesChosen Dict
-async function getImageChosenDict(inputString: string) {
+async function getImageChosenDict(inputString: string, supabase: any) {
 	const characterSet = new Set(inputString.split(''));
 	const characterSetTraditional = s2t(characterSet);
 
