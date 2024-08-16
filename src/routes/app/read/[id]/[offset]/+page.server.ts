@@ -14,7 +14,6 @@ export const load = (async ({ parent, params, fetch, locals: { supabase }  }) =>
 	if (error) {
 			throw new Error('Error fetching sentence data: ' + error.message);	
 		} 
-	console.log(data);
 
 	const sentence = data[0]?.sentence?.join('') ?? '';
 	const simplifiedSentence = data[0]?.simplified_sentence?.join('') ?? '';
@@ -47,14 +46,22 @@ export const load = (async ({ parent, params, fetch, locals: { supabase }  }) =>
 
 
 async function updateCurrentSentence(currentSentence: string, supabase: any) {
-  const { error } = await supabase
-    .from('currentSentence')
-    .update({ sentence: currentSentence})
-    .eq('id', 0);
+	const { data: userData, error: userError } = await supabase.auth.getUser();
 
-  if (error) {
-    console.error('Error updating current sentence:', error);
-  } 
+	if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+	}
+    const { error } = await supabase
+      .from('currentSentence')
+      .upsert({ id: 0, sentence: currentSentence, user_id: userData.user?.id })
+
+    if (error) {
+      console.error('Error updating current sentence:', error);
+    } 
 //   else {
 //     console.log('Current sentence updated successfully.');
 //   }

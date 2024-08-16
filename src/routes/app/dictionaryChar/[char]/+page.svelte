@@ -8,9 +8,21 @@
 	const { char, imagePaths, definition, frequency, decompositions } = data;
 
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
+		const { data: userData, error: userError } = await supabase.auth.getUser();
+
+		if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+		}
 		const { error } = await supabase
 			.from('MyKnownCharacters')
-			.upsert({ character, knowledgeLevel, chosen_image }, { onConflict: 'character' });
+			.upsert(
+				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
+				{ onConflict: 'character' }
+			);
 
 		if (error) {
 			console.error('Error updating database:', error);

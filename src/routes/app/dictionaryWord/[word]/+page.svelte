@@ -2,9 +2,21 @@
 	import { supabase } from '$lib/supabaseClient';
 	import { currentSentenceWords } from '$lib';
 	async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
+		const { data: userData, error: userError } = await supabase.auth.getUser();
+
+		if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+		}
 		const { error } = await supabase
 			.from('MyKnownWords') // Adjust the table name as needed
-			.upsert({ wordChinese, knowledgeLevel }, { onConflict: 'wordChinese' });
+			.upsert(
+				{ wordChinese, knowledgeLevel, user_id: userData.user?.id },
+				{ onConflict: 'wordChinese' }
+			);
 
 		if (error) {
 			console.error('Error updating database:', error);

@@ -5,6 +5,7 @@
 	export let char: string;
 	export let imagePaths;
 	export let imageChosen;
+	export let supabase: any;
 
 	let chosen_image = 0;
 	let imagePath: string;
@@ -41,10 +42,22 @@
 	}
 
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
-		const { supabase } = await import('$lib/supabaseClient');
+		const { data: userData, error: userError } = await supabase.auth.getUser();
+
+		if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+		}
+
 		const { error } = await supabase
 			.from('MyKnownCharacters') // Adjust the table name as needed
-			.upsert({ character, knowledgeLevel, chosen_image }, { onConflict: 'character' });
+			.upsert(
+				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
+				{ onConflict: 'character' }
+			);
 
 		if (error) {
 			console.error('Error updating database:', error);
