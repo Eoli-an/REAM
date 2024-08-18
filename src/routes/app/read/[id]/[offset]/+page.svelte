@@ -2,9 +2,7 @@
 	import type { PageData } from './$types';
 	import TextElement from './TextElement.svelte';
 	import { currentSentenceWords } from '$lib';
-	import { getContext } from 'svelte';
 	import { simplified } from '$lib';
-	// const simplified: SvelteStore<any> = getContext('simplified');
 
 	export let data: PageData;
 	$: ({ supabase } = data);

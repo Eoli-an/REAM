@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { supabase } from '$lib/supabaseClient';
 	import { Button, Spinner, AccordionItem, Accordion } from 'flowbite-svelte';
 	import { CharacterKnowledge } from '$lib';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 	const { char, imagePaths, definition, frequency, decompositions } = data;
+	$: ({ supabase } = data);
 
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
 		const { data: userData, error: userError } = await supabase.auth.getUser();

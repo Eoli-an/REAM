@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { supabase } from '$lib/supabaseClient';
 	import { currentSentenceWords } from '$lib';
+	$: ({ supabase } = data);
 	async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
 		const { data: userData, error: userError } = await supabase.auth.getUser();
 
