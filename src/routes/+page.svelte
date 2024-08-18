@@ -16,8 +16,8 @@
 			<!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">REAM</span> -->
 		</NavBrand>
 		<div class="flex items-center lg:order-2">
-			<Button href="/upload" color="dark">Log in</Button>
-			<Button class="ml-2 bg-blue-900 text-white" href="/upload">Get started</Button>
+			<Button href="/app/upload" color="dark">Log in</Button>
+			<Button class="ml-2 bg-blue-900 text-white" href="/app/upload">Get started</Button>
 			<NavHamburger
 				on:click={toggle}
 				btnClass="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -52,7 +52,7 @@
 					level. We use modern AI to make your texts more comprehensible and enjoyable.
 				</p>
 				<!-- <Button size="xl" color="red">Try For Free <ArrowRight class="ml-2 h-5 w-5" /></Button> -->
-				<Button class="bg-blue-900 text-white" size="xl" href="/upload">Try it</Button>
+				<Button class="bg-blue-900 text-white" size="xl" href="/app/upload">Try it</Button>
 			</div>
 			<div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
 				<img
@@ -177,7 +177,7 @@
 				<p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
 					Try REAM and experience the power of AI-assisted language learning.
 				</p>
-				<Button class="bg-blue-900 text-white" size="xl" href="/upload">Get started</Button>
+				<Button class="bg-blue-900 text-white" size="xl" href="/app/upload">Get started</Button>
 			</div>
 		</div>
 	</section>

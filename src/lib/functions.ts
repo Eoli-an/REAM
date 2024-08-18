@@ -1,9 +1,8 @@
-import { supabase } from '$lib/supabaseClient';
 // @ts-ignore
 import pkg from 'chinese-s2t';
 const { s2t, t2s } = pkg;
 
-export async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
+export async function updateDatabase(wordChinese: string, knowledgeLevel: number, supabase: any) {
     const { error } = await supabase
         .from('MyKnownWords') // Adjust the table name as needed
         .upsert({ wordChinese, knowledgeLevel }, { onConflict: 'wordChinese' });
@@ -13,7 +12,7 @@ export async function updateDatabase(wordChinese: string, knowledgeLevel: number
     }
 }
 
-export async function updateDatabaseSentenceIndex(sentenceIndex: number, text_id: string) {
+export async function updateDatabaseSentenceIndex(sentenceIndex: number, text_id: string, supabase: any) {
     const { error } = await supabase
         .from('TextsMetadata')
         .update({ currentSentence: sentenceIndex })
@@ -25,7 +24,7 @@ export async function updateDatabaseSentenceIndex(sentenceIndex: number, text_id
 }
 
 export async function uploadDatabaseBook(dicts: { word_position: number; word: string; translation: string; sentence: number; }[]
-    , text_id: number
+    , text_id: number, supabase: any
 ) {
     console.log(text_id)
     const data = dicts.map(dict => ({

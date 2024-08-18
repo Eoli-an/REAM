@@ -112,15 +112,7 @@ export type Database = {
           word?: string | null
           word_position?: number | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Texts_text_id_fkey"
-            columns: ["text_id"]
-            isOneToOne: false
-            referencedRelation: "TextsMetadata"
-            referencedColumns: ["text_id"]
-          },
-        ]
+        Relationships: []
       }
       Texts2: {
         Row: {
@@ -133,6 +125,8 @@ export type Database = {
           sentence_word_translations: string[] | null
           simplified_sentence: string[] | null
           text_id: string
+          user_id: string | null
+          user_id3: string
         }
         Insert: {
           id?: string
@@ -144,6 +138,8 @@ export type Database = {
           sentence_word_translations?: string[] | null
           simplified_sentence?: string[] | null
           text_id: string
+          user_id?: string | null
+          user_id3?: string
         }
         Update: {
           id?: string
@@ -155,6 +151,8 @@ export type Database = {
           sentence_word_translations?: string[] | null
           simplified_sentence?: string[] | null
           text_id?: string
+          user_id?: string | null
+          user_id3?: string
         }
         Relationships: [
           {
@@ -164,6 +162,13 @@ export type Database = {
             referencedRelation: "TextsMetadata"
             referencedColumns: ["text_id"]
           },
+          {
+            foreignKeyName: "Texts2_user_id2_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
         ]
       }
       TextsMetadata: {
@@ -171,18 +176,49 @@ export type Database = {
           currentSentence: number
           text_id: string
           title: string | null
+          user_id: string | null
         }
         Insert: {
           currentSentence?: number
           text_id?: string
           title?: string | null
+          user_id?: string | null
         }
         Update: {
           currentSentence?: number
           text_id?: string
           title?: string | null
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "TextsMetadata_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      Users: {
+        Row: {
+          id: string
+        }
+        Insert: {
+          id?: string
+        }
+        Update: {
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -190,15 +226,7 @@ export type Database = {
         Row: {
           text_id: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "Texts_text_id_fkey"
-            columns: ["text_id"]
-            isOneToOne: false
-            referencedRelation: "TextsMetadata"
-            referencedColumns: ["text_id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Functions: {
