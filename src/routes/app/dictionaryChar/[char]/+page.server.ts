@@ -4,11 +4,16 @@ import { getImageUrls } from '$lib/functions'; // Import getImageUrls
 import * as hanzi from 'hanzi';
 // hanzi.start();
 
+// @ts-ignore
+import pkg from 'chinese-s2t';
+const { s2t } = pkg;
+
+
 export const load = (async ({params, fetch, locals: { supabase }}) => {
     const char = params.char;
 
-    const imagePathsDict = await getImageUrls(char, supabase);
-    const imagePaths = imagePathsDict && imagePathsDict[char] ? Object.values(imagePathsDict[char]) : [];
+    const imagePathsDict = await getImageUrls(s2t(char), supabase);
+    const imagePaths = imagePathsDict && imagePathsDict[s2t(char)] ? Object.values(imagePathsDict[s2t(char)]) : [];
 
 
     const definition: any[] = hanzi.definitionLookup(char);
