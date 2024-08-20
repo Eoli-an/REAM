@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 
-async function uploadImage(imagePath) {
+async function uploadImage(imagePath, explanation, prompt, type) {
 	const parts = imagePath.split('\\');
 	const fileName = parts[parts.length - 1];
 	console.log('Uploading image:', fileName);
@@ -35,7 +35,7 @@ async function uploadImage(imagePath) {
 
 	const { data: newImageData, error: newImageError } = await supabase
 		.from('images')
-		.insert([{ id, char, index }]);
+		.insert([{ id, char, index, explanation, prompt, type }]);
 
 	if (imageError) {
 		throw new Error(`Error inserting image data: ${imageError.message}`);
