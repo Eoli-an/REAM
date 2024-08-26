@@ -9,6 +9,11 @@ export const supabase = createClient(
 );
 import { decode } from 'base64-arraybuffer';
 import fs from 'fs/promises'; // Import the fs module for file system operations
+// @ts-ignore
+import pkg from 'chinese-s2t';
+const { s2t } = pkg;
+
+const use_fal = false;
 
 const openai = new OpenAI({
 	baseURL: 'https://openrouter.ai/api/v1',
@@ -35,20 +40,20 @@ const parts = [
 	{ text: '说' },
 	{
 		text: "Most Common Meaning: Speak, say, explain\n\nThinking: To visualize speaking, we can show a speech bubble coming out of someone's mouth.\n\nPrompt:\nA cartoon figure with a big speech bubble"
-	},
-	{ text: '奥' },
-	{
-		text: 'Most Common Meaning: profound, deep, mysterious\n\nThinking: This meaning is abstract. We need to find a visual metaphor that represents "profound" or "mysterious".\n\nPrompt:\nA deep underwater cave with a beam of light shining through the water'
-	},
-	{ text: '运' },
-	{
-		text: 'Most Common Meaning:  luck, fortune, destiny\n\nThinking:  Luck is an abstract concept. It can be visualized by objects commonly associated with good fortune.\n\nPrompt:\nA hand holding a four-leaf clover. Golden light shining on the clover.'
-	},
-	{ text: '会' },
-	{
-		text: 'Most Common Meaning: will, be able to\n\nThinking: To visualize someone "being able to" we need to show a difficult action that someone has mastered.\n\nPrompt:\nA person juggling five colorful balls in the air with a confident smile.'
-	},
-	{ text: ' ' }
+	}
+	// { text: '奥' },
+	// {
+	// 	text: 'Most Common Meaning: profound, deep, mysterious\n\nThinking: This meaning is abstract. We need to find a visual metaphor that represents "profound" or "mysterious".\n\nPrompt:\nA deep underwater cave with a beam of light shining through the water'
+	// },
+	// { text: '运' },
+	// {
+	// 	text: 'Most Common Meaning:  luck, fortune, destiny\n\nThinking:  Luck is an abstract concept. It can be visualized by objects commonly associated with good fortune.\n\nPrompt:\nA hand holding a four-leaf clover. Golden light shining on the clover.'
+	// },
+	// { text: '会' },
+	// {
+	// 	text: 'Most Common Meaning: will, be able to\n\nThinking: To visualize someone "being able to" we need to show a difficult action that someone has mastered.\n\nPrompt:\nA person juggling five colorful balls in the air with a confident smile.'
+	// },
+	// { text: ' ' }
 ];
 
 const system_prompt = parts.map((part) => part.text).join('\n');
@@ -56,7 +61,8 @@ const system_prompt = parts.map((part) => part.text).join('\n');
 async function getPromptFromGemini(character) {
 	//append char to parts
 	const chatCompletion = await openai.chat.completions.create({
-		model: 'google/gemini-flash-1.5',
+		// model: 'google/gemini-flash-1.5',
+		model: 'meta-llama/llama-3.1-405b-instruct',
 		messages: [
 			{
 				role: 'system',
@@ -68,7 +74,7 @@ async function getPromptFromGemini(character) {
 			}
 		],
 		temperature: 1,
-		// max_tokens: 10000,
+		max_tokens: 100,
 		top_p: 0.95,
 		frequency_penalty: 0,
 		presence_penalty: 0
@@ -76,15 +82,17 @@ async function getPromptFromGemini(character) {
 
 	const content = chatCompletion.choices[0].message.content;
 
+	console.log(content);
+
 	const response_parts = content.split(':');
 
 	const meaning = response_parts[1].split('\n')[0];
 	const thinking = response_parts[2].split('\n')[0];
 	const prompt = response_parts[3].trim();
 
-	console.log(meaning);
-	console.log(thinking);
-	console.log(prompt);
+	// console.log(meaning);
+	// console.log(thinking);
+	// console.log(prompt);
 
 	return { meaning, thinking, prompt };
 }
@@ -99,10 +107,31 @@ async function generateImageFromFalAI(prompt) {
 		},
 		logs: true
 	});
-	console.log('Generated image:', result.images[0]);
+	// console.log('Generated image:', result.images[0]);
 
 	// Assuming the result contains the image URL or data directly
 	return result.images[0]; // Adjust based on actual response structure
+}
+
+async function generateImageFromWebEndpoint(prompt) {
+	console.log('Generating image from web endpoint with prompt:', prompt);
+	const response = await fetch(
+		'https://eoli-an--stable-diffusion-xl-model-web-inference-dev.modal.run/',
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ prompt: prompt, n_steps: 4 }) // Ensure the payload matches the expected input
+		}
+	);
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
+
+	const blob = await response.arrayBuffer(); // Assuming the response is a PNG image
+	return blob;
 }
 
 async function downloadImage(url) {
@@ -112,7 +141,7 @@ async function downloadImage(url) {
 }
 async function uploadImage(arrayBuffer, char, explanation, prompt, type) {
 	const id = uuidv4();
-	console.log(id);
+	// console.log(id);
 
 	const { data: imageData, error: imageError } = await supabase
 		.from('images')
@@ -150,27 +179,32 @@ async function uploadImage(arrayBuffer, char, explanation, prompt, type) {
 
 async function processCharacter(character) {
 	const { meaning, thinking, prompt } = await getPromptFromGemini(character);
-	console.log('prompt:', prompt);
-	const image = await generateImageFromFalAI(prompt);
-	const blob = await downloadImage(image.url); // Download the image
-	console.log('Downloaded image:', blob);
-
 	const explanation = `Most Common meaning: ${meaning}. Thinking of a visual representation: ${thinking}`;
-	await uploadImage(blob, character, explanation, prompt, 'Meaning'); // Assuming image object has a URL property
+
+	if (use_fal) {
+		const image = await generateImageFromFalAI(prompt);
+		const blob = await downloadImage(image.url); // Download the image
+		uploadImage(blob, character, explanation, prompt, 'Meaning'); // Assuming image object has a URL property
+	} else {
+		const blob = await generateImageFromWebEndpoint(prompt); // Use the new function
+		uploadImage(blob, character, explanation, prompt, 'Meaning');
+	}
 }
 
 async function main() {
 	try {
 		// Read the content of hp3.txt
-		const data = await fs.readFile('static/hp3.txt', 'utf8');
+		const data = await fs.readFile('static/Three People make a Tiger.txt', 'utf8');
 
 		// Use a Set to store unique characters
 		const characters = new Set(data);
 
+		console.log('Unique characters:', characters);
+
 		// Process each unique character
 		for (const character of characters) {
 			try {
-				await processCharacter(character);
+				await processCharacter(s2t(character));
 			} catch (error) {
 				console.error(`Failed to process character ${character}:`, error);
 			}
@@ -180,8 +214,58 @@ async function main() {
 	}
 }
 
-// Example usage
-const characters = ['其', '实']; // Add more characters as needed
-// main(characters);
+async function main2() {
+	try {
+		// Read the content of hp3.txt
+		const data = await fs.readFile('static/Three People make a Tiger.txt', 'utf8');
 
-processCharacter('個');
+		// Use a Set to store unique characters
+		const characters = new Set(data);
+
+		console.log('Unique characters:', characters);
+
+		// Process each unique character
+		for (const character of characters) {
+			// Check if the character is a Chinese character
+			if (!/^[\u4e00-\u9fa5]$/.test(character)) {
+				console.log(`Character ${character} is not a Chinese character, skipping.`);
+				continue;
+			}
+
+			try {
+				// Check if the character is already in the "images" table with a non-null explanation
+				const { data: imageData, error: imageError } = await supabase
+					.from('images')
+					.select('char, explanation') // Include explanation in the select query
+					.eq('char', s2t(character));
+
+				if (imageError) {
+					throw new Error(`Error checking for character ${character}: ${imageError.message}`);
+				}
+
+				// If the character is not found or no entry has a non-null explanation, process it
+				const shouldProcess =
+					!imageData || imageData.length === 0 || imageData.every((entry) => !entry.explanation);
+				if (shouldProcess) {
+					console.log(`Processing character ${character}`);
+					await processCharacter(s2t(character));
+				} else {
+					console.log(
+						`Character ${character} already processed with a valid explanation, skipping.`
+					);
+				}
+			} catch (error) {
+				console.error(`Failed to process character ${character}:`, error);
+			}
+		}
+	} catch (error) {
+		console.error('Failed to read or process the text file:', error);
+	}
+}
+// Example usage
+// const characters = ['其', '实']; // Add more characters as needed
+// // main(characters);
+
+// processCharacter('個');
+
+main2();

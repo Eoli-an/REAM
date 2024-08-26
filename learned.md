@@ -79,3 +79,7 @@ SQL is case-sensitive with identifiers, including table names, when they are quo
 # JWT and Session
 
 A token used to communicate between server and client. When the client logs in, a jwt is created (a session). This JWT is returned to the user. The user can then use the JWT to make further requests to the server. The server can then, using the JWT, verfiy the identity and give information to the User. See https://www.vaadata.com/blog/jwt-tokens-and-security-working-principles-and-use-cases/ and https://supabase.com/docs/guides/auth/sessions. (Traditionally user sessions were implemented by using a unique string stored in cookies that identified the authorization that the user had on a specific browser. Applications would use this unique string to constantly fetch the attached user information on every API call.)
+
+# Unique constraints supabase
+
+Unique constraints over multiple cols (i.e. combination of colx and coly should be unique) must be done in SQL editior, seems not possible in the dashboard
