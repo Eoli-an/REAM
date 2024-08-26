@@ -20,12 +20,12 @@ export const load = (async ({ parent, params, fetch, locals: { supabase }  }) =>
 
 	// get chosen images for all potential characters, saved as traditional
 	const chosenImages = await getImageChosenDict(
-		sentence + simplifiedSentence, supabase
+		s2t(sentence + simplifiedSentence), supabase
 	);
 
 	// get imageURLs for all potential characters, saved as traditional
 	const urlDict = await getImageUrls(
-		sentence + simplifiedSentence, supabase
+		s2t(sentence + simplifiedSentence), supabase
 	);
 
 	updateCurrentSentence(sentence, supabase);

@@ -8,7 +8,6 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
     const word = params.word;
 
     const definition: any[] = hanzi.definitionLookup(word);
-    console.log(definition);
     let uniqueDefinitions: any[];
     if (definition && definition.length > 0) {
         uniqueDefinitions = Array.from(
