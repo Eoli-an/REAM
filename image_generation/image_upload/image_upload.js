@@ -30,7 +30,8 @@ async function main() {
 	const directories = [
 		path.join(scriptDir, '..', '..', 'static', 'images'),
 		path.join(scriptDir, '..', '..', 'static', 'images2'),
-		path.join(scriptDir, '..', '..', 'static', 'images3')
+		path.join(scriptDir, '..', '..', 'static', 'images3'),
+		path.join(scriptDir, '..', '..', 'static', 'images4')
 	];
 
 	await collectAndUploadImages(directories);

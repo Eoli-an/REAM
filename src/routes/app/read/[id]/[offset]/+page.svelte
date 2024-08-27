@@ -3,6 +3,10 @@
 	import TextElement from './TextElement.svelte';
 	import { currentSentenceWords } from '$lib';
 	import { simplified } from '$lib';
+	import { character_set } from '$lib';
+	// @ts-ignore
+	import pkg from 'chinese-s2t';
+	const { s2t, t2s } = pkg;
 
 	export let data: PageData;
 	$: ({ supabase } = data);
@@ -30,10 +34,34 @@
 <hr class="divider my-10 border-t border-black sm:my-20" />
 
 <div class="text-center">
-	{#if !$simplified}
+	{#if $character_set === 'simplified'}
+		{#if !$simplified}
+			{#each data.words as word, i (i)}
+				<TextElement
+					word={t2s(word)}
+					pinyin_word={'pinyin'}
+					translation={data.sentenceWordTranslations[i]}
+					imagePaths={data.imagePaths}
+					imageChosen={data.chosenImages}
+					{supabase}
+				/>
+			{/each}
+		{:else}
+			{#each data.wordsSimplified as word, i (i)}
+				<TextElement
+					word={t2s(word)}
+					pinyin_word={'pinyin'}
+					translation={data.sentenceSimplifiedWordTranslations[i]}
+					imagePaths={data.imagePaths}
+					imageChosen={data.chosenImages}
+					{supabase}
+				/>
+			{/each}
+		{/if}
+	{:else if !$simplified}
 		{#each data.words as word, i (i)}
 			<TextElement
-				{word}
+				word={s2t(word)}
 				pinyin_word={'pinyin'}
 				translation={data.sentenceWordTranslations[i]}
 				imagePaths={data.imagePaths}
@@ -44,7 +72,7 @@
 	{:else}
 		{#each data.wordsSimplified as word, i (i)}
 			<TextElement
-				{word}
+				word={s2t(word)}
 				pinyin_word={'pinyin'}
 				translation={data.sentenceSimplifiedWordTranslations[i]}
 				imagePaths={data.imagePaths}

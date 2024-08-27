@@ -145,7 +145,7 @@ class Model:
             prompt, n_steps=n_steps, high_noise_frac=high_noise_frac
         ).getvalue()
 
-    @web_endpoint()
+    @web_endpoint(docs=True)
     def web_inference(self, prompt, n_steps=24, high_noise_frac=0.8):
         return Response(
             content=self._inference(

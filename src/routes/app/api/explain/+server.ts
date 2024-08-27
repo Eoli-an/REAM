@@ -20,7 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
     Word: 自顧自
 
     ASSISTANT:
-    Relevant part of the sentence: 達斯利[Dursley] 先生[Mr.] 自顧自[himself] 哼著[hum] 歌[song] (Mr. Dursley hummed to himself)
+    Relevant part of the sentence: 達斯利[Dursley] 先生[Mr.] 自顧自[himself] 哼著[hum] (Mr. Dursley hummed to himself)
 
     In this context, 自顧自 means "to oneself" or "by oneself".  It emphasizes that Mr. Dursley is humming the song without paying attention to anyone else.
 
@@ -36,16 +36,16 @@ export const POST: RequestHandler = async ({ request }) => {
     Word: 了
 
     ASSISTANT:
-    Relevant part of the sentence: 選擇[choose] 了[completed action]\n
+    Relevant part of the sentence: 選擇[choose] 了[completed action]
 
     In this context, 了 is a particle that indicates the completion of an action. So instead of choosing something, Mr. Dursley has already chosen something.\n
 
     USER:
-    Sentence: 達斯利夫人高興地聊天，嘗試餵養他們尖叫的兒子達德利坐在高椅中\n
-    Word: 尖叫\n
+    Sentence: 達斯利夫人高興地聊天，嘗試餵養他們尖叫的兒子達德利坐在高椅中
+    Word: 尖叫
 
     ASSISTANT:
-    Relevant part of the sentence: 餵養[feed] 他們[their] 尖叫[screaming] 的['s] 兒子[son] 達德利[Dudley]
+    Relevant part of the sentence: 餵養[feed] 他們[their] 尖叫[screaming] 的['s] 兒子[son]
 
     In this context, 尖叫 means "screaming". It describes the action of the son screaming loudly.
 

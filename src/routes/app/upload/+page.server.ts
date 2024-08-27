@@ -53,6 +53,8 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 
 		const sentences = splitIntoSentences(text);
 
+		// console.log('Sentences:', sentences);
+
 		// Upload first sentence and wait for it
 		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
 
@@ -158,10 +160,11 @@ async function callApi(apiRoute: string, input: any, fetch:any) {
 }
 
 async function processAndUpload(sentences: string[], text_id: string, fetch: any, supabase: any) {
-			for (let i = 1; i < sentences.length - 1; i += 1) {
-			const sentence = sentences[i];
-			processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
-		}
+    for (let i = 1; i < sentences.length; i += 1) {
+        const sentence = sentences[i];
+        await processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
+        await new Promise(resolve => setTimeout(resolve, 10000)); // Wait for 10 seconds
+    }
 }
 
 async function processAndUploadOneSentence(sentence: string, text_id: string, sentence_id: number, fetch: any, supabase: any) {

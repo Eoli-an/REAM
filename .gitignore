@@ -11,6 +11,7 @@ vite.config.ts.timestamp-*
 /static/images
 /static/images2
 /static/images3
+/static/images4
 image_generation/images2
 image_generation/images
 image_generation/images3

@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { Button, Spinner, AccordionItem, Accordion } from 'flowbite-svelte';
+	import { Button, Spinner, AccordionItem, Accordion, Modal } from 'flowbite-svelte';
 	import { CharacterKnowledge } from '$lib';
 	import type { PageData } from './$types';
+	// @ts-ignore
+	import pkg from 'chinese-s2t';
+	const { s2t } = pkg;
 
 	export let data: PageData;
-	const { char, imagePaths, definition, frequency, decompositions } = data;
+	const { char, imageDataDict, definition, frequency, decompositions } = data;
 	$: ({ supabase } = data);
 
 	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
@@ -21,7 +24,7 @@
 			.from('MyKnownCharacters')
 			.upsert(
 				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
-				{ onConflict: 'character' }
+				{ onConflict: ['character', 'user_id'] }
 			);
 
 		if (error) {
@@ -31,12 +34,14 @@
 
 	function selectItem(type: 'word' | 'image', index: number) {
 		CharacterKnowledge.update((knowledge) => {
-			knowledge[char] = type === 'word' ? 1 : 0;
+			knowledge[s2t(char)] = type === 'word' ? 1 : 0;
 			return knowledge;
 		});
-		updateDatabase(char, type === 'word' ? 1 : 0, index);
+		updateDatabase(s2t(char), type === 'word' ? 1 : 0, index);
 		window.history.back();
 	}
+
+	let showModal = {};
 </script>
 
 <div class="container mx-auto px-4 py-8">
@@ -48,13 +53,35 @@
 			<Button color="blue" on:click={() => selectItem('word', 0)}>Choose this</Button>
 		</div>
 
-		{#if imagePaths.length > 0}
-			{#each imagePaths as imagePath, index}
+		{#if Object.keys(imageDataDict).length > 0}
+			{#each Object.keys(imageDataDict) as index}
 				<div
 					class="flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
 				>
-					<img src={imagePath} alt={char} class="mb-4 h-48 w-full object-contain" />
-					<Button color="blue" on:click={() => selectItem('image', index)}>Choose this</Button>
+					<img src={imageDataDict[index].url} alt={char} class="mb-4 h-48 w-full object-contain" />
+					<div class="flex space-x-2">
+						<Button color="blue" on:click={() => selectItem('image', +index)}>Choose this</Button>
+						<Button color="gray" on:click={() => (showModal[index] = true)}>Info</Button>
+					</div>
+					<Modal title="Image Information" bind:open={showModal[index]} autoclose outsideclose>
+						{#if imageDataDict[index].explanation || imageDataDict[index].prompt}
+							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+								<strong>Explanation:</strong>
+								{imageDataDict[index].explanation || 'No explanation available'}
+							</p>
+							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+								<strong>Prompt:</strong>
+								{imageDataDict[index].prompt || 'No prompt available'}
+							</p>
+						{:else}
+							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+								No information available
+							</p>
+						{/if}
+						<svelte:fragment slot="footer">
+							<Button on:click={() => (showModal[index] = false)}>Close</Button>
+						</svelte:fragment>
+					</Modal>
 				</div>
 			{/each}
 		{:else}

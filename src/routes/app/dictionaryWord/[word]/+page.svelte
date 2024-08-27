@@ -1,4 +1,7 @@
 <script lang="ts">
+	// @ts-ignore
+	import pkg from 'chinese-s2t';
+	const { s2t } = pkg;
 	import { currentSentenceWords } from '$lib';
 	$: ({ supabase } = data);
 	async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
@@ -35,10 +38,10 @@
 
 	function update(knowledgeLevel: number) {
 		wordKnowledge.update((knowledge) => {
-			knowledge[word] = knowledgeLevel;
+			knowledge[s2t(word)] = knowledgeLevel;
 			return knowledge;
 		});
-		updateDatabase(word, knowledgeLevel);
+		updateDatabase(s2t(word), knowledgeLevel);
 		window.history.back();
 	}
 

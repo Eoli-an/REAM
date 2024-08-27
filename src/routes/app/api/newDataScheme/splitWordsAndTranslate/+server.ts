@@ -14,7 +14,7 @@ async function splitAndTranslate(text: string): Promise<{ words: string[]; trans
     const chatInput = text;
     const systemPrompt = `You will be given a chinese text. Split this text into words and generate word-by-word translations, that are context appropriate. Make sure each word is in the dictionary. Do not combine multiple words into one translation. Use traditional characters.
     Be brief with the translations. If you encouter punctations, just copy them. It is important to follow my instructions, because I will parse the output programmatically afterwards.
-    Adhere strictly to the format of the example output. Generate a short translation for every word, even if it is a grammer part. Start directly with the first word, no introduction or explanation.
+    Adhere strictly to the format of the example output. Generate a short translation for every word, even if it is a grammer part. Start directly with the first word, no introduction or explanation. Do not include empty lines, every line should contain a dash (-).
 Example:
 USER:
 哈利波特站在火車站的月台上，心情既興奮又緊張。他即將乘坐霍格華茲特快列車，前往他夢寐以求的魔法學校。
@@ -49,7 +49,6 @@ ASSISTANT:
 魔法 - magic
 學校 - school
 。- .
-
 USER:
 小明：老板，买单。
 
@@ -73,7 +72,6 @@ ASSISTANT:
 300 - 300
 元 - yuan
 。- .
-
 USER:
 我媽媽做的水果沙拉酸酸甜甜的,口感真不錯。
 
@@ -93,7 +91,6 @@ ASSISTANT:
 不 - not
 錯 - bad
 。- .
-
 USER:
 但是當他回頭看時,只有一隻虎斑貓站在普里維特街的街角,沒有地圖在望。
 
@@ -121,7 +118,32 @@ ASSISTANT:
 地圖 - map
 在 - at
 望 - sight
-`;
+USER:
+国王听了哈哈大笑地说：“怎么可能呢？这里可是首都啊，老虎不敢来。”
+
+ASSISTANT:
+国王 - king
+听 - hear
+了 - past action
+哈哈 - haha
+大笑 - laugh
+地 - adverbial particle
+说 - say
+：- :
+“ - "
+怎么 - how
+可能 - possible
+呢 - question particle
+？ - ?
+这里 - here
+可是 - but
+首都 - capital
+啊 - ah
+，- ,
+老虎 - tiger
+不 - not
+敢 - dare
+来 - come`;
     const content = await callLLM(systemPrompt, chatInput, false);
 
     const words: string[] = [];
@@ -131,6 +153,7 @@ ASSISTANT:
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
+        if (!line.includes('-')) continue;
         const line_split = line.split('-');
         try {
             const word = line_split[0].trim();

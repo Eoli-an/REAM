@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { CharacterKnowledge } from '$lib';
 	import { goto } from '$app/navigation';
+	// @ts-ignore
+	import pkg from 'chinese-s2t';
+	const { s2t } = pkg;
 
 	export let char: string;
 	export let imagePaths;
@@ -13,16 +16,16 @@
 
 	$: {
 		chosen_image = 0;
-		if (imageChosen.hasOwnProperty(char)) {
-			chosen_image = imageChosen[char];
+		if (imageChosen.hasOwnProperty(s2t(char))) {
+			chosen_image = imageChosen[s2t(char)];
 		}
 	}
 
 	$: {
 		image_available = false;
-		if (imagePaths.hasOwnProperty(char)) {
+		if (imagePaths.hasOwnProperty(s2t(char))) {
 			image_available = true;
-			imagePath = imagePaths[char][chosen_image];
+			imagePath = imagePaths[s2t(char)][chosen_image];
 		}
 	}
 
@@ -33,9 +36,9 @@
 		if (!store_value.hasOwnProperty(char)) {
 			displayType = 'image';
 		} else {
-			if (store_value[char] === 0) {
+			if (store_value[s2t(char)] === 0) {
 				displayType = 'image';
-			} else if (store_value[char] === 1) {
+			} else if (store_value[s2t(char)] === 1) {
 				displayType = 'character';
 			}
 		}
@@ -51,12 +54,11 @@
 				message: 'Error fetching user data.'
 			};
 		}
-
 		const { error } = await supabase
 			.from('MyKnownCharacters') // Adjust the table name as needed
 			.upsert(
 				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
-				{ onConflict: 'character' }
+				{ onConflict: ['character', 'user_id'] }
 			);
 
 		if (error) {
@@ -68,17 +70,17 @@
 		if (displayType === 'character') {
 			displayType = 'image';
 			CharacterKnowledge.update((knowledge) => {
-				knowledge[char] = 0;
+				knowledge[s2t(char)] = 0;
 				return knowledge;
 			});
-			updateDatabase(char, 0, chosen_image);
+			updateDatabase(s2t(char), 0, chosen_image);
 		} else if (displayType === 'image') {
 			displayType = 'character';
 			CharacterKnowledge.update((knowledge) => {
-				knowledge[char] = 1;
+				knowledge[s2t(char)] = 1;
 				return knowledge;
 			});
-			updateDatabase(char, 1, chosen_image);
+			updateDatabase(s2t(char), 1, chosen_image);
 		}
 	}
 </script>
