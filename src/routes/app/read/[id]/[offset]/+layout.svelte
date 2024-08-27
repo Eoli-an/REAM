@@ -2,6 +2,7 @@
 	import type { LayoutData } from './$types';
 	import { Drawer, Button, CloseButton, Toggle } from 'flowbite-svelte';
 	import { simplified } from '$lib';
+	import { character_set } from '$lib';
 	import { sineIn } from 'svelte/easing';
 	import { AdjustmentsHorizontalOutline } from 'flowbite-svelte-icons';
 
@@ -22,6 +23,9 @@
 
 	function toggleSimplified() {
 		simplified.set(!$simplified);
+	}
+	function toggleCharacterSet() {
+		character_set.set($character_set === 'simplified' ? 'traditional' : 'simplified');
 	}
 </script>
 
@@ -58,5 +62,11 @@
 	<div class="flex items-center">
 		<Toggle on:change={toggleSimplified} checked={$simplified}></Toggle>
 		<p class="ml-2">Use LLM-based Simplification</p>
+	</div>
+
+	<div class="mt-4 flex items-center">
+		<!-- Added mt-4 for margin-top -->
+		<Toggle on:change={toggleCharacterSet} checked={$character_set === 'traditional'}></Toggle>
+		<p class="ml-2">Use Traditional Characters</p>
 	</div>
 </Drawer>

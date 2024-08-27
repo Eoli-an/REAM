@@ -55,10 +55,9 @@ async function updateCurrentSentence(currentSentence: string, supabase: any) {
 				message: 'Error fetching user data.'
 			};
 	}
-	console.log(userData.user?.id);
     const { error } = await supabase
       .from('currentSentence')
-      .upsert({ id: 0, sentence: currentSentence, user_id: userData.user?.id }, { onConflict: 'id' });
+      .upsert({ sentence: currentSentence, user_id: userData.user?.id }, { onConflict: 'user_id' });
 
     if (error) {
       console.error('Error updating current sentence:', error);

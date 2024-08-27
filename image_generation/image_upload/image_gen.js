@@ -217,7 +217,7 @@ async function main() {
 async function main2() {
 	try {
 		// Read the content of hp3.txt
-		const data = await fs.readFile('static/Three People make a Tiger.txt', 'utf8');
+		const data = await fs.readFile('static/Olympics.txt', 'utf8');
 
 		// Use a Set to store unique characters
 		const characters = new Set(data);

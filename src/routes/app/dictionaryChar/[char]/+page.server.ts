@@ -69,10 +69,20 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
 }) satisfies PageServerLoad;
 
 async function getCurrentSentence(supabase: any) {
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+	}
+
+
   const { data: currentSentenceData, error } = await supabase
     .from('currentSentence')
     .select('sentence')
-    .eq('id', 0)
+    .eq('user_id',  userData.user?.id )
     .single();
 
   if (error) {
