@@ -34,7 +34,3 @@ REAM provides a suite of tools to aid in Chinese language learning, including:
 ## Contributing
 
 We welcome contributions to the REAM project. If you're interested in contributing, please fork the repository and submit a pull request with your changes.
-
-## Demo
-
-A live demo of REAM can be found at https://ream-six.vercel.app/. Try it out and see how REAM can simplify complex Chinese texts for you!
