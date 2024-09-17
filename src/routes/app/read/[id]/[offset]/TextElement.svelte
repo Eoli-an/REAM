@@ -13,6 +13,8 @@
 
 	let upperButtonDisplay = 'none';
 
+	$: isAllChinese = /^[\u4e00-\u9fa5]+$/.test(word);
+
 	const store_value = $wordKnowledge;
 	$: {
 		if (!store_value.hasOwnProperty(word)) {
@@ -53,18 +55,24 @@
 </script>
 
 <div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
-	<button
-		on:click={(e) => {
-			goto(`/app/dictionaryWord/${word}`);
-		}}
-		class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
-	>
-		{#if upperButtonDisplay === 'translation'}
-			{translation}
-		{:else}
-			...
-		{/if}
-	</button>
+	{#if isAllChinese}
+		<button
+			on:click={(e) => {
+				goto(`/app/dictionaryWord/${word}`);
+			}}
+			class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
+		>
+			{#if upperButtonDisplay === 'translation'}
+				{translation}
+			{:else}
+				...
+			{/if}
+		</button>
+	{:else}
+		<button
+			class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
+		></button>
+	{/if}
 
 	<div bind:this={charContainer} class="chars mr-0 flex flex-wrap justify-center">
 		{#each word.split('') as char}

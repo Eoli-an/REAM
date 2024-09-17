@@ -51,15 +51,15 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_A_bustling_market_during_sunset._Skyscrapers_street_f4fdd5c1-9a83-4353-9092-1ed2e4e7c830_1.png';
-const char = '市';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_3_part_image._1._A_woman_practicing_guitar._on_the__58161c53-a7f9-43ee-b934-d1c5af3dfef9_3.png';
+const char = '习';
 const explanation = `
     Most Common Meaning:
-    Market, City
+    practice/study/exercise
     Thinking of a visual representation:
-    We can simply show a market in a city to represent this character.
+    this is a versitile word and many scenes could be used to imagine it. persons studying somthing o exercising are good examples.
     `;
 const prompt =
-	'A bustling market during sunset. Skyscrapers, street vendors, and busy pedestrians, middle ages';
+	'A young monk practicing calligraphy with a brush and inkstone in a serene temple setting, with a hint of sunrise in the background.in the air the word "practice" floats Movie still';
 const type = 'Meaning';
 uploadImage(imagePath, char, explanation, prompt, type);

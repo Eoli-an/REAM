@@ -14,6 +14,8 @@
 	let imagePath: string;
 	let image_available = false;
 
+	$: isChineseCharacter = /^[\u4e00-\u9fa5]$/.test(char);
+
 	$: {
 		chosen_image = 0;
 		if (imageChosen.hasOwnProperty(s2t(char))) {
@@ -85,22 +87,30 @@
 	}
 </script>
 
-<button
-	on:click={circle}
-	class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
->
-	{#if displayType === 'character'}
+{#if isChineseCharacter}
+	<button
+		on:click={circle}
+		class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
+	>
+		{#if displayType === 'character'}
+			{char}
+		{:else if image_available}
+			<img
+				src={imagePath}
+				alt={char}
+				class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
+			/>
+		{:else}
+			{char}
+		{/if}
+	</button>
+{:else}
+	<button
+		class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
+	>
 		{char}
-	{:else if image_available}
-		<img
-			src={imagePath}
-			alt={char}
-			class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
-		/>
-	{:else}
-		{char}
-	{/if}
-</button>
+	</button>
+{/if}
 
 <!-- <button on:click={() => goto(`/dictionaryChar/${char}`)}> -->
 
