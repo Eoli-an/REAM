@@ -31,6 +31,7 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		}
 
 		let text = await file.text();
+
 		const title: string = file.name.split('.')[0];
 
 		const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -128,17 +129,18 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 };
 
 
-
 function splitIntoSentences(text: string): string[] {
-	const sentences = [];
-	const parts = text.split(/[。！？]/g);
-
-	for (let i = 0; i < parts.length; i += 2) {
-		const sentence = parts[i] + (parts[i + 1] || '');
-		sentences.push(sentence);
-	}
-
-	return sentences;
+    // Regular expression to match sequences ending with Chinese punctuation or newline
+    const regex = /[^。！？\n]+[。！？]?/g;
+    const matches = text.match(regex);
+    
+    if (matches) {
+        return matches
+            .map(segment => segment.trim()) // Remove any leading/trailing whitespace
+            .filter(segment => segment.length > 0); // Exclude empty strings
+    }
+    
+    return [];
 }
 
 async function callApi(apiRoute: string, input: any, fetch:any) {
