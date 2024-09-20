@@ -44,15 +44,17 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 			};
 		}
 
+		const sentences = splitIntoSentences(text);
+
 		const { error } = await supabase
 			.from('TextsMetadata')
-			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id}, { onConflict: 'text_id' });
+			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id, sentenceAmount: sentences.length}, { onConflict: 'text_id' });
 		// TODO proper error handling
 		if (error) {
 			console.error('Error updating database:', error);
 		}
 
-		const sentences = splitIntoSentences(text);
+		
 
 		// console.log('Sentences:', sentences);
 
