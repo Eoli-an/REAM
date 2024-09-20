@@ -29,7 +29,7 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 	const words_per_page = 40;
 
 	const { data: wordKnowledgeData } = await supabase.from('MyKnownWords').select();
-	const { data: sentenceIndexData } = await supabase.from('TextsMetadata').select("currentSentence").eq('text_id', params.id).single();
+	const { data: sentenceIndexData } = await supabase.from('TextsMetadata').select("currentSentence, sentenceAmount").eq('text_id', params.id).single();
 	// const { data: sentenceIndexData } = await supabase.from('SentenceIndex').select().eq('id', 12345);
 	const { data: characterKnowledgeData } = await supabase.from('MyKnownCharacters').select();
 
@@ -46,6 +46,7 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 		words_per_page: words_per_page,
 		sentenceOffsets: sentenceOffsets,
 		currentSentenceIndex: sentenceIndexData?.currentSentence || 0,
+		sentenceAmount: sentenceIndexData?.sentenceAmount || 10000, // Add this line
 		// imagePaths: imagePaths,
 		currentId: currentId,
 	};

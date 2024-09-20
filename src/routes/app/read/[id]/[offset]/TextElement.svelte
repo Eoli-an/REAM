@@ -60,13 +60,11 @@
 			on:click={(e) => {
 				goto(`/app/dictionaryWord/${word}`);
 			}}
-			class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
+			class="upper-button h-6 w-full cursor-pointer border-none bg-gray-100 sm:h-8 dark:bg-gray-800"
 		>
 			{#if upperButtonDisplay === 'translation'}
 				{translation}
-			{:else}
-				...
-			{/if}
+			{:else}...{/if}
 		</button>
 	{:else}
 		<button
