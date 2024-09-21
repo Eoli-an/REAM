@@ -34,7 +34,7 @@
 
 	$: {
 		const charKey = s2t(char);
-		const knowledgeLevel = $CharacterKnowledge[charKey];
+		const knowledgeLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
 		if (knowledgeLevel === 1) {
 			displayType = 'character';
 		} else {
@@ -66,7 +66,8 @@
 
 	function circle() {
 		const charKey = s2t(char);
-		const newKnowledgeLevel = $CharacterKnowledge[charKey] === 0 ? 1 : 0;
+		const currentLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
+		const newKnowledgeLevel = currentLevel === 0 ? 1 : 0;
 		CharacterKnowledge.update((knowledge) => {
 			return { ...knowledge, [charKey]: newKnowledgeLevel };
 		});

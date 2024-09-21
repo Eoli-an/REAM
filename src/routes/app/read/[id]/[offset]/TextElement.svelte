@@ -12,7 +12,7 @@
 	export let imagePaths;
 	export let imageChosen;
 	export let supabase: any;
-	export let uniqueId: string; // Receive the unique ID make the dropdown work correctly
+	export let uniqueId: string;
 
 	let upperButtonDisplay = 'translation';
 
@@ -20,7 +20,7 @@
 
 	$: {
 		const wordKey = s2t(word);
-		const knowledgeLevel = $wordKnowledge[wordKey];
+		const knowledgeLevel = $wordKnowledge[wordKey] ?? 0; // Default to 0 if undefined
 		if (knowledgeLevel === 1) {
 			upperButtonDisplay = 'none';
 		} else {
@@ -52,7 +52,8 @@
 
 	function toggle() {
 		const wordKey = s2t(word);
-		const newKnowledgeLevel = $wordKnowledge[wordKey] === 0 ? 1 : 0;
+		const currentLevel = $wordKnowledge[wordKey] ?? 0; // Default to 0 if undefined
+		const newKnowledgeLevel = currentLevel === 0 ? 1 : 0;
 		wordKnowledge.update((knowledge) => {
 			return { ...knowledge, [wordKey]: newKnowledgeLevel };
 		});

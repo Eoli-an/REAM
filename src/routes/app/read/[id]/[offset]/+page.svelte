@@ -16,9 +16,28 @@
 </script>
 
 {#if data.sentence === ''}
-	<!-- ... -->
+	<div class="flex h-screen items-center justify-center">
+		<p class="text-xl font-bold">
+			This sentence is not yet uploaded. Please go back to the previous sentence or reload the page
+			after waiting a bit.
+		</p>
+	</div>
 {:else}
-	<!-- ... -->
+	<button
+		class="mb-2 h-16 w-full cursor-pointer border-none bg-transparent p-0 text-2xl font-normal sm:text-3xl"
+		on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
+	>
+		{#if showSentenceTranslation}
+			{#if !$simplified}
+				{data.sentenceTranslation}
+			{:else}
+				{data.sentenceSimplifiedTranslation}
+			{/if}
+		{:else}
+			...
+		{/if}
+	</button>
+	<hr class="divider my-10 border-t border-black sm:my-20" />
 	<div class="text-center">
 		{#if $character_set === 'simplified'}
 			{#if !$simplified}
