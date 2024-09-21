@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { updateDatabase } from '$lib';
 	import CharElement from './CharElement.svelte';
 	import { wordKnowledge } from '$lib';
-	import { goto } from '$app/navigation';
+	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+	// @ts-ignore
+	import pkg from 'chinese-s2t';
+	const { s2t } = pkg;
 
 	export let word: string;
 	export let pinyin_word: string;
@@ -10,61 +12,71 @@
 	export let imagePaths;
 	export let imageChosen;
 	export let supabase: any;
+	export let uniqueId: string; // Receive the unique ID make the dropdown work correctly
 
-	let upperButtonDisplay = 'none';
+	let upperButtonDisplay = 'translation';
 
 	$: isAllChinese = /^[\u4e00-\u9fa5]+$/.test(word);
 
-	const store_value = $wordKnowledge;
 	$: {
-		if (!store_value.hasOwnProperty(word)) {
+		const wordKey = s2t(word);
+		const knowledgeLevel = $wordKnowledge[wordKey];
+		if (knowledgeLevel === 1) {
 			upperButtonDisplay = 'none';
 		} else {
-			if (store_value[word] === 0) {
-				upperButtonDisplay = 'translation';
-			} else if (store_value[word] === 1) {
-				upperButtonDisplay = 'none';
-			}
+			upperButtonDisplay = 'translation';
 		}
 	}
 
-	// function circleUpperButton() {
-	//     if (upperButtonDisplay === 'translation') {
-	//         upperButtonDisplay = 'none';
-	//         wordKnowledge.update(knowledge => {
-	//             knowledge[word] = 1;
-	//             return knowledge;
-	//         });
-	//         updateDatabase(word, 1);
-	//     } else if (upperButtonDisplay === 'none') {
-	//         upperButtonDisplay = 'translation';
-	//         wordKnowledge.update(knowledge => {
-	//             knowledge[word] = 0;
-	//             return knowledge;
-	//         });
-	//         updateDatabase(word, 0);
-	//     }
-	// }
-	// let charContainerWidth = 0;
-	// function measureCharContainerWidth(node: HTMLDivElement) {
-	//     charContainerWidth = node.offsetWidth;
-	// }
+	async function updateDatabase(word: string, knowledgeLevel: number) {
+		const { data: userData, error: userError } = await supabase.auth.getUser();
+
+		if (userError) {
+			console.error('Error fetching user data:', userError);
+			return {
+				success: false,
+				message: 'Error fetching user data.'
+			};
+		}
+		const { error } = await supabase
+			.from('MyKnownWords')
+			.upsert(
+				{ wordChinese: word, knowledgeLevel: knowledgeLevel, user_id: userData.user?.id },
+				{ onConflict: ['wordChinese', 'user_id'] }
+			);
+
+		if (error) {
+			console.error('Error updating database:', error);
+		}
+	}
+
+	function toggle() {
+		const wordKey = s2t(word);
+		const newKnowledgeLevel = $wordKnowledge[wordKey] === 0 ? 1 : 0;
+		wordKnowledge.update((knowledge) => {
+			return { ...knowledge, [wordKey]: newKnowledgeLevel };
+		});
+		updateDatabase(wordKey, newKnowledgeLevel);
+	}
 
 	let charContainer: HTMLDivElement;
-	$: charContainerWidth = charContainer ? charContainer.offsetWidth : 0;
 </script>
 
 <div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
 	{#if isAllChinese}
+		<Dropdown placement="top" triggeredBy="#translation-dropdown-{uniqueId}">
+			<DropdownItem on:click={toggle}>Switch</DropdownItem>
+			<DropdownItem href={`/app/dictionaryWord/${word}`}>Explanation</DropdownItem>
+		</Dropdown>
 		<button
-			on:click={(e) => {
-				goto(`/app/dictionaryWord/${word}`);
-			}}
+			id="translation-dropdown-{uniqueId}"
 			class="upper-button h-6 w-full cursor-pointer border-none bg-gray-100 sm:h-8 dark:bg-gray-800"
 		>
 			{#if upperButtonDisplay === 'translation'}
 				{translation}
-			{:else}...{/if}
+			{:else}
+				...
+			{/if}
 		</button>
 	{:else}
 		<button

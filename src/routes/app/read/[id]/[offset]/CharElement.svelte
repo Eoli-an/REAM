@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { CharacterKnowledge } from '$lib';
-	import { goto } from '$app/navigation';
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
 	const { s2t } = pkg;
@@ -32,17 +31,14 @@
 	}
 
 	let displayType: string = 'image';
-	const store_value = $CharacterKnowledge;
 
 	$: {
-		if (!store_value.hasOwnProperty(char)) {
-			displayType = 'image';
+		const charKey = s2t(char);
+		const knowledgeLevel = $CharacterKnowledge[charKey];
+		if (knowledgeLevel === 1) {
+			displayType = 'character';
 		} else {
-			if (store_value[s2t(char)] === 0) {
-				displayType = 'image';
-			} else if (store_value[s2t(char)] === 1) {
-				displayType = 'character';
-			}
+			displayType = 'image';
 		}
 	}
 
@@ -57,7 +53,7 @@
 			};
 		}
 		const { error } = await supabase
-			.from('MyKnownCharacters') // Adjust the table name as needed
+			.from('MyKnownCharacters')
 			.upsert(
 				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
 				{ onConflict: ['character', 'user_id'] }
@@ -69,28 +65,19 @@
 	}
 
 	function circle() {
-		if (displayType === 'character') {
-			displayType = 'image';
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[s2t(char)] = 0;
-				return knowledge;
-			});
-			updateDatabase(s2t(char), 0, chosen_image);
-		} else if (displayType === 'image') {
-			displayType = 'character';
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[s2t(char)] = 1;
-				return knowledge;
-			});
-			updateDatabase(s2t(char), 1, chosen_image);
-		}
+		const charKey = s2t(char);
+		const newKnowledgeLevel = $CharacterKnowledge[charKey] === 0 ? 1 : 0;
+		CharacterKnowledge.update((knowledge) => {
+			return { ...knowledge, [charKey]: newKnowledgeLevel };
+		});
+		updateDatabase(charKey, newKnowledgeLevel, chosen_image);
 	}
 </script>
 
 {#if isChineseCharacter}
 	<button
 		on:click={circle}
-		class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
+		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
 	>
 		{#if displayType === 'character'}
 			{char}
@@ -106,38 +93,8 @@
 	</button>
 {:else}
 	<button
-		class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
+		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
 	>
 		{char}
 	</button>
 {/if}
-
-<!-- <button on:click={() => goto(`/dictionaryChar/${char}`)}> -->
-
-<!-- <style>
-	button {
-		width: 80px; /* Set the desired fixed width */
-		height: 80px; /* Set the desired fixed height */
-		background-color: transparent;
-		border: none;
-		/* border-radius: 0; */
-		/* padding: 4px 8px; */
-		font-size: 60px;
-		cursor: pointer;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-top: 0px;
-		margin-left: 0px;
-		padding: 0px;
-		font-size: 70px;
-	}
-
-	img {
-		width: 70px;
-		height: auto;
-		vertical-align: middle;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-top: 20px;
-	}
-</style> -->

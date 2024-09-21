@@ -83,3 +83,16 @@ A token used to communicate between server and client. When the client logs in, 
 # Unique constraints supabase
 
 Unique constraints over multiple cols (i.e. combination of colx and coly should be unique) must be done in SQL editior, seems not possible in the dashboard
+
+# Unique identifiers in different components.
+
+I used to have
+'''
+<Dropdown placement="top" triggeredBy="#translation-dropdown">
+<!-- ... -->
+</Dropdown>
+<button id="translation-dropdown">
+<!-- ... -->
+</button>
+'''
+But did something weird where only the last word on the screen got updated. Changing to unique identifiers solved the issue.
