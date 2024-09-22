@@ -51,15 +51,14 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_3_part_image._1._A_woman_practicing_guitar._on_the__58161c53-a7f9-43ee-b934-d1c5af3dfef9_3.png';
-const char = '习';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_the_letter_9_--chaos_10_--sref_httpss.mj.runc5O8gcr_c8960c87-9600-44d5-bf81-c4e936819bae_0.png';
+const char = '九';
 const explanation = `
     Most Common Meaning:
-    practice/study/exercise
+    nine
     Thinking of a visual representation:
-    this is a versitile word and many scenes could be used to imagine it. persons studying somthing o exercising are good examples.
+	Easy to visualize, just the letter nine
     `;
-const prompt =
-	'A young monk practicing calligraphy with a brush and inkstone in a serene temple setting, with a hint of sunrise in the background.in the air the word "practice" floats Movie still';
+const prompt = 'the letter "9"';
 const type = 'Meaning';
 uploadImage(imagePath, char, explanation, prompt, type);

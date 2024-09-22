@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CharacterKnowledge } from '$lib';
+	import { Dropdown, DropdownItem } from 'flowbite-svelte';
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
 	const { s2t } = pkg;
@@ -8,10 +9,12 @@
 	export let imagePaths;
 	export let imageChosen;
 	export let supabase: any;
+	export let uniqueId: string; // Added uniqueId as a prop for unique dropdown triggers
 
 	let chosen_image = 0;
 	let imagePath: string;
 	let image_available = false;
+	let dropdownOpen = false; // Added state to control dropdown
 
 	$: isChineseCharacter = /^[\u4e00-\u9fa5]$/.test(char);
 
@@ -72,26 +75,40 @@
 			return { ...knowledge, [charKey]: newKnowledgeLevel };
 		});
 		updateDatabase(charKey, newKnowledgeLevel, chosen_image);
+		dropdownOpen = false; // Close the dropdown after toggling
 	}
 </script>
 
 {#if isChineseCharacter}
-	<button
-		on:click={circle}
-		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
-	>
-		{#if displayType === 'character'}
-			{char}
-		{:else if image_available}
-			<img
-				src={imagePath}
-				alt={char}
-				class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
-			/>
-		{:else}
-			{char}
-		{/if}
-	</button>
+	<div class="relative inline-block">
+		<!-- Dropdown Trigger -->
+		<Dropdown
+			placement="top"
+			triggeredBy={`#char-dropdown-${uniqueId}-${char}`}
+			bind:open={dropdownOpen}
+		>
+			<DropdownItem on:click={circle}>Switch</DropdownItem>
+			<DropdownItem href={`/app/dictionaryChar/${char}`}>Explanation</DropdownItem>
+		</Dropdown>
+
+		<!-- Button that triggers the Dropdown -->
+		<button
+			id={`char-dropdown-${uniqueId}-${char}`}
+			class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
+		>
+			{#if displayType === 'character'}
+				{char}
+			{:else if image_available}
+				<img
+					src={imagePath}
+					alt={char}
+					class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
+				/>
+			{:else}
+				{char}
+			{/if}
+		</button>
+	</div>
 {:else}
 	<button
 		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"

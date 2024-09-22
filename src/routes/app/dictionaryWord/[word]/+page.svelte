@@ -57,10 +57,10 @@
 		{/each}
 	</div>
 
-	<div class="flex flex-row space-x-4">
+	<!-- <div class="flex flex-row space-x-4">
 		<Button on:click={() => update(0)} color="alternative" size="lg">Show translation</Button>
 		<Button on:click={() => update(1)} color="alternative" size="lg">Hide translation</Button>
-	</div>
+	</div> -->
 </div>
 
 <div class="mt-12">

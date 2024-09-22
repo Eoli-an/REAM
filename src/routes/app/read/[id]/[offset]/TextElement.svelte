@@ -15,6 +15,7 @@
 	export let uniqueId: string;
 
 	let upperButtonDisplay = 'translation';
+	let dropdownOpen = false; // Added state to control dropdown
 
 	$: isAllChinese = /^[\u4e00-\u9fa5]+$/.test(word);
 
@@ -58,6 +59,7 @@
 			return { ...knowledge, [wordKey]: newKnowledgeLevel };
 		});
 		updateDatabase(wordKey, newKnowledgeLevel);
+		dropdownOpen = false; // Close the dropdown after toggling
 	}
 
 	let charContainer: HTMLDivElement;
@@ -65,12 +67,16 @@
 
 <div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
 	{#if isAllChinese}
-		<Dropdown placement="top" triggeredBy="#translation-dropdown-{uniqueId}">
+		<Dropdown
+			placement="top"
+			triggeredBy={`#translation-dropdown-${uniqueId}`}
+			bind:open={dropdownOpen}
+		>
 			<DropdownItem on:click={toggle}>Switch</DropdownItem>
 			<DropdownItem href={`/app/dictionaryWord/${word}`}>Explanation</DropdownItem>
 		</Dropdown>
 		<button
-			id="translation-dropdown-{uniqueId}"
+			id={`translation-dropdown-${uniqueId}`}
 			class="upper-button h-6 w-full cursor-pointer border-none bg-gray-100 sm:h-8 dark:bg-gray-800"
 		>
 			{#if upperButtonDisplay === 'translation'}
@@ -85,9 +91,9 @@
 		></button>
 	{/if}
 
-	<div bind:this={charContainer} class="chars mr-0 flex flex-wrap justify-center">
-		{#each word.split('') as char}
-			<CharElement {char} {imagePaths} {imageChosen} {supabase} />
+	<div class="chars mr-0 flex flex-wrap justify-center">
+		{#each word.split('') as char, index}
+			<CharElement {char} {imagePaths} {imageChosen} {supabase} uniqueId={`${uniqueId}-${index}`} />
 		{/each}
 	</div>
 </div>

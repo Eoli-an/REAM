@@ -55,9 +55,6 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		}
 
 		
-
-		// console.log('Sentences:', sentences);
-
 		// Upload first sentence and wait for it
 		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
 
@@ -114,7 +111,11 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 
 		let { content: translatedText } = await translateResponse.json();
 
+		
+
 		const sentences = splitIntoSentences(translatedText);
+
+		
 
 		// Upload first sentence and wait for it
 		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
@@ -183,8 +184,8 @@ async function processAndUploadOneSentence(sentence: string, text_id: string, se
     ] = await Promise.all([
         callApi('/app/api/translate_sentence', { sentence : sentence}, fetch),
         callApi('/app/api/translate_sentence', { sentence : simplifiedSentence }, fetch),
-        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : sentence}, fetch),
-        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : simplifiedSentence }, fetch)
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : sentence}, fetch),
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : simplifiedSentence }, fetch)
     ]);
 
 	// TODO make this not await in case of async upload?

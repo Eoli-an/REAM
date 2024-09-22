@@ -29,14 +29,14 @@
 	let currentSentenceIndex = data.currentSentenceIndex;
 	let sentenceAmount = data.sentenceAmount;
 
-	wordKnowledgeData?.forEach((item) => {
+	wordKnowledgeData?.forEach((item: any) => {
 		wordKnowledge.update((knowledge) => {
 			knowledge[item.wordChinese] = item.knowledgeLevel;
 			return knowledge;
 		});
 	});
 
-	charKnowledgeData?.forEach((item) => {
+	charKnowledgeData?.forEach((item: any) => {
 		CharacterKnowledge.update((knowledge) => {
 			knowledge[item.character] = item.knowledgeLevel;
 			return knowledge;

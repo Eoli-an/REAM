@@ -11,37 +11,54 @@ export type Database = {
     Tables: {
       currentSentence: {
         Row: {
-          id: number
           sentence: string | null
+          user_id: string
         }
         Insert: {
-          id?: number
           sentence?: string | null
+          user_id: string
         }
         Update: {
-          id?: number
           sentence?: string | null
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "currentSentence_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       images: {
         Row: {
           char: string | null
           created_at: string
+          explanation: string | null
           id: string
           index: number
+          prompt: string | null
+          type: Database["public"]["Enums"]["Image Type"] | null
         }
         Insert: {
           char?: string | null
           created_at?: string
+          explanation?: string | null
           id?: string
           index?: number
+          prompt?: string | null
+          type?: Database["public"]["Enums"]["Image Type"] | null
         }
         Update: {
           char?: string | null
           created_at?: string
+          explanation?: string | null
           id?: string
           index?: number
+          prompt?: string | null
+          type?: Database["public"]["Enums"]["Image Type"] | null
         }
         Relationships: []
       }
@@ -52,6 +69,7 @@ export type Database = {
           created_at: string
           id: string
           knowledgeLevel: number | null
+          user_id: string | null
         }
         Insert: {
           character: string
@@ -59,6 +77,7 @@ export type Database = {
           created_at?: string
           id?: string
           knowledgeLevel?: number | null
+          user_id?: string | null
         }
         Update: {
           character?: string
@@ -66,53 +85,46 @@ export type Database = {
           created_at?: string
           id?: string
           knowledgeLevel?: number | null
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "MyKnownCharacters_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       MyKnownWords: {
         Row: {
           image_paths: string[] | null
           knowledgeLevel: number | null
+          user_id: string | null
           wordChinese: string
         }
         Insert: {
           image_paths?: string[] | null
           knowledgeLevel?: number | null
+          user_id?: string | null
           wordChinese: string
         }
         Update: {
           image_paths?: string[] | null
           knowledgeLevel?: number | null
+          user_id?: string | null
           wordChinese?: string
         }
-        Relationships: []
-      }
-      Texts: {
-        Row: {
-          id: string
-          sentence: number | null
-          text_id: string | null
-          translation: string | null
-          word: string | null
-          word_position: number | null
-        }
-        Insert: {
-          id?: string
-          sentence?: number | null
-          text_id?: string | null
-          translation?: string | null
-          word?: string | null
-          word_position?: number | null
-        }
-        Update: {
-          id?: string
-          sentence?: number | null
-          text_id?: string | null
-          translation?: string | null
-          word?: string | null
-          word_position?: number | null
-        }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "MyKnownWords_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       Texts2: {
         Row: {
@@ -126,7 +138,6 @@ export type Database = {
           simplified_sentence: string[] | null
           text_id: string
           user_id: string | null
-          user_id3: string
         }
         Insert: {
           id?: string
@@ -139,7 +150,6 @@ export type Database = {
           simplified_sentence?: string[] | null
           text_id: string
           user_id?: string | null
-          user_id3?: string
         }
         Update: {
           id?: string
@@ -152,7 +162,6 @@ export type Database = {
           simplified_sentence?: string[] | null
           text_id?: string
           user_id?: string | null
-          user_id3?: string
         }
         Relationships: [
           {
@@ -163,7 +172,7 @@ export type Database = {
             referencedColumns: ["text_id"]
           },
           {
-            foreignKeyName: "Texts2_user_id2_fkey"
+            foreignKeyName: "Texts2_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -174,18 +183,21 @@ export type Database = {
       TextsMetadata: {
         Row: {
           currentSentence: number
+          sentenceAmount: number | null
           text_id: string
           title: string | null
           user_id: string | null
         }
         Insert: {
           currentSentence?: number
+          sentenceAmount?: number | null
           text_id?: string
           title?: string | null
           user_id?: string | null
         }
         Update: {
           currentSentence?: number
+          sentenceAmount?: number | null
           text_id?: string
           title?: string | null
           user_id?: string | null
@@ -222,18 +234,13 @@ export type Database = {
       }
     }
     Views: {
-      distinct_text_id: {
-        Row: {
-          text_id: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      "Image Type": "Meaning" | "Mnemonic"
     }
     CompositeTypes: {
       [_ in never]: never
