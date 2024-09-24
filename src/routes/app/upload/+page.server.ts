@@ -168,7 +168,7 @@ async function processAndUpload(sentences: string[], text_id: string, fetch: any
     for (let i = 1; i < sentences.length; i += 1) {
         const sentence = sentences[i];
         await processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
-        await new Promise(resolve => setTimeout(resolve, 10000)); // Wait for 10 seconds
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 seconds
     }
 }
 
