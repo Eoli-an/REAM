@@ -72,8 +72,8 @@
 			triggeredBy={`#translation-dropdown-${uniqueId}`}
 			bind:open={dropdownOpen}
 		>
-			<DropdownItem on:click={toggle}>Switch</DropdownItem>
 			<DropdownItem href={`/app/dictionaryWord/${word}`}>Explanation</DropdownItem>
+			<DropdownItem on:click={toggle}>Switch</DropdownItem>
 		</Dropdown>
 		<button
 			id={`translation-dropdown-${uniqueId}`}

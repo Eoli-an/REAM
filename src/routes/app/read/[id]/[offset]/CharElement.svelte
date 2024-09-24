@@ -92,8 +92,8 @@
 			triggeredBy={`#char-dropdown-${uniqueId}-${char}`}
 			bind:open={dropdownOpen}
 		>
-			<DropdownItem on:click={circle}>Switch</DropdownItem>
 			<DropdownItem href={`/app/dictionaryChar/${char}`}>Explanation</DropdownItem>
+			<DropdownItem on:click={circle}>Switch</DropdownItem>
 		</Dropdown>
 
 		<!-- Button that triggers the Dropdown -->
@@ -104,13 +104,10 @@
 			{#if displayType === 'character'}
 				{char}
 			{:else if image_available}
-				<TwicPicture
+				<TwicImg
 					src={imagePath}
 					alt={char}
-					preTransform="contain=100x100/quality=10/cover=100x100"
-					mode="contain"
 					eager="true"
-					sizes="10pxx10px"
 					class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
 				/>
 			{:else}
