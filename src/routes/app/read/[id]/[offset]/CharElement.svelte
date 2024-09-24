@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { CharacterKnowledge } from '$lib';
 	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { TwicImg } from '@twicpics/components/sveltekit';
+	import { TwicPicture } from '@twicpics/components/sveltekit';
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
 	const { s2t } = pkg;
@@ -29,7 +31,10 @@
 		image_available = false;
 		if (imagePaths.hasOwnProperty(s2t(char))) {
 			image_available = true;
-			imagePath = imagePaths[s2t(char)][chosen_image];
+			// imagePath = imagePaths[s2t(char)][chosen_image];
+			const imageName = imagePaths[s2t(char)][chosen_image].split('/').pop();
+			imagePath = imageName;
+			// imagePath = `https://reamimages.twic.pics/${imageName}`;
 		}
 	}
 
@@ -99,9 +104,13 @@
 			{#if displayType === 'character'}
 				{char}
 			{:else if image_available}
-				<img
+				<TwicPicture
 					src={imagePath}
 					alt={char}
+					preTransform="contain=100x100/quality=10/cover=100x100"
+					mode="contain"
+					eager="true"
+					sizes="10pxx10px"
 					class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
 				/>
 			{:else}

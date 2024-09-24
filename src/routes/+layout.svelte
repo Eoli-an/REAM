@@ -3,6 +3,15 @@
 	import { DarkMode } from 'flowbite-svelte';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	// import TwicPics sveltekit components
+	import { installTwicpics } from '@twicpics/components/sveltekit';
+	// import TwicPics components css
+	import '@twicpics/components/style.css';
+
+	installTwicpics({
+		// domain is mandatory
+		domain: 'https://reamimages.twic.pics'
+	});
 
 	export let data;
 	$: ({ session, supabase } = data);
