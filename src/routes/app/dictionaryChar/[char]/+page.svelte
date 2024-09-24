@@ -2,6 +2,8 @@
 	import { Button, Spinner, AccordionItem, Accordion, Modal } from 'flowbite-svelte';
 	import { CharacterKnowledge } from '$lib';
 	import type { PageData } from './$types';
+	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
+
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
 	const { s2t } = pkg;
@@ -43,6 +45,14 @@
 
 	let showModal = {};
 </script>
+
+<Button
+	on:click={() => window.history.back()}
+	class="absolute left-2 top-12 flex items-center bg-white text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+>
+	<ArrowLeftOutline class="mr-2 h-5 w-5" />
+	Back
+</Button>
 
 <div class="container mx-auto px-4 py-8">
 	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -116,7 +126,7 @@
 				<span slot="header" class="text-xl font-semibold">Explanation</span>
 				{#await data.explanation}
 					<div class="flex items-center justify-center">
-						<Spinner size="m" />
+						<Spinner class="h-5 w-5" />
 						<span class="ml-2">Loading explanation...</span>
 					</div>
 				{:then explanation}

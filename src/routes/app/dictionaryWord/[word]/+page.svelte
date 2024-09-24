@@ -1,6 +1,8 @@
 <script lang="ts">
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
+	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
+
 	const { s2t } = pkg;
 	import { currentSentenceWords } from '$lib';
 	$: ({ supabase } = data);
@@ -49,6 +51,13 @@
 </script>
 
 <div class="flex flex-col items-center">
+	<Button
+		on:click={() => window.history.back()}
+		class="absolute left-2 top-12 flex items-center bg-white text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+	>
+		<ArrowLeftOutline class="mr-2 h-5 w-5" />
+		Back
+	</Button>
 	<div class="flex flex-row space-x-4">
 		{#each word.split('') as char}
 			<a href="/app/dictionaryChar/{char}" class="mb-2 rounded bg-gray-100 shadow dark:bg-gray-800">
@@ -86,7 +95,7 @@
 			<span slot="header" class="text-xl font-semibold">Explanation</span>
 			{#await data.explanation}
 				<div class="flex items-center justify-center">
-					<Spinner size="m" />
+					<Spinner class="h-5 w-5" />
 					<span class="ml-2">Loading explanation...</span>
 				</div>
 			{:then explanation}
@@ -97,21 +106,3 @@
 		</AccordionItem>
 	</Accordion>
 </div>
-
-<!-- <style>
-	.definition-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		grid-gap: 1rem;
-		margin-top: 5rem;
-	}
-
-	.definition {
-		margin-top: 10rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 1rem; /* Adjust the height as needed */
-		font-size: 1.6rem;
-	}
-</style> -->
