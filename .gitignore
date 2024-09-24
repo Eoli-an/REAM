@@ -15,4 +15,5 @@ vite.config.ts.timestamp-*
 image_generation/images2
 image_generation/images
 image_generation/images3
-image_generation/output.apkg 
+image_generation/output.apkg
+src/repo2textenv2

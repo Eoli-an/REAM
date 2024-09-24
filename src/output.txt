@@ -1,0 +1,3050 @@
+Repository Documentation
+This document provides a comprehensive overview of the repository's structure and contents.
+The first section, titled 'Directory/File Tree', displays the repository's hierarchy in a tree format.
+In this section, directories and files are listed using tree branches to indicate their structure and relationships.
+Following the tree representation, the 'File Content' section details the contents of each file in the repository.
+Each file's content is introduced with a '[File Begins]' marker followed by the file's relative path,
+and the content is displayed verbatim. The end of each file's content is marked with a '[File Ends]' marker.
+This format ensures a clear and orderly presentation of both the structure and the detailed contents of the repository.
+
+Directory/File Tree Begins -->
+
+src/
+├── app.css
+├── app.d.ts
+├── app.html
+├── hooks.server.ts
+├── lib
+│   ├── database.types.ts
+│   ├── functions.ts
+│   ├── index.ts
+│   ├── portal.ts
+│   ├── static
+│   │   └── word_knowledge.json
+│   ├── stores.ts
+│   └── supabaseClient.ts
+└── routes
+    ├── +layout.server.ts
+    ├── +layout.svelte
+    ├── +layout.ts
+    ├── +page.svelte
+    ├── app
+    │   ├── +layout.server.ts
+    │   ├── +layout.svelte
+    │   ├── api
+    │   │   ├── explain
+    │   │   │   └── +server.ts
+    │   │   ├── llmService.ts
+    │   │   ├── newDataScheme
+    │   │   │   ├── simplifySentence
+    │   │   │   │   └── +server.ts
+    │   │   │   ├── splitWordsAndTranslate
+    │   │   │   │   └── +server.ts
+    │   │   │   └── splitWordsAndTranslate2
+    │   │   │       └── +server.ts
+    │   │   ├── process
+    │   │   │   └── +server.ts
+    │   │   ├── simplify
+    │   │   │   └── +server.ts
+    │   │   ├── simplifyEnglish
+    │   │   │   └── +server.ts
+    │   │   ├── simplifyMaxChinese
+    │   │   │   └── +server.ts
+    │   │   ├── translateEnglishChinese
+    │   │   │   └── +server.ts
+    │   │   ├── translate_sentence
+    │   │   │   └── +server.ts
+    │   │   ├── translate_words
+    │   │   │   └── +server.ts
+    │   │   └── updateKnownWords
+    │   │       └── +server.ts
+    │   ├── dictionaryChar
+    │   │   └── [char]
+    │   │       ├── +page.server.ts
+    │   │       └── +page.svelte
+    │   ├── dictionaryWord
+    │   │   └── [word]
+    │   │       ├── +page.server.ts
+    │   │       └── +page.svelte
+    │   ├── read
+    │   │   └── [id]
+    │   │       ├── +layout.server.ts
+    │   │       ├── +layout.svelte
+    │   │       ├── +page.svelte
+    │   │       ├── [offset]
+    │   │       │   ├── +layout.svelte
+    │   │       │   ├── +page.server.ts
+    │   │       │   ├── +page.svelte
+    │   │       │   ├── CharElement.svelte
+    │   │       │   └── TextElement.svelte
+    │   │       └── translate.ts
+    │   └── upload
+    │       ├── +page.server.ts
+    │       └── +page.svelte
+    ├── auth
+    │   ├── +layout.svelte
+    │   ├── +page.server.ts
+    │   ├── +page.svelte
+    │   ├── error
+    │   │   └── +page.svelte
+    │   ├── login
+    │   │   ├── +page.server.ts
+    │   │   └── +page.svelte
+    │   └── signup
+    │       ├── +page.server.ts
+    │       ├── +page.svelte
+    │       └── confirm
+    │           └── +server.ts
+    ├── blog
+    │   └── introduction
+    │       ├── +page.svelte
+    │       └── intro.svx
+    └── read
+        └── [id]
+
+<-- Directory/File Tree Ends
+
+File Content Begin -->
+[File Begins] app.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[File Ends] app.css
+
+[File Begins] app.d.ts
+// See https://kit.svelte.dev/docs/types#app
+// for information about these interfaces
+declare global {
+	namespace App {
+		// interface Error {}
+		interface Locals {
+			supabase: SupabaseClient
+			safeGetSession: () => Promise<{ session: Session | null; user: User | null }>
+			session: Session | null
+			user: User | null
+			}
+		interface PageData {
+			session: Session | null
+			}
+		interface PageState {
+			selected?: any;
+		  }
+		
+		// interface Platform {}
+	}
+}
+
+declare module 'chinese-conv' {
+	export function tify(input: string): string;
+	export function sify(input: string): string;
+}
+
+declare namespace svelte.JSX {
+	interface HTMLAttributes<T> {
+		'on:longpress'?: (event: CustomEvent) => void;
+	}
+}
+
+declare module 'hanzi';
+
+export {};
+
+
+[File Ends] app.d.ts
+
+[File Begins] app.html
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- <link rel="icon" href="%sveltekit.assets%/favicon.png" /> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover" data-theme="dark">
+		<!-- was "skeleton" before, notsure if right, wanted to make dark mode default-->
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
+
+[File Ends] app.html
+
+[File Begins] hooks.server.ts
+import { createServerClient } from '@supabase/ssr'
+import { type Handle, redirect } from '@sveltejs/kit'
+import { sequence } from '@sveltejs/kit/hooks'
+
+import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
+
+// @ts-ignore
+import * as hanzi from 'hanzi';
+hanzi.start();
+
+
+const supabase: Handle = async ({ event, resolve }) => {
+  /**
+   * Creates a Supabase client specific to this server request.
+   *
+   * The Supabase client gets the Auth token from the request cookies.
+   */
+  // Set up on every request for security reasons
+  event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+    cookies: {
+      getAll: () => event.cookies.getAll(),
+      /**
+       * SvelteKit's cookies API requires `path` to be explicitly set in
+       * the cookie options. Setting `path` to `/` replicates previous/
+       * standard behavior.
+       */
+      setAll: (cookiesToSet) => {
+        cookiesToSet.forEach(({ name, value, options }) => {
+          event.cookies.set(name, value, { ...options, path: '/' })
+        })
+      },
+    },
+  })
+
+  /**
+   * Unlike `supabase.auth.getSession()`, which returns the session _without_
+   * validating the JWT, this function also calls `getUser()` to validate the
+   * JWT before returning the session.
+   */
+  event.locals.safeGetSession = async () => {
+    const {
+      data: { session },
+    } = await event.locals.supabase.auth.getSession()
+    if (!session) {
+      return { session: null, user: null }
+    }
+
+    const {
+      data: { user },
+      error,
+    } = await event.locals.supabase.auth.getUser()
+    if (error) {
+      // JWT validation has failed
+      return { session: null, user: null }
+    }
+
+    return { session, user }
+  }
+
+  return resolve(event, {
+    filterSerializedResponseHeaders(name) {
+      /**
+       * Supabase libraries use the `content-range` and `x-supabase-api-version`
+       * headers, so we need to tell SvelteKit to pass it through.
+       */
+      return name === 'content-range' || name === 'x-supabase-api-version'
+    },
+  })
+}
+
+const authGuard: Handle = async ({ event, resolve }) => {
+  const { session, user } = await event.locals.safeGetSession()
+  event.locals.session = session
+  event.locals.user = user
+
+  if (!event.locals.session && event.url.pathname.startsWith('/app')) {
+    redirect(303, '/auth')
+  }
+
+  if (event.locals.session && event.url.pathname === '/auth') {
+    redirect(303, '/app')
+  }
+
+  return resolve(event)
+}
+
+// supabase sets up the stuff, authGuard executes it
+export const handle: Handle = sequence(supabase, authGuard)
+[File Ends] hooks.server.ts
+
+  [File Begins] lib\database.types.ts
+  ﻿export type Json =
+    | string
+    | number
+    | boolean
+    | null
+    | { [key: string]: Json | undefined }
+    | Json[]
+  
+  export type Database = {
+    public: {
+      Tables: {
+        currentSentence: {
+          Row: {
+            sentence: string | null
+            user_id: string
+          }
+          Insert: {
+            sentence?: string | null
+            user_id: string
+          }
+          Update: {
+            sentence?: string | null
+            user_id?: string
+          }
+          Relationships: [
+            {
+              foreignKeyName: "currentSentence_user_id_fkey"
+              columns: ["user_id"]
+              isOneToOne: true
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+        images: {
+          Row: {
+            char: string | null
+            created_at: string
+            explanation: string | null
+            id: string
+            index: number
+            prompt: string | null
+            type: Database["public"]["Enums"]["Image Type"] | null
+          }
+          Insert: {
+            char?: string | null
+            created_at?: string
+            explanation?: string | null
+            id?: string
+            index?: number
+            prompt?: string | null
+            type?: Database["public"]["Enums"]["Image Type"] | null
+          }
+          Update: {
+            char?: string | null
+            created_at?: string
+            explanation?: string | null
+            id?: string
+            index?: number
+            prompt?: string | null
+            type?: Database["public"]["Enums"]["Image Type"] | null
+          }
+          Relationships: []
+        }
+        MyKnownCharacters: {
+          Row: {
+            character: string
+            chosen_image: number
+            created_at: string
+            id: string
+            knowledgeLevel: number | null
+            user_id: string | null
+          }
+          Insert: {
+            character: string
+            chosen_image?: number
+            created_at?: string
+            id?: string
+            knowledgeLevel?: number | null
+            user_id?: string | null
+          }
+          Update: {
+            character?: string
+            chosen_image?: number
+            created_at?: string
+            id?: string
+            knowledgeLevel?: number | null
+            user_id?: string | null
+          }
+          Relationships: [
+            {
+              foreignKeyName: "MyKnownCharacters_user_id_fkey"
+              columns: ["user_id"]
+              isOneToOne: false
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+        MyKnownWords: {
+          Row: {
+            image_paths: string[] | null
+            knowledgeLevel: number | null
+            user_id: string | null
+            wordChinese: string
+          }
+          Insert: {
+            image_paths?: string[] | null
+            knowledgeLevel?: number | null
+            user_id?: string | null
+            wordChinese: string
+          }
+          Update: {
+            image_paths?: string[] | null
+            knowledgeLevel?: number | null
+            user_id?: string | null
+            wordChinese?: string
+          }
+          Relationships: [
+            {
+              foreignKeyName: "MyKnownWords_user_id_fkey"
+              columns: ["user_id"]
+              isOneToOne: false
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+        Texts2: {
+          Row: {
+            id: string
+            sentence: string[] | null
+            sentence_id: number | null
+            sentence_simplified_translation: string | null
+            sentence_simplified_word_translations: string[] | null
+            sentence_translation: string | null
+            sentence_word_translations: string[] | null
+            simplified_sentence: string[] | null
+            text_id: string
+            user_id: string | null
+          }
+          Insert: {
+            id?: string
+            sentence?: string[] | null
+            sentence_id?: number | null
+            sentence_simplified_translation?: string | null
+            sentence_simplified_word_translations?: string[] | null
+            sentence_translation?: string | null
+            sentence_word_translations?: string[] | null
+            simplified_sentence?: string[] | null
+            text_id: string
+            user_id?: string | null
+          }
+          Update: {
+            id?: string
+            sentence?: string[] | null
+            sentence_id?: number | null
+            sentence_simplified_translation?: string | null
+            sentence_simplified_word_translations?: string[] | null
+            sentence_translation?: string | null
+            sentence_word_translations?: string[] | null
+            simplified_sentence?: string[] | null
+            text_id?: string
+            user_id?: string | null
+          }
+          Relationships: [
+            {
+              foreignKeyName: "Texts2_text_id_fkey"
+              columns: ["text_id"]
+              isOneToOne: false
+              referencedRelation: "TextsMetadata"
+              referencedColumns: ["text_id"]
+            },
+            {
+              foreignKeyName: "Texts2_user_id_fkey"
+              columns: ["user_id"]
+              isOneToOne: false
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+        TextsMetadata: {
+          Row: {
+            currentSentence: number
+            sentenceAmount: number | null
+            text_id: string
+            title: string | null
+            user_id: string | null
+          }
+          Insert: {
+            currentSentence?: number
+            sentenceAmount?: number | null
+            text_id?: string
+            title?: string | null
+            user_id?: string | null
+          }
+          Update: {
+            currentSentence?: number
+            sentenceAmount?: number | null
+            text_id?: string
+            title?: string | null
+            user_id?: string | null
+          }
+          Relationships: [
+            {
+              foreignKeyName: "TextsMetadata_user_id_fkey"
+              columns: ["user_id"]
+              isOneToOne: false
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+        Users: {
+          Row: {
+            id: string
+          }
+          Insert: {
+            id?: string
+          }
+          Update: {
+            id?: string
+          }
+          Relationships: [
+            {
+              foreignKeyName: "Users_id_fkey"
+              columns: ["id"]
+              isOneToOne: true
+              referencedRelation: "users"
+              referencedColumns: ["id"]
+            },
+          ]
+        }
+      }
+      Views: {
+        [_ in never]: never
+      }
+      Functions: {
+        [_ in never]: never
+      }
+      Enums: {
+        "Image Type": "Meaning" | "Mnemonic"
+      }
+      CompositeTypes: {
+        [_ in never]: never
+      }
+    }
+  }
+  
+  type PublicSchema = Database[Extract<keyof Database, "public">]
+  
+  export type Tables<
+    PublicTableNameOrOptions extends
+      | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
+      | { schema: keyof Database },
+    TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+      ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+          Database[PublicTableNameOrOptions["schema"]]["Views"])
+      : never = never,
+  > = PublicTableNameOrOptions extends { schema: keyof Database }
+    ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+          PublicSchema["Views"])
+      ? (PublicSchema["Tables"] &
+          PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+          Row: infer R
+        }
+        ? R
+        : never
+      : never
+  
+  export type TablesInsert<
+    PublicTableNameOrOptions extends
+      | keyof PublicSchema["Tables"]
+      | { schema: keyof Database },
+    TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+      ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+      : never = never,
+  > = PublicTableNameOrOptions extends { schema: keyof Database }
+    ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+      ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+          Insert: infer I
+        }
+        ? I
+        : never
+      : never
+  
+  export type TablesUpdate<
+    PublicTableNameOrOptions extends
+      | keyof PublicSchema["Tables"]
+      | { schema: keyof Database },
+    TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
+      ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+      : never = never,
+  > = PublicTableNameOrOptions extends { schema: keyof Database }
+    ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+      ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+          Update: infer U
+        }
+        ? U
+        : never
+      : never
+  
+  export type Enums<
+    PublicEnumNameOrOptions extends
+      | keyof PublicSchema["Enums"]
+      | { schema: keyof Database },
+    EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
+      ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+      : never = never,
+  > = PublicEnumNameOrOptions extends { schema: keyof Database }
+    ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
+    : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+      ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+      : never
+
+  [File Ends] lib\database.types.ts
+
+  [File Begins] lib\functions.ts
+  // @ts-ignore
+  import pkg from 'chinese-s2t';
+  const { s2t, t2s } = pkg;
+  
+  export async function updateDatabase(wordChinese: string, knowledgeLevel: number, supabase: any) {
+      const { error } = await supabase
+          .from('MyKnownWords') // Adjust the table name as needed
+          .upsert({ wordChinese, knowledgeLevel }, { onConflict: 'wordChinese' });
+  
+      if (error) {
+          console.error('Error updating database:', error);
+      }
+  }
+  
+  export async function updateDatabaseSentenceIndex(sentenceIndex: number, text_id: string, supabase: any) {
+      const { error } = await supabase
+          .from('TextsMetadata')
+          .update({ currentSentence: sentenceIndex })
+          .eq('text_id', text_id);
+  
+      if (error) {
+          console.error('Error updating sentence database:', error);
+      }
+  }
+  
+  export async function uploadDatabaseBook(dicts: { word_position: number; word: string; translation: string; sentence: number; }[]
+      , text_id: number, supabase: any
+  ) {
+      console.log(text_id)
+      const data = dicts.map(dict => ({
+          text_id: text_id,
+          word_position: dict.word_position,
+          word: dict.word,
+          translation: dict.translation,
+          sentence: dict.sentence
+      }));
+  
+      const { error } = await supabase
+          .from('Texts') 
+          .upsert(data, { onConflict: 'text_id, word_position, sentence' });
+  
+      if (error) {
+          console.error('Error uploading to database:', error);
+      } else {
+          console.log('Database upload successful');
+      }
+  }
+  
+  async function getImageIds(sentence: string, supabase: any) {
+  		const { data: imageData, error: imageError } = await supabase
+  			.from('images')
+  			.select('id, char, index')
+  			.in('char', [...new Set(sentence.split(''))]);
+  
+  		if (imageError) {
+  			console.error('Error fetching image data:', imageError);
+  			return {};
+  		}
+  
+  		const idDict: { [char: string]: { [index: number]: string } } = {};
+  		imageData.forEach((row: { char: string; index: number; id: string; }) => {
+  			if (!idDict[row.char]) {
+  				idDict[row.char] = {};
+  			}
+  			idDict[row.char][row.index] = row.id;
+  		});
+  
+  		return idDict;
+  	}
+  
+  async function getImageUrlsFromIds(idDict: { [char: string]: { [index: number]: string } }, supabase: any) {
+  		const urlDict: { [char: string]: { [index: number]: string } } = {};
+  		for (const char in idDict) {
+  			urlDict[char] = {}; 
+  			for (const index in idDict[char]) {
+  				const { data, error } = await supabase
+  					.storage
+  					.from('Images')
+  					.getPublicUrl(`images/${idDict[char][index]}`);
+  
+  				if (error) {
+  					console.error('Error fetching public URL:', error);
+  				} else {
+  					urlDict[char][index] = data.publicUrl;
+  				}
+  			}
+  		}
+  
+  		return urlDict;
+  	}
+  
+  export async function getImageUrls(sentence: string, supabase: any) {
+          // sentence can also be only one word
+  
+  		const idDict = await getImageIds(s2t(sentence), supabase);
+  		const urlDict = await getImageUrlsFromIds(idDict, supabase);
+  		return urlDict;
+  	} 
+  [File Ends] lib\functions.ts
+
+  [File Begins] lib\index.ts
+  // place files you want to import through the `$lib` alias in this folder.
+  // TODO not sure why this is needed
+  export { supabase } from './supabaseClient';
+  export { wordKnowledge } from './stores';
+  export { CharacterKnowledge } from './stores';
+  export { currentSentence } from './stores';
+  export { currentSentenceWords } from './stores';
+  export { simplified } from './stores';
+  export { character_set } from './stores';
+  
+  export { updateDatabase } from './functions';
+  export { updateDatabaseSentenceIndex } from './functions';
+  export { uploadDatabaseBook } from './functions';
+  export { getImageUrls } from './functions';
+  [File Ends] lib\index.ts
+
+  [File Begins] lib\portal.ts
+  export const portal = (node: HTMLElement) => {
+  	document.querySelector('main')?.appendChild(node).focus();
+  };
+  [File Ends] lib\portal.ts
+
+    [File Begins] lib\static\word_knowledge.json
+    {
+        "你": {
+          "knowledge_level": 1
+        },
+        "你好": {
+          "knowledge_level": 1
+        }
+      }
+    [File Ends] lib\static\word_knowledge.json
+
+  [File Begins] lib\stores.ts
+  import { writable } from 'svelte/store';
+  //import type { Database } from './database.types';
+  
+  //type MyKnownWordsRow = Database['public']['Tables']['MyKnownWords']['Row'];
+  interface KnowledgeDict {
+  	[key: string]: number | null;
+  }
+  
+  export const wordKnowledge = writable<KnowledgeDict>({});
+  export const CharacterKnowledge = writable<KnowledgeDict>({});
+  
+  // interface CurrentSentence {
+  //     sentenceIndex: number;
+  // }
+  
+  // export const currentSentence = writable<CurrentSentence>({sentenceIndex: 0});
+  
+  export const currentSentence = writable(0);
+  
+  export const currentSentenceWords = writable<string>('');
+  
+  export const simplified = writable(false);
+  
+  export const character_set = writable<'simplified' | 'traditional'>('simplified');
+
+  [File Ends] lib\stores.ts
+
+  [File Begins] lib\supabaseClient.ts
+  import { createClient } from '@supabase/supabase-js'
+  import { type Database } from './database.types'
+  
+  export const supabase = createClient<Database>('https://kxkuuxexzztnyzzmptgg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4a3V1eGV4enp0bnl6em1wdGdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU4NTE5MTksImV4cCI6MjAzMTQyNzkxOX0.N77BjJm27qvDNNPbMrzL7CeiubOGTE0xCeaROXAxFnU')
+  [File Ends] lib\supabaseClient.ts
+
+  [File Begins] routes\+layout.server.ts
+  import type { LayoutServerLoad } from './$types'
+  
+  export const load: LayoutServerLoad = async ({ locals: { session }, cookies }) => {
+    return {
+      session,
+      cookies: cookies.getAll(),
+    }
+  }
+  [File Ends] routes\+layout.server.ts
+
+  [File Begins] routes\+layout.svelte
+  <script>
+  	import '../app.css';
+  	import { DarkMode } from 'flowbite-svelte';
+  	import { invalidate } from '$app/navigation';
+  	import { onMount } from 'svelte';
+  	// import TwicPics sveltekit components
+  	import { installTwicpics } from '@twicpics/components/sveltekit';
+  	// import TwicPics components css
+  	import '@twicpics/components/style.css';
+  
+  	installTwicpics({
+  		// domain is mandatory
+  		domain: 'https://reamimages.twic.pics'
+  	});
+  
+  	export let data;
+  	$: ({ session, supabase } = data);
+  
+  	onMount(() => {
+  		const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
+  			if (newSession?.expires_at !== session?.expires_at) {
+  				invalidate('supabase:auth');
+  			}
+  		});
+  
+  		return () => data.subscription.unsubscribe();
+  	});
+  </script>
+  
+  <DarkMode />
+  <slot></slot>
+  
+  <style>
+  	:global(body) {
+  		@apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+  	}
+  </style>
+
+  [File Ends] routes\+layout.svelte
+
+  [File Begins] routes\+layout.ts
+  import { createBrowserClient, createServerClient, isBrowser } from '@supabase/ssr'
+  import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public'
+  import type { LayoutLoad } from './$types'
+  
+  export const load: LayoutLoad = async ({ data, depends, fetch }) => {
+    /**
+     * Declare a dependency so the layout can be invalidated, for example, on
+     * session refresh.
+     * By declaring this dependency, the Svelte framework will automatically invalidate and reload the layout 
+     * when the 'supabase:auth' data changes, ensuring that the application always has the correct Supabase client and user data.
+     */
+    depends('supabase:auth')
+  
+    const supabase = isBrowser()
+      ? createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+          global: {
+            fetch,
+          },
+        })
+      : createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+          global: {
+            fetch,
+          },
+          cookies: {
+            getAll() {
+              return data.cookies
+            },
+          },
+        })
+  
+    /**
+     * It's fine to use `getSession` here, because on the client, `getSession` is
+     * safe, and on the server, it reads `session` from the `LayoutData`, which
+     * safely checked the session using `safeGetSession`.
+     * TODO understand
+     */
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+  
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+  
+    return { session, supabase, user }
+  }
+  [File Ends] routes\+layout.ts
+
+  [File Begins] routes\+page.svelte
+  <script lang="ts">
+  	import { Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+  
+  	let navClass = 'bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800';
+  	let navDivClass = 'flex flex-wrap justify-between items-center mx-auto max-w-screen-xl';
+  </script>
+  
+  <header>
+  	<Navbar let:hidden let:toggle fluid={false} {navClass} {navDivClass}>
+  		<NavBrand href="/">
+  			<img
+  				src="https://kxkuuxexzztnyzzmptgg.supabase.co/storage/v1/object/public/Images/Website/a_sleek_and_modern_logo_for_the_app_ream_featuring_wQoP4cC5TGKm8BNXWM4vGg_jiMwf6ZbS0yL_iyeBuWfog.png"
+  				class="h-20"
+  				alt="REAM Logo"
+  			/>
+  			<!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">REAM</span> -->
+  		</NavBrand>
+  		<div class="flex items-center lg:order-2">
+  			<Button href="/app/upload" color="dark">Log in</Button>
+  			<Button class="ml-2 bg-blue-900 text-white" href="/app/upload">Get started</Button>
+  			<NavHamburger
+  				on:click={toggle}
+  				btnClass="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+  			/>
+  		</div>
+  		<NavUl
+  			{hidden}
+  			divClass="justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+  			ulClass="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+  		>
+  			<NavLi href="/" active={true}>Home</NavLi>
+  			<NavLi href="/">About</NavLi>
+  			<NavLi href="/">Blog</NavLi>
+  		</NavUl>
+  	</Navbar>
+  </header>
+  
+  <main class="pt-16">
+  	<!-- Hero Section -->
+  	<section class="bg-white dark:bg-gray-900">
+  		<div class="mx-auto grid max-w-screen-xl px-4 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
+  			<div class="mr-auto place-self-center lg:col-span-7">
+  				<h1
+  					class="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white"
+  				>
+  					Reading Chinese Streamlined
+  				</h1>
+  				<p
+  					class="mb-6 max-w-2xl font-light text-gray-500 md:text-lg lg:mb-8 lg:text-xl dark:text-gray-400"
+  				>
+  					REAM helps you read your favorite texts in Chinese, even if they are above your current
+  					level. We use modern AI to make your texts more comprehensible and enjoyable.
+  				</p>
+  				<!-- <Button size="xl" color="red">Try For Free <ArrowRight class="ml-2 h-5 w-5" /></Button> -->
+  				<Button class="bg-blue-900 text-white" size="xl" href="/app/upload">Try it</Button>
+  			</div>
+  			<div class="hidden lg:col-span-5 lg:mt-0 lg:flex">
+  				<img
+  					src="https://kxkuuxexzztnyzzmptgg.supabase.co/storage/v1/object/public/Images/Website/artis3747_Chinese_character_for_fire___personalize_dtyftfs____f4cbe91f_855b_4bc3_a247_f1bb1724969c_1.png"
+  					alt="mockup"
+  				/>
+  			</div>
+  		</div>
+  	</section>
+  
+  	<!-- Feature Section 1 -->
+  	<section class="bg-gray-50 dark:bg-gray-800">
+  		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
+  			<div class="mb-8 max-w-screen-md lg:mb-16">
+  				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+  					AI-Powered Simplification
+  				</h2>
+  				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
+  					REAM uses large language models to simplify complex Chinese texts into a more digestible
+  					form
+  				</p>
+  			</div>
+  			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Less Complex Grammar</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Adapt the text to your personal HSK level grammar.
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">More Common Characters And Words</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Replace rare characters with more common ones to improve readability.
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Additional Explanations</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Provide explanations for difficult words and phrases to aid comprehension.
+  					</p>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+  
+  	<!-- Feature Section 2 -->
+  	<section class="bg-white dark:bg-gray-900">
+  		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
+  			<div class="mb-8 max-w-screen-md lg:mb-16">
+  				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+  					Adaptive Translation
+  				</h2>
+  				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
+  					REAM provides you with translations, right where you need them
+  				</p>
+  			</div>
+  			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Sentence Translation</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Don't quite get the meaning of a sentence? REAM is here to help.
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Word Translation</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Adaptively translate words that you don't want to learn right now
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">AI-powered</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Chinese words can have many meanings. REAM gives you the right one for the context.
+  					</p>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+  
+  	<!-- Feature Section 1 -->
+  	<section class="bg-gray-50 dark:bg-gray-800">
+  		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
+  			<div class="mb-8 max-w-screen-md lg:mb-16">
+  				<h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+  					Mnemonics make your life easier
+  				</h2>
+  				<p class="text-gray-500 sm:text-xl dark:text-gray-400">
+  					In REAM we have create powerful Mnemonics for each character. This makes learning new
+  					characters a breeze.
+  				</p>
+  			</div>
+  			<div class="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">AI-generated Images</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						AI helps to visualize even the most absurd Mnemonics.
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Adaptive Scaffolding</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						REAM provides a multiple Mnemonics per image, so you can learn step by step.
+  					</p>
+  				</div>
+  				<div>
+  					<h3 class="mb-2 text-xl font-bold dark:text-white">Choose Your Style</h3>
+  					<p class="text-gray-500 dark:text-gray-400">
+  						Choose between different types of Mnemonics to find the one that suits you best.
+  					</p>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+  
+  	<!-- CTA Section -->
+  	<section class="bg-white dark:bg-gray-900">
+  		<div class="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
+  			<div class="mx-auto max-w-screen-sm text-center">
+  				<h2 class="mb-4 text-4xl font-extrabold leading-tight text-gray-900 dark:text-white">
+  					Start your Chinese learning journey today
+  				</h2>
+  				<p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+  					Try REAM and experience the power of AI-assisted language learning.
+  				</p>
+  				<Button class="bg-blue-900 text-white" size="xl" href="/app/upload">Get started</Button>
+  			</div>
+  		</div>
+  	</section>
+  </main>
+  
+  <footer class="bg-gray-50 dark:bg-gray-800">
+  	<div class="mx-auto max-w-screen-xl">
+  		<div class="md:flex md:justify-between">
+  			<div class="mb-6 md:mb-0">
+  				<a href="/" class="flex items-center">
+  					<img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="REAM Logo" />
+  					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
+  						>REAM</span
+  					>
+  				</a>
+  			</div>
+  			<div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+  				<div>
+  					<h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+  						Resources
+  					</h2>
+  					<ul class="text-gray-600 dark:text-gray-400">
+  						<li class="mb-4">
+  							<a href="#" class="hover:underline">Documentation</a>
+  						</li>
+  						<li>
+  							<a href="#" class="hover:underline">Tutorial Videos</a>
+  						</li>
+  					</ul>
+  				</div>
+  				<div>
+  					<h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+  						Follow us
+  					</h2>
+  					<ul class="text-gray-600 dark:text-gray-400">
+  						<li class="mb-4">
+  							<a href="#" class="hover:underline">Twitter</a>
+  						</li>
+  						<li>
+  							<a href="#" class="hover:underline">Facebook</a>
+  						</li>
+  					</ul>
+  				</div>
+  				<div>
+  					<h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">Legal</h2>
+  					<ul class="text-gray-600 dark:text-gray-400">
+  						<li class="mb-4">
+  							<a href="#" class="hover:underline">Privacy Policy</a>
+  						</li>
+  						<li>
+  							<a href="#" class="hover:underline">Terms &amp; Conditions</a>
+  						</li>
+  					</ul>
+  				</div>
+  			</div>
+  		</div>
+  		<hr class="my-6 border-gray-200 sm:mx-auto lg:my-8 dark:border-gray-700" />
+  		<div class="sm:flex sm:items-center sm:justify-between">
+  			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+  				>© 2023 <a href="/" class="hover:underline">REAM™</a>. All Rights Reserved.</span
+  			>
+  			<div class="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+  				<!-- Add social media icons here -->
+  			</div>
+  		</div>
+  	</div>
+  </footer>
+
+  [File Ends] routes\+page.svelte
+
+    [File Begins] routes\app\+layout.server.ts
+    import type { LayoutServerLoad } from './$types';
+    /**
+     * This file is necessary to ensure protection of all routes in the `private`
+     * directory. It makes the routes in this directory _dynamic_ routes, which
+     * send a server request, and thus trigger `hooks.server.ts`.
+     **/
+    export const load = (async () => {
+        return {};
+    }) satisfies LayoutServerLoad;
+    [File Ends] routes\app\+layout.server.ts
+
+    [File Begins] routes\app\+layout.svelte
+    <script lang="ts">
+    	import type { LayoutData } from './$types';
+    
+    	export let data: LayoutData;
+    	$: ({ supabase } = data);
+    </script>
+    
+    <!-- <header>
+    	<nav>
+    		<a href="/">Home</a>
+    	</nav>
+    	<button on:click={logout}>Logout</button>
+    </header> -->
+    <main>
+    	<slot />
+    </main>
+
+    [File Ends] routes\app\+layout.svelte
+
+       
+
+        [File Begins] routes\app\dictionaryChar\[char]\+page.server.ts
+        import type { PageServerLoad } from './$types';
+        import { getImageUrls } from '$lib/functions'; // Import getImageUrls
+        // @ts-ignore
+        import * as hanzi from 'hanzi';
+        // hanzi.start();
+        
+        // @ts-ignore
+        import pkg from 'chinese-s2t';
+        const { s2t } = pkg;
+        
+        
+        export const load = (async ({params, fetch, locals: { supabase }}) => {
+            const char = params.char;
+        
+            // const imagePathsDict = await getImageUrls(s2t(char), supabase);
+            // const imagePaths = imagePathsDict && imagePathsDict[s2t(char)] ? Object.values(imagePathsDict[s2t(char)]) : [];
+            // console.log(imagePaths);
+            // console.log("okok");
+        
+            const imageDataDict = await getImageData(s2t(char), supabase);
+        
+            const definition: any[] = hanzi.definitionLookup(char);
+            // For some reason definitions come back multiple times
+            let uniqueDefinitions: any[];
+            if (definition && definition.length > 0) {
+                uniqueDefinitions = Array.from(
+                    new Map(definition.map(item => [JSON.stringify(item), item])).values()
+                );
+            } else {
+                uniqueDefinitions = [{
+                    traditional: '',
+                    simplified: '',
+                    pinyin: '',
+                    definition: "no definition available"
+                }];
+            }
+            const frequency = hanzi.getCharacterFrequency(char)['number'];
+        
+            const currentSentence = await getCurrentSentence(supabase);
+        
+            let explanation: Promise<string> = Promise.resolve('');
+            if (currentSentence) {
+                explanation = getWordExplanation(currentSentence, char, fetch);
+            }
+            else {
+                explanation = Promise.resolve('No current sentence available');
+            }
+        
+            const decompositions = hanzi.decompose(char);
+        
+            if (decompositions && decompositions.components2) {
+                decompositions.components2 = decompositions.components2.map((component: string) => {
+                    const meaning = hanzi.getRadicalMeaning(component);
+                    return meaning ? `${component} (${meaning})` : component;
+                });
+                
+            }
+        
+            return {
+                char: char,
+                // imagePaths: imagePaths || [], // Update to use imagePaths directly
+                imageDataDict: imageDataDict,
+                definition: uniqueDefinitions,
+                frequency: frequency,
+                currentSentence: currentSentence,
+                explanation: explanation,
+                decompositions: decompositions
+            };
+        }) satisfies PageServerLoad;
+        
+        async function getCurrentSentence(supabase: any) {
+          const { data: userData, error: userError } = await supabase.auth.getUser();
+          if (userError) {
+        			console.error('Error fetching user data:', userError);
+        			return {
+        				success: false,
+        				message: 'Error fetching user data.'
+        			};
+        	}
+        
+        
+          const { data: currentSentenceData, error } = await supabase
+            .from('currentSentence')
+            .select('sentence')
+            .eq('user_id',  userData.user?.id )
+            .single();
+        
+          if (error) {
+            console.error('Error fetching current sentence:', error);
+            return 'Error fetching current sentence';
+          }
+        
+          return currentSentenceData.sentence;
+        }
+        
+        async function getWordExplanation(sentence: string, word: string, fetch: any) {
+            return fetch('/app/api/explain', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sentence: sentence,
+                    word: word
+                })
+            })
+            .then((response: Response) => response.json())
+            .then((data: { content: string }) => data.content);
+        }
+        
+        async function getImageData(char: string, supabase: any) {
+            // Fetch image data including ids, indices, explanations, and prompts for the given character
+            const { data: imageData, error: imageError } = await supabase
+                .from('images')
+                .select('id, index, explanation, prompt')
+                .eq('char', char);
+        
+            if (imageError) {
+                console.error('Error fetching image data:', imageError);
+                return {};
+            }
+        
+            const imageDict: { [index: number]: { url: string, explanation: string, prompt: string } } = {};
+            for (const row of imageData) {
+                const { data, error } = await supabase
+                    .storage
+                    .from('Images')
+                    .getPublicUrl(`images/${row.id}`);
+        
+                if (error) {
+                    console.error('Error fetching public URL:', error);
+                } else {
+                    imageDict[row.index] = {
+                        url: data.publicUrl,
+                        explanation: row.explanation,
+                        prompt: row.prompt
+                    };
+                }
+            }
+        
+            return imageDict;
+        }
+        [File Ends] routes\app\dictionaryChar\[char]\+page.server.ts
+
+        [File Begins] routes\app\dictionaryChar\[char]\+page.svelte
+        <script lang="ts">
+        	import { Button, Spinner, AccordionItem, Accordion, Modal } from 'flowbite-svelte';
+        	import { CharacterKnowledge } from '$lib';
+        	import type { PageData } from './$types';
+        	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
+        
+        	// @ts-ignore
+        	import pkg from 'chinese-s2t';
+        	const { s2t } = pkg;
+        
+        	export let data: PageData;
+        	const { char, imageDataDict, definition, frequency, decompositions } = data;
+        	$: ({ supabase } = data);
+        
+        	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
+        		const { data: userData, error: userError } = await supabase.auth.getUser();
+        
+        		if (userError) {
+        			console.error('Error fetching user data:', userError);
+        			return {
+        				success: false,
+        				message: 'Error fetching user data.'
+        			};
+        		}
+        		const { error } = await supabase
+        			.from('MyKnownCharacters')
+        			.upsert(
+        				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
+        				{ onConflict: ['character', 'user_id'] }
+        			);
+        
+        		if (error) {
+        			console.error('Error updating database:', error);
+        		}
+        	}
+        
+        	function selectItem(type: 'word' | 'image', index: number) {
+        		CharacterKnowledge.update((knowledge) => {
+        			knowledge[s2t(char)] = type === 'word' ? 1 : 0;
+        			return knowledge;
+        		});
+        		updateDatabase(s2t(char), type === 'word' ? 1 : 0, index);
+        		window.history.back();
+        	}
+        
+        	let showModal = {};
+        </script>
+        
+        <Button
+        	on:click={() => window.history.back()}
+        	class="absolute left-2 top-12 flex items-center bg-white text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+        >
+        	<ArrowLeftOutline class="mr-2 h-5 w-5" />
+        	Back
+        </Button>
+        
+        <div class="container mx-auto px-4 py-8">
+        	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        		<div
+        			class="flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+        		>
+        			<h1 class="mb-4 text-9xl">{char}</h1>
+        			<Button color="blue" on:click={() => selectItem('word', 0)}>Choose this</Button>
+        		</div>
+        
+        		{#if Object.keys(imageDataDict).length > 0}
+        			{#each Object.keys(imageDataDict) as index}
+        				<div
+        					class="flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+        				>
+        					<img src={imageDataDict[index].url} alt={char} class="mb-4 h-48 w-full object-contain" />
+        					<div class="flex space-x-2">
+        						<Button color="blue" on:click={() => selectItem('image', +index)}>Choose this</Button>
+        						<Button color="gray" on:click={() => (showModal[index] = true)}>Info</Button>
+        					</div>
+        					<Modal title="Image Information" bind:open={showModal[index]} autoclose outsideclose>
+        						{#if imageDataDict[index].explanation || imageDataDict[index].prompt}
+        							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+        								<strong>Explanation:</strong>
+        								{imageDataDict[index].explanation || 'No explanation available'}
+        							</p>
+        							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+        								<strong>Prompt:</strong>
+        								{imageDataDict[index].prompt || 'No prompt available'}
+        							</p>
+        						{:else}
+        							<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+        								No information available
+        							</p>
+        						{/if}
+        						<svelte:fragment slot="footer">
+        							<Button on:click={() => (showModal[index] = false)}>Close</Button>
+        						</svelte:fragment>
+        					</Modal>
+        				</div>
+        			{/each}
+        		{:else}
+        			<div
+        				class="flex items-center justify-center rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800"
+        			>
+        				<p class="text-gray-500 dark:text-gray-400">No images available for this word.</p>
+        			</div>
+        		{/if}
+        	</div>
+        
+        	<div class="mt-12">
+        		<Accordion flush>
+        			<AccordionItem>
+        				<span slot="header" class="text-xl font-semibold">Definitions</span>
+        				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        					{#each definition as item}
+        						<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+        							<p class="mb-2 text-lg"><strong>Definition:</strong> {item.definition}</p>
+        							<p class="text-lg"><strong>Pinyin:</strong> {item.pinyin}</p>
+        						</div>
+        					{/each}
+        				</div>
+        			</AccordionItem>
+        
+        			<AccordionItem>
+        				<span slot="header" class="text-xl font-semibold">Frequency</span>
+        				<p class="text-lg">Frequency: {frequency}</p>
+        			</AccordionItem>
+        
+        			<AccordionItem>
+        				<span slot="header" class="text-xl font-semibold">Explanation</span>
+        				{#await data.explanation}
+        					<div class="flex items-center justify-center">
+        						<Spinner class="h-5 w-5" />
+        						<span class="ml-2">Loading explanation...</span>
+        					</div>
+        				{:then explanation}
+        					<p class="whitespace-pre-wrap text-gray-700 dark:text-gray-300">{explanation}</p>
+        				{:catch error}
+        					<p class="text-red-500">{error.message}</p>
+        				{/await}
+        			</AccordionItem>
+        
+        			<AccordionItem>
+        				<span slot="header" class="text-xl font-semibold">Decomposition</span>
+        				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+        						<p class="mb-2 text-lg"><strong>Character:</strong> {decompositions.character}</p>
+        						<p class="text-lg">
+        							<strong>Components 1:</strong>
+        							{decompositions.components1.join(', ')}
+        						</p>
+        						<p class="text-lg">
+        							<strong>Components 2:</strong>
+        							{decompositions.components2.join(', ')}
+        						</p>
+        						<p class="text-lg">
+        							<strong>Components 3:</strong>
+        							{decompositions.components3.join(', ')}
+        						</p>
+        					</div>
+        				</div>
+        			</AccordionItem>
+        		</Accordion>
+        	</div>
+        </div>
+
+        [File Ends] routes\app\dictionaryChar\[char]\+page.svelte
+
+        [File Begins] routes\app\dictionaryWord\[word]\+page.server.ts
+        import type { PageServerLoad } from './$types';
+        // @ts-ignore
+        import * as hanzi from 'hanzi';
+        // hanzi.start();
+        
+        
+        export const load = (async ({params, fetch, locals: { supabase }}) => {
+            const word = params.word;
+        
+            const definition: any[] = hanzi.definitionLookup(word);
+            let uniqueDefinitions: any[];
+            if (definition && definition.length > 0) {
+                uniqueDefinitions = Array.from(
+                    new Map(definition.map(item => [JSON.stringify(item), item])).values()
+                );
+            } else {
+                uniqueDefinitions = [{
+                    traditional: '',
+                    simplified: '',
+                    pinyin: '',
+                    definition: "no definition available"
+                }];
+            }
+            const frequency = hanzi.getCharacterFrequency(word)['number'];
+            const currentSentence = await getCurrentSentence(supabase);
+        
+            let explanation: Promise<string> = Promise.resolve('');
+            if (currentSentence) {
+                explanation = getWordExplanation(currentSentence, word, fetch);
+            }
+            else {
+                explanation = Promise.resolve('No current sentence available');
+            }
+        
+        
+        
+            return {
+                word: word,
+                definition: uniqueDefinitions,
+                frequency: frequency,
+                currentSentence: currentSentence,
+                explanation: explanation
+            };
+        }) satisfies PageServerLoad;
+        
+        async function getCurrentSentence(supabase: any) {
+          const { data: userData, error: userError } = await supabase.auth.getUser();
+          if (userError) {
+        			console.error('Error fetching user data:', userError);
+        			return {
+        				success: false,
+        				message: 'Error fetching user data.'
+        			};
+        	}
+        
+        
+          const { data: currentSentenceData, error } = await supabase
+            .from('currentSentence')
+            .select('sentence')
+            .eq('user_id',  userData.user?.id )
+            .single();
+        
+          if (error) {
+            console.error('Error fetching current sentence:', error);
+            return 'Error fetching current sentence';
+          }
+        
+          return currentSentenceData.sentence;
+        }
+        
+        async function getWordExplanation(sentence: string, word: string, fetch: any) {
+            return fetch('/app/api/explain', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sentence: sentence,
+                    word: word
+                })
+            })
+            .then((response: Response) => response.json())
+            .then((data: { content: string }) => data.content);
+        }
+        [File Ends] routes\app\dictionaryWord\[word]\+page.server.ts
+
+        [File Begins] routes\app\dictionaryWord\[word]\+page.svelte
+        <script lang="ts">
+        	// @ts-ignore
+        	import pkg from 'chinese-s2t';
+        	import { ArrowLeftOutline } from 'flowbite-svelte-icons';
+        
+        	const { s2t } = pkg;
+        	import { currentSentenceWords } from '$lib';
+        	$: ({ supabase } = data);
+        	async function updateDatabase(wordChinese: string, knowledgeLevel: number) {
+        		const { data: userData, error: userError } = await supabase.auth.getUser();
+        
+        		if (userError) {
+        			console.error('Error fetching user data:', userError);
+        			return {
+        				success: false,
+        				message: 'Error fetching user data.'
+        			};
+        		}
+        		const { error } = await supabase
+        			.from('MyKnownWords') // Adjust the table name as needed
+        			.upsert(
+        				{ wordChinese, knowledgeLevel, user_id: userData.user?.id },
+        				{ onConflict: 'wordChinese' }
+        			);
+        
+        		if (error) {
+        			console.error('Error updating database:', error);
+        		}
+        	}
+        	import type { PageData } from './$types';
+        	import { wordKnowledge } from '$lib';
+        	import { Button, Spinner, Accordion, AccordionItem } from 'flowbite-svelte';
+        	// import { ArrowLeftIcon } from 'flowbite-svelte-icons';
+        	import CharElement from '../../read/[id]/[offset]/CharElement.svelte';
+        
+        	export let data: PageData;
+        	const word = data.word;
+        	const definition = data.definition;
+        	const frequency = data.frequency;
+        
+        	function update(knowledgeLevel: number) {
+        		wordKnowledge.update((knowledge) => {
+        			knowledge[s2t(word)] = knowledgeLevel;
+        			return knowledge;
+        		});
+        		updateDatabase(s2t(word), knowledgeLevel);
+        		window.history.back();
+        	}
+        
+        	console.log(currentSentenceWords);
+        </script>
+        
+        <div class="flex flex-col items-center">
+        	<Button
+        		on:click={() => window.history.back()}
+        		class="absolute left-2 top-12 flex items-center bg-white text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+        	>
+        		<ArrowLeftOutline class="mr-2 h-5 w-5" />
+        		Back
+        	</Button>
+        	<div class="flex flex-row space-x-4">
+        		{#each word.split('') as char}
+        			<a href="/app/dictionaryChar/{char}" class="mb-2 rounded bg-gray-100 shadow dark:bg-gray-800">
+        				<h1 class="text-[6rem] sm:text-[14rem]">{char}</h1>
+        			</a>
+        		{/each}
+        	</div>
+        
+        	<!-- <div class="flex flex-row space-x-4">
+        		<Button on:click={() => update(0)} color="alternative" size="lg">Show translation</Button>
+        		<Button on:click={() => update(1)} color="alternative" size="lg">Hide translation</Button>
+        	</div> -->
+        </div>
+        
+        <div class="mt-12">
+        	<Accordion flush>
+        		<AccordionItem>
+        			<span slot="header" class="text-xl font-semibold">Definitions</span>
+        			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        				{#each definition as item}
+        					<div class="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+        						<p class="mb-2 text-lg"><strong>Definition:</strong> {item.definition}</p>
+        						<p class="text-lg"><strong>Pinyin:</strong> {item.pinyin}</p>
+        					</div>
+        				{/each}
+        			</div>
+        		</AccordionItem>
+        
+        		<!-- <AccordionItem>
+        			<span slot="header" class="text-xl font-semibold">Frequency</span>
+        			<p class="text-lg">Frequency: {frequency}</p>
+        		</AccordionItem> -->
+        
+        		<AccordionItem>
+        			<span slot="header" class="text-xl font-semibold">Explanation</span>
+        			{#await data.explanation}
+        				<div class="flex items-center justify-center">
+        					<Spinner class="h-5 w-5" />
+        					<span class="ml-2">Loading explanation...</span>
+        				</div>
+        			{:then explanation}
+        				<p class="whitespace-pre-wrap text-gray-700 dark:text-gray-300">{explanation}</p>
+        			{:catch error}
+        				<p class="text-red-500">{error.message}</p>
+        			{/await}
+        		</AccordionItem>
+        	</Accordion>
+        </div>
+
+        [File Ends] routes\app\dictionaryWord\[word]\+page.svelte
+
+        [File Begins] routes\app\read\[id]\+layout.server.ts
+        import type { LayoutServerLoad } from './$types';
+        import { cut } from '@node-rs/jieba';
+        // Jieba only works on server, maybe later better to do everything on clientside for android app
+        import { translateWord } from './translate';
+        // @ts-ignore
+        import pkg from 'chinese-s2t';
+        const { s2t, t2s } = pkg;
+        
+        import { pinyin } from 'pinyin-pro';
+        
+        export const load = (async ({ fetch, params, locals: { supabase } }) => {
+        	const text_less_complex = false;
+        	let response;
+        	if (!text_less_complex) {
+        		response = await fetch('/short_story.txt'); //SvelteKit automatically serves files from the static directory, so you can directly access the file using its relative path.
+        	} else {
+        		response = await fetch('/harry_potter_less_complex.txt');
+        	}
+        	const text = await response.text();
+        	const text_traditional = s2t(text);
+        	const text_simplified = t2s(text);
+        	// const text_cut = cut(text_traditional);
+        	// const pinyin_cut = text_cut.map((c_word) => pinyin(c_word));
+        
+        	let sentenceOffsets: number[] = [];
+        	
+        
+        	const offset = 0;
+        	const words_per_page = 40;
+        
+        	const { data: wordKnowledgeData } = await supabase.from('MyKnownWords').select();
+        	const { data: sentenceIndexData } = await supabase.from('TextsMetadata').select("currentSentence, sentenceAmount").eq('text_id', params.id).single();
+        	// const { data: sentenceIndexData } = await supabase.from('SentenceIndex').select().eq('id', 12345);
+        	const { data: characterKnowledgeData } = await supabase.from('MyKnownCharacters').select();
+        
+        	const currentId = params.id;
+        
+        	return {
+        		text: text,
+        		wordKnowledgeData: wordKnowledgeData,
+        		characterKnowledgeData: characterKnowledgeData,
+        		// text_cut: text_cut,
+        		//translations: translations,
+        		// pinyin_cut: pinyin_cut,
+        		offset: offset,
+        		words_per_page: words_per_page,
+        		sentenceOffsets: sentenceOffsets,
+        		currentSentenceIndex: sentenceIndexData?.currentSentence || 0,
+        		sentenceAmount: sentenceIndexData?.sentenceAmount || 10000, // Add this line
+        		// imagePaths: imagePaths,
+        		currentId: currentId,
+        	};
+        }) satisfies LayoutServerLoad;
+
+        [File Ends] routes\app\read\[id]\+layout.server.ts
+
+        [File Begins] routes\app\read\[id]\+layout.svelte
+        <script lang="ts">
+        	import { onMount } from 'svelte';
+        
+        	// onMount(() => {
+        	// 	document.documentElement.setAttribute('data-theme', 'dark');
+        	// });
+        
+        	import { wordKnowledge, CharacterKnowledge } from '$lib/stores';
+        	import { updateDatabaseSentenceIndex } from '$lib';
+        	import type { LayoutData } from './$types';
+        	import { goto } from '$app/navigation';
+        	import { browser } from '$app/environment';
+        	import { preloadCode, preloadData } from '$app/navigation';
+        	import { BottomNav, BottomNavItem, Tooltip } from 'flowbite-svelte';
+        	import { AngleLeftOutline, AngleRightOutline, HomeOutline } from 'flowbite-svelte-icons';
+        
+        	export let data: LayoutData;
+        
+        	$: ({ supabase } = data);
+        
+        	//TODO get that right here with the reactivity
+        	// const text_cut = data.text_cut;
+        	// const pinyin_cut = data.pinyin_cut;
+        	const sentenceOffsets = data.sentenceOffsets;
+        	const wordKnowledgeData = data.wordKnowledgeData;
+        	const charKnowledgeData = data.characterKnowledgeData;
+        	// const imagePaths = data.imagePaths;
+        	const currentId = data.currentId;
+        	let currentSentenceIndex = data.currentSentenceIndex;
+        	let sentenceAmount = data.sentenceAmount;
+        
+        	wordKnowledgeData?.forEach((item: any) => {
+        		wordKnowledge.update((knowledge) => {
+        			knowledge[item.wordChinese] = item.knowledgeLevel;
+        			return knowledge;
+        		});
+        	});
+        
+        	charKnowledgeData?.forEach((item: any) => {
+        		CharacterKnowledge.update((knowledge) => {
+        			knowledge[item.character] = item.knowledgeLevel;
+        			return knowledge;
+        		});
+        	});
+        
+        	//TODO get the preload right, I think only one page can be preloaded at a time
+        	// $: preloadData(`/read/${currentId}/${currentSentenceIndex + 1}`);
+        	// $: preloadData(`/read/${currentId}/${currentSentenceIndex - 1}`);
+        
+        	function goBack() {
+        		if (currentSentenceIndex > 0) {
+        			currentSentenceIndex--;
+        			updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
+        			goto(`/app/read/${currentId}/${currentSentenceIndex}`);
+        		}
+        	}
+        
+        	function goForward() {
+        		if (currentSentenceIndex < sentenceAmount - 1) {
+        			currentSentenceIndex++;
+        			updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
+        			goto(`/app/read/${currentId}/${currentSentenceIndex}`);
+        		}
+        	}
+        
+        	if (browser) {
+        		goto(`/app/read/${currentId}/${currentSentenceIndex}`);
+        	}
+        </script>
+        
+        <div class="flex min-h-screen flex-col">
+        	<main class="flex-grow pb-16">
+        		<slot></slot>
+        	</main>
+        
+        	<BottomNav position="fixed" navType="pagination" classInner="grid-cols-3">
+        		<BottomNavItem btnName="Previous Sentence" on:click={goBack}>
+        			<AngleLeftOutline
+        				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+        			/>
+        			<!-- <Tooltip arrow={false}>Previous Sentence</Tooltip> -->
+        		</BottomNavItem>
+        		<BottomNavItem btnName="Home" href="/app/upload">
+        			<HomeOutline
+        				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+        			/>
+        			<!-- <Tooltip arrow={false}>Home</Tooltip> -->
+        		</BottomNavItem>
+        		<BottomNavItem btnName="Next Sentence" on:click={goForward}>
+        			<AngleRightOutline
+        				class="mb-1 h-6 w-6 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
+        			/>
+        			<!-- <Tooltip arrow={false}>Next Sentence</Tooltip> -->
+        		</BottomNavItem>
+        	</BottomNav>
+        </div>
+
+        [File Ends] routes\app\read\[id]\+layout.svelte
+
+        [File Begins] routes\app\read\[id]\+page.svelte
+        <script lang="ts">
+            import type { PageData } from './$types';
+            
+            export let data: PageData;
+        </script>
+        [File Ends] routes\app\read\[id]\+page.svelte
+
+          [File Begins] routes\app\read\[id]\[offset]\+layout.svelte
+          <script lang="ts">
+          	import type { LayoutData } from './$types';
+          	import { Drawer, Button, CloseButton, Toggle } from 'flowbite-svelte';
+          	import { simplified } from '$lib';
+          	import { character_set } from '$lib';
+          	import { sineIn } from 'svelte/easing';
+          	import { AdjustmentsHorizontalOutline } from 'flowbite-svelte-icons';
+          
+          	let hidden6 = true;
+          	let transitionParamsRight = {
+          		x: 320,
+          		duration: 200,
+          		easing: sineIn
+          	};
+          
+          	export let data: LayoutData;
+          
+          	import { setContext } from 'svelte';
+          	import { writable } from 'svelte/store';
+          
+          	// const simplified = writable(false);
+          	// setContext('simplified', simplified);
+          
+          	function toggleSimplified() {
+          		simplified.set(!$simplified);
+          	}
+          	function toggleCharacterSet() {
+          		character_set.set($character_set === 'simplified' ? 'traditional' : 'simplified');
+          	}
+          </script>
+          
+          <slot></slot>
+          
+          <div class="fixed right-0 top-0">
+          	<Button
+          		on:click={() => (hidden6 = false)}
+          		class="border-none bg-transparent shadow-none hover:bg-gray-200 dark:border-none dark:bg-transparent dark:hover:bg-gray-700"
+          	>
+          		<AdjustmentsHorizontalOutline class="h-6 w-6 text-gray-500 dark:text-gray-400" />
+          	</Button>
+          </div>
+          
+          <Drawer
+          	placement="right"
+          	transitionType="fly"
+          	transitionParams={transitionParamsRight}
+          	bind:hidden={hidden6}
+          	id="sidebar6"
+          >
+          	<div class="flex items-center">
+          		<h5
+          			id="drawer-label"
+          			class="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400"
+          		>
+          			<AdjustmentsHorizontalOutline class="h-6 w-6 text-gray-500 dark:text-gray-400" /> Settings
+          		</h5>
+          		<CloseButton on:click={() => (hidden6 = true)} class="mb-4 dark:text-white" />
+          	</div>
+          
+          	<div class="mt-8"></div>
+          
+          	<div class="flex items-center">
+          		<Toggle on:change={toggleSimplified} checked={$simplified}></Toggle>
+          		<p class="ml-2">Use LLM-based Simplification</p>
+          	</div>
+          
+          	<div class="mt-4 flex items-center">
+          		<!-- Added mt-4 for margin-top -->
+          		<Toggle on:change={toggleCharacterSet} checked={$character_set === 'traditional'}></Toggle>
+          		<p class="ml-2">Use Traditional Characters</p>
+          	</div>
+          </Drawer>
+
+          [File Ends] routes\app\read\[id]\[offset]\+layout.svelte
+
+          [File Begins] routes\app\read\[id]\[offset]\+page.server.ts
+          import type { PageServerLoad } from './$types';
+          import { getImageUrls } from '$lib/functions';
+          // @ts-ignore
+          import pkg from 'chinese-s2t';
+          const { s2t, t2s } = pkg;
+          
+          export const load = (async ({ parent, params, fetch, locals: { supabase }  }) => {
+          
+          	const { data, error } = await supabase
+          			.from('Texts2')
+          			.select('sentence, sentence_translation, simplified_sentence, sentence_word_translations, sentence_simplified_word_translations, sentence_simplified_translation')
+          			.eq('sentence_id', params.offset)
+          			.eq('text_id', params.id);
+          	if (error) {
+          			throw new Error('Error fetching sentence data: ' + error.message);	
+          		} 
+          
+          	const sentence = data[0]?.sentence?.join('') ?? '';
+          	const simplifiedSentence = data[0]?.simplified_sentence?.join('') ?? '';
+          
+          	// get chosen images for all potential characters, saved as traditional
+          	const chosenImages = await getImageChosenDict(
+          		s2t(sentence + simplifiedSentence), supabase
+          	);
+          
+          	// get imageURLs for all potential characters, saved as traditional
+          	const urlDict = await getImageUrls(
+          		s2t(sentence + simplifiedSentence), supabase
+          	);
+          
+          	updateCurrentSentence(sentence, supabase);
+          
+          	return {
+          		sentence: sentence,
+          		simplifiedSentence: simplifiedSentence,
+          		words: data[0]?.sentence ?? [],
+          		wordsSimplified: data[0]?.simplified_sentence ?? [],
+          		sentenceTranslation: data[0]?.sentence_translation ?? '',
+          		sentenceWordTranslations: data[0]?.sentence_word_translations ?? [],
+          		sentenceSimplifiedWordTranslations: data[0]?.sentence_simplified_word_translations ?? [],
+          		sentenceSimplifiedTranslation: data[0]?.sentence_simplified_translation ?? '',
+          		chosenImages: chosenImages,
+          		imagePaths: urlDict,
+          	};
+          }) satisfies PageServerLoad;
+          
+          
+          async function updateCurrentSentence(currentSentence: string, supabase: any) {
+          	const { data: userData, error: userError } = await supabase.auth.getUser();
+          
+          	if (userError) {
+          			console.error('Error fetching user data:', userError);
+          			return {
+          				success: false,
+          				message: 'Error fetching user data.'
+          			};
+          	}
+              const { error } = await supabase
+                .from('currentSentence')
+                .upsert({ sentence: currentSentence, user_id: userData.user?.id }, { onConflict: 'user_id' });
+          
+              if (error) {
+                console.error('Error updating current sentence:', error);
+              } 
+          //   else {
+          //     console.log('Current sentence updated successfully.');
+          //   }
+          }
+          
+          // Convert the block to a function that gets a string and returns the imagesChosen Dict
+          async function getImageChosenDict(inputString: string, supabase: any) {
+          	const characterSet = new Set(inputString.split(''));
+          	const characterSetTraditional = s2t(characterSet);
+          
+          	const { data: imageChosenData, error } = await supabase
+          		.from('MyKnownCharacters')
+          		.select('character, chosen_image')
+          		.in('character', [...characterSetTraditional]);
+          		
+          	if (error) {
+          		console.error('Error fetching image data:', error);
+          	}
+          	
+          	const imageChosen: { [key: string]: number } = {};
+          	imageChosenData?.forEach((row) => {
+          		imageChosen[row.character] = row.chosen_image;
+          	});
+          
+          	return imageChosen;
+          }
+          [File Ends] routes\app\read\[id]\[offset]\+page.server.ts
+
+          [File Begins] routes\app\read\[id]\[offset]\+page.svelte
+          <script lang="ts">
+          	import type { PageData } from './$types';
+          	import TextElement from './TextElement.svelte';
+          	import { currentSentenceWords, simplified, character_set } from '$lib';
+          	// @ts-ignore
+          	import pkg from 'chinese-s2t';
+          	const { s2t, t2s } = pkg;
+          
+          	export let data: PageData;
+          	$: ({ supabase } = data);
+          
+          	let showSentenceTranslation = false;
+          
+          	// Set the store to the current sentence
+          	$: currentSentenceWords.set(data.sentence);
+          </script>
+          
+          {#if data.sentence === ''}
+          	<div class="flex h-screen items-center justify-center">
+          		<p class="text-xl font-bold">
+          			This sentence is not yet uploaded. Please go back to the previous sentence or reload the page
+          			after waiting a bit.
+          		</p>
+          	</div>
+          {:else}
+          	<button
+          		class="mb-2 h-16 w-full cursor-pointer border-none bg-transparent p-0 text-2xl font-normal sm:text-3xl"
+          		on:click={() => (showSentenceTranslation = !showSentenceTranslation)}
+          	>
+          		{#if showSentenceTranslation}
+          			{#if !$simplified}
+          				{data.sentenceTranslation}
+          			{:else}
+          				{data.sentenceSimplifiedTranslation}
+          			{/if}
+          		{:else}
+          			...
+          		{/if}
+          	</button>
+          	<hr class="divider my-10 border-t border-black sm:my-20" />
+          	<div class="text-center">
+          		{#if $character_set === 'simplified'}
+          			{#if !$simplified}
+          				{#each data.words as word, i (i)}
+          					<TextElement
+          						word={t2s(word)}
+          						pinyin_word={'pinyin'}
+          						translation={data.sentenceWordTranslations[i]}
+          						imagePaths={data.imagePaths}
+          						imageChosen={data.chosenImages}
+          						{supabase}
+          						uniqueId={`text-element-${i}`}
+          					/>
+          				{/each}
+          			{:else}
+          				{#each data.wordsSimplified as word, i (i)}
+          					<TextElement
+          						word={t2s(word)}
+          						pinyin_word={'pinyin'}
+          						translation={data.sentenceSimplifiedWordTranslations[i]}
+          						imagePaths={data.imagePaths}
+          						imageChosen={data.chosenImages}
+          						{supabase}
+          						uniqueId={`text-element-${i}`}
+          					/>
+          				{/each}
+          			{/if}
+          		{:else if !$simplified}
+          			{#each data.words as word, i (i)}
+          				<TextElement
+          					word={s2t(word)}
+          					pinyin_word={'pinyin'}
+          					translation={data.sentenceWordTranslations[i]}
+          					imagePaths={data.imagePaths}
+          					imageChosen={data.chosenImages}
+          					{supabase}
+          					uniqueId={`text-element-${i}`}
+          				/>
+          			{/each}
+          		{:else}
+          			{#each data.wordsSimplified as word, i (i)}
+          				<TextElement
+          					word={s2t(word)}
+          					pinyin_word={'pinyin'}
+          					translation={data.sentenceSimplifiedWordTranslations[i]}
+          					imagePaths={data.imagePaths}
+          					imageChosen={data.chosenImages}
+          					{supabase}
+          					uniqueId={`text-element-${i}`}
+          				/>
+          			{/each}
+          		{/if}
+          	</div>
+          {/if}
+
+          [File Ends] routes\app\read\[id]\[offset]\+page.svelte
+
+          [File Begins] routes\app\read\[id]\[offset]\CharElement.svelte
+          <script lang="ts">
+          	import { CharacterKnowledge } from '$lib';
+          	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+          	import { TwicImg } from '@twicpics/components/sveltekit';
+          	import { TwicPicture } from '@twicpics/components/sveltekit';
+          	// @ts-ignore
+          	import pkg from 'chinese-s2t';
+          	const { s2t } = pkg;
+          
+          	export let char: string;
+          	export let imagePaths;
+          	export let imageChosen;
+          	export let supabase: any;
+          	export let uniqueId: string; // Added uniqueId as a prop for unique dropdown triggers
+          
+          	let chosen_image = 0;
+          	let imagePath: string;
+          	let image_available = false;
+          	let dropdownOpen = false; // Added state to control dropdown
+          
+          	$: isChineseCharacter = /^[\u4e00-\u9fa5]$/.test(char);
+          
+          	$: {
+          		chosen_image = 0;
+          		if (imageChosen.hasOwnProperty(s2t(char))) {
+          			chosen_image = imageChosen[s2t(char)];
+          		}
+          	}
+          
+          	$: {
+          		image_available = false;
+          		if (imagePaths.hasOwnProperty(s2t(char))) {
+          			image_available = true;
+          			// imagePath = imagePaths[s2t(char)][chosen_image];
+          			const imageName = imagePaths[s2t(char)][chosen_image].split('/').pop();
+          			imagePath = imageName;
+          			// imagePath = `https://reamimages.twic.pics/${imageName}`;
+          		}
+          	}
+          
+          	let displayType: string = 'image';
+          
+          	$: {
+          		const charKey = s2t(char);
+          		const knowledgeLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
+          		if (knowledgeLevel === 1) {
+          			displayType = 'character';
+          		} else {
+          			displayType = 'image';
+          		}
+          	}
+          
+          	async function updateDatabase(character: string, knowledgeLevel: number, chosen_image: number) {
+          		const { data: userData, error: userError } = await supabase.auth.getUser();
+          
+          		if (userError) {
+          			console.error('Error fetching user data:', userError);
+          			return {
+          				success: false,
+          				message: 'Error fetching user data.'
+          			};
+          		}
+          		const { error } = await supabase
+          			.from('MyKnownCharacters')
+          			.upsert(
+          				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
+          				{ onConflict: ['character', 'user_id'] }
+          			);
+          
+          		if (error) {
+          			console.error('Error updating database:', error);
+          		}
+          	}
+          
+          	function circle() {
+          		const charKey = s2t(char);
+          		const currentLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
+          		const newKnowledgeLevel = currentLevel === 0 ? 1 : 0;
+          		CharacterKnowledge.update((knowledge) => {
+          			return { ...knowledge, [charKey]: newKnowledgeLevel };
+          		});
+          		updateDatabase(charKey, newKnowledgeLevel, chosen_image);
+          		dropdownOpen = false; // Close the dropdown after toggling
+          	}
+          </script>
+          
+          {#if isChineseCharacter}
+          	<div class="relative inline-block">
+          		<!-- Dropdown Trigger -->
+          		<Dropdown
+          			placement="top"
+          			triggeredBy={`#char-dropdown-${uniqueId}-${char}`}
+          			bind:open={dropdownOpen}
+          		>
+          			<DropdownItem href={`/app/dictionaryChar/${char}`}>Explanation</DropdownItem>
+          			<DropdownItem on:click={circle}>Switch</DropdownItem>
+          		</Dropdown>
+          
+          		<!-- Button that triggers the Dropdown -->
+          		<button
+          			id={`char-dropdown-${uniqueId}-${char}`}
+          			class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
+          		>
+          			{#if displayType === 'character'}
+          				{char}
+          			{:else if image_available}
+          				<TwicImg
+          					src={imagePath}
+          					alt={char}
+          					eager="true"
+          					class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
+          				/>
+          			{:else}
+          				{char}
+          			{/if}
+          		</button>
+          	</div>
+          {:else}
+          	<button
+          		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
+          	>
+          		{char}
+          	</button>
+          {/if}
+
+          [File Ends] routes\app\read\[id]\[offset]\CharElement.svelte
+
+          [File Begins] routes\app\read\[id]\[offset]\TextElement.svelte
+          <script lang="ts">
+          	import CharElement from './CharElement.svelte';
+          	import { wordKnowledge } from '$lib';
+          	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+          	// @ts-ignore
+          	import pkg from 'chinese-s2t';
+          	const { s2t } = pkg;
+          
+          	export let word: string;
+          	export let pinyin_word: string;
+          	export let translation: string;
+          	export let imagePaths;
+          	export let imageChosen;
+          	export let supabase: any;
+          	export let uniqueId: string;
+          
+          	let upperButtonDisplay = 'translation';
+          	let dropdownOpen = false; // Added state to control dropdown
+          
+          	$: isAllChinese = /^[\u4e00-\u9fa5]+$/.test(word);
+          
+          	$: {
+          		const wordKey = s2t(word);
+          		const knowledgeLevel = $wordKnowledge[wordKey] ?? 0; // Default to 0 if undefined
+          		if (knowledgeLevel === 1) {
+          			upperButtonDisplay = 'none';
+          		} else {
+          			upperButtonDisplay = 'translation';
+          		}
+          	}
+          
+          	async function updateDatabase(word: string, knowledgeLevel: number) {
+          		const { data: userData, error: userError } = await supabase.auth.getUser();
+          
+          		if (userError) {
+          			console.error('Error fetching user data:', userError);
+          			return {
+          				success: false,
+          				message: 'Error fetching user data.'
+          			};
+          		}
+          		const { error } = await supabase
+          			.from('MyKnownWords')
+          			.upsert(
+          				{ wordChinese: word, knowledgeLevel: knowledgeLevel, user_id: userData.user?.id },
+          				{ onConflict: ['wordChinese', 'user_id'] }
+          			);
+          
+          		if (error) {
+          			console.error('Error updating database:', error);
+          		}
+          	}
+          
+          	function toggle() {
+          		const wordKey = s2t(word);
+          		const currentLevel = $wordKnowledge[wordKey] ?? 0; // Default to 0 if undefined
+          		const newKnowledgeLevel = currentLevel === 0 ? 1 : 0;
+          		wordKnowledge.update((knowledge) => {
+          			return { ...knowledge, [wordKey]: newKnowledgeLevel };
+          		});
+          		updateDatabase(wordKey, newKnowledgeLevel);
+          		dropdownOpen = false; // Close the dropdown after toggling
+          	}
+          
+          	let charContainer: HTMLDivElement;
+          </script>
+          
+          <div class="mb-8 mr-4 mt-0 inline-flex flex-col items-center sm:mb-16 sm:mr-8">
+          	{#if isAllChinese}
+          		<Dropdown
+          			placement="top"
+          			triggeredBy={`#translation-dropdown-${uniqueId}`}
+          			bind:open={dropdownOpen}
+          		>
+          			<DropdownItem href={`/app/dictionaryWord/${word}`}>Explanation</DropdownItem>
+          			<DropdownItem on:click={toggle}>Switch</DropdownItem>
+          		</Dropdown>
+          		<button
+          			id={`translation-dropdown-${uniqueId}`}
+          			class="upper-button h-6 w-full cursor-pointer border-none bg-gray-100 sm:h-8 dark:bg-gray-800"
+          		>
+          			{#if upperButtonDisplay === 'translation'}
+          				{translation}
+          			{:else}
+          				...
+          			{/if}
+          		</button>
+          	{:else}
+          		<button
+          			class="upper-button h-6 w-full cursor-pointer border-none bg-transparent sm:h-8 dark:bg-transparent"
+          		></button>
+          	{/if}
+          
+          	<div class="chars mr-0 flex flex-wrap justify-center">
+          		{#each word.split('') as char, index}
+          			<CharElement {char} {imagePaths} {imageChosen} {supabase} uniqueId={`${uniqueId}-${index}`} />
+          		{/each}
+          	</div>
+          </div>
+
+          [File Ends] routes\app\read\[id]\[offset]\TextElement.svelte
+
+        [File Begins] routes\app\read\[id]\translate.ts
+        import Groq from 'groq-sdk';
+        const groq = new Groq({
+            apiKey: process.env.GROQ_API_KEY
+        });
+        
+        
+        async function translateWord(text: string, words: string[]) {
+            const chatInput = text + '\n\n-' + words.join('\n-');
+            const systemPrompt = `You will be given a piece of chinese text and then a list of words from this chinese text. Generate word-by-word translations, that are context appropriate. Be brief with the translations.
+            Do NOT output anything else. Adhere strcitly to the format of the example output. JUST DO THE TASK.
+          
+          For instance the input could be:
+          哈利波特站在火車站的月台上，心情既興奮又緊張。他即將乘坐霍格華茲特快列車，前往他夢寐以求的魔法學校。
+          
+          -月台
+          -即將
+          -前往
+          
+          Then the output should be:
+          
+          -月台: platform
+          -即將: soon 
+          -前往: go`;
+          
+            const chatCompletion = await groq.chat.completions.create({
+              model: 'gemma-7b-it',
+              messages: [
+                {
+                  role: 'system',
+                  content: systemPrompt,
+                },
+                {
+                  role: 'user',
+                  content: chatInput,
+                },
+              ],
+              temperature: 1,
+              max_tokens: 5000,//chatInput.length * 5,
+              top_p: 1,
+              frequency_penalty: 0,
+              presence_penalty: 0,
+              //stream: true,
+            });
+          
+            const content = chatCompletion.choices[0].message.content;
+            if (!content) {
+              throw new Error('No content in chatCompletion');
+            }
+            console.log("CONTENT: ", chatInput);
+            console.log("RESPONSE: ", content);
+          
+            const outputList: string[] = [];
+            for (const line of content.split('\n')) {
+              const translation = line.split(': ')[1].split('/')[0].split('(')[0].replace("'", "").trim();
+              outputList.push(translation);
+            }
+            return outputList;
+        }
+        
+        export { translateWord };
+        [File Ends] routes\app\read\[id]\translate.ts
+
+      [File Begins] routes\app\upload\+page.server.ts
+      import type { Actions, PageServerLoad } from './$types';
+      import { v4 as uuidv4 } from 'uuid';
+      import fs from 'fs';
+      import path from 'path';
+      // @ts-ignore
+      import pkg from 'chinese-s2t';
+      const { s2t, t2s } = pkg;
+      
+      export const load = (async ({ locals: { supabase } }) => {
+      	const { data, error } = await supabase.from('TextsMetadata').select();
+      
+          if (error) {
+              console.error('Error fetching text metadata:', error);
+              return { texts: [] };
+          }
+      
+          return { texts: data };
+      }) satisfies PageServerLoad;
+      
+      export const actions: Actions = {
+      uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
+      		const formData = await request.formData();
+      		const file = formData.get('file') as File;
+      		const text_id: string = uuidv4(); // Generate a new UUID
+      
+      		if (!file) {
+      			return {
+      				success: false,
+      				message: 'Please upload a .txt file.'
+      			};
+      		}
+      
+      		let text = await file.text();
+      
+      		const title: string = file.name.split('.')[0];
+      
+      		const { data: userData, error: userError } = await supabase.auth.getUser();
+      
+      		if (userError) {
+      			console.error('Error fetching user data:', userError);
+      			return {
+      				success: false,
+      				message: 'Error fetching user data.'
+      			};
+      		}
+      
+      		const sentences = splitIntoSentences(text);
+      
+      		const { error } = await supabase
+      			.from('TextsMetadata')
+      			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id, sentenceAmount: sentences.length}, { onConflict: 'text_id' });
+      		// TODO proper error handling
+      		if (error) {
+      			console.error('Error updating database:', error);
+      		}
+      
+      		
+      		// Upload first sentence and wait for it
+      		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
+      
+      		// Upload the rest of the sentences asynchronously
+      		processAndUpload(sentences, text_id, fetch, supabase);
+      
+      
+      		return {
+      				success: true,
+      				message: 'Text processed successfully.'
+      			};
+      
+      
+      	},
+      
+      	uploadTextEnglish: async ({ request, fetch, locals: { supabase } }) => {
+      
+      		const formData = await request.formData();
+      		const file = formData.get('file') as File;
+      		const text_id: string = uuidv4(); // Generate a new UUID
+      
+      		if (!file) {
+      			return {
+      				success: false,
+      				message: 'Please upload a .txt file.'
+      			};
+      		}
+      
+      		let text = await file.text();
+      		const title: string = file.name.split('.')[0];
+      
+      		const { error } = await supabase
+      			.from('TextsMetadata')
+      			.upsert({ text_id: text_id, title: title }, { onConflict: 'text_id' });
+      		// TODO proper error handling
+      		if (error) {
+      			console.error('Error updating database:', error);
+      		}
+      
+      		const translateResponse = await fetch('/app/api/translateEnglishChinese', {
+      			method: 'POST',
+      			headers: {
+      				'Content-Type': 'application/json'
+      			},
+      			body: JSON.stringify({ text: text })
+      		});
+      
+      		if (!translateResponse.ok) {
+      			return {
+      				success: false,
+      				message: 'Error translating text.'
+      			};
+      		}
+      
+      		let { content: translatedText } = await translateResponse.json();
+      
+      		
+      
+      		const sentences = splitIntoSentences(translatedText);
+      
+      		
+      
+      		// Upload first sentence and wait for it
+      		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
+      
+      		// Upload the rest of the sentences asynchronously
+      		processAndUpload(sentences, text_id, fetch, supabase);
+      
+      
+      		return {
+      				success: true,
+      				message: 'Text processed successfully.'
+      			};
+      }		
+      };
+      
+      
+      function splitIntoSentences(text: string): string[] {
+          // Regular expression to match sequences ending with Chinese punctuation or newline
+          const regex = /[^。！？\n]+[。！？]?/g;
+          const matches = text.match(regex);
+          
+          if (matches) {
+              return matches
+                  .map(segment => segment.trim()) // Remove any leading/trailing whitespace
+                  .filter(segment => segment.length > 0); // Exclude empty strings
+          }
+          
+          return [];
+      }
+      
+      async function callApi(apiRoute: string, input: any, fetch:any) {
+      	const response = await fetch(apiRoute, {
+      		method: 'POST',
+      		headers: {
+      			'Content-Type': 'application/json'
+      		},
+      		body: JSON.stringify(input)
+      	});
+      
+          if (!response.ok) {
+              const errorBody = await response.json();
+              throw new Error(`Error during API call: ${errorBody.message || 'Unknown error'}`);
+          }
+      
+      
+      	return await response.json();
+      }
+      
+      async function processAndUpload(sentences: string[], text_id: string, fetch: any, supabase: any) {
+          for (let i = 1; i < sentences.length; i += 1) {
+              const sentence = sentences[i];
+              await processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
+              await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 seconds
+          }
+      }
+      
+      async function processAndUploadOneSentence(sentence: string, text_id: string, sentence_id: number, fetch: any, supabase: any) {
+      	console.log('Processing sentence:', sentence);
+      	const { simplifiedSentence } = await callApi('/app/api/newDataScheme/simplifySentence', { sentence }, fetch);
+      
+      	const [
+      		{ sentenceTranslation : translatedSentence },
+      		{ sentenceTranslation : translatedSimplifiedSentence},
+      		{ words, translations },
+      		{ words : simplifiedWords, translations : simplifiedTranslations }
+          ] = await Promise.all([
+              callApi('/app/api/translate_sentence', { sentence : sentence}, fetch),
+              callApi('/app/api/translate_sentence', { sentence : simplifiedSentence }, fetch),
+              callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : sentence}, fetch),
+              callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : simplifiedSentence }, fetch)
+          ]);
+      
+      	// TODO make this not await in case of async upload?
+      	const { error } = await supabase.from('Texts2').insert({
+      		text_id: text_id,
+      		sentence_id: sentence_id,
+      
+      		sentence: words,
+      		sentence_translation: translatedSentence,
+      		sentence_word_translations: translations,
+      
+      		simplified_sentence: simplifiedWords,
+      		sentence_simplified_translation: translatedSimplifiedSentence,
+      		sentence_simplified_word_translations: simplifiedTranslations,
+      	});
+      
+      	if (error) {
+      		throw new Error(`Error uploading sentence to database: ${error.message}`);
+      	}
+      }
+      [File Ends] routes\app\upload\+page.server.ts
+
+      [File Begins] routes\app\upload\+page.svelte
+      <script lang="ts">
+      	import type { ActionData, PageData } from './$types';
+      	import { Gallery, Button, Spinner, Card } from 'flowbite-svelte';
+      	import { enhance } from '$app/forms';
+      	import { goto } from '$app/navigation';
+      
+      	export let data: PageData;
+      	export let form: ActionData;
+      
+      	let formLoading = false;
+      	let chineseFormElement: any;
+      	let englishFormElement: any;
+      
+      	const handleSubmit = () => {
+      		return () => {
+      			formLoading = true;
+      			return async ({ update }: { update: () => void }) => {
+      				formLoading = false;
+      				update();
+      			};
+      		};
+      	};
+      
+      	const logout = async () => {
+      		const { error } = await data.supabase.auth.signOut();
+      		if (error) {
+      			console.error(error);
+      		}
+      		goto('/');
+      	};
+      
+      	const handleChineseFileSelect = () => {
+      		chineseFormElement.submit();
+      	};
+      
+      	const handleEnglishFileSelect = () => {
+      		englishFormElement.submit();
+      	};
+      </script>
+      
+      <header>
+      	<nav>
+      		<Button
+      			href="/"
+      			color="dark"
+      			class="mr-2 bg-white text-gray-800 dark:bg-gray-800 dark:text-white">Home</Button
+      		>
+      	</nav>
+      	<Button
+      		on:click={logout}
+      		color="dark"
+      		class="bg-white text-gray-800 dark:bg-gray-800 dark:text-white">Logout</Button
+      	>
+      </header>
+      
+      <div class="mx-auto max-w-4xl space-y-8 p-6">
+      	<h1 class="mb-6 text-3xl font-bold text-gray-800 dark:text-white">Text Upload</h1>
+      
+      	<div class="grid gap-6 md:grid-cols-2">
+      		<Card size="xs">
+      			<form
+      				bind:this={chineseFormElement}
+      				method="POST"
+      				action="?/uploadTextChinese"
+      				use:enhance={handleSubmit()}
+      				enctype="multipart/form-data"
+      				class="space-y-4"
+      			>
+      				<h2 class="text-xl font-semibold text-gray-700 dark:text-white">Upload Chinese Text</h2>
+      				<div class="flex w-full items-center justify-center">
+      					<label
+      						for="chinese-file-upload"
+      						class="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100"
+      					>
+      						<svg
+      							class="mb-4 h-8 w-8 text-gray-500"
+      							aria-hidden="true"
+      							xmlns="http://www.w3.org/2000/svg"
+      							fill="none"
+      							viewBox="0 0 20 16"
+      						>
+      							<path
+      								stroke="currentColor"
+      								stroke-linecap="round"
+      								stroke-linejoin="round"
+      								stroke-width="2"
+      								d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+      							/>
+      						</svg>
+      						<p class="mb-2 text-sm text-gray-500">
+      							<span class="font-semibold">Click to upload</span>
+      						</p>
+      						<p class="text-xs text-gray-500">TXT file only</p>
+      						<input
+      							id="chinese-file-upload"
+      							type="file"
+      							name="file"
+      							accept=".txt"
+      							class="hidden"
+      							required
+      							on:change={handleChineseFileSelect}
+      						/>
+      					</label>
+      				</div>
+      			</form>
+      		</Card>
+      
+      		<Card size="xs">
+      			<form
+      				bind:this={englishFormElement}
+      				method="POST"
+      				action="?/uploadTextEnglish"
+      				use:enhance={handleSubmit()}
+      				enctype="multipart/form-data"
+      				class="space-y-4"
+      			>
+      				<h2 class="text-xl font-semibold text-gray-700 dark:text-white">Upload English Text</h2>
+      				<div class="flex w-full items-center justify-center">
+      					<label
+      						for="english-file-upload"
+      						class="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100"
+      					>
+      						<svg
+      							class="mb-4 h-8 w-8 text-gray-500"
+      							aria-hidden="true"
+      							xmlns="http://www.w3.org/2000/svg"
+      							fill="none"
+      							viewBox="0 0 20 16"
+      						>
+      							<path
+      								stroke="currentColor"
+      								stroke-linecap="round"
+      								stroke-linejoin="round"
+      								stroke-width="2"
+      								d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+      							/>
+      						</svg>
+      						<p class="mb-2 text-sm text-gray-500">
+      							<span class="font-semibold">Click to upload</span>
+      						</p>
+      						<p class="text-xs text-gray-500">TXT file only</p>
+      						<input
+      							id="english-file-upload"
+      							type="file"
+      							name="file"
+      							accept=".txt"
+      							class="hidden"
+      							required
+      							on:change={handleEnglishFileSelect}
+      						/>
+      					</label>
+      				</div>
+      			</form>
+      		</Card>
+      	</div>
+      
+      	{#if form?.success}
+      		<div class="border-l-4 border-green-500 bg-green-100 p-4 text-green-700" role="alert">
+      			<p class="font-bold">Success</p>
+      			<!-- <p>{form.message}</p> -->
+      			<p>
+      				Uploaded the first sentence of the text successfully. You can start reading the text,
+      				further sentences will be uploaded in the background.
+      			</p>
+      		</div>
+      	{/if}
+      
+      	<div class="mt-8">
+      		<h2 class="mb-4 text-2xl font-bold text-gray-800 dark:text-white">Available Texts</h2>
+      		<Gallery class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      			{#each data.texts as text}
+      				<a
+      					href="/app/read/{text.text_id}"
+      					class="flex h-32 items-center justify-center rounded-lg bg-blue-100 p-4 text-center transition-colors duration-200 hover:bg-blue-200"
+      				>
+      					<span class="text-lg font-semibold text-blue-800">{text.title}</span>
+      				</a>
+      			{/each}
+      		</Gallery>
+      	</div>
+      </div>
+
+      [File Ends] routes\app\upload\+page.svelte
+
+    [File Begins] routes\auth\+layout.svelte
+    <script lang="ts">
+    	import type { LayoutData } from './$types';
+    
+    	export let data: LayoutData;
+    </script>
+    
+    <header>
+    	<nav>
+    		<a href="/" class="flex items-center">
+    			<img
+    				src="https://kxkuuxexzztnyzzmptgg.supabase.co/storage/v1/object/public/Images/Website/a_sleek_and_modern_logo_for_the_app_ream_featuring_wQoP4cC5TGKm8BNXWM4vGg_jiMwf6ZbS0yL_iyeBuWfog.png"
+    				class="mr-3 h-24"
+    				alt="REAM Logo"
+    			/>
+    		</a>
+    	</nav>
+    </header>
+    <slot />
+
+    [File Ends] routes\auth\+layout.svelte
+
+    [File Begins] routes\auth\+page.server.ts
+    import type { PageServerLoad } from './$types';
+    import { redirect } from '@sveltejs/kit'
+    
+    export const load = (async () => {
+        throw redirect(302, '/auth/login'); // Specify the path you want to redirect to
+    }) satisfies PageServerLoad;
+    [File Ends] routes\auth\+page.server.ts
+
+    [File Begins] routes\auth\+page.svelte
+    <script lang="ts">
+    	import type { PageData } from './$types';
+    
+    	export let data: PageData;
+    </script>
+
+    [File Ends] routes\auth\+page.svelte
+
+      [File Begins] routes\auth\error\+page.svelte
+      <script lang="ts">
+      	import type { PageData } from './$types';
+      
+      	export let data: PageData;
+      </script>
+      
+      <p>Login error</p>
+
+      [File Ends] routes\auth\error\+page.svelte
+
+      [File Begins] routes\auth\login\+page.server.ts
+      import type { PageServerLoad } from './$types';
+      import { redirect } from '@sveltejs/kit'
+      import type { Actions } from './$types'
+      
+      export const load = (async () => {
+          return {};
+      }) satisfies PageServerLoad;
+      
+      
+      export const actions: Actions = {
+        login: async ({ request, locals: { supabase } }) => {
+          const formData = await request.formData()
+          const email = formData.get('email') as string
+          const password = formData.get('password') as string
+      
+          const { error } = await supabase.auth.signInWithPassword({ email, password })
+          if (error) {
+            console.error(error)
+            redirect(303, '/auth/signup')
+          } else {
+            redirect(303, '/app/upload')
+          }
+        },
+      }
+      [File Ends] routes\auth\login\+page.server.ts
+
+      [File Begins] routes\auth\login\+page.svelte
+      <script lang="ts">
+      	import type { PageData } from './$types';
+      	import { Section, Register } from 'flowbite-svelte-blocks';
+      	import { Button, Checkbox, Label, Input } from 'flowbite-svelte';
+      
+      	export let data: PageData;
+      </script>
+      
+      <Section name="login">
+      	<div class="space-y-4 p-6 sm:p-8 md:space-y-6">
+      		<form method="POST" action="?/login" class="flex flex-col space-y-6">
+      			<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">Login</h3>
+      			<Label class="space-y-2">
+      				<span>Your email</span>
+      				<Input type="email" name="email" placeholder="name@company.com" required />
+      			</Label>
+      			<Label class="space-y-2">
+      				<span>Your password</span>
+      				<Input type="password" name="password" placeholder="•••••" required />
+      			</Label>
+      
+      			<Checkbox>Remember me</Checkbox>
+      			<a href="/" class=" text-sm text-blue-700 hover:underline dark:text-blue-500"
+      				>Forgot password?</a
+      			>
+      
+      			<Button type="submit" class="w-full">Login</Button>
+      			<p class="text-sm font-light text-gray-500 dark:text-gray-400">
+      				Don’t have an account yet? <a
+      					href="/auth/signup"
+      					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a
+      				>
+      			</p>
+      		</form>
+      	</div>
+      </Section>
+
+      [File Ends] routes\auth\login\+page.svelte
+
+      [File Begins] routes\auth\signup\+page.server.ts
+      import type { PageServerLoad } from './$types';
+      import { redirect } from '@sveltejs/kit'
+      import type { Actions } from './$types'
+      
+      export const load = (async () => {
+          return {};
+      }) satisfies PageServerLoad;
+      
+      
+      export const actions: Actions = {
+        signup: async ({ request, locals: { supabase } }) => {
+          const formData = await request.formData()
+          const email = formData.get('email') as string
+          const password = formData.get('password') as string
+      
+          const { error } = await supabase.auth.signUp({ email, password })
+          if (error) {
+            console.error(error)
+            redirect(303, '/auth/error')
+          } else {
+            redirect(303, '/')
+          }
+        }
+      }
+      [File Ends] routes\auth\signup\+page.server.ts
+
+      [File Begins] routes\auth\signup\+page.svelte
+      <script lang="ts">
+      	import type { PageData } from './$types';
+      	import { Section, Register } from 'flowbite-svelte-blocks';
+      	import { Button, Checkbox, Label, Input } from 'flowbite-svelte';
+      
+      	export let data: PageData;
+      </script>
+      
+      <Section name="register">
+      	<div class="space-y-4 p-6 sm:p-8 md:space-y-6">
+      		<form method="POST" action="?/signup" class="flex flex-col space-y-6">
+      			<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">Create an account</h3>
+      			<Label class="space-y-2">
+      				<span>Your email</span>
+      				<Input type="email" name="email" placeholder="name@company.com" required />
+      			</Label>
+      			<Label class="space-y-2">
+      				<span>Your password</span>
+      				<Input type="password" name="password" placeholder="•••••" required />
+      			</Label>
+      			<Label class="space-y-2">
+      				<span>Confirm password</span>
+      				<Input type="password" name="confirm-password" placeholder="•••••" required />
+      			</Label>
+      			<div class="flex items-start">
+      				<Checkbox
+      					>I accept the&nbsp;<a
+      						class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+      						href="/"
+      					>
+      						Terms and Conditions</a
+      					></Checkbox
+      				>
+      			</div>
+      			<Button type="submit" class="w-full">Create an account</Button>
+      			<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+      				Already have an account? <a
+      					href="/auth/login"
+      					class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a
+      				>
+      			</div>
+      		</form>
+      	</div>
+      </Section>
+
+      [File Ends] routes\auth\signup\+page.svelte
+
+        [File Begins] routes\auth\signup\confirm\+server.ts
+        import type { EmailOtpType } from '@supabase/supabase-js'
+        import { redirect } from '@sveltejs/kit'
+        
+        import type { RequestHandler } from './$types'
+        
+        /**
+         * TODO not 100% sure when this is called (after auth.signUp?)
+         * Also not 100% how it works
+         **/
+        
+        export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
+          const token_hash = url.searchParams.get('token_hash')
+          const type = url.searchParams.get('type') as EmailOtpType | null
+          const next = url.searchParams.get('next') ?? '/'
+        
+          /**
+           * Clean up the redirect URL by deleting the Auth flow parameters.
+           *
+           * `next` is preserved for now, because it's needed in the error case.
+           */
+          const redirectTo = new URL(url)
+          redirectTo.pathname = next
+          redirectTo.searchParams.delete('token_hash')
+          redirectTo.searchParams.delete('type')
+        
+          if (token_hash && type) {
+            const { error } = await supabase.auth.verifyOtp({ type, token_hash })
+            if (!error) {
+              redirectTo.searchParams.delete('next')
+              redirect(303, redirectTo)
+            }
+          }
+        
+          redirectTo.pathname = '/auth/error'
+          redirect(303, redirectTo)
+        }
+        [File Ends] routes\auth\signup\confirm\+server.ts
+
+      [File Begins] routes\blog\introduction\+page.svelte
+      <script lang="ts">
+      	import type { PageData } from './$types';
+      	// @ts-ignore
+      	import About from './intro.svx';
+      
+      	export let data: PageData;
+      </script>
+      
+      <main>
+      	<About />
+      </main>
+
+      [File Ends] routes\blog\introduction\+page.svelte
+
+      [File Begins] routes\blog\introduction\intro.svx
+      <script>
+        export let title = 'About Us';
+      </script>
+      
+        # {title}
+      
+        Welcome to the about page, written in mdsvex!
+      
+        - Point 1
+        - Point 2
+        - Point 3
+
+      [File Ends] routes\blog\introduction\intro.svx
+
+
+<-- File Content Ends
+

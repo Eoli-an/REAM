@@ -51,14 +51,15 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_the_letter_9_--chaos_10_--sref_httpss.mj.runc5O8gcr_c8960c87-9600-44d5-bf81-c4e936819bae_0.png';
-const char = '九';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_person_on_a_walk_through_Japanese_autumn_landscape__6990819f-8bfa-4705-9cf2-6e90e63d5410_2.png';
+const char = '走';
 const explanation = `
     Most Common Meaning:
-    nine
+    walk
     Thinking of a visual representation:
-	Easy to visualize, just the letter nine
+	A person walking, stlye it a bit
     `;
-const prompt = 'the letter "9"';
+const prompt =
+	'person on a walk through Japanese autumn landscape, tree leaves spells "walk", Denis Villeneuve movie still, digital art';
 const type = 'Meaning';
 uploadImage(imagePath, char, explanation, prompt, type);
