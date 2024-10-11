@@ -1,5 +1,7 @@
 import Groq from 'groq-sdk';
 import OpenAI from 'openai';
+import { error } from '@sveltejs/kit';
+
 
 // Initialize Groq and OpenAI clients
 const groq = new Groq({
@@ -23,16 +25,18 @@ const openai = new OpenAI({
  */
 async function retryWithBackoff<T>(
   fn: () => Promise<T>,
-  retries: number = 3,
+  retries: number = 5,
   delay: number = 1000,
   factor: number = 2,
   jitter: number = 300
 ): Promise<T> {
   try {
     return await fn();
-  } catch (error) {
+  } catch (error:any) {
+    console.warn(`Caught error: ${error.message}`);
     if (retries <= 0) {
-      throw error;
+      // throw error;
+      throw error(420, 'Upload was not successful, please try again');
     }
 
     // Optionally, inspect the error to decide if it's retryable
@@ -117,7 +121,7 @@ export async function callLLM(
 
   // Wrap the API call with retry logic
   try {
-    const result = await retryWithBackoff(apiCall, 3, 1000, 2, 300);
+    const result = await retryWithBackoff(apiCall, 5, 1000, 2, 300);
     return result;
   } catch (error) {
     console.error('Failed to get LLM response after retries:', error);

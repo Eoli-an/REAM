@@ -165,6 +165,17 @@
 		</div>
 	{/if}
 
+	<Button
+		on:click={() => console.log('Generate text from available vocabulary')}
+		color="dark"
+		class="w-full bg-white text-gray-800 dark:bg-gray-800 dark:text-white"
+		size="xl"
+		href="https://chatgpt.com/share/66ffb355-9e18-8006-b8a6-218a84ca21c1"
+		target="_blank"
+	>
+		Generate Text using ChatGPT
+	</Button>
+
 	<div class="mt-8">
 		<h2 class="mb-4 text-2xl font-bold text-gray-800 dark:text-white">Available Texts</h2>
 		<Gallery class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">

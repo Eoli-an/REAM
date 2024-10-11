@@ -1,0 +1,452 @@
+{
+	"免": {
+		"adjective": "exempt",
+		"noun": "exemption",
+		"location": "Mountains",
+		"person": "Hermit",
+		"animal": "Deer",
+		"verb1": "liberate",
+		"verb2": "discharge",
+		"verb3": "absolve"
+	},
+	"丶": {
+		"adjective": "minimal",
+		"noun": "dot",
+		"location": "Desert",
+		"person": "Monk",
+		"animal": "Ant",
+		"verb1": "indicate",
+		"verb2": "mark",
+		"verb3": "dot"
+	},
+	"宀": {
+		"adjective": "sheltered",
+		"noun": "roof",
+		"location": "Cottage",
+		"person": "Guardian",
+		"animal": "Turtle",
+		"verb1": "protect",
+		"verb2": "cover",
+		"verb3": "shelter"
+	},
+	"⻊": {
+		"adjective": "agile",
+		"noun": "foot",
+		"location": "Forest",
+		"person": "Scout",
+		"animal": "Leopard",
+		"verb1": "leap",
+		"verb2": "stride",
+		"verb3": "run"
+	},
+	"包": {
+		"adjective": "enclosed",
+		"noun": "package",
+		"location": "Warehouse",
+		"person": "Courier",
+		"animal": "Beetle",
+		"verb1": "wrap",
+		"verb2": "seal",
+		"verb3": "deliver"
+	},
+	"了": {
+		"adjective": "completed",
+		"noun": "completion",
+		"location": "Summit",
+		"person": "Finisher",
+		"animal": "Eagle",
+		"verb1": "achieve",
+		"verb2": "conclude",
+		"verb3": "finalize"
+	},
+	"一": {
+		"adjective": "unified",
+		"noun": "one",
+		"location": "Temple",
+		"person": "Philosopher",
+		"animal": "Wolf",
+		"verb1": "integrate",
+		"verb2": "unify",
+		"verb3": "converge"
+	},
+	"禾": {
+		"adjective": "bountiful",
+		"noun": "grain",
+		"location": "Field",
+		"person": "Farmer",
+		"animal": "Sparrow",
+		"verb1": "cultivate",
+		"verb2": "harvest",
+		"verb3": "yield"
+	},
+	"口": {
+		"adjective": "vocal",
+		"noun": "mouth",
+		"location": "Market",
+		"person": "Orator",
+		"animal": "Parrot",
+		"verb1": "speak",
+		"verb2": "proclaim",
+		"verb3": "articulate"
+	},
+	"𠂇": {
+		"adjective": "bent",
+		"noun": "fold",
+		"location": "Cave",
+		"person": "Elder",
+		"animal": "Crab",
+		"verb1": "curve",
+		"verb2": "warp",
+		"verb3": "bend"
+	},
+	"𦣻": {
+		"adjective": "expansive",
+		"noun": "expansion",
+		"location": "Plain",
+		"person": "Explorer",
+		"animal": "Buffalo",
+		"verb1": "broaden",
+		"verb2": "extend",
+		"verb3": "expand"
+	},
+	"夂": {
+		"adjective": "descending",
+		"noun": "step",
+		"location": "Valley",
+		"person": "Climber",
+		"animal": "Goat",
+		"verb1": "descend",
+		"verb2": "drop",
+		"verb3": "plunge"
+	},
+	"大": {
+		"adjective": "grand",
+		"noun": "greatness",
+		"location": "Palace",
+		"person": "King",
+		"animal": "Lion",
+		"verb1": "reign",
+		"verb2": "command",
+		"verb3": "inspire"
+	},
+	"匕": {
+		"adjective": "sharp",
+		"noun": "dagger",
+		"location": "Alley",
+		"person": "Assassin",
+		"animal": "Snake",
+		"verb1": "stab",
+		"verb2": "cut",
+		"verb3": "slice"
+	},
+	"止": {
+		"adjective": "halted",
+		"noun": "stop",
+		"location": "Checkpoint",
+		"person": "Guard",
+		"animal": "Raven",
+		"verb1": "halt",
+		"verb2": "pause",
+		"verb3": "interrupt"
+	},
+	"𣥂": {
+		"adjective": "suspended",
+		"noun": "suspension",
+		"location": "Bridge",
+		"person": "Watcher",
+		"animal": "Bat",
+		"verb1": "hang",
+		"verb2": "dangle",
+		"verb3": "balance"
+	},
+	"彳": {
+		"adjective": "slow-moving",
+		"noun": "step",
+		"location": "Trail",
+		"person": "Wanderer",
+		"animal": "Snail",
+		"verb1": "tread",
+		"verb2": "wander",
+		"verb3": "amble"
+	},
+	"㝵": {
+		"adjective": "noble",
+		"noun": "nobility",
+		"location": "Castle",
+		"person": "Duke",
+		"animal": "Falcon",
+		"verb1": "lead",
+		"verb2": "govern",
+		"verb3": "influence"
+	},
+	"艮": {
+		"adjective": "stubborn",
+		"noun": "obstinacy",
+		"location": "Mountain",
+		"person": "Warrior",
+		"animal": "Ox",
+		"verb1": "resist",
+		"verb2": "defy",
+		"verb3": "persist"
+	},
+	"忄": {
+		"adjective": "emotional",
+		"noun": "emotion",
+		"location": "Sanctuary",
+		"person": "Poet",
+		"animal": "Dove",
+		"verb1": "feel",
+		"verb2": "express",
+		"verb3": "reflect"
+	},
+	"夬": {
+		"adjective": "decisive",
+		"noun": "decision",
+		"location": "Courtroom",
+		"person": "Judge",
+		"animal": "Hawk",
+		"verb1": "decide",
+		"verb2": "rule",
+		"verb3": "conclude"
+	},
+	"女": {
+		"adjective": "feminine",
+		"noun": "woman",
+		"location": "Garden",
+		"person": "Queen",
+		"animal": "Swan",
+		"verb1": "nurture",
+		"verb2": "reign",
+		"verb3": "inspire"
+	},
+	"也": {
+		"adjective": "contrary",
+		"noun": "contradiction",
+		"location": "Crossroads",
+		"person": "Rebel",
+		"animal": "Fox",
+		"verb1": "oppose",
+		"verb2": "challenge",
+		"verb3": "resist"
+	},
+	"龵": {
+		"adjective": "gripping",
+		"noun": "grip",
+		"location": "Arena",
+		"person": "Gladiator",
+		"animal": "Eagle",
+		"verb1": "clutch",
+		"verb2": "seize",
+		"verb3": "conquer"
+	},
+	"目": {
+		"adjective": "observant",
+		"noun": "eye",
+		"location": "Watchtower",
+		"person": "Observer",
+		"animal": "Owl",
+		"verb1": "watch",
+		"verb2": "gaze",
+		"verb3": "observe"
+	},
+	"冂": {
+		"adjective": "open",
+		"noun": "boundary",
+		"location": "Prairie",
+		"person": "Surveyor",
+		"animal": "Coyote",
+		"verb1": "explore",
+		"verb2": "map",
+		"verb3": "survey"
+	},
+	"儿": {
+		"adjective": "youthful",
+		"noun": "child",
+		"location": "Playground",
+		"person": "Child",
+		"animal": "Fawn",
+		"verb1": "play",
+		"verb2": "laugh",
+		"verb3": "explore"
+	},
+	"辶": {
+		"adjective": "quick",
+		"noun": "movement",
+		"location": "Path",
+		"person": "Runner",
+		"animal": "Cheetah",
+		"verb1": "dash",
+		"verb2": "sprint",
+		"verb3": "race"
+	},
+	"虫": {
+		"adjective": "tiny",
+		"noun": "insect",
+		"location": "Garden",
+		"person": "Entomologist",
+		"animal": "Butterfly",
+		"verb1": "crawl",
+		"verb2": "flutter",
+		"verb3": "inspect"
+	},
+	"艹": {
+		"adjective": "green",
+		"noun": "plant",
+		"location": "Garden",
+		"person": "Gardener",
+		"animal": "Bee",
+		"verb1": "grow",
+		"verb2": "cultivate",
+		"verb3": "harvest"
+	},
+	"火": {
+		"adjective": "fiery",
+		"noun": "flame",
+		"location": "Forge",
+		"person": "Smith",
+		"animal": "Phoenix",
+		"verb1": "ignite",
+		"verb2": "forge",
+		"verb3": "melt"
+	},
+	"竹": {
+		"adjective": "flexible",
+		"noun": "bamboo",
+		"location": "Forest",
+		"person": "Builder",
+		"animal": "Monkey",
+		"verb1": "construct",
+		"verb2": "bend",
+		"verb3": "grow"
+	},
+	"土": {
+		"adjective": "earthy",
+		"noun": "soil",
+		"location": "Farm",
+		"person": "Agronomist",
+		"animal": "Worm",
+		"verb1": "cultivate",
+		"verb2": "fertilize",
+		"verb3": "till"
+	},
+	"山": {
+		"adjective": "majestic",
+		"noun": "peak",
+		"location": "Mountain Range",
+		"person": "Mountaineer",
+		"animal": "Goat",
+		"verb1": "climb",
+		"verb2": "summit",
+		"verb3": "explore"
+	},
+	"禾": {
+		"adjective": "grain-filled",
+		"noun": "harvest",
+		"location": "Farm",
+		"person": "Agriculturalist",
+		"animal": "Pigeon",
+		"verb1": "gather",
+		"verb2": "collect",
+		"verb3": "store"
+	},
+	"风": {
+		"adjective": "breezy",
+		"noun": "air",
+		"location": "Coast",
+		"person": "Sailor",
+		"animal": "Seagull",
+		"verb1": "sail",
+		"verb2": "drift",
+		"verb3": "fly"
+	},
+	"月": {
+		"adjective": "luminous",
+		"noun": "moonlight",
+		"location": "Night Sky",
+		"person": "Dreamer",
+		"animal": "Bat",
+		"verb1": "shine",
+		"verb2": "glow",
+		"verb3": "illuminate"
+	},
+	"手": {
+		"adjective": "crafty",
+		"noun": "skill",
+		"location": "Workshop",
+		"person": "Artisan",
+		"animal": "Fox",
+		"verb1": "create",
+		"verb2": "design",
+		"verb3": "craft"
+	},
+	"木": {
+		"adjective": "sturdy",
+		"noun": "tree",
+		"location": "Forest",
+		"person": "Carpenter",
+		"animal": "Bear",
+		"verb1": "cut",
+		"verb2": "carve",
+		"verb3": "build"
+	},
+	"犬": {
+		"adjective": "loyal",
+		"noun": "dog",
+		"location": "Home",
+		"person": "Owner",
+		"animal": "Dog",
+		"verb1": "train",
+		"verb2": "play",
+		"verb3": "love"
+	},
+	"王": {
+		"adjective": "regal",
+		"noun": "crown",
+		"location": "Throne Room",
+		"person": "Emperor",
+		"animal": "Tiger",
+		"verb1": "rule",
+		"verb2": "command",
+		"verb3": "conquer"
+	},
+	"夊": {
+		"adjective": "tranquil",
+		"noun": "rest",
+		"location": "Hammock",
+		"person": "Dreamer",
+		"animal": "Sloth",
+		"verb1": "relax",
+		"verb2": "breathe",
+		"verb3": "meditate"
+	},
+	"耳": {
+		"adjective": "listening",
+		"noun": "ear",
+		"location": "Concert Hall",
+		"person": "Musician",
+		"animal": "Mouse",
+		"verb1": "listen",
+		"verb2": "play",
+		"verb3": "compose"
+	},
+	"田": {
+		"adjective": "cultivated",
+		"noun": "field",
+		"location": "Farm",
+		"person": "Agriculturalist",
+		"animal": "Horse",
+		"verb1": "plant",
+		"verb2": "harvest",
+		"verb3": "sow"
+	},
+	"白": {
+		"adjective": "pure",
+		"noun": "light",
+		"location": "Snowfield",
+		"person": "Angel",
+		"animal": "Dove",
+		"verb1": "shine",
+		"verb2": "reflect",
+		"verb3": "glimmer"
+	}
+}

@@ -8,10 +8,10 @@ import * as hanzi from 'hanzi';
 import pkg from 'chinese-s2t';
 const { s2t } = pkg;
 
-
-export const load = (async ({params, fetch, locals: { supabase }}) => {
+export const load: PageServerLoad = (async ({ params, fetch, locals: { supabase } }) => {
     const char = params.char;
 
+    // Uncomment and use if getImageUrls is needed
     // const imagePathsDict = await getImageUrls(s2t(char), supabase);
     // const imagePaths = imagePathsDict && imagePathsDict[s2t(char)] ? Object.values(imagePathsDict[s2t(char)]) : [];
     // console.log(imagePaths);
@@ -20,7 +20,7 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
     const imageDataDict = await getImageData(s2t(char), supabase);
 
     const definition: any[] = hanzi.definitionLookup(char);
-    // For some reason definitions come back multiple times
+    // Remove duplicate definitions
     let uniqueDefinitions: any[];
     if (definition && definition.length > 0) {
         uniqueDefinitions = Array.from(
@@ -38,12 +38,11 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
 
     const currentSentence = await getCurrentSentence(supabase);
 
-    let explanation: Promise<string> = Promise.resolve('');
+    let explanation: string = '';
     if (currentSentence) {
-        explanation = getWordExplanation(currentSentence, char, fetch);
-    }
-    else {
-        explanation = Promise.resolve('No current sentence available');
+        explanation = await getWordExplanation(currentSentence, char, fetch);
+    } else {
+        explanation = 'No current sentence available';
     }
 
     const decompositions = hanzi.decompose(char);
@@ -53,7 +52,6 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
             const meaning = hanzi.getRadicalMeaning(component);
             return meaning ? `${component} (${meaning})` : component;
         });
-        
     }
 
     return {
@@ -68,33 +66,45 @@ export const load = (async ({params, fetch, locals: { supabase }}) => {
     };
 }) satisfies PageServerLoad;
 
-async function getCurrentSentence(supabase: any) {
-  const { data: userData, error: userError } = await supabase.auth.getUser();
-  if (userError) {
-			console.error('Error fetching user data:', userError);
-			return {
-				success: false,
-				message: 'Error fetching user data.'
-			};
-	}
+// Define ImageType based on your Supabase enum
+type ImageType = 'Meaning' | 'Mnemonic'; // Add other types if necessary
 
-
-  const { data: currentSentenceData, error } = await supabase
-    .from('currentSentence')
-    .select('sentence')
-    .eq('user_id',  userData.user?.id )
-    .single();
-
-  if (error) {
-    console.error('Error fetching current sentence:', error);
-    return 'Error fetching current sentence';
-  }
-
-  return currentSentenceData.sentence;
+interface ImageRow {
+    id: string;
+    char: string | null;
+    created_at: string;
+    explanation: string | null;
+    index: number;
+    prompt: string | null;
+    type: ImageType | null;
 }
 
-async function getWordExplanation(sentence: string, word: string, fetch: any) {
-    return fetch('/app/api/explain', {
+async function getCurrentSentence(supabase: any) {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError) {
+        console.error('Error fetching user data:', userError);
+        return {
+            success: false,
+            message: 'Error fetching user data.'
+        };
+    }
+
+    const { data: currentSentenceData, error } = await supabase
+        .from('currentSentence')
+        .select('sentence')
+        .eq('user_id', userData.user?.id)
+        .single();
+
+    if (error) {
+        console.error('Error fetching current sentence:', error);
+        return 'Error fetching current sentence';
+    }
+
+    return currentSentenceData.sentence;
+}
+
+async function getWordExplanation(sentence: string, word: string, fetch: any): Promise<string> {
+    const response = await fetch('/app/api/explain', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -103,16 +113,16 @@ async function getWordExplanation(sentence: string, word: string, fetch: any) {
             sentence: sentence,
             word: word
         })
-    })
-    .then((response: Response) => response.json())
-    .then((data: { content: string }) => data.content);
+    });
+
+    const data: { content: string } = await response.json();
+    return data.content;
 }
 
 async function getImageData(char: string, supabase: any) {
-    // Fetch image data including ids, indices, explanations, and prompts for the given character
     const { data: imageData, error: imageError } = await supabase
         .from('images')
-        .select('id, index, explanation, prompt')
+        .select('id, index, explanation, prompt, type')
         .eq('char', char);
 
     if (imageError) {
@@ -120,21 +130,33 @@ async function getImageData(char: string, supabase: any) {
         return {};
     }
 
-    const imageDict: { [index: number]: { url: string, explanation: string, prompt: string } } = {};
-    for (const row of imageData) {
-        const { data, error } = await supabase
-            .storage
-            .from('Images')
-            .getPublicUrl(`images/${row.id}`);
+    const imageDict: { 
+        Meaning: { [index: number]: { url: string, explanation: string, prompt: string } },
+        Mnemonic: { [index: number]: { url: string, explanation: string, prompt: string } }
+    } = { Meaning: {}, Mnemonic: {} };
 
-        if (error) {
-            console.error('Error fetching public URL:', error);
+    for (const row of imageData as ImageRow[]) {
+        if (row.type === 'Meaning' || row.type === 'Mnemonic') { // Type guard
+            const { data, error } = await supabase
+                .storage
+                .from('Images')
+                .getPublicUrl(`images/${row.id}`);
+
+            if (error) {
+                console.error('Error fetching public URL:', error);
+                continue; // Skip this iteration if there's an error
+            }
+
+            if (data.publicUrl) { // Ensure publicUrl exists
+                imageDict[row.type][row.index] = {
+                    url: data.publicUrl,
+                    explanation: row.explanation || '',
+                    prompt: row.prompt || ''
+                };
+            }
         } else {
-            imageDict[row.index] = {
-                url: data.publicUrl,
-                explanation: row.explanation,
-                prompt: row.prompt
-            };
+            console.warn(`Unsupported image type: ${row.type} for image ID: ${row.id}`);
+            // Optionally handle other types or skip
         }
     }
 

@@ -45,6 +45,8 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		}
 
 		const sentences = splitIntoSentences(text);
+		console.log('Sentences:', sentences);
+
 
 		const { error } = await supabase
 			.from('TextsMetadata')
@@ -114,6 +116,7 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		
 
 		const sentences = splitIntoSentences(translatedText);
+
 
 		
 

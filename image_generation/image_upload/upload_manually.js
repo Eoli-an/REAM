@@ -51,15 +51,16 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_person_on_a_walk_through_Japanese_autumn_landscape__6990819f-8bfa-4705-9cf2-6e90e63d5410_2.png';
-const char = '走';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_hand_reaching_out_to_touch_a_shiny_precious_golden__ade9d067-d646-460e-a10b-3aa2dc58666c_3.png';
+const char = '有';
 const explanation = `
-    Most Common Meaning:
-    walk
-    Thinking of a visual representation:
-	A person walking, stlye it a bit
-    `;
+	Purpose:
+	𠂇 (left hand), 月 (moon) should be combined to hint at the meaning "have".
+	Mnemonic idea:
+	The left hand can be seen as grasping the moon. The moon in this case is a precious golden object, combining with the semantic scaffold,
+	which is a person hording valuables.
+	`;
 const prompt =
-	'person on a walk through Japanese autumn landscape, tree leaves spells "walk", Denis Villeneuve movie still, digital art';
-const type = 'Meaning';
+	'hand reaching out  to touch a shiny, precious, golden, expensive moon, illustration';
+const type = 'Mnemonic';
 uploadImage(imagePath, char, explanation, prompt, type);

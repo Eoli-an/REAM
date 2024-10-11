@@ -99,18 +99,21 @@ export type Database = {
       }
       MyKnownWords: {
         Row: {
+          id: string
           image_paths: string[] | null
           knowledgeLevel: number | null
           user_id: string | null
           wordChinese: string
         }
         Insert: {
+          id?: string
           image_paths?: string[] | null
           knowledgeLevel?: number | null
           user_id?: string | null
           wordChinese: string
         }
         Update: {
+          id?: string
           image_paths?: string[] | null
           knowledgeLevel?: number | null
           user_id?: string | null
@@ -182,6 +185,7 @@ export type Database = {
       }
       TextsMetadata: {
         Row: {
+          created_at: string | null
           currentSentence: number
           sentenceAmount: number | null
           text_id: string
@@ -189,6 +193,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          created_at?: string | null
           currentSentence?: number
           sentenceAmount?: number | null
           text_id?: string
@@ -196,6 +201,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          created_at?: string | null
           currentSentence?: number
           sentenceAmount?: number | null
           text_id?: string
