@@ -144,12 +144,12 @@ ASSISTANT:
 不 - not
 敢 - dare
 来 - come`;
-    const content = await callLLM(systemPrompt, chatInput, false);
+    const content = await callLLM(systemPrompt, chatInput, true);
 
     const words: string[] = [];
     const translations: string[] = [];
     const lines = content.split('\n');
-    console.log("LINES: ", lines);
+    // console.log("LINES: ", lines);
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
@@ -165,6 +165,6 @@ ASSISTANT:
             continue;
         }
     }
-    console.log("OUTPUT: ", { words, translations });
+    // console.log("OUTPUT: ", { words, translations });
     return { words, translations };
 };

@@ -45,6 +45,7 @@ USER:
 ASSISTANT:
 麥教授繼續說。她的聲音在抖。"還有更多事。"「人們說，他想殺波特夫婦的兒子哈利。""但是他失敗了。""他殺不了那個小孩。"`;
 
+
 	const simplifiedSentence = await callLLM(systemPrompt, sentence, false);
 	return { simplifiedSentence };
 }

@@ -1,0 +1,11 @@
+<script>
+  export let title = 'About Us';
+</script>
+
+  # {title}
+
+  Welcome to the about page, written in mdsvex!
+
+  - Point 1
+  - Point 2
+  - Point 3

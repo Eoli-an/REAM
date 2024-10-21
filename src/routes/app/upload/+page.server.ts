@@ -31,6 +31,7 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 		}
 
 		let text = await file.text();
+
 		const title: string = file.name.split('.')[0];
 
 		const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -43,18 +44,19 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 			};
 		}
 
+		const sentences = splitIntoSentences(text);
+		console.log('Sentences:', sentences);
+
+
 		const { error } = await supabase
 			.from('TextsMetadata')
-			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id}, { onConflict: 'text_id' });
+			.upsert({ text_id: text_id, title: title, user_id: userData.user?.id, sentenceAmount: sentences.length}, { onConflict: 'text_id' });
 		// TODO proper error handling
 		if (error) {
 			console.error('Error updating database:', error);
 		}
 
-		const sentences = splitIntoSentences(text);
-
-		// console.log('Sentences:', sentences);
-
+		
 		// Upload first sentence and wait for it
 		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
 
@@ -111,7 +113,12 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 
 		let { content: translatedText } = await translateResponse.json();
 
+		
+
 		const sentences = splitIntoSentences(translatedText);
+
+
+		
 
 		// Upload first sentence and wait for it
 		await processAndUploadOneSentence(sentences[0], text_id, 0, fetch, supabase);
@@ -128,17 +135,18 @@ uploadTextChinese: async ({ request, fetch, locals: { supabase }}) => {
 };
 
 
-
 function splitIntoSentences(text: string): string[] {
-	const sentences = [];
-	const parts = text.split(/[。！？]/g);
-
-	for (let i = 0; i < parts.length; i += 2) {
-		const sentence = parts[i] + (parts[i + 1] || '');
-		sentences.push(sentence);
-	}
-
-	return sentences;
+    // Regular expression to match sequences ending with Chinese punctuation or newline
+    const regex = /[^。！？\n]+[。！？]?/g;
+    const matches = text.match(regex);
+    
+    if (matches) {
+        return matches
+            .map(segment => segment.trim()) // Remove any leading/trailing whitespace
+            .filter(segment => segment.length > 0); // Exclude empty strings
+    }
+    
+    return [];
 }
 
 async function callApi(apiRoute: string, input: any, fetch:any) {
@@ -163,7 +171,7 @@ async function processAndUpload(sentences: string[], text_id: string, fetch: any
     for (let i = 1; i < sentences.length; i += 1) {
         const sentence = sentences[i];
         await processAndUploadOneSentence(sentence, text_id, i, fetch, supabase);
-        await new Promise(resolve => setTimeout(resolve, 10000)); // Wait for 10 seconds
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 seconds
     }
 }
 
@@ -179,8 +187,8 @@ async function processAndUploadOneSentence(sentence: string, text_id: string, se
     ] = await Promise.all([
         callApi('/app/api/translate_sentence', { sentence : sentence}, fetch),
         callApi('/app/api/translate_sentence', { sentence : simplifiedSentence }, fetch),
-        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : sentence}, fetch),
-        callApi('/app/api/newDataScheme/splitWordsAndTranslate', { sentence : simplifiedSentence }, fetch)
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : sentence}, fetch),
+        callApi('/app/api/newDataScheme/splitWordsAndTranslate2', { sentence : simplifiedSentence }, fetch)
     ]);
 
 	// TODO make this not await in case of async upload?

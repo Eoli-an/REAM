@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { CharacterKnowledge } from '$lib';
-	import { goto } from '$app/navigation';
+	import { Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { TwicImg } from '@twicpics/components/sveltekit';
+	import { TwicPicture } from '@twicpics/components/sveltekit';
 	// @ts-ignore
 	import pkg from 'chinese-s2t';
 	const { s2t } = pkg;
@@ -9,10 +11,14 @@
 	export let imagePaths;
 	export let imageChosen;
 	export let supabase: any;
+	export let uniqueId: string; // Added uniqueId as a prop for unique dropdown triggers
 
 	let chosen_image = 0;
 	let imagePath: string;
 	let image_available = false;
+	let dropdownOpen = false; // Added state to control dropdown
+
+	$: isChineseCharacter = /^[\u4e00-\u9fa5]$/.test(char);
 
 	$: {
 		chosen_image = 0;
@@ -25,22 +31,22 @@
 		image_available = false;
 		if (imagePaths.hasOwnProperty(s2t(char))) {
 			image_available = true;
-			imagePath = imagePaths[s2t(char)][chosen_image];
+			// imagePath = imagePaths[s2t(char)][chosen_image];
+			const imageName = imagePaths[s2t(char)][chosen_image].split('/').pop();
+			imagePath = imageName;
+			// imagePath = `https://reamimages.twic.pics/${imageName}`;
 		}
 	}
 
 	let displayType: string = 'image';
-	const store_value = $CharacterKnowledge;
 
 	$: {
-		if (!store_value.hasOwnProperty(char)) {
-			displayType = 'image';
+		const charKey = s2t(char);
+		const knowledgeLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
+		if (knowledgeLevel === 1) {
+			displayType = 'character';
 		} else {
-			if (store_value[s2t(char)] === 0) {
-				displayType = 'image';
-			} else if (store_value[s2t(char)] === 1) {
-				displayType = 'character';
-			}
+			displayType = 'image';
 		}
 	}
 
@@ -55,7 +61,7 @@
 			};
 		}
 		const { error } = await supabase
-			.from('MyKnownCharacters') // Adjust the table name as needed
+			.from('MyKnownCharacters')
 			.upsert(
 				{ character, knowledgeLevel, chosen_image, user_id: userData.user?.id },
 				{ onConflict: ['character', 'user_id'] }
@@ -67,67 +73,52 @@
 	}
 
 	function circle() {
-		if (displayType === 'character') {
-			displayType = 'image';
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[s2t(char)] = 0;
-				return knowledge;
-			});
-			updateDatabase(s2t(char), 0, chosen_image);
-		} else if (displayType === 'image') {
-			displayType = 'character';
-			CharacterKnowledge.update((knowledge) => {
-				knowledge[s2t(char)] = 1;
-				return knowledge;
-			});
-			updateDatabase(s2t(char), 1, chosen_image);
-		}
+		const charKey = s2t(char);
+		const currentLevel = $CharacterKnowledge[charKey] ?? 0; // Default to 0 if undefined
+		const newKnowledgeLevel = currentLevel === 0 ? 1 : 0;
+		CharacterKnowledge.update((knowledge) => {
+			return { ...knowledge, [charKey]: newKnowledgeLevel };
+		});
+		updateDatabase(charKey, newKnowledgeLevel, chosen_image);
+		dropdownOpen = false; // Close the dropdown after toggling
 	}
 </script>
 
-<button
-	on:click={circle}
-	class=" m-0 m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:w-20 sm:text-[70px]"
->
-	{#if displayType === 'character'}
+{#if isChineseCharacter}
+	<div class="relative inline-block">
+		<!-- Dropdown Trigger -->
+		<Dropdown
+			placement="top"
+			triggeredBy={`#char-dropdown-${uniqueId}-${char}`}
+			bind:open={dropdownOpen}
+		>
+			<DropdownItem href={`/app/dictionaryChar/${char}`}>Explanation</DropdownItem>
+			<DropdownItem on:click={circle}>Switch</DropdownItem>
+		</Dropdown>
+
+		<!-- Button that triggers the Dropdown -->
+		<button
+			id={`char-dropdown-${uniqueId}-${char}`}
+			class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
+		>
+			{#if displayType === 'character'}
+				{char}
+			{:else if image_available}
+				<TwicImg
+					src={imagePath}
+					alt={char}
+					eager="true"
+					class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
+				/>
+			{:else}
+				{char}
+			{/if}
+		</button>
+	</div>
+{:else}
+	<button
+		class="m-0 h-10 w-10 cursor-pointer border-none bg-transparent p-0 text-[40px] sm:w-20 sm:text-[70px]"
+	>
 		{char}
-	{:else if image_available}
-		<img
-			src={imagePath}
-			alt={char}
-			class="m-0 mt-[10px] h-auto w-[40px] align-middle sm:mt-[20px] sm:w-[70px]"
-		/>
-	{:else}
-		{char}
-	{/if}
-</button>
-
-<!-- <button on:click={() => goto(`/dictionaryChar/${char}`)}> -->
-
-<!-- <style>
-	button {
-		width: 80px; /* Set the desired fixed width */
-		height: 80px; /* Set the desired fixed height */
-		background-color: transparent;
-		border: none;
-		/* border-radius: 0; */
-		/* padding: 4px 8px; */
-		font-size: 60px;
-		cursor: pointer;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-top: 0px;
-		margin-left: 0px;
-		padding: 0px;
-		font-size: 70px;
-	}
-
-	img {
-		width: 70px;
-		height: auto;
-		vertical-align: middle;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-top: 20px;
-	}
-</style> -->
+	</button>
+{/if}

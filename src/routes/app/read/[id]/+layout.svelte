@@ -27,15 +27,16 @@
 	// const imagePaths = data.imagePaths;
 	const currentId = data.currentId;
 	let currentSentenceIndex = data.currentSentenceIndex;
+	let sentenceAmount = data.sentenceAmount;
 
-	wordKnowledgeData?.forEach((item) => {
+	wordKnowledgeData?.forEach((item: any) => {
 		wordKnowledge.update((knowledge) => {
 			knowledge[item.wordChinese] = item.knowledgeLevel;
 			return knowledge;
 		});
 	});
 
-	charKnowledgeData?.forEach((item) => {
+	charKnowledgeData?.forEach((item: any) => {
 		CharacterKnowledge.update((knowledge) => {
 			knowledge[item.character] = item.knowledgeLevel;
 			return knowledge;
@@ -55,11 +56,11 @@
 	}
 
 	function goForward() {
-		// if (currentSentenceIndex) {
-		currentSentenceIndex++;
-		updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
-		goto(`/app/read/${currentId}/${currentSentenceIndex}`);
-		// }
+		if (currentSentenceIndex < sentenceAmount - 1) {
+			currentSentenceIndex++;
+			updateDatabaseSentenceIndex(currentSentenceIndex, currentId, supabase);
+			goto(`/app/read/${currentId}/${currentSentenceIndex}`);
+		}
 	}
 
 	if (browser) {

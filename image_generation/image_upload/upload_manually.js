@@ -51,15 +51,16 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_A_bustling_market_during_sunset._Skyscrapers_street_f4fdd5c1-9a83-4353-9092-1ed2e4e7c830_1.png';
-const char = '市';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_hand_reaching_out_to_touch_a_shiny_precious_golden__ade9d067-d646-460e-a10b-3aa2dc58666c_3.png';
+const char = '有';
 const explanation = `
-    Most Common Meaning:
-    Market, City
-    Thinking of a visual representation:
-    We can simply show a market in a city to represent this character.
-    `;
+	Purpose:
+	𠂇 (left hand), 月 (moon) should be combined to hint at the meaning "have".
+	Mnemonic idea:
+	The left hand can be seen as grasping the moon. The moon in this case is a precious golden object, combining with the semantic scaffold,
+	which is a person hording valuables.
+	`;
 const prompt =
-	'A bustling market during sunset. Skyscrapers, street vendors, and busy pedestrians, middle ages';
-const type = 'Meaning';
+	'hand reaching out  to touch a shiny, precious, golden, expensive moon, illustration';
+const type = 'Mnemonic';
 uploadImage(imagePath, char, explanation, prompt, type);
