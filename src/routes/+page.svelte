@@ -30,7 +30,7 @@
 		>
 			<NavLi href="/" active={true}>Home</NavLi>
 			<NavLi href="/">About</NavLi>
-			<NavLi href="/">Blog</NavLi>
+			<NavLi href="/blog">Blog</NavLi>
 		</NavUl>
 	</Navbar>
 </header>
