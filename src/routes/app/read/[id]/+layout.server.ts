@@ -35,6 +35,28 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 
 	const currentId = params.id;
 
+	let currentSentenceIndex = sentenceIndexData?.currentSentence || 0;
+
+	const { data: userData, error: userError } = await supabase.auth.getUser();
+	if (userError) {
+		console.error('Error fetching user data:', userError);
+		return {
+			success: false,
+			message: 'Error fetching user data.'
+		};
+	}
+
+	if (params.id === '8b43b473-ada8-432a-a3ee-c7954728b720') {
+		const { data: userProgressData } = await supabase
+			.from('PublicTextUserProgress')
+			.select('currentSentence')
+			.eq('user_id', userData.user?.id) // Updated to use userData
+			.eq('text_id', params.id)
+			.single();
+
+		currentSentenceIndex = userProgressData?.currentSentence || 0;
+	}
+
 	return {
 		text: text,
 		wordKnowledgeData: wordKnowledgeData,
@@ -45,7 +67,7 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 		offset: offset,
 		words_per_page: words_per_page,
 		sentenceOffsets: sentenceOffsets,
-		currentSentenceIndex: sentenceIndexData?.currentSentence || 0,
+		currentSentenceIndex: currentSentenceIndex,
 		sentenceAmount: sentenceIndexData?.sentenceAmount || 10000, // Add this line
 		// imagePaths: imagePaths,
 		currentId: currentId,

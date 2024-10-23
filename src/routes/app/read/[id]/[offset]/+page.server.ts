@@ -82,7 +82,7 @@ async function getImageChosenDict(inputString: string, supabase: any) {
 	}
 	
 	const imageChosen: { [key: string]: number } = {};
-	imageChosenData?.forEach((row) => {
+	imageChosenData?.forEach((row:any) => {
 		imageChosen[row.character] = row.chosen_image;
 	});
 
