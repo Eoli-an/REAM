@@ -46,7 +46,7 @@ export const load = (async ({ fetch, params, locals: { supabase } }) => {
 		};
 	}
 
-	if (params.id === '8b43b473-ada8-432a-a3ee-c7954728b720') {
+	if (params.id === '8b43b473-ada8-432a-a3ee-c7954728b720' || params.id === '83b49a34-c832-4183-9a8e-265f03f57ff3') {
 		const { data: userProgressData } = await supabase
 			.from('PublicTextUserProgress')
 			.select('currentSentence')

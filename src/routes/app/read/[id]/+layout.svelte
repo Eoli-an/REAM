@@ -54,7 +54,10 @@
 		}
 
 		// If this is the special text_id, also update PublicTextUserProgress
-		if (text_id === '8b43b473-ada8-432a-a3ee-c7954728b720') {
+		if (
+			text_id === '8b43b473-ada8-432a-a3ee-c7954728b720' ||
+			text_id === '83b49a34-c832-4183-9a8e-265f03f57ff3'
+		) {
 			const {
 				data: { user },
 				error: userError
