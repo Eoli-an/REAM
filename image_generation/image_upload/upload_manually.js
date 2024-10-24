@@ -51,16 +51,11 @@ async function uploadImage(imagePath, char, explanation, prompt, type) {
 }
 
 const imagePath =
-	'C:\\Users\\Dennis\\Downloads\\artis3747_hand_reaching_out_to_touch_a_shiny_precious_golden__ade9d067-d646-460e-a10b-3aa2dc58666c_3.png';
-const char = '有';
+	'C:\\Users\\Dennis\\Downloads\\artis3747_a_giant_square_mouth_--chaos_10_--personalize_5l47k_b5ebd5ed-2cb0-4e39-9195-e2d8ec6d60f5_0.png';
+const char = '口';
 const explanation = `
-	Purpose:
-	𠂇 (left hand), 月 (moon) should be combined to hint at the meaning "have".
-	Mnemonic idea:
-	The left hand can be seen as grasping the moon. The moon in this case is a precious golden object, combining with the semantic scaffold,
-	which is a person hording valuables.
+Most Common Meaning: a mouth
 	`;
-const prompt =
-	'hand reaching out  to touch a shiny, precious, golden, expensive moon, illustration';
-const type = 'Mnemonic';
+const prompt = 'a giant square mouth';
+const type = 'Meaning';
 uploadImage(imagePath, char, explanation, prompt, type);

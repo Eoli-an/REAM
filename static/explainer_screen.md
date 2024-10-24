@@ -71,17 +71,26 @@ Of course, if the characters are replaced with an image, you will not learn the 
 
 ## _Mnemonics_
 
-Once you feel like you have familiarized yourself enough with how a character is used, you can proceed to memorize it. REAM helps you with this step by introducing mnemonics. Mnemonics are techniques that "hack" the brain to remember information a lot easier. In REAM, mnemonics are used to remember the meaning of a character, given the meanings of their components. Take for instance the character 家 which means home/family. The character is composed of the components 宀 (roof) and 豕 (pig). To remember the meaning, in REAM those components are combined in a short memorable story/picture that point to the meaning of the character. For 家 this could mean imagining a family of pigs standing below the roof of their hut during rain.
-Those types of images are a lot easier to learn than just rote memorizing the character shape itself. In REAM, we generated those mnemonic images for you and you can gradually introduce them during your readings.
+Once you feel like you have familiarized yourself enough with how a character is used, you can proceed to memorize it. REAM helps you with this step by introducing mnemonics. Mnemonics are techniques that "hack" the brain to remember information a lot easier. In REAM, mnemonics are used to remember the meaning of a character, given the meanings of their components. Take for instance the character 是 which means be/is. The character is composed of the components 日 (sun/day), 一 (one), 龰 (foot). To remember the meaning, in REAM those components are combined in a short memorable story/picture that point to the meaning of the character. For 是 we can draw a picture of a sun at the top and feet in the lower part of the image. If we combine this with beach/relaxing vibes this points to the meaning be (just relaxing/being, in contrast to doing anything).
+
+![Chinese Path](/MnemonicShi.png)
+
+Those types of images are a lot easier to learn than just rote memorizing the character shape itself. In REAM, we generated those mnemonic images for you and you can gradually introduce them during your readings. Right now, the usage of Mnemonics is limited because a) there are not a lot of Mnemonics available yet and b) you first have to learn the meaning of the ~200 most common components. In the future, REAM will also show you the meaning of the characters automatically, like the second part in the image above.
 
 ## _AI-helpers_
 
 Image scaffolds and Mnemonics are the bread and butter of REAM and will help you progress a lot quicker on your journey to learn Chinese. To further make engaging text more accessible, in REAM you also have the opportunity to use AI-generated tools such as simplification and explanations.
 
-REAM uses modern large language models to simplify text that you upload. This means you have the advantage of less complicated grammar and words while still being able to read your favorite stories or articles. The simplification is REAM is fine-tuned to strike a good balance between retaining most information and make the language simpler to understand.
+REAM uses modern large language models to simplify text that you upload. This means you have the advantage of less complicated grammar and words while still being able to read your favorite stories or articles. The simplification is REAM is fine-tuned to strike a good balance between retaining most information and make the language simpler to understand. The simplification is accessible via a sidepanel that you can open in the top right corner.
 
-Furthermore, you also have the opportunity to look at large language model generated explanations of characters and words. For instance, REAM can help you understand why some characters together for a particular word or what the meaning and purpose of a word is in the particular context.
+Furthermore, you also have the opportunity to look at large language model generated explanations of characters and words. For instance, REAM can help you understand why some characters together for a particular word or what the meaning and purpose of a word is in the particular context. Those explanations are available via clicking a character or a word.
+
+## _More Texts_
+
+In the app, you'll see a few pre-uploaded texts to choose from. If you want to continue using the app after reading those texts, you can upload your own in a .txt file. You may either upload Chinese text or you may upload English text which will be translated automatically. Furthermore, you can also go to ChatGPT and ask it to generate text for you that is exactly at your vocabulary level and that matches your taste. In the future, this will be available directly in the app.
 
 ## _Conclusion_
 
-With REAM, your chinese language learning journey is streamlined.
+With REAM, your written chinese language learning journey is stREAMlined. It is designed to give you just the right information that you need at a time to understand text, making for smooth journey. I hope you enjoy the app!
+
+Dennis
