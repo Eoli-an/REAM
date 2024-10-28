@@ -1,15 +1,15 @@
 ## _Introduction_
 
-REAM is a platform that supports you in reading chinese text. As a language learner, this enables you to read more complicated and thus more engaging text that your current level would usually permit.
+REAM is a platform that supports you in reading Chinese text. As a language learner, this enables you to read more complicated and thus more engaging text than your current level would usually permit.
 
 ## _Background on written Chinese_
 
-For those of you that don't know any Chinese yet, let's dive right in with a short explanation about the written Chinese language.
+For those of you who don't know any Chinese yet, let's dive right in with a short explanation of the written Chinese language.
 Consider the following Chinese sentence:
 
 我喜欢绿茶.
 
-Each component in this sentence is called a character (think of it as a squibbly square for now). For instance, 我 is the character that means "I" and 茶 means "tea".
+Each component in this sentence is called a character (think of it as a squiggly square for now). For instance, 我 is the character that means "I" and 茶 means "tea".
 
 Words in Chinese are made out of one or more characters. The character 喜 means "to be fond of", the character 欢 means "joyous". Together, they make up the word 喜欢 meaning "to like". It can be thought of as meaning "to be joyously fond of something". The character 我 (I) is a word in itself.
 Together, the sentence means
@@ -18,9 +18,9 @@ Together, the sentence means
 
 That is the gist of a Chinese sentence. Characters make up words and words make up sentences. The grammar to combine the words is often a lot easier than in English.
 
-Now, of course the characters are not only squibly squares. They also are made up of meaningful components (also called radicals) that make recognizing and memorizing characters easier.
+Of course, the characters are not only squiggly squares. They also are made up of meaningful components (also called radicals) that make recognizing and memorizing characters easier.
 
-For instance, the character 我 is composed of the components 手 (hand) and 戈 (spear). Why would hand and spear together point to the meaning "I"? Well there is a lot to be discussed here, but for our purposes we can say that this is completely random.
+For instance, the character 我 is composed of the components 手 (hand) and 戈 (spear). Why would hand and spear together point to the meaning "I"? Well, there is a lot to be discussed here, but for our purpose we can say that this is completely random.
 茶(tea) is composed of the components 艹 (grass), 人 (human), 十 (ten), and 小 (small). Even though the combinations might be random, knowing that characters are composed of components makes them a lot easier to learn as we see later.
 
 In conclusion, components make up characters, characters make up words and words make up sentences. You need to know about 200 components, 3000 characters, 6000 words and a bit of grammar to read Chinese on a native level.
@@ -29,7 +29,7 @@ In conclusion, components make up characters, characters make up words and words
 
 ## _REAM_
 
-That's quite a lot to learn until you can read texts that interest you. Fortunately, REAM supports you at each step on this pipeline, enabling you to read engaging texts much sooner on your journey. Think of it like a pop-up dictionary on steroids.
+That's quite a lot to learn until you can read texts that interest you. Fortunately, REAM supports you at each step of this pipeline, enabling you to read engaging texts much sooner on your journey. Think of it like a pop-up dictionary on steroids.
 
 REAM has three components:
 
@@ -63,7 +63,7 @@ For each character, REAM lets you choose an image to replace it with. Have a loo
 
 ![Chinese Path](/ImageExamples.png)
 
-乌 means black/crow depending on context. In REAM, this character is replaced with an image of a black crow (as additional hint, the word "black" is also embedded in the image). When this character shows up while reading a text, it will be replaced by the image. So instead of needing to remember the meaning of the character from the squibbly lines, you only have to remember the meaning of the image. Sometimes, like in the second example, the meaning is more abstract and/or the character might have many multiple meanings depending on the context. 很 means "very" and in the image this is visualized with a very large insect.
+乌 means black/crow depending on context. In REAM, this character is replaced with an image of a black crow (as an additional hint, the word "black" is also embedded in the image). When this character shows up while reading a text, it will be replaced by the image. So instead of needing to remember the meaning of the character from the squiggly lines, you only have to remember the meaning of the image. Sometimes, like in the second example, the meaning is more abstract and/or the character might have many multiple meanings depending on the context. 很 means "very" and in the image this is visualized with a very large insect.
 
 Of course, if the characters are replaced with an image, you will not learn the character -> meaning association. However, what you can do is skip the process for a while and during that time read more engaging texts. Furthermore, you will also get familiar with the character, for instance in which words or context it is used.
 
@@ -91,6 +91,6 @@ In the app, you'll see a few pre-uploaded texts to choose from. If you want to c
 
 ## _Conclusion_
 
-With REAM, your written chinese language learning journey is stREAMlined. It is designed to give you just the right information that you need at a time to understand text, making for smooth journey. I hope you enjoy the app!
+With REAM, your written Chinese language learning journey is stREAMlined. It is designed to give you just the right information that you need at a time to understand text, making for a smooth journey. I hope you enjoy the app!
 
 Dennis
