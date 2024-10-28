@@ -11,11 +11,11 @@
 		<form method="POST" action="?/signup" class="flex flex-col space-y-6">
 			<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">Create an account</h3>
 			<p class="text-sm text-gray-500 dark:text-gray-300">
-				Hint: choose username@realm.com as your email address
+				Hint: choose username@realm-app.com as your email address
 			</p>
 			<Label class="space-y-2">
 				<span>Your email</span>
-				<Input type="email" name="email" placeholder="username@ream.com" required />
+				<Input type="email" name="email" placeholder="username@ream-app.com" required />
 			</Label>
 			<Label class="space-y-2">
 				<span>Your password</span>
