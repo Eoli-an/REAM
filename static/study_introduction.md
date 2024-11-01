@@ -1,6 +1,6 @@
 ## _Welcome to REAM!_
 
-Hello there! Thank you for your interest in trying out REAM, the app that stREAMlines learning to read Chinese. Don't worry if you never studied Chinese before, the app will guide you through the basics. The main page of REAM is located at https://ream-six.vercel.app/. It is recommended that you use the app with Wifi in order no to strain your mobile data.
+Hello there! Thank you for your interest in trying out REAM, the app that stREAMlines learning to read Chinese. Don't worry if you never studied Chinese before, the app will guide you through the basics. The main page of REAM is located at https://ream-six.vercel.app/. It is recommended that you use the app with Wifi in order no to strain your mobile data. The study will take about 30-45 minutes.
 
 To participate in the study, please follow these instructions:
 
