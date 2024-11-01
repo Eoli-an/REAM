@@ -85,6 +85,12 @@ REAM uses modern large language models to simplify text that you upload. This me
 
 Furthermore, you also have the opportunity to look at large language model generated explanations of characters and words. For instance, REAM can help you understand why some characters together for a particular word or what the meaning and purpose of a word is in the particular context. Those explanations are available via clicking a character or a word.
 
+Lastly, you also have the opportunity to access AI-generated translations of individual words and a whole sentence. To translate a whole sentence, click on the three dots at the top of the screen. To access AI-generated translations click on the dots above a word. The word translations are adaptive, such that the translation fits the current context best.
+
+## _Learning progress_
+
+As you progress in learning Chinese, you will need to rely less and less on the scaffolds that the app provides. It is encouraged to remove a scaffold such as the word translation or the Mnemonic once you feel like you have a good grasp on the item. In the future, I plan to include a procedure that automatically removes the scaffolds for you at an appropriate time.
+
 ## _More Texts_
 
 In the app, you'll see a few pre-uploaded texts to choose from. If you want to continue using the app after reading those texts, you can upload your own in a .txt file. You may either upload Chinese text or you may upload English text which will be translated automatically. Furthermore, you can also go to ChatGPT and ask it to generate text for you that is exactly at your vocabulary level and that matches your taste. In the future, this will be available directly in the app.
