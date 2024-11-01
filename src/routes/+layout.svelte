@@ -1,12 +1,15 @@
 <script>
 	import '../app.css';
 	import { DarkMode } from 'flowbite-svelte';
+	import { inject } from '@vercel/analytics';
+	import { dev } from '$app/environment';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	// import TwicPics sveltekit components
 	import { installTwicpics } from '@twicpics/components/sveltekit';
 	// import TwicPics components css
 	import '@twicpics/components/style.css';
+	inject({ mode: dev ? 'development' : 'production' });
 
 	installTwicpics({
 		// domain is mandatory
