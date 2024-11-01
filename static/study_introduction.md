@@ -11,6 +11,8 @@ To participate in the study, please follow these instructions:
    For each text you read, please be sure to explore the features of the app, as demonstrated in the tutorial. You can click on characters, words and explanations and also open up additional screens.
 4. _4. Please fill out the survey._ After you have used REAM, please give your feedback at https://forms.gle/UCiEMgipghHmweFa9
 
+The results of the survey will be saved anonymously. As you use the app, your learning progress and any texts you upload will be stored on a secure server in the EU.
+
 That's it! Thank you very much for participating in this study🤗 I hope the app has piqued your interest in learning Chinese and I look forward to your feedback.
 
 Dennis
