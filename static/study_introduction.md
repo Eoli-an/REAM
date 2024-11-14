@@ -11,13 +11,15 @@ To participate in the study, please follow these instructions:
    For each text you read, please be sure to explore the features of the app, as demonstrated in the tutorial. You can click on characters, words and explanations and also open up additional screens.
 4. _4. Please fill out the survey._ After you have used REAM, please give your feedback at https://forms.gle/UCiEMgipghHmweFa9
 
+Before you begin please also read the Consent and Acknowledgment:
+
 Consent and Acknowledgment:
 
-The results of the survey will be saved anonymously. As you use the app, your learning progress and any texts you upload will be stored on a secure server in the EU.
-I understand that by participating in this study, I am providing my consent for my responses and usage data to be recorded anonymously.
-I understand that participation is voluntary and that I can withdraw at any time without penalty.
-I confirm that I am at least 18 years old.
-I consent to the anonymous collection and analysis of my survey responses and app usage data for research purposes.
+* The results of the survey will be saved anonymously. As you use the app, your learning progress and any texts you upload will be stored on a secure server in the EU.
+* I understand that by participating in this study, I am providing my consent for my responses and usage data to be recorded anonymously.
+* I understand that participation is voluntary and that I can withdraw at any time without penalty.
+* I confirm that I am at least 18 years old.
+* I consent to the anonymous collection and analysis of my survey responses and app usage data for research purposes.
 
 By proceeding with this study, I acknowledge that I have read and understood the above information and agree to participate.
 
