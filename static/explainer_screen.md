@@ -57,7 +57,7 @@ Historically, many characters evolved from actual drawings of the things they re
 
 ![Chinese Path](/eye_evolution.png)
 
-At some point during the evolution of their language, the Chinese people must have figured out that they really suck at drawing and instead resorted to inventing an abstract symbol system (the real story might be slightly more complicated). However, with the capabilities of modern image generation AI, we can bring the Chinese language back to its roots.
+At some point during the evolution of their language, the Chinese people must have figured out that they are not that good at drawing and instead resorted to inventing an abstract symbol system (the real story might be slightly more complicated). However, with the capabilities of modern image generation AI, we can bring the Chinese language back to its roots.
 
 For each character, REAM lets you choose an image to replace it with. Have a look at the following examples:
 
