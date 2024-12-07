@@ -29,7 +29,7 @@ In conclusion, components make up characters, characters make up words and words
 
 ## _REAM_
 
-That's quite a lot to learn until you can read texts that interest you. Fortunately, REAM supports you at each step of this pipeline, enabling you to read engaging texts much sooner on your journey. Think of it like a pop-up dictionary on steroids.
+That's quite a lot to learn until you can read texts that interest you. Fortunately, REAM supports you at each step of this pipeline, enabling you to read engaging texts much sooner on your journey.
 
 REAM has three components:
 
